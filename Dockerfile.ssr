@@ -1,4 +1,4 @@
-FROM node:12 AS app-base
+FROM node:14 AS app-base
 WORKDIR /app
 COPY package.json .
 COPY package-lock.json .
@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build:ssr -S
 RUN npm prune --production -S
 
-FROM node:12 AS app-ui-ssr
+FROM node:14 AS app-ui-ssr
 ARG CONTAINER_PORT_UI_SSR
 EXPOSE $CONTAINER_PORT_UI_SSR
 WORKDIR /app
