@@ -1,0 +1,4 @@
+FROM redis:alpine as app-redis
+WORKDIR /redis
+COPY init-redis.sh ./
+RUN chmod +x init-redis.sh

@@ -1,0 +1,101 @@
+version: '3.4'
+services:
+  app-redis:
+    container_name: ${CONTAINER_NAME_REDIS}
+    build:
+      context: .
+      dockerfile: Dockerfile.redis
+      target: app-redis
+    command: sh -c "./init-redis.sh"
+    sysctls:
+      net.core.somaxconn: 2048
+    privileged: true
+    ports:
+      - ${CONTAINER_PORT_REDIS}:6379
+  app-mongodb:
+    container_name: ${CONTAINER_NAME_MONGODB}
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - ./mongo-volume:/data/db
+      - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+    restart: always
+  app-api:
+    container_name: ${CONTAINER_NAME_API}
+    build:
+        context: .
+        dockerfile: Dockerfile.api
+        target: app-api
+        args:
+          - CONTAINER_PORT_API=${CONTAINER_PORT_API}
+    ports:
+      - ${CONTAINER_PORT_API}:${CONTAINER_PORT_API}
+    command: ["node", "--max-old-space-size=2048", "main.js"]
+    environment:
+      CONTAINER_NAME_MONGODB: ${CONTAINER_NAME_MONGODB}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      CONTAINER_PORT_API: ${CONTAINER_PORT_API}
+      CONTAINER_NAME_REDIS: ${CONTAINER_NAME_REDIS}
+    restart: always
+  app-api-scraper:
+    container_name: ${CONTAINER_NAME_SCRAPER}
+    build:
+        context: .
+        dockerfile: Dockerfile.api
+        target: app-api
+        args:
+          - CONTAINER_PORT_API=${CONTAINER_PORT_SCRAPER}
+    ports:
+      - ${CONTAINER_PORT_SCRAPER}:${CONTAINER_PORT_SCRAPER}
+    command: ["node", "--max-old-space-size=2048", "main.js"]
+    environment:
+      CONTAINER_NAME_MONGODB: ${CONTAINER_NAME_MONGODB}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      CONTAINER_PORT_API: ${CONTAINER_PORT_SCRAPER}
+      CONTAINER_NAME_REDIS: ${CONTAINER_NAME_REDIS}
+    restart: always
+  app-ui-ssr:
+    container_name: ${CONTAINER_NAME_UI_SSR}
+    build:
+       context: .
+       dockerfile: Dockerfile.ssr
+       target: app-ui-ssr
+       args:
+        - CONTAINER_PORT_UI_SSR=${CONTAINER_PORT_UI_SSR}
+    ports:
+     - ${CONTAINER_PORT_UI_SSR}:${CONTAINER_PORT_UI_SSR}
+    command: ["node",  "--max-old-space-size=2048", "dist/apps/sample/server/main.js"]
+    environment:
+      CONTAINER_PORT_UI_SSR: ${CONTAINER_PORT_UI_SSR}
+    restart: always
+  app-ui:
+    container_name: ${CONTAINER_NAME_UI}
+    build:
+        context: .
+        dockerfile: Dockerfile.nginx
+        args:
+          - CONTAINER_PORT_UI_SSR=${CONTAINER_PORT_UI_SSR}
+          - CONTAINER_PORT_API=${CONTAINER_PORT_API}
+          - CONTAINER_PORT_SCRAPER=${CONTAINER_PORT_SCRAPER}
+          - DOMAIN=${DOMAIN}
+        target: app-ui
+    expose:
+      - 80
+      - 443
+    volumes:
+      - /etc/ssl:/etc/nginx/ssl
+    command: ["./wait-for-it.sh", "${CONTAINER_NAME_API}:${CONTAINER_PORT_API}", "${CONTAINER_NAME_SCRAPER}:${CONTAINER_PORT_SCRAPER}", "${CONTAINER_NAME_UI_SSR}:${CONTAINER_PORT_UI_SSR}", "--strict",  "--", "nginx", "-g", "daemon off;"]
+    environment:
+     VIRTUAL_HOST: ${VIRTUAL_HOST}
+    restart: always
+networks:
+  default:
+    external:
+      name: nginx-proxy

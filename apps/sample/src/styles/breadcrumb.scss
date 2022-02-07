@@ -1,0 +1,18 @@
+.xng-breadcrumb-link {
+  white-space: break-spaces !important;
+}
+
+.breadcrumb {
+  background: #FFFFFF !important;
+  display: none !important;
+  padding: 1em;
+  @include media-breakpoint-up(sm) {
+    display: none !important;
+  }
+  @include media-breakpoint-up(md) {
+    display: block !important;
+  }
+  @include media-breakpoint-up(lg) {
+    display: block !important;
+  }
+}

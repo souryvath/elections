@@ -1,0 +1,27 @@
+@import "variables";
+
+.loader {
+  text-align: center;
+}
+
+@keyframes custom-progress-spinner-color {
+  100%,
+  0% {
+    stroke: $main-color;
+  }
+  40% {
+    stroke: $main-color;
+  }
+  66% {
+    stroke: $main-color;
+  }
+  80%,
+  90% {
+    stroke: $main-color;
+  }
+}
+
+.custom-spinner .p-progress-spinner-circle {
+  animation: custom-progress-spinner-color 1.5s ease-in-out infinite,
+    custom-progress-spinner-color 6s ease-in-out infinite;
+}

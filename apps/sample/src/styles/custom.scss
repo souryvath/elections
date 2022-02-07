@@ -1,0 +1,78 @@
+@import "variables";
+
+.cs-title {
+  padding: 1em;
+  background: #ffffff;
+  border-radius: $border-radius-card;
+  h1 {
+    margin-bottom: 0 !important;
+  }
+}
+
+.cs-form-search {
+  width: 100%;
+  margin-bottom: 1em;
+  p {
+    text-align: center;
+  }
+  .p-dropdown {
+    width: 100%;
+  }
+}
+
+.cs-card {
+  background: #ffffff;
+  border-radius: $border-radius-card;
+  padding: 1em;
+  margin-top: 1em;
+  p {
+    margin-top: 1em;
+    text-align: center;
+  }
+  .image {
+    text-align: center;
+  }
+  .vignette {
+    margin-top: 3em;
+  }
+}
+
+.cs-list {
+  text-align: center;
+  .row {
+    align-items: center;
+    justify-content: center;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    margin-top: 1em;
+  }
+  a {
+    width: 100%;
+  }
+
+  .p-button {
+    display: block;
+  }
+}
+
+.cs-icon-button {
+  width: 100%;
+  display: flex !important;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .label {
+    margin-left: 5px;
+  }
+  .p-button-label {
+    margin-left: 5px;
+    flex: unset !important;
+  }
+}

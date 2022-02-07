@@ -1,0 +1,15 @@
+FROM nginx:alpine AS app-ui
+EXPOSE 80 443
+ARG CONTAINER_PORT_UI_SSR
+ENV CONTAINER_PORT_UI_SSR=$CONTAINER_PORT_UI_SSR
+ARG DOMAIN
+ENV DOMAIN=$DOMAIN
+ARG CONTAINER_PORT_API
+ENV CONTAINER_PORT_API=$CONTAINER_PORT_API
+ARG CONTAINER_PORT_SCRAPER
+ENV CONTAINER_PORT_SCRAPER=$CONTAINER_PORT_SCRAPER
+COPY nginx.conf /etc/nginx/conf.templates/default.conf
+COPY wait-for-it.sh wait-for-it.sh
+RUN chmod 777 wait-for-it.sh
+RUN apk update && apk add bash
+RUN /bin/sh -c "envsubst '\$CONTAINER_PORT_UI_SSR,\$DOMAIN,\$CONTAINER_PORT_API,\$CONTAINER_PORT_SCRAPER' < /etc/nginx/conf.templates/default.conf > /etc/nginx/nginx.conf"

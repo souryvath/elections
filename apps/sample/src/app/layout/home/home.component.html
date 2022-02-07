@@ -1,0 +1,13 @@
+<div class="container">
+  <h1 class="mt-5">Title</h1>
+  <div class="content map">
+    <app-map [id]="'map-test'" [tiles]="'human'"></app-map>
+  </div>
+  <app-search-postal-code [city]="city" [(results)]="results" (searchEvent)="search($event)" [type]="'controle'"
+  [buttonLabel]="'Valider'" [geolocalisation]="true" (geolocalisationEvent)="findLocalisation()" (selectedPlaceEvent)="select($event, 'controle-technique')"
+  [searchLabel]="'Entrez votre code postal ou votre ville'"></app-search-postal-code>
+  <ng-container *ngIf="isBrowser">
+    <share-buttons [theme]="'modern-dark'" [include]="['facebook','twitter','messenger','whatsapp','email']" [show]="8"
+      [autoSetMeta]="false"></share-buttons>
+  </ng-container>
+</div>

@@ -1,0 +1,21 @@
+.search-button {
+  width: 100%;
+}
+
+a {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  color: #495057;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.form-search {
+  .label {
+    text-align: center;
+  }
+}

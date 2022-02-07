@@ -1,0 +1,100 @@
+@import 'variables';
+
+.p-autocomplete-emptymessage {
+  margin-left: 1em !important;
+}
+
+.p-button:focus {
+  box-shadow: 0 0 0 0.2rem $main-color !important;
+}
+
+.p-autocomplete-panel .p-autocomplete-items {
+  padding: 0 !important;
+}
+
+.p-inputtext {
+  border-radius: $border-radius-input !important;
+}
+
+.p-button {
+  border-radius: $border-radius-input !important;
+}
+
+.p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item {
+  padding: 0 !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  padding: 0 !important;
+}
+
+.p-dropdown-label {
+  padding: 0 !important;
+}
+
+.p-dropdown-panel .p-dropdown-items {
+  padding: 0 !important;
+}
+
+.p-dropdown .p-dropdown-trigger {
+  color: #FFFFFF !important;
+}
+
+.p-button-primary {
+  background: $main-color !important;
+  border: 1px solid $main-color !important;
+  &.p-button-outlined {
+    background-color: #FFFFFF !important;
+    color: $main-color !important;
+  }
+  &:hover {
+    color: #FFFFFF;
+  }
+}
+
+.p-button-help {
+  background: #3c3c3c !important;
+  border: 1px solid #3c3c3c !important;
+  &.p-button-outlined {
+    background-color: #FFFFFF !important;
+    color: #3c3c3c !important;
+  }
+  &:hover {
+    color: #FFFFFF;
+  }
+}
+
+.p-button-compare {
+  background: $second-color !important;
+  border: 1px solid $second-color !important;
+  &.p-button-outlined {
+    background-color: #FFFFFF !important;
+    color: $second-color !important;
+  }
+  &:hover {
+    color: #FFFFFF;
+  }
+}
+
+.p-button.p-button-outlined {
+  .p-button-label {
+    font-weight: bold;
+  }
+}
+
+.p-component {
+  font-family: 'Ubuntu', sans-serif !important;
+}
+
+.p-card {
+  height: 100%;
+}
+
+.p-inputtext {
+  width: 100%;
+}
+
+.p-autocomplete {
+  width: 100%;
+  margin-bottom: 1em;
+}

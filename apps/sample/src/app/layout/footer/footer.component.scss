@@ -1,0 +1,36 @@
+@import '../../../styles/variables.scss';
+
+.container {
+  text-align: center;
+  margin-top: 0;
+  color: $footer-text-color;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: inline;
+}
+
+.links {
+  margin-bottom: 1em;
+  a {
+    color: $footer-text-color;
+  }
+
+  li + li::before {
+    content: "|";
+    padding: .35em;
+  }
+}
+
+.networks {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+}
+

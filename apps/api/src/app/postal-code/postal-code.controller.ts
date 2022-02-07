@@ -1,0 +1,59 @@
+import { HttpService } from '@nestjs/axios';
+import { Controller, Get, HttpStatus, Post, Query, Res } from '@nestjs/common';
+import { PostalCode } from './interfaces/postal-code.interface';
+import { PostalCodeService } from './postal-code.service';
+
+@Controller()
+export class PostalCodeController {
+  constructor(
+    private readonly postalCodeService: PostalCodeService,
+    private readonly httpService: HttpService) { }
+
+  @Get('postal-code')
+  async getPostalCode(@Res() res, @Query() params): Promise<PostalCode[]> {
+    let postalCode = null;
+    if (params.postalCode) {
+      postalCode = await this.postalCodeService.getPostalCodes(params.postalCode);
+    }
+    if (params.slug) {
+      postalCode = await this.postalCodeService.findPostalCodesBySlug(params.slug);
+    }
+    if (params.inseeCode) {
+      postalCode = await this.postalCodeService.findPostalCodesByInseeCode(params.inseeCode);
+    }
+    if (params.departementCode) {
+      postalCode = await this.postalCodeService.findPostalCodesByDepartment(params.departementCode);
+    }
+    if (!postalCode) {
+      postalCode = [];
+    }
+    return res.status(HttpStatus.OK).json(postalCode);
+  }
+
+  @Get('postal-code/nearest/')
+  async getTheNearestPostalCodes(@Res() res, @Query() params): Promise<PostalCode[]> {
+    if (params.long && params.lat && params.postalCode) {
+      const postalCodes = await this.postalCodeService.findPostalCodesByGeolocation(params.postalCode, params.long, params.lat);
+      return res.status(HttpStatus.OK).json(postalCodes);
+    } else {
+      return res.status(HttpStatus.OK).json([]);
+    }
+  }
+
+  @Get('postal-code/reverse')
+  async getReverse(@Res() res, @Query() params): Promise<any> {
+    const result = await this.httpService.get(`http://195.154.90.2:7879/reverse/?lon=${params.lon}&lat=${params.lat}`).toPromise();
+    return res.status(HttpStatus.OK).json(result.data);
+  }
+
+  @Post('postal-code/sitemap/')
+  async sitemapPostalCodeStation(@Res() res, @Query() params): Promise<PostalCode[]> {
+    let postalCodes = await this.postalCodeService.findAllPostalCodes();
+    let sitemap = `<?xml version="1.0" encoding="utf-8"?><urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">`;
+    postalCodes.forEach((element) => {
+      sitemap += `<url><loc>https://www.applivoiture.fr/prix-carburant/${element.slug}</loc></url>`
+    });
+    sitemap += '</urlset>';
+    return res.status(HttpStatus.OK).json(sitemap);
+  }
+}

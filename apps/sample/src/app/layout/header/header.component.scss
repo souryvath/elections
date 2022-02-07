@@ -1,0 +1,22 @@
+@import '../../../styles/variables.scss';
+
+.navbar-brand {
+  img {
+    margin-right: 0.2em;
+  }
+}
+
+.nav-link {
+  opacity: 0.8;
+  &.active {
+    opacity: 1;
+  }
+}
+
+.icon {
+  width: 32px;
+}
+
+.navbar {
+  background-color: $main-color !important;
+}

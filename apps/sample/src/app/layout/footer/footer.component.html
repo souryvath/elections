@@ -1,0 +1,22 @@
+<div class="container">
+  <ul class="links">
+    <li>
+      <a href="infos/mentions-legales">Mentions légales</a>
+    </li>
+    <li>
+      <a href="infos/cgu">CGU</a>
+    </li>
+  </ul>
+  <ul class="networks">
+    <ng-container *ngFor="let network of networks">
+      <li *ngIf="network.url !== ''">
+        <a href="{{network.url}}" target="_blank" rel="noopener noreferrer nofollow">
+          <fa-icon [icon]="['fab', network.name]" [classes]="['icon-network']" size="2x"></fa-icon>
+        </a>
+      </li>
+    </ng-container>
+
+  </ul>
+
+
+</div>
