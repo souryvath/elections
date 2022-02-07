@@ -4,6 +4,7 @@ COPY package.json .
 COPY package-lock.json .
 RUN npm install
 COPY . .
+RUN nx dep-graph --file dep-graph.json
 RUN npm run build:api -S
 RUN npm prune --production -S
 
@@ -13,6 +14,7 @@ EXPOSE $CONTAINER_PORT_API
 WORKDIR /app
 COPY --from=app-base /app/node_modules /app/node_modules
 COPY --from=app-base /app/dist/apps/api .
+
 RUN apt-get update \
     && apt-get install -y wget gnupg \
     && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
