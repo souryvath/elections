@@ -8,7 +8,7 @@ RUN npm run deph:graph
 RUN npm run build:api -S
 RUN npm prune --production -S
 
-FROM node:12 AS app-api
+FROM node:14 AS app-api
 ARG CONTAINER_PORT_API
 EXPOSE $CONTAINER_PORT_API
 WORKDIR /app
