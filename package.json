@@ -39,7 +39,8 @@
     "prerender": "ng run sample:prerender",
     "workspace-generator": "nx workspace-generator",
     "clear:cache": "ng config cli.cache.enabled false",
-    "pwa": "pwa-asset-generator logo.png ./apps/sample/src/assets/icons -c  -i ./apps/sample/src/index.html -m ./apps/sample/src/manifest.webmanifest"
+    "pwa": "pwa-asset-generator logo.png ./apps/sample/src/assets/icons -c  -i ./apps/sample/src/index.html -m ./apps/sample/src/manifest.webmanifest",
+    "deph:graph": "nx dep-graph --file dep-graph.json"
   },
   "private": true,
   "dependencies": {

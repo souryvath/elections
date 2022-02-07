@@ -4,7 +4,7 @@ COPY package.json .
 COPY package-lock.json .
 RUN npm install
 COPY . .
-RUN nx dep-graph --file dep-graph.json
+RUN npm run deph:graph
 RUN npm run build:api -S
 RUN npm prune --production -S
 
