@@ -1,3 +1,4 @@
+import { ScraperSponsorshipService } from './scraper-sponsorship.service';
 import { OnQueueActive, OnQueueCompleted, OnQueueFailed, Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 import { Job } from 'bull';
@@ -9,6 +10,7 @@ export class ScraperProcessor {
 
   constructor(
     private readonly scraperService: ScraperService,
+    private readonly scraperSponsorshipService: ScraperSponsorshipService,
   ) {}
 
   @OnQueueActive()
@@ -33,6 +35,17 @@ export class ScraperProcessor {
       await this.scraperService.scrapPostalCode().toPromise();
     } catch (error) {
       this.logger.error('Scraper Postal Code Failed', error.stack)
+      throw error
+    }
+  }
+
+  @Process('scrapSponsorship')
+  async scrapSponsorship(): Promise<any> {
+    this.logger.log('Scraper Sponsorship Processing');
+    try {
+      await this.scraperSponsorshipService.scrapSponsorship().toPromise();
+    } catch (error) {
+      this.logger.error('Scraper Sponsorship Failed', error.stack)
       throw error
     }
   }

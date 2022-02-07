@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { environment } from '../environments/environment';
 import { SocialNetworkModule } from './social-network/social-network.module';
+import { SponsorshipModule } from './sponsorship/sponsorship.module';
 
 const mongo = environment.production === true ?
 `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@${process.env.CONTAINER_NAME_MONGODB}:27017/${process.env.MONGO_INITDB_DATABASE}`
@@ -16,7 +17,8 @@ const mongo = environment.production === true ?
     MongooseModule.forRoot(mongo),
     PostalCodeModule,
     ScraperModule,
-    SocialNetworkModule
+    SocialNetworkModule,
+    SponsorshipModule
   ],
   controllers: [AppController],
   providers: [AppService],

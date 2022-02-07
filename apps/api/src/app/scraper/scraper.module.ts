@@ -1,3 +1,4 @@
+import { SponsorshipModule } from './../sponsorship/sponsorship.module';
 import { PostalCodeModule } from './../postal-code/postal-code.module';
 import { ScraperService } from './scraper.service';
 import { Module } from '@nestjs/common';
@@ -6,11 +7,13 @@ import { BullModule } from '@nestjs/bull';
 import { ScraperProcessor } from './scraper.processor';
 import { environment } from '../../environments/environment';
 import { HttpModule } from '@nestjs/axios';
+import { ScraperSponsorshipService } from './scraper-sponsorship.service';
 
 @Module({
   imports: [
     HttpModule,
     PostalCodeModule,
+    SponsorshipModule,
     BullModule.registerQueueAsync({
       name: 'scraper',
       useFactory: () => ({
@@ -28,6 +31,7 @@ import { HttpModule } from '@nestjs/axios';
   ],
   providers: [
     ScraperService,
+    ScraperSponsorshipService,
     ScraperProcessor
   ]
 })

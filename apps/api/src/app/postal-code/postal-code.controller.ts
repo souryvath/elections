@@ -15,16 +15,16 @@ export class PostalCodeController {
     if (params.postalCode) {
       postalCode = await this.postalCodeService.getPostalCodes(params.postalCode);
     }
-    if (params.slug) {
+    else if (params.slug) {
       postalCode = await this.postalCodeService.findPostalCodesBySlug(params.slug);
     }
-    if (params.inseeCode) {
+    else if (params.inseeCode) {
       postalCode = await this.postalCodeService.findPostalCodesByInseeCode(params.inseeCode);
     }
-    if (params.departementCode) {
+    else if (params.departementCode) {
       postalCode = await this.postalCodeService.findPostalCodesByDepartment(params.departementCode);
     }
-    if (!postalCode) {
+    else if (!postalCode) {
       postalCode = [];
     }
     return res.status(HttpStatus.OK).json(postalCode);
