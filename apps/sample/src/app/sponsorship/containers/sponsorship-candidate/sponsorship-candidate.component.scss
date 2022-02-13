@@ -1,0 +1,26 @@
+@import '../../../../styles/variables.scss';
+
+.card-table {
+  padding: 0;
+}
+
+.banner {
+  border-radius: $border-radius-card;
+  background-color: #4949A5;
+  color: #FFFFFF;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .material-icons {
+    font-size: 36px;
+  }
+  .green {
+    color: green;
+  }
+  .red {
+    color: red;
+  }
+}

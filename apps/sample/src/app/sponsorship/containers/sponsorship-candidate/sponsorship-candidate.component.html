@@ -1,0 +1,97 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="container">
+  <app-search-postal-code [(results)]="results" (searchEvent)="search($event)"
+    [searchLabel]="'Recherchez les parrainages d’un candidat :'" [buttonLabel]="'Valider'"
+    [placeholder]="'Nom du candidat'" [type]="'parrainages'" (selectedPlaceEvent)="select($event, 'parrainages')">
+  </app-search-postal-code>
+  <ng-container *ngIf=" {
+      sponsorships: (sponsorships$ | loading | async)
+    } as obs">
+    <ng-container *ngIf="obs.sponsorships as sponsorshipsObs">
+      <ng-container *ngIf="sponsorshipsObs.value as sponsorships">
+
+        <div class="cs-title">
+          <h1>
+            Liste des parrainages des présidentielles 2022 pour le candidat {{sponsorships[0].candidate}}
+          </h1>
+        </div>
+        <div class="content">
+          <div class="banner">
+            <div class="left">
+              <div class="icon">
+              </div>
+              <div class="introduce">
+                <div class="name">
+                  {{sponsorships[0].candidate}}
+                </div>
+                <div class="political">
+                  Les républicains
+                </div>
+              </div>
+            </div>
+            <div class="right">
+              <span *ngIf="sponsorships.length >= NBR_SPONSORSHIPS" class="material-icons green">
+                check_circle
+              </span>
+              <span *ngIf="sponsorships.length < NBR_SPONSORSHIPS" class="material-icons red">
+                highlight_off
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="content">
+          <p>
+            Retrouvez la liste des parrainages du candidat {{sponsorships[0].candidate}} pour les présidentielles 2022,
+            avec la liste des élus et le nombre parrainages obtenus, par ville et département (dernière mise à jour le
+            10 février 2022)
+          </p>
+        </div>
+        <div class="content">
+          <app-sponsorship-map></app-sponsorship-map>
+        </div>
+
+        <div class="cs-title">
+          <p class="subtitle">
+            Evolution des parrainages dans le temps pour le candidat {{sponsorships[0].candidate}} pour les
+            présidentielles 2022
+          </p>
+        </div>
+        <div class="content">
+          <app-sponsorship-graph></app-sponsorship-graph>
+        </div>
+
+        <div class="cs-title">
+          <p class="subtitle">
+            Classement de {{sponsorships[0].candidate}} parmi les autres candidats
+          </p>
+        </div>
+        <div class="content cs-card card-table">
+          <ng-container *ngIf=" {
+            ranking: (ranking$ | loading | async)
+          } as obs">
+            <ng-container *ngIf="obs.ranking as rankingObs">
+              <ng-container *ngIf="rankingObs.value as ranking">
+                <app-sponsorship-ranking [data]="ranking"></app-sponsorship-ranking>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
+        </div>
+        <div class="cs-title">
+          <h2>
+            Liste des élus et parrainages du candidat {{sponsorships[0].candidate}} pour les présidentielles 2022 par
+            ville et département
+          </h2>
+        </div>
+        <div class="content">
+          <app-sponsorship-list [data]="sponsorships"></app-sponsorship-list>
+        </div>
+        <p class="subtitle">
+          Tous les parrainages par candidat
+        </p>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+</div>

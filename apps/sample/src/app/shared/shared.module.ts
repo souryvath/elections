@@ -1,3 +1,4 @@
+import { ListButtonsComponent } from './components/list-buttons/list-buttons.component';
 import { SharedLibsModule } from './shared-libs.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,7 +11,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     MapComponent,
-    SearchPostalCodeComponent
+    SearchPostalCodeComponent,
+    ListButtonsComponent
   ],
   exports: [
     CommonModule,

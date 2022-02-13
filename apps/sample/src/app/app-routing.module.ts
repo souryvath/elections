@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './layout/home/home.component';
+import { SponsorshipCandidateComponent } from './sponsorship/containers/sponsorship-candidate/sponsorship-candidate.component';
 
 const routes: Routes = [
   {
@@ -10,9 +11,15 @@ const routes: Routes = [
     data: { breadcrumb: 'Infos' }
   },
   {
-    path: '', component: HomeComponent,  data: { breadcrumb: 'Home' }
+    loadChildren: () => import('./sponsorship/sponsorship.module')
+      .then(m => m.SponsorshipModule),
+    path: 'parrainages',
+    data: { breadcrumb: 'Parrainages' }
   },
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  // {
+  //   path: '', component: HomeComponent,  data: { breadcrumb: 'Home' }
+  // },
+  { path: '**', redirectTo: 'parrainages', pathMatch: 'full' }
 ];
 
 @NgModule({

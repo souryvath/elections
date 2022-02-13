@@ -3,6 +3,7 @@ import { Sponsorship } from './interfaces/sponsorship.interface';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import slugify from 'slugify';
 
 @Injectable()
 export class SponsorshipService {
@@ -33,6 +34,24 @@ export class SponsorshipService {
     return sponsorships;
   }
 
+  async findCandidates(query: string): Promise<Sponsorship[]> {
+    const regex = new RegExp(`${slugify(query, { lower: true, remove: /[*+~.()'"!:@/]/g })}`);
+    const candidates = (await this.findDistinctCandidates()).filter(value => regex.test(value.slug));
+    return candidates;
+  }
+
+  async findDistinctCandidates() {
+    let allCandidates = await this.sponsorshipModel.find().distinct('candidate').exec();
+    allCandidates = allCandidates.map((element) => {
+      const newObject = {
+        name: element,
+        slug: `${slugify(element, { lower: true, remove: /[*+~.()'"!:@/]/g })}`,
+      }
+      return (newObject);
+    });
+    return allCandidates;
+  }
+
   async findSponsorships(field: string, value: string): Promise<Sponsorship[]> {
     const query = {};
     query[field] = value;
@@ -40,6 +59,22 @@ export class SponsorshipService {
       query
     ).exec();
     return sponsorships;
+  }
+
+  async findRanking(slugCandidate: string) {
+    let allCandidates = await this.findDistinctCandidates();
+    let candidates = [];
+    for (const candidate of allCandidates) {
+      const newObject = {
+        name: candidate.name,
+        slug: candidate.slug,
+        numberSponsorships: (await this.findSponsorships('slugCandidate', candidate.slug)).length
+      }
+      candidates.push(newObject);
+    }
+    const newCandidates = candidates.filter((element) => element.slug !== slugCandidate).sort((a, b) => (a.numberSponsorships < b.numberSponsorships) ? 1 : -1);
+    newCandidates.unshift(candidates.find((element) => element.slug === slugCandidate));
+    return newCandidates;
   }
 
 

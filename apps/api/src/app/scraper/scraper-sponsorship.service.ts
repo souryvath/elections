@@ -56,6 +56,7 @@ export class ScraperSponsorshipService {
               district: element[4],
               department: element[5],
               candidate: element[6],
+              slugCandidate: slugify(element[6], { lower: true, remove: /[*+~.()'"!:@/]/g }),
               date: element[7]
             }
             this.sponsorshipService.addSponsorship(sponsorship);

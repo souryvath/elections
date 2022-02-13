@@ -3,11 +3,11 @@
     {{searchLabel}}
   </p>
   <p-autoComplete #autocomplete [autofocus]="false" [inputId]="'autocomplete-input'"
-    [emptyMessage]="'Aucun résultat, veuillez réessayer'" [placeholder]="'Ville ou code postal'" [(ngModel)]="city"
+    [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [(ngModel)]="city"
     [suggestions]="results" (completeMethod)="search($event)"  (onKeyUp)="getKey($event)" (onSelect)="selectPlace($event)" field="name">
     <ng-template let-postalCode pTemplate="item">
-      <a [href]="postalCode.slug">{{postalCode.postalCode}}
-        ({{postalCode.name}})</a>
+      <a [href]="type + '/' + postalCode.slug">
+        {{postalCode.name}}</a>
     </ng-template>
   </p-autoComplete>
   <div class="buttons">

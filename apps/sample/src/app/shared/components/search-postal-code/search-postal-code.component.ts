@@ -11,6 +11,7 @@ export class SearchPostalCodeComponent implements OnInit {
   @Input() results;
   @Input() city;
   @Input() type;
+  @Input() placeholder;
   @Input() searchLabel;
   @Input() buttonLabel;
   @Input() selectedFuel;
