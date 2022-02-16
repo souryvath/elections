@@ -8,9 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SponsorshipRankingComponent implements OnInit {
 
   @Input() data;
+  @Input() candidate;
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.data);
   }
 
 }

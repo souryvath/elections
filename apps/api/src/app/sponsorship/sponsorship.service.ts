@@ -52,16 +52,38 @@ export class SponsorshipService {
     return allCandidates;
   }
 
+  async findDistinctDepartment() {
+    let allCandidates = await this.sponsorshipModel.aggregate([{
+      $group: {
+        _id: {
+          "departmentCode": "$departmentCode",
+          "slugCandidate": "$slugCandidate"
+        },
+        "departmentCode": {
+          $first: "$departmentCode"
+        },
+        "department": {
+          $first: "$department"
+        },
+        "value": {
+          $first: "$departmentNumberSponsorship"
+        }
+      }
+    }]);
+    return allCandidates;
+  }
+
   async findSponsorships(field: string, value: string): Promise<Sponsorship[]> {
     const query = {};
     query[field] = value;
     const sponsorships = await this.sponsorshipModel.find(
       query
     ).exec();
+    console.log(sponsorships.length);
     return sponsorships;
   }
 
-  async findRanking(slugCandidate: string) {
+  async findRanking() {
     let allCandidates = await this.findDistinctCandidates();
     let candidates = [];
     for (const candidate of allCandidates) {
@@ -72,9 +94,7 @@ export class SponsorshipService {
       }
       candidates.push(newObject);
     }
-    const newCandidates = candidates.filter((element) => element.slug !== slugCandidate).sort((a, b) => (a.numberSponsorships < b.numberSponsorships) ? 1 : -1);
-    newCandidates.unshift(candidates.find((element) => element.slug === slugCandidate));
-    return newCandidates;
+    return candidates.sort((a, b) => (a.numberSponsorships < b.numberSponsorships) ? 1 : -1);
   }
 
 

@@ -2,27 +2,28 @@
 <div class="container">
   <app-search-postal-code [(results)]="results" (searchEvent)="search($event)"
     [searchLabel]="'Recherchez les parrainages d’un candidat :'" [buttonLabel]="'Valider'"
-    [placeholder]="'Nom du candidat'" [type]="'parrainages'" (selectedPlaceEvent)="select($event, 'parrainages')">
+    [placeholder]="'Nom du candidat'" [type]="'2022/parrainages-presidentielles/candidats'" (selectedPlaceEvent)="select($event, 'parrainages')">
   </app-search-postal-code>
   <ng-container *ngIf=" {
-      sponsorships: (sponsorships$ | loading | async)
+      candidate: (candidate$ | loading | async)
     } as obs">
-    <ng-container *ngIf="obs.sponsorships as sponsorshipsObs">
-      <ng-container *ngIf="sponsorshipsObs.value as sponsorships">
+    <ng-container *ngIf="obs.candidate as candidateObs">
+      <ng-container *ngIf="candidateObs.value as candidate">
 
         <div class="cs-title">
           <h1>
-            Liste des parrainages des présidentielles 2022 pour le candidat {{sponsorships[0].candidate}}
+            Liste des parrainages des présidentielles 2022 pour le candidat {{candidate.name}}
           </h1>
         </div>
         <div class="content">
-          <div class="banner">
+          <div class="banner" [class.green]="candidate.numberSponsorships >= NBR_SPONSORSHIPS && candidate.numberDepartments >= 30 && candidate.hasTenPercent === false"
+            [class.red]="candidate.numberSponsorships < NBR_SPONSORSHIPS || candidate.numberDepartments < 30 || candidate.hasTenPercent === true">
             <div class="left">
               <div class="icon">
               </div>
               <div class="introduce">
                 <div class="name">
-                  {{sponsorships[0].candidate}}
+                  {{candidate.name}}
                 </div>
                 <div class="political">
                   Les républicains
@@ -30,10 +31,10 @@
               </div>
             </div>
             <div class="right">
-              <span *ngIf="sponsorships.length >= NBR_SPONSORSHIPS" class="material-icons green">
-                check_circle
+              <span *ngIf="candidate.numberSponsorships >= NBR_SPONSORSHIPS && candidate.numberDepartments >= 30 && candidate.hasTenPercent === false" class="material-icons green">
+                check_circle_outline
               </span>
-              <span *ngIf="sponsorships.length < NBR_SPONSORSHIPS" class="material-icons red">
+              <span *ngIf="candidate.numberSponsorships < NBR_SPONSORSHIPS || candidate.numberDepartments < 30 || candidate.hasTenPercent === true" class="material-icons red">
                 highlight_off
               </span>
             </div>
@@ -42,56 +43,105 @@
 
         <div class="content">
           <p>
-            Retrouvez la liste des parrainages du candidat {{sponsorships[0].candidate}} pour les présidentielles 2022,
+            Retrouvez la liste des parrainages du candidat {{candidate.name}} pour les présidentielles 2022,
             avec la liste des élus et le nombre parrainages obtenus, par ville et département (dernière mise à jour le
             10 février 2022)
           </p>
         </div>
         <div class="content">
-          <app-sponsorship-map></app-sponsorship-map>
+          <app-sponsorship-map [data]="candidate.departments"></app-sponsorship-map>
         </div>
+        <div class="content">
+          <div class="row g-2">
+            <div class="col-lg-4">
+              <div class="bloc" [class.green]="candidate.numberSponsorships >= 500" [class.red]="candidate.numberSponsorships < 500">
+                <div class="number">
+                  {{candidate.numberSponsorships}}
+                </div>
+                <div class="message mt-2">
+                  parrainages / <br>
+                  au moins 500
+                </div>
 
+                </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="bloc" [class.green]="candidate.numberDepartments >= 30" [class.red]="candidate.numberDepartments < 30">
+                <div class="number">
+                  {{candidate.numberDepartments}}
+                </div>
+                <div class="message mt-2">
+                  départements / <br>
+                  au moins 30
+                </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="bloc" [class.green]="candidate.hasTenPercent === false" [class.red]="candidate.hasTenPercent === true">
+                <div class="message mb-2">
+                ne possède pas
+                </div>
+                <div class="number">
+                  +10%
+                </div>
+                <div class="message mt-2">
+                  des parrainages <br>
+                  dans un seul département
+                </div>
+
+                </div>
+            </div>
+          </div>
+        </div>
         <div class="cs-title">
           <p class="subtitle">
-            Evolution des parrainages dans le temps pour le candidat {{sponsorships[0].candidate}} pour les
+            Evolution des parrainages dans le temps pour le candidat {{candidate.name}} pour les
             présidentielles 2022
           </p>
         </div>
         <div class="content">
-          <app-sponsorship-graph></app-sponsorship-graph>
+          <app-sponsorship-graph [data]="candidate.timeline"></app-sponsorship-graph>
         </div>
 
         <div class="cs-title">
           <p class="subtitle">
-            Classement de {{sponsorships[0].candidate}} parmi les autres candidats
+            Classement de {{candidate.name}} parmi les autres candidats
           </p>
         </div>
-        <div class="content cs-card card-table">
-          <ng-container *ngIf=" {
-            ranking: (ranking$ | loading | async)
-          } as obs">
-            <ng-container *ngIf="obs.ranking as rankingObs">
-              <ng-container *ngIf="rankingObs.value as ranking">
-                <app-sponsorship-ranking [data]="ranking"></app-sponsorship-ranking>
-              </ng-container>
-            </ng-container>
-          </ng-container>
-
+        <div class="content cs-card card-table" *ngIf="ranking">
+          <app-sponsorship-ranking [data]="ranking" [candidate]="candidate.name">
+          </app-sponsorship-ranking>
         </div>
         <div class="cs-title">
           <h2>
-            Liste des élus et parrainages du candidat {{sponsorships[0].candidate}} pour les présidentielles 2022 par
+            Liste des élus et parrainages du candidat {{candidate.name}} pour les présidentielles 2022 par
             ville et département
           </h2>
         </div>
-        <div class="content">
-          <app-sponsorship-list [data]="sponsorships"></app-sponsorship-list>
+        <div class="content list">
+          <app-sponsorship-list [data]="candidate.sponsorships"></app-sponsorship-list>
         </div>
-        <p class="subtitle">
-          Tous les parrainages par candidat
-        </p>
+        <div class="content">
+          <app-list-buttons
+          [list]="ranking"
+          [candidate]="candidate.name"
+          [type]="'candidate'"
+          [title]="'Tous les parrainages par candidat'"
+          [link]="'2022/parrainages-presidentielles/candidats/'"
+          ></app-list-buttons>
+        </div>
+      </ng-container>
+      <div class="content loader" *ngIf="candidateObs.loading">
+        <p-progressSpinner [style]="{width: '70px', height: '70px'}" styleClass="custom-spinner" strokeWidth="5"
+          animationDuration=".5s"></p-progressSpinner>
+      </div>
+      <ng-container *ngIf="!(candidateObs.value) && !candidateObs.loading">
+        <div class="content">
+          <p-message severity="error" text="Aucun résultat pour le candidat demandé"></p-message>
+        </div>
       </ng-container>
     </ng-container>
-  </ng-container>
 
+  </ng-container>
 </div>

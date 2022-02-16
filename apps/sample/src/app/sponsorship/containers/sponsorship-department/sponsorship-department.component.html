@@ -1,0 +1,144 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="container">
+  <app-search-postal-code [(results)]="results" (searchEvent)="search($event)"
+    [searchLabel]="'Tous les parrainages dans votre département'" [buttonLabel]="'Valider'"
+    [placeholder]="'Votre département'" [type]="'2022/parrainages-presidentielles/departements'" (selectedPlaceEvent)="select($event, 'departements')">
+  </app-search-postal-code>
+  <ng-container *ngIf=" {
+    department: (department$ | loading | async)
+    } as obs">
+    <ng-container *ngIf="obs.department as departmentObs">
+      <ng-container *ngIf="departmentObs.value as department">
+
+        <div class="cs-title">
+          <h1>
+            Carte des parrainages présidentielles 2022 dans le département {{department.name}} par ville
+          </h1>
+        </div>
+        <!-- <div class="content">
+          <div class="banner" [class.green]="department.numberSponsorships >= NBR_SPONSORSHIPS && department.numberDepartments >= 30 && department.hasTenPercent === false"
+            [class.red]="department.numberSponsorships < NBR_SPONSORSHIPS || department.numberDepartments < 30 || department.hasTenPercent === true">
+            <div class="left">
+              <div class="icon">
+              </div>
+              <div class="introduce">
+                <div class="name">
+                  {{department.name}}
+                </div>
+                <div class="political">
+                  Les républicains
+                </div>
+              </div>
+            </div>
+            <div class="right">
+              <span *ngIf="department.numberSponsorships >= NBR_SPONSORSHIPS && department.numberDepartments >= 30 && department.hasTenPercent === false" class="material-icons green">
+                check_circle_outline
+              </span>
+              <span *ngIf="department.numberSponsorships < NBR_SPONSORSHIPS || department.numberDepartments < 30 || department.hasTenPercent === true" class="material-icons red">
+                highlight_off
+              </span>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="content">
+          <p>
+            Retrouvez la carte des parrainages pour les présidentielles 2022 dans le département {{department.name}} et par ville, avec la liste et le nombre parrainages, ainsi que les candidats soutenus (dernière mise à jour le 10 février 2022)
+          </p>
+        </div>
+        <div class="content">
+          <!-- <app-sponsorship-map [data]="department.departments"></app-sponsorship-map> -->
+        </div>
+        <!-- <div class="content">
+          <div class="row g-2">
+            <div class="col-lg-4">
+              <div class="bloc" [class.green]="department.numberSponsorships >= 500" [class.red]="department.numberSponsorships < 500">
+                <div class="number">
+                  {{department.numberSponsorships}}
+                </div>
+                <div class="message mt-2">
+                  parrainages / <br>
+                  au moins 500
+                </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="bloc" [class.green]="department.numberDepartments >= 30" [class.red]="department.numberDepartments < 30">
+                <div class="number">
+                  {{department.numberDepartments}}
+                </div>
+                <div class="message mt-2">
+                  départements / <br>
+                  au moins 30
+                </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="bloc" [class.green]="department.hasTenPercent === false" [class.red]="department.hasTenPercent === true">
+                <div class="message mb-2">
+                ne possède pas
+                </div>
+                <div class="number">
+                  +10%
+                </div>
+                <div class="message mt-2">
+                  des parrainages <br>
+                  dans un seul département
+                </div>
+
+                </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="cs-title">
+          <p class="subtitle">
+            <!-- Evolution des parrainages dans le temps pour le candidat {{department.name}} pour les
+            présidentielles 2022 -->
+          </p>
+        </div>
+        <div class="content">
+          <!-- <app-sponsorship-graph [data]="department.timeline"></app-sponsorship-graph> -->
+        </div>
+
+        <div class="cs-title">
+          <p class="subtitle">
+            Classement des candidats soutenus en parrainages pour les présidentielles 2022 dans le département {{department.name}}
+          </p>
+        </div>
+        <div class="content cs-card card-table">
+          <app-sponsorship-ranking [data]="department.candidates" [candidate]="null">
+          </app-sponsorship-ranking>
+        </div>
+        <div class="cs-title">
+          <h2>
+            Liste des élus et parrainages pour les présidentielles 2022 par ville dans le département {{department.name}}
+          </h2>
+        </div>
+        <div class="content list">
+          <app-sponsorship-list [data]="department.sponsorships"></app-sponsorship-list>
+        </div>
+        <div class="content">
+          <app-list-buttons
+          [list]="region"
+          [candidate]="department.name"
+          [type]="'department'"
+          [title]="'Tous les parrainages par département dans la région ' + region[0].region.name"
+          [link]="'2022/parrainages-presidentielles/departements/'"
+          ></app-list-buttons>
+        </div>
+      </ng-container>
+      <div class="content loader" *ngIf="departmentObs.loading">
+        <p-progressSpinner [style]="{width: '70px', height: '70px'}" styleClass="custom-spinner" strokeWidth="5"
+          animationDuration=".5s"></p-progressSpinner>
+      </div>
+      <ng-container *ngIf="!(departmentObs.value) && !departmentObs.loading">
+        <div class="content">
+          <p-message severity="error" text="Aucun résultat pour le département demandé"></p-message>
+        </div>
+      </ng-container>
+    </ng-container>
+
+  </ng-container>
+</div>

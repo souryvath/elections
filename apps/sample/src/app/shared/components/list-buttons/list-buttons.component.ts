@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-list-buttons',
@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListButtonsComponent implements OnInit {
 
-  constructor() { }
+  @Input() title;
+  @Input() list;
+  @Input() candidate;
+  @Input() link;
+  @Input() type;
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

@@ -1,1 +1,16 @@
-<p>list-buttons works!</p>
+<div class="cs-list">
+  <ul class="row">
+    <p class="subtitle">
+
+      {{title}}
+    </p>
+    <ng-container *ngFor="let item of list; let i = index;">
+      <li class="item-button col-lg-4" *ngIf="item.name !== candidate">
+        <a href="{{link + item.slug}}" class="p-button p-button-primary">
+          <span *ngIf="type === 'candidate'">Parrainages {{item.name}} présidentielles 2022</span>
+          <span *ngIf="type === 'department'">Parrainages présidentielles 2022 {{item.name}}</span>
+        </a>
+      </li>
+    </ng-container>
+  </ul>
+</div>

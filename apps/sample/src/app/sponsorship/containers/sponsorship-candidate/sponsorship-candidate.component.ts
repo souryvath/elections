@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
+import { SeoService } from '../../../core/services/seo.service';
 import { SponsorshipService } from '../../services/sponsorship.service';
 
 @Component({
@@ -11,21 +12,25 @@ import { SponsorshipService } from '../../services/sponsorship.service';
 export class SponsorshipCandidateComponent implements OnInit {
 
   results: any[];
-  sponsorships$: Observable<any>;
-  ranking$: Observable<any>;
+  candidate$: Observable<any>;
+  ranking: any;
   NBR_SPONSORSHIPS = 500;
   constructor(
     public router: Router,
     private readonly route: ActivatedRoute,
-    private readonly sponsorshipService: SponsorshipService
+    private readonly sponsorshipService: SponsorshipService,
+    private readonly seoService: SeoService
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.sponsorships$ = this.sponsorshipService.getSponsorships('slugCandidate', params.slugCandidate)
-      this.ranking$ = this.sponsorshipService.getRanking(params.slugCandidate).pipe(tap((element) => {
-        console.log(element);
+      this.candidate$ = this.sponsorshipService.getCandidate('slug', params.slugCandidate).pipe(tap((element) => {
+        this.setSeo(element.name);
       }));
+      // this.department$ = this.sponsorshipService.getSponsorshipsBydepartment(params.slugCandidate);
+      this.sponsorshipService.getRanking().subscribe((result) => {
+        this.ranking = result;
+      });
     });
   }
 
@@ -39,6 +44,14 @@ export class SponsorshipCandidateComponent implements OnInit {
     if ($event) {
       this.router.navigate([type, $event.slug]);
     }
+  }
+
+  private setSeo(candidateName: string): void {
+    this.seoService.setSeoPage(
+      `Liste des parrainages des présidentielles 2022 pour le candidat ${candidateName}`,
+      `Retrouvez la liste des parrainages du candidat ${candidateName} pour les présidentielles 2022, avec la liste des élus et le nombre parrainages obtenus, par ville et département.`,
+      'IMAGE A MODIFIER'
+    );
   }
 
 }

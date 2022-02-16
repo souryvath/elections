@@ -102,3 +102,15 @@
 .p-datatable .p-sortable-column .p-sortable-column-icon {
   color: #FFFFFF !important;
 }
+
+.p-datatable-responsive-scroll>.p-datatable-wrapper>table {
+  table-layout: fixed !important;
+}
+
+.p-datatable table {
+  width: 100% !important;
+}
+
+.p-datatable .p-sortable-column .p-sortable-column-icon {
+  margin-left: 0 !important;
+}

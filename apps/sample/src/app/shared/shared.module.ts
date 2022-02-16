@@ -20,6 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     PrimeModule,
     MapComponent,
     SearchPostalCodeComponent,
+    ListButtonsComponent,
     BreadcrumbModule,
     FontAwesomeModule
   ],

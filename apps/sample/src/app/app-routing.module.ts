@@ -13,13 +13,13 @@ const routes: Routes = [
   {
     loadChildren: () => import('./sponsorship/sponsorship.module')
       .then(m => m.SponsorshipModule),
-    path: 'parrainages',
+    path: '2022/parrainages-presidentielles',
     data: { breadcrumb: 'Parrainages' }
   },
   // {
   //   path: '', component: HomeComponent,  data: { breadcrumb: 'Home' }
   // },
-  { path: '**', redirectTo: 'parrainages', pathMatch: 'full' }
+  { path: '**', redirectTo: '2022/parrainages-presidentielles', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -16,12 +16,24 @@ th {
 }
 
 @media screen and (max-width: 64em) {
+  table {
+    width: 100% !important;
+  }
   :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
       top: 0;
+      font-size: 0.75em !important;
+      padding: 0.1em !important;
   }
+
+  :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    top: 0;
+    font-size: 0.75em !important;
+    padding: 0.1em !important;
+}
 
   .layout-news-active :host ::ng-deep .p-datatable tr > th {
       top: 0;
   }
 }
+
 

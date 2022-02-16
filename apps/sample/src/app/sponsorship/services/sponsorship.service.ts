@@ -18,9 +18,16 @@ export class SponsorshipService {
     return this.httpClient.get(`${environment.api}/api/sponsorship?field=${field}&value=${value}`);
   }
 
-  getRanking(slugCandidate: string): Observable<any> {
-    return this.httpClient.get(`${environment.api}/api/sponsorship/ranking?slugCandidate=${slugCandidate}`);
+  getRanking(): Observable<any> {
+    return this.httpClient.get(`${environment.api}/api/candidate/ranking`);
   }
 
+  getCandidate(field: string, value: string): Observable<any> {
+    return this.httpClient.get(`${environment.api}/api/candidate?field=${field}&value=${value}`);
+  }
+
+  getDepartment(field: string, value: string): Observable<any> {
+    return this.httpClient.get(`${environment.api}/api/department?field=${field}&value=${value}`);
+  }
 
 }

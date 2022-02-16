@@ -12,6 +12,10 @@ import { SponsorshipGraphComponent } from './components/sponsorship-graph/sponso
 import { SponsorshipRankingComponent } from './components/sponsorship-ranking/sponsorship-ranking.component';
 import { SponsorshipListComponent } from './components/sponsorship-list/sponsorship-list.component';
 import { SponsorshipComponent } from './containers/sponsorship/sponsorship.component';
+import { SponsorshipHomeComponent } from './containers/sponsorship-home/sponsorship-home.component';
+import { SponsorshipHomeCandidateComponent } from './containers/sponsorship-home-candidate/sponsorship-home-candidate.component';
+import { SponsorshipHomeDepartmentComponent } from './containers/sponsorship-home-department/sponsorship-home-department.component';
+import { SponsorshipDepartmentComponent } from './containers/sponsorship-department/sponsorship-department.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { SponsorshipComponent } from './containers/sponsorship/sponsorship.compo
     SponsorshipGraphComponent,
     SponsorshipRankingComponent,
     SponsorshipListComponent,
-    SponsorshipComponent
+    SponsorshipComponent,
+    SponsorshipHomeComponent,
+    SponsorshipHomeCandidateComponent,
+    SponsorshipHomeDepartmentComponent,
+    SponsorshipDepartmentComponent
   ],
   imports: [
     CommonModule,

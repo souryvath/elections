@@ -7,6 +7,8 @@ export const SponsorshipSchema = new mongoose.Schema({
   mandate: String,
   district: String,
   department: String,
+  departmentCode: String,
+  departmentNumberSponsorship: Number,
   candidate: String,
   slugCandidate: String,
   date: String

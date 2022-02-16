@@ -12,7 +12,6 @@ export class SponsorshipController {
   async getSponsorship(@Res() res, @Query() params): Promise<Sponsorship[]> {
     let sponsorships = null;
     if (params.field && params.value) {
-      console.log(params);
       sponsorships = await this.sponsorshipService.findSponsorships(params.field, params.value);
     } else {
       sponsorships = await this.sponsorshipService.findAllSponsorships();
@@ -32,10 +31,17 @@ export class SponsorshipController {
   @Get('sponsorship/ranking')
   async getRanking(@Res() res, @Query() params): Promise<Sponsorship[]> {
     if (params.slugCandidate) {
-      const sponsorships = await this.sponsorshipService.findRanking(params.slugCandidate);
+      const sponsorships = await this.sponsorshipService.findRanking();
       return res.status(HttpStatus.OK).json(sponsorships);
     }
-
     return res.status(HttpStatus.OK).json([]);
+  }
+
+  @Get('sponsorship/department')
+  async getDepartment(@Res() res, @Query() params): Promise<Sponsorship[]> {
+    if (params.slugCandidate) {
+      const sponsorships = await this.sponsorshipService.findDistinctDepartment();
+      return res.status(HttpStatus.OK).json(sponsorships.filter((item => item._id.slugCandidate === params.slugCandidate)));
+    }
   }
 }

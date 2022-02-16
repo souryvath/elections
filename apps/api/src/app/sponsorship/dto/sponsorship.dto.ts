@@ -5,6 +5,8 @@ export interface SponsorshipDTO {
   readonly mandate?: string;
   readonly district?: string;
   readonly department?: string;
+  readonly departmentCode?: string;
+  readonly departmentNumberSponsorship?: number;
   readonly candidate?: string;
   readonly slugCandidate?: string;
   readonly date?: string
