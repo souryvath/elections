@@ -12,6 +12,7 @@ export class SponsorshipHomeDepartmentComponent implements OnInit {
 
   results: any[];
   departments: any[];
+  todayDate: any = Date.now();
   constructor(
     private readonly seoService: SeoService,
     public router: Router
@@ -35,8 +36,7 @@ export class SponsorshipHomeDepartmentComponent implements OnInit {
   private setSeo(): void {
     this.seoService.setSeoPage(
       'Carte des parrainages présidentielles 2022 par département et par ville',
-      'Retrouvez la carte des parrainages pour les présidentielles 2022 par département et par ville, avec la liste et le nombre parrainages, ainsi que les candidats soutenus',
-      'IMAGE A MODIFIER'
+      'Retrouvez la carte des parrainages pour les présidentielles 2022 par département et par ville, avec la liste et le nombre parrainages, ainsi que les candidats soutenus'
     );
   }
 }

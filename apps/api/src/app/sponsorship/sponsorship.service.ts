@@ -79,7 +79,6 @@ export class SponsorshipService {
     const sponsorships = await this.sponsorshipModel.find(
       query
     ).exec();
-    console.log(sponsorships.length);
     return sponsorships;
   }
 

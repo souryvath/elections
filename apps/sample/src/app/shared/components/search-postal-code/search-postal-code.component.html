@@ -2,22 +2,29 @@
   <p class="label">
     {{searchLabel}}
   </p>
-  <p-autoComplete #autocomplete [autofocus]="false" [inputId]="'autocomplete-input'"
-    [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [(ngModel)]="city"
-    [suggestions]="results" (completeMethod)="search($event)"  (onKeyUp)="getKey($event)" (onSelect)="selectPlace($event)" field="name">
-    <ng-template let-postalCode pTemplate="item">
-      <a [href]="type + '/' + postalCode.slug">
-        {{postalCode.name}}</a>
-    </ng-template>
-  </p-autoComplete>
-  <div class="buttons">
-    <button pButton type="button" class="search-button p-button-primary" label="{{buttonLabel}}" (click)="search(null)"
-      [disabled]="!city"></button>
-    <button pButton type="button" class="cs-icon-button p-button-primary geoloc-button" label="Géolocaliser"
-      *ngIf="geolocalisation" (click)="findLocalisation($event)">
-      <span class="material-icons">
-        my_location
-      </span>
-    </button>
+  <div class="form">
+    <div class="autocomplete">
+      <p-autoComplete #autocomplete [autofocus]="false" [inputId]="'autocomplete-input'"
+        [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder"
+        [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)"
+        (onSelect)="selectPlace($event)" field="name">
+        <ng-template let-postalCode pTemplate="item">
+          <a [href]="type + '/' + postalCode.slug">
+            {{postalCode.name}}</a>
+        </ng-template>
+      </p-autoComplete>
+    </div>
+
+    <div class="buttons">
+      <button pButton type="button" class="search-button p-button-primary" label="{{buttonLabel}}"
+        (click)="search(null)" [disabled]="!city"></button>
+      <button pButton type="button" class="cs-icon-button p-button-primary geoloc-button" label="Géolocaliser"
+        *ngIf="geolocalisation" (click)="findLocalisation($event)">
+        <span class="material-icons">
+          my_location
+        </span>
+      </button>
+    </div>
+
   </div>
 </div>

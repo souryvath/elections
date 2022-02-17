@@ -2,7 +2,7 @@
 <div class="container">
   <app-search-postal-code [(results)]="results" (searchEvent)="search($event)"
     [searchLabel]="'Tous les parrainages dans votre département'" [buttonLabel]="'Valider'"
-    [placeholder]="'Votre département'" [type]="'parrainages-presidentielles-2022/departements'"
+    [placeholder]="'Votre département'" [type]="'parrainages-presidentielle-2022/departements'"
     (selectedPlaceEvent)="select($event, 'departements')">
   </app-search-postal-code>
   <ng-container *ngIf=" {
@@ -18,8 +18,7 @@
         <div class="content">
           <p>
             Retrouvez la carte des parrainages pour les présidentielles 2022 dans le département {{department.name}} et
-            par ville, avec la liste et le nombre parrainages, ainsi que les candidats soutenus (dernière mise à jour le
-            10 février 2022)
+            par ville, avec la liste et le nombre parrainages, ainsi que les candidats soutenus (dernière mise à jour le {{todayDate | date: 'fullDate'}})
           </p>
         </div>
         <div class="content map">
@@ -83,7 +82,7 @@
         <div class="content">
           <app-list-buttons [list]="region" [candidate]="department.name" [type]="'department'"
             [title]="'Tous les parrainages par département dans la région ' + region[0].region.name"
-            [link]="'parrainages-presidentielles-2022/departements/'"></app-list-buttons>
+            [link]="'parrainages-presidentielle-2022/departements/'"></app-list-buttons>
         </div>
       </ng-container>
       <div class="content loader" *ngIf="departmentObs.loading">

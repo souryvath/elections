@@ -7,7 +7,7 @@ export interface Sponsorship extends Document {
   readonly district?: string;
   readonly department?: string;
   readonly departmentCode?: string;
-  readonly departmentNumberSponsorship?: number;
+  readonly departmentSlug?: string;
   readonly candidate?: string;
   readonly location?: Location;
   readonly slugCandidate?: string;

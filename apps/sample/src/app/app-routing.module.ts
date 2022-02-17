@@ -13,8 +13,8 @@ const routes: Routes = [
   {
     loadChildren: () => import('./sponsorship/sponsorship.module')
       .then(m => m.SponsorshipModule),
-    path: 'parrainages-presidentielles-2022',
-    data: { breadcrumb: 'Parrainages présidentielles 2022' }
+    path: 'parrainages-presidentielle-2022',
+    data: { breadcrumb: 'Parrainages présidentielle 2022' }
   },
   {
     path: '', component: HomeComponent,  data: { breadcrumb: 'Accueil' }

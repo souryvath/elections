@@ -32,6 +32,7 @@
 .bloc {
   color: #FFFFFF;
   border-radius: $border-radius-card;
+  position: relative;
   &.green {
     background: #42E695;
   }
@@ -39,11 +40,7 @@
     background: red;
   }
   text-align: center;
-  height: 10em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
   .number {
     font-size: 2.5em;
     line-height: 0.8;
@@ -53,6 +50,22 @@
   }
 }
 
+.text {
+  height: 10em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .list {
   background-color: #FFFFFF;
+}
+
+.icon {
+  position: absolute;
+  top:0;
+  right:0;
+  padding: 0.25em;
+  font-size: 40px;
 }

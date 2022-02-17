@@ -13,6 +13,7 @@ export class SponsorshipHomeCandidateComponent implements OnInit {
 
   resultsCandidates: any[];
   ranking$: Observable<any>;
+  todayDate: any = Date.now();
   constructor(
     public router: Router,
     private readonly seoService: SeoService,
@@ -38,8 +39,7 @@ export class SponsorshipHomeCandidateComponent implements OnInit {
   private setSeo(): void {
     this.seoService.setSeoPage(
       'Liste des parrainages des présidentielles 2022 par candidat',
-      'Retrouvez la liste des parrainages de chaque candidat pour les présidentielles 2022, avec la liste des élus et le nombre parrainages obtenus pour chaque candidat, par ville et département.',
-      'IMAGE A MODIFIER'
+      'Retrouvez la liste des parrainages de chaque candidat pour les présidentielles 2022, avec la liste des élus et le nombre parrainages obtenus pour chaque candidat, par ville et département.'
     );
   }
 }

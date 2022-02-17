@@ -10,9 +10,9 @@
   </div>
   <div class="content ranking">
     <div class="cs-title">
-      <p class="subtitle">
+      <h2>
         Classement des parrainages
-      </p>
+      </h2>
     </div>
     <ng-container *ngIf=" {
       ranking: (ranking$ | loading | async)
@@ -31,7 +31,7 @@
     </p>
     <app-search-postal-code [(results)]="resultsCandidates" (searchEvent)="searchCandidate($event)"
     [searchLabel]="'Recherchez les parrainages d’un candidat :'" [buttonLabel]="'Valider'"
-    [placeholder]="'Nom du candidat'" [type]="'parrainages-presidentielles-2022/candidats'" (selectedPlaceEvent)="select($event, 'parrainages')">
+    [placeholder]="'Nom du candidat'" [type]="'parrainages-presidentielle-2022/candidats'" (selectedPlaceEvent)="select($event, 'parrainages')">
   </app-search-postal-code>
   </div>
   <div class="content search">
@@ -40,7 +40,7 @@
     </p>
     <app-search-postal-code [(results)]="resultsDepartments" (searchEvent)="searchDepartment($event)"
     [searchLabel]="'Recherchez les parrainages dans votre département :'" [buttonLabel]="'Valider'"
-    [placeholder]="'Votre département'" [type]="'parrainages-presidentielles-2022/departements'"
+    [placeholder]="'Votre département'" [type]="'parrainages-presidentielle-2022/departements'"
     (selectedPlaceEvent)="select($event, 'departements')"></app-search-postal-code>
   </div>
 </div>

@@ -97,10 +97,12 @@ export class ScraperSponsorshipService {
         district: element[4],
         department: element[5],
         departmentCode: dep.code,
+        departmentSlug: dep.slug,
         candidate: candidate.trim(),
         slugCandidate: slugify(candidate.trim(), { lower: true, remove: /[*+~.()'"!:@/]/g }),
         date: element[7],
-        address: `${element[4]} ${element[5]} ${dep.region.name}`
+        region: dep.region.name,
+        departmentCode1: dep.code.slice(3),
       }
       sponsorships.push(sponsorship);
     });
@@ -117,12 +119,13 @@ export class ScraperSponsorshipService {
         district: element[4],
         department: element[5],
         departmentCode: element[6],
-        candidate: element[7],
-        slugCandidate: element[8],
-        date: element[9],
+        departmentSlug: element[7],
+        candidate: element[8],
+        slugCandidate: element[9],
+        date: element[10],
         location: {
           type: 'Point',
-          coordinates: [Number(element[12]), Number(element[11])]
+          coordinates: [Number(element[14]), Number(element[13])]
         }
       }
       sponsorships.push(sponsorship);
@@ -208,7 +211,9 @@ export class ScraperSponsorshipService {
   private async fetchAdressFromGouv(): Promise<any> {
     const formData = new FormData();
     formData.append('data', fs.createReadStream('./sponsorships.csv'));
-    formData.append('columns', 'address');
+    formData.append('columns', 'district');
+    formData.append('columns', 'department');
+    formData.append('columns', 'departmentCode1');
     formData.append('delimiter', ',');
     const res = await fetch(this.URL_SEARCH_ADDRESS, { method: 'POST', body: formData });
     const text = await res.text();

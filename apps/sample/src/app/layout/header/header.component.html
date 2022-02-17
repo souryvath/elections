@@ -15,9 +15,14 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link" [class.active]="router.url | include: 'parrainages-presidentielles-2022'"
-            href="parrainages-presidentielles-2022">
-            Parrainages présidentielles 2022</a>
+            <a class="nav-link" [class.active]="router.url | include: 'parrainages-presidentielle-2022/candidats'"
+            href="parrainages-presidentielle-2022/candidats">
+            Parrainages présidentielle 2022 par candidat</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="router.url | include: 'parrainages-presidentielle-2022/departements'"
+            href="parrainages-presidentielle-2022/departements">
+            Parrainages présidentielle 2022 par département</a>
           </li>
         </ul>
       </div>

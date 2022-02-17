@@ -12,7 +12,6 @@ export class SponsorshipRankingComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.data);
   }
 
 }

@@ -35,8 +35,10 @@
       <td>{{item.lastName}} <br> {{item.firstName}}</td>
       <td>{{item.mandate}}</td>
       <td>{{item.district}}</td>
-      <td *ngIf="type === 'candidate'">{{item.department}}</td>
-      <td *ngIf="type === 'department'">{{item.candidate}}</td>
+      <td *ngIf="type === 'candidate'">
+        <a [href]="'parrainages-presidentielle-2022/departements/' + item.departmentSlug">{{item.department}}</a></td>
+      <td *ngIf="type === 'department'">
+        <a [href]="'parrainages-presidentielle-2022/candidats/' + item.slugCandidate">{{item.candidate}}</a></td>
     </tr>
   </ng-template>
   <ng-template pTemplate="emptymessage">

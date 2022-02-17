@@ -30,8 +30,7 @@ export class SponsorshipHomeComponent implements OnInit {
   private setSeo(): void {
     this.seoService.setSeoPage(
       'Liste des parrainages des présidentielles 2022 par candidat et département',
-      'Retrouvez la liste complète des parrainages pour les présidentielles 2022, pour chaque candidat, par nombre de parrainages obtenus, par élu, ville et département',
-      'IMAGE A MODIFIER'
+      'Retrouvez la liste complète des parrainages pour les présidentielles 2022, pour chaque candidat, par nombre de parrainages obtenus, par élu, ville et département'
     );
   }
 

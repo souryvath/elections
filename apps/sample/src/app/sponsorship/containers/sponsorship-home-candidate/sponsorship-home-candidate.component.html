@@ -2,8 +2,8 @@
 <div class="container">
   <app-search-postal-code [(results)]="resultsCandidates" (searchEvent)="searchCandidate($event)"
     [searchLabel]="'Recherchez les parrainages d’un candidat :'" [buttonLabel]="'Valider'"
-    [placeholder]="'Nom du candidat'" [type]="'parrainages-presidentielles-2022/candidats'"
-    (selectedPlaceEvent)="select($event, 'parrainages-presidentielles-2022/candidats')">
+    [placeholder]="'Nom du candidat'" [type]="'parrainages-presidentielle-2022/candidats'"
+    (selectedPlaceEvent)="select($event, 'parrainages-presidentielle-2022/candidats')">
   </app-search-postal-code>
   <div class="cs-title">
     <h1>
@@ -14,7 +14,7 @@
     <p>
       Retrouvez la liste des parrainages de chaque candidat pour les présidentielles 2022,
       avec la liste des élus et le nombre parrainages obtenus,
-      par ville et département (dernière mise à jour le 10 février 2022)
+      par ville et département (dernière mise à jour le {{todayDate | date: 'fullDate'}})
     </p>
   </div>
 
@@ -29,7 +29,7 @@
         </div>
         <div class="content">
           <app-list-buttons [list]="ranking" [type]="'candidate'" [title]="'Tous les parrainages par candidat'"
-            [link]="'parrainages-presidentielles-2022/candidats/'"></app-list-buttons>
+            [link]="'parrainages-presidentielle-2022/candidats/'"></app-list-buttons>
         </div>
       </ng-container>
     </ng-container>

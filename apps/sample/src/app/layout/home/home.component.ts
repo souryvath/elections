@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   search($event): void {
-    console.log($event);
+
     this.postalCodeService.getPostalCodes($event.query).subscribe(data => {
       this.results = data;
     });
