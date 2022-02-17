@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { BreadcrumbService } from 'xng-breadcrumb';
@@ -17,12 +18,14 @@ export class SponsorshipCandidateComponent implements OnInit {
   ranking: any;
   NBR_SPONSORSHIPS = 500;
   todayDate: any = Date.now();
+  isBrowser = isPlatformBrowser(this.platformId);
   constructor(
     public router: Router,
     private readonly route: ActivatedRoute,
     private readonly sponsorshipService: SponsorshipService,
     private readonly seoService: SeoService,
-    private readonly breadcrumbService: BreadcrumbService
+    private readonly breadcrumbService: BreadcrumbService,
+    @Inject(PLATFORM_ID) private readonly platformId: any
   ) { }
 
   ngOnInit(): void {

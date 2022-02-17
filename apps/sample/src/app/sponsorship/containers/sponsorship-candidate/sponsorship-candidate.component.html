@@ -54,7 +54,7 @@
             {{todayDate | date: 'fullDate'}})
           </p>
         </div>
-        <div class="content">
+        <div class="content" *ngIf="isBrowser">
           <app-sponsorship-map [data]="candidate.departments"></app-sponsorship-map>
         </div>
         <div class="content">
@@ -132,7 +132,7 @@
             présidentielles 2022
           </p>
         </div>
-        <div class="content">
+        <div class="content" *ngIf="isBrowser">
           <app-sponsorship-graph [data]="candidate.timeline"></app-sponsorship-graph>
         </div>
 
