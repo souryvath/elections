@@ -1,1 +1,40 @@
-<p>sponsorship-home-candidate works!</p>
+<app-breadcrumb></app-breadcrumb>
+<div class="container">
+  <app-search-postal-code [(results)]="resultsCandidates" (searchEvent)="searchCandidate($event)"
+    [searchLabel]="'Recherchez les parrainages d’un candidat :'" [buttonLabel]="'Valider'"
+    [placeholder]="'Nom du candidat'" [type]="'parrainages-presidentielles-2022/candidats'"
+    (selectedPlaceEvent)="select($event, 'parrainages-presidentielles-2022/candidats')">
+  </app-search-postal-code>
+  <div class="cs-title">
+    <h1>
+      Classement des parrainages de la présidentielle 2022 pour chaque candidat
+    </h1>
+  </div>
+  <div class="content">
+    <p>
+      Retrouvez la liste des parrainages de chaque candidat pour les présidentielles 2022,
+      avec la liste des élus et le nombre parrainages obtenus,
+      par ville et département (dernière mise à jour le 10 février 2022)
+    </p>
+  </div>
+
+  <ng-container *ngIf=" {
+      ranking: (ranking$ | loading | async)
+      } as obs">
+    <ng-container *ngIf="obs.ranking as rankingObs">
+      <ng-container *ngIf="rankingObs.value as ranking">
+        <div class="content">
+          <app-sponsorship-ranking [data]="ranking" [candidate]="null">
+          </app-sponsorship-ranking>
+        </div>
+        <div class="content">
+          <app-list-buttons [list]="ranking" [type]="'candidate'" [title]="'Tous les parrainages par candidat'"
+            [link]="'parrainages-presidentielles-2022/candidats/'"></app-list-buttons>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+
+
+</div>

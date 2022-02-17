@@ -17,6 +17,7 @@ export class SponsorshipDepartmentComponent implements OnInit {
   ranking: any;
   NBR_SPONSORSHIPS = 500;
   region: any[];
+  places: any[]
   constructor(
     public router: Router,
     private readonly route: ActivatedRoute,
@@ -29,16 +30,14 @@ export class SponsorshipDepartmentComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.department$ = this.sponsorshipService.getDepartment('slug', params.slugDepartment).pipe(tap((element) => {
         const dep = FRANCE_DEPS_LIST.find((depItem) => depItem.name === element.name);
-        console.log(dep.region.name);
-        console.log(FRANCE_DEPS_LIST);
         this.region = FRANCE_DEPS_LIST.filter((item) => item.region.name === dep.region.name);
+        this.places = element.sponsorships.filter((item) => item.mandate === 'Maire');
         this.setSeo(element.name);
       }));
     });
   }
 
   search($event): void {
-    // console.log($event.query);
     this.results = FRANCE_DEPS_LIST.filter((element) => element.name.toLowerCase().includes($event.query));
   }
 
@@ -48,10 +47,10 @@ export class SponsorshipDepartmentComponent implements OnInit {
     }
   }
 
-  private setSeo(candidateName: string): void {
+  private setSeo(departmentName: string): void {
     this.seoService.setSeoPage(
-      `Liste des parrainages des présidentielles 2022 pour le candidat ${candidateName}`,
-      `Retrouvez la liste des parrainages du candidat ${candidateName} pour les présidentielles 2022, avec la liste des élus et le nombre parrainages obtenus, par ville et département.`,
+      `Carte des parrainages présidentielles 2022 dans le département ${departmentName} par ville`,
+      `Retrouvez la carte des parrainages pour les présidentielles 2022 dans le département ${departmentName} et par ville, avec la liste et le nombre parrainages, ainsi que les candidats soutenus`,
       'IMAGE A MODIFIER'
     );
   }

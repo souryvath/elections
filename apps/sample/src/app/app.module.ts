@@ -1,8 +1,9 @@
+import localeFr from '@angular/common/locales/fr';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,10 +14,16 @@ import { environment } from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { JsonLdModule } from 'ngx-seo';
+import { DatePipe, registerLocaleData } from '@angular/common';
+registerLocaleData(localeFr, 'fr-FR');
 
 @NgModule({
   declarations: [
     AppComponent
+  ],
+  providers: [
+    DatePipe,
+    { provide: LOCALE_ID, useValue: 'fr-FR' }
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'app' }),

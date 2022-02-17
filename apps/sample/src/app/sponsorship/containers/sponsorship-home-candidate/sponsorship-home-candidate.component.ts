@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { SeoService } from '../../../core/services/seo.service';
+import { SponsorshipService } from '../../services/sponsorship.service';
 
 @Component({
   selector: 'app-sponsorship-home-candidate',
@@ -8,10 +11,28 @@ import { SeoService } from '../../../core/services/seo.service';
 })
 export class SponsorshipHomeCandidateComponent implements OnInit {
 
-  constructor(private readonly seoService: SeoService) { }
+  resultsCandidates: any[];
+  ranking$: Observable<any>;
+  constructor(
+    public router: Router,
+    private readonly seoService: SeoService,
+    private readonly sponsorshipService: SponsorshipService) { }
 
   ngOnInit(): void {
     this.setSeo();
+    this.ranking$ = this.sponsorshipService.getRanking();
+  }
+
+  searchCandidate($event): void {
+    this.sponsorshipService.getCandidates($event.query).subscribe(data => {
+      this.resultsCandidates = data;
+    });
+  }
+
+  select($event, type) {
+    if ($event) {
+      this.router.navigate([type, $event.slug]);
+    }
   }
 
   private setSeo(): void {

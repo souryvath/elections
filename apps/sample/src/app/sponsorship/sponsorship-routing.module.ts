@@ -21,7 +21,7 @@ export const routes: Routes = [
           {
             path: '',
             component: SponsorshipHomeCandidateComponent,
-            data: { breadcrumbAlias: 'candidate' },
+            data: { breadcrumb: 'Parrainages par candidat' }
           },
           {
             path: ':slugCandidate',
@@ -39,7 +39,7 @@ export const routes: Routes = [
           {
             path: '',
             component: SponsorshipHomeDepartmentComponent,
-            data: { breadcrumbAlias: 'department' },
+            data: { breadcrumb: 'Parrainages par département' }
           },
           {
             path: ':slugDepartment',

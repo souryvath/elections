@@ -1,7 +1,6 @@
 import * as mongoose from 'mongoose';
 
 export const SponsorshipSchema = new mongoose.Schema({
-  civility: String,
   lastName: String,
   firstName: String,
   mandate: String,
@@ -11,7 +10,11 @@ export const SponsorshipSchema = new mongoose.Schema({
   departmentNumberSponsorship: Number,
   candidate: String,
   slugCandidate: String,
-  date: String
+  date: String,
+  location: {
+    type: { type: String },
+    coordinates: [Number]
+  },
 });
 
 SponsorshipSchema.index({location: '2dsphere'});

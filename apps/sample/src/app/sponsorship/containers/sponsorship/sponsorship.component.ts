@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { SeoService } from './../../../core/services/seo.service';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-sponsorship',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SponsorshipComponent implements OnInit {
 
-  constructor() { }
+  isBrowser = isPlatformBrowser(this.platformId);
+  constructor(private readonly seoService: SeoService, @Inject(PLATFORM_ID) private readonly platformId: any) { }
 
   ngOnInit(): void {
+    this.setSeo();
+  }
+
+  private setSeo(): void {
+    this.seoService.setSeoPage(
+      'Liste des parrainages des présidentielles 2022 par candidat et département',
+      'Retrouvez la liste complète des parrainages pour les présidentielles 2022, pour chaque candidat, par nombre de parrainages obtenus, par élu, ville et département',
+      'IMAGE A MODIFIER'
+    );
   }
 
 }

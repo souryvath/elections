@@ -83,19 +83,4 @@ export class SponsorshipService {
     return sponsorships;
   }
 
-  async findRanking() {
-    let allCandidates = await this.findDistinctCandidates();
-    let candidates = [];
-    for (const candidate of allCandidates) {
-      const newObject = {
-        name: candidate.name,
-        slug: candidate.slug,
-        numberSponsorships: (await this.findSponsorships('slugCandidate', candidate.slug)).length
-      }
-      candidates.push(newObject);
-    }
-    return candidates.sort((a, b) => (a.numberSponsorships < b.numberSponsorships) ? 1 : -1);
-  }
-
-
 }

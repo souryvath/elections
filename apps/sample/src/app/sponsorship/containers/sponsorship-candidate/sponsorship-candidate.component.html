@@ -2,7 +2,7 @@
 <div class="container">
   <app-search-postal-code [(results)]="results" (searchEvent)="search($event)"
     [searchLabel]="'Recherchez les parrainages d’un candidat :'" [buttonLabel]="'Valider'"
-    [placeholder]="'Nom du candidat'" [type]="'2022/parrainages-presidentielles/candidats'" (selectedPlaceEvent)="select($event, 'parrainages')">
+    [placeholder]="'Nom du candidat'" [type]="'parrainages-presidentielles-2022/candidats'" (selectedPlaceEvent)="select($event, 'parrainages')">
   </app-search-postal-code>
   <ng-container *ngIf=" {
       candidate: (candidate$ | loading | async)
@@ -26,7 +26,7 @@
                   {{candidate.name}}
                 </div>
                 <div class="political">
-                  Les républicains
+                  {{candidate.party}}
                 </div>
               </div>
             </div>
@@ -120,7 +120,7 @@
           </h2>
         </div>
         <div class="content list">
-          <app-sponsorship-list [data]="candidate.sponsorships"></app-sponsorship-list>
+          <app-sponsorship-list [data]="candidate.sponsorships" [type]="'candidate'"></app-sponsorship-list>
         </div>
         <div class="content">
           <app-list-buttons
@@ -128,7 +128,7 @@
           [candidate]="candidate.name"
           [type]="'candidate'"
           [title]="'Tous les parrainages par candidat'"
-          [link]="'2022/parrainages-presidentielles/candidats/'"
+          [link]="'parrainages-presidentielles-2022/candidats/'"
           ></app-list-buttons>
         </div>
       </ng-container>

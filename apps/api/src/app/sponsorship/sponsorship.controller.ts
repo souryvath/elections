@@ -28,15 +28,6 @@ export class SponsorshipController {
     return res.status(HttpStatus.OK).json(null);
   }
 
-  @Get('sponsorship/ranking')
-  async getRanking(@Res() res, @Query() params): Promise<Sponsorship[]> {
-    if (params.slugCandidate) {
-      const sponsorships = await this.sponsorshipService.findRanking();
-      return res.status(HttpStatus.OK).json(sponsorships);
-    }
-    return res.status(HttpStatus.OK).json([]);
-  }
-
   @Get('sponsorship/department')
   async getDepartment(@Res() res, @Query() params): Promise<Sponsorship[]> {
     if (params.slugCandidate) {

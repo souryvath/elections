@@ -67,7 +67,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
   initMarkerCurrentPosition(latitude: number, longitude: number): any {
     this.iconCurrentPosition = {
       icon: L.icon({
-        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
         iconSize: [25, 41],
         iconAnchor: [12, 41],
@@ -81,7 +81,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
   initMarker(latitude: number, longitude: number): any {
     this.icon = {
       icon: L.icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
         shadowUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-shadow.png',
         iconSize: [24, 36],
         iconAnchor: [12, 36],
@@ -96,30 +96,26 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
     this.places.forEach((place) => {
 
       const marker = this.initMarker(place.location.coordinates[1], place.location.coordinates[0]);
-      let infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 1em;font-size: 1.15em;">
-      <a  style="color: #000000;" onmouseover='this.style.textDecoration="underline"'
-      onmouseout='this.style.textDecoration="none"' href="controle-technique/${place.localisation.slug}/${place.slugName}" title="Contrôle technique ${place.name}">Contrôle technique ${place.name}</a>
+      // let infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 1em;font-size: 1.15em;">
+      // <a  style="color: #000000;" onmouseover='this.style.textDecoration="underline"'
+      // onmouseout='this.style.textDecoration="none"' href="controle-technique/${place.localisation.slug}/${place.slugName}" title="Contrôle technique ${place.name}">Contrôle technique ${place.name}</a>
+      // <br>
+      // </div>`;
+      let infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 1em;font-size: 1.15em;">${place.district} - ${place.candidate}
       <br>
       </div>`;
-      if (this.type === 'fuel') {
-        infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 1em;font-size: 1.15em;">
-        <a  style="color: #000000;" onmouseover='this.style.textDecoration="underline"'
-        onmouseout='this.style.textDecoration="none"' href="prix-carburant/${place.localisation.slug}/${place.slugName}" title="Station essence ${place.name}">Station essence ${place.name}</a>
-        <br>
-        </div>`;
-      }
-      if (this.isSheet === true) {
-        if (this.type === 'fuel') {
-          infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 0.5em;font-size: 1.15em;">
-          Station essence ${place.name}
-          </div>`;
-        } else {
-          infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 0.5em;font-size: 1.15em;">
-          Contrôle technique ${place.name}
-          </div>`;
-        }
+      // if (this.isSheet === true) {
+      //   if (this.type === 'fuel') {
+      //     infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 0.5em;font-size: 1.15em;">
+      //     Station essence ${place.name}
+      //     </div>`;
+      //   } else {
+      //     infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 0.5em;font-size: 1.15em;">
+      //     Contrôle technique ${place.name}
+      //     </div>`;
+      //   }
 
-      }
+      // }
       const popup = L.popup({}, marker).setContent(infos);
       marker.bindPopup(popup);
       marker.addTo(fg);

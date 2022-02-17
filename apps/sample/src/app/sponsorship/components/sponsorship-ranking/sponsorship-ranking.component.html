@@ -8,20 +8,29 @@
           Candidat
         </th>
         <th scope="col">
-          Nombre de parrainages
+          Nombre de parrainages récoltés
         </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of data; let i = index;" [class.yellow]="item.name === candidate">
-        <td class="number" scope="row">{{i + 1}}.</td>
-        <td>{{item.name}}</td>
-        <td>{{item.numberSponsorships}} parrainages
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" [style.width]="(item.numberSponsorships / 500) * 100 + '%'"
-              [aria-valuenow]="(item.numberSponsorships / 500) * 100" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </td>
+
+        <a [href]="'parrainages-presidentielles-2022/candidats/' + item.slug">
+          <td class="number" scope="row">{{i + 1}}.</td>
+          <td>
+            {{item.name}}
+            <div>
+              {{item.party}}
+            </div>
+          </td>
+          <td>{{item.numberSponsorships}} parrainages
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" [style.width]="(item.numberSponsorships / 500) * 100 + '%'"
+                [aria-valuenow]="(item.numberSponsorships / 500) * 100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </td>
+        </a>
+
       </tr>
     </tbody>
   </table>

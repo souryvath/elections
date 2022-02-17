@@ -42,7 +42,7 @@ export class CandidateService {
   }
 
   async rankingCandidate(): Promise<Candidate[]> {
-    const candidates = await this.candidateModel.find({}, { name: 1, slugName: 1, numberSponsorships: 1, _id: 0 }).exec();
+    const candidates = await this.candidateModel.find({}, { name: 1, slug: 1, party: 1, numberSponsorships: 1, _id: 0 }).exec();
     return (candidates.sort((a, b) => (a.numberSponsorships < b.numberSponsorships) ? 1 : -1));
   }
 }

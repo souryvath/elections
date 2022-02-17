@@ -88,3 +88,21 @@ tbody td, thead th {
 .number {
   width: 10% !important;
 }
+
+a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+}
+
+td {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.ranking-table {
+  background-color: #FFFFFF;
+}

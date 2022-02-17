@@ -2,7 +2,11 @@
 
 .navbar-brand {
   text-transform: uppercase;
-  img {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  img, .material-icons {
     margin-right: 0.2em;
   }
 }

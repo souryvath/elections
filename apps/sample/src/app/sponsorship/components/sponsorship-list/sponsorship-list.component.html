@@ -1,4 +1,4 @@
-<p-table #dt [value]="data" responsiveLayout="scroll" scrollHeight="50vh" [globalFilterFields]="['lastName','mandate', 'district', 'department']">
+<p-table #dt [value]="data" responsiveLayout="scroll" scrollHeight="50vh" [globalFilterFields]="['lastName','mandate', 'district', 'department', 'candidate']">
   <ng-template pTemplate="caption">
     <div class="flex">
         <span class="p-input-icon-left ml-auto">
@@ -20,9 +20,13 @@
 
         <p-sortIcon field="district"></p-sortIcon>
       </th>
-      <th pSortableColumn="department">Departement
+      <th *ngIf="type === 'candidate'" pSortableColumn="department">Departement
 
         <p-sortIcon field="department"></p-sortIcon>
+      </th>
+      <th *ngIf="type === 'department'" pSortableColumn="candidate">Candidat soutenu
+
+        <p-sortIcon field="candidate"></p-sortIcon>
       </th>
     </tr>
   </ng-template>
@@ -31,7 +35,8 @@
       <td>{{item.lastName}} <br> {{item.firstName}}</td>
       <td>{{item.mandate}}</td>
       <td>{{item.district}}</td>
-      <td>{{item.department}}</td>
+      <td *ngIf="type === 'candidate'">{{item.department}}</td>
+      <td *ngIf="type === 'department'">{{item.candidate}}</td>
     </tr>
   </ng-template>
   <ng-template pTemplate="emptymessage">

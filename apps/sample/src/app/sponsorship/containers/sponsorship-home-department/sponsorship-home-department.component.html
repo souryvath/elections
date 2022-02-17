@@ -1,1 +1,26 @@
-<p>sponsorship-home-department works!</p>
+<app-breadcrumb></app-breadcrumb>
+<div class="container">
+  <div class="cs-title">
+    <h1>
+      Carte des parrainages présidentielles 2022 dans le département et par ville
+    </h1>
+  </div>
+  <div class="content">
+    <p>
+      Retrouvez la carte des parrainages pour les présidentielles 2022 dans tous les départements et par ville, avec la liste et le nombre parrainages, ainsi que les candidats soutenus (dernière mise à jour le 10 février 2022)
+    </p>
+  </div>
+  <app-search-postal-code [(results)]="results" (searchEvent)="search($event)"
+    [searchLabel]="'Recherchez les parrainages dans votre département :'" [buttonLabel]="'Valider'"
+    [placeholder]="'Votre département'" [type]="'parrainages-presidentielles-2022/departements'"
+    (selectedPlaceEvent)="select($event, 'parrainages-presidentielles-2022/departements')">
+  </app-search-postal-code>
+  <div class="content">
+    <app-list-buttons
+    [list]="departments"
+    [type]="'department'"
+    [title]="'Tous les parrainages par département'"
+    [link]="'parrainages-presidentielles-2022/departements/'"
+    ></app-list-buttons>
+  </div>
+</div>

@@ -909,31 +909,50 @@ export const FRANCE_DEPS = [
 		slug: 'yvelines'
 	},
   {
-		code: 'FR-EU',
+		code: 'FR-EUP',
 		name: 'Parlement européen',
+    region: {
+			name: 'France',
+			code: 'FR-123'
+		},
 		slug: 'parlement-europeen'
 	},
   {
 		code: 'FR-987',
 		name: 'Polynésie française',
+    region: {
+			name: 'Polynésie',
+			code: 'FR-123'
+		},
 		slug: 'polynesie-francaise'
 	},
   {
 		code: 'FR-INT',
 		name: 'Français de l\'étranger',
+    region: {
+			name: 'Français de l\'étranger',
+			code: 'FR-123'
+		},
 		slug: 'francais-etranger'
 	},
   {
 		code: 'FR-978',
 		name: 'Saint-Martin',
+    region: {
+			name: 'Saint-Martin',
+			code: 'FR-123'
+		},
 		slug: 'saint-martin'
 	},
   {
 		code: 'FR-988',
 		name: 'Nouvelle-Calédonie',
+    region: {
+			name: 'Nouvelle-Calédonie',
+			code: 'FR-123'
+		},
 		slug: 'nouvelle-caledonie'
 	},
-
 ];
 
 // 'Parlement européen',

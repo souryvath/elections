@@ -72,7 +72,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   goToCityPage($event): void {
     this.city = $event;
-    console.log(this.city);
   }
 
   private setSeo(): void {

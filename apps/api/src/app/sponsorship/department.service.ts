@@ -38,6 +38,7 @@ export class DepartmentService {
     const departments = await this.departmentModel.findOne(
       query
     ).exec();
+    console.log(departments);
     return departments;
   }
 

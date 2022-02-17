@@ -9,7 +9,8 @@ export interface Department extends Document {
   readonly candidates?: CandidateDepartment[];
 }
 
-export interface CandidateDepartment{
+export interface CandidateDepartment {
   readonly name?: string;
+  readonly slug?: string;
   readonly numberSponsorships?: Number[];
 }

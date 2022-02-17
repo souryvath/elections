@@ -19,14 +19,7 @@ export class SponsorshipGraphComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.data.forEach((item) => {
-    //   const date = new Date(item.date);
-    //   date.toLocaleString('fr-FR');
-    //   console.log(date);
-    //   item.date = date;
-    // });
     this.createSeries('timeline', 'value')
-
   }
 
   // Create series

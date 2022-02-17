@@ -9,7 +9,7 @@ import { WordFirstUppercasePipe } from './pipes/word-first-uppercase.pipe';
 import { WordSeoPipe } from './pipes/word-seo.pipe';
 import { NgReplacePipeModule } from 'angular-pipes';
 import { MomentModule } from 'ngx-moment';
-
+import { registerLocaleData } from '@angular/common';
 @NgModule({
   declarations: [
     WordFirstUppercasePipe,
@@ -30,6 +30,7 @@ import { MomentModule } from 'ngx-moment';
     FormsModule,
     ReactiveFormsModule,
     WordFirstUppercasePipe,
+    DatePipe,
     WordSeoPipe,
     LoadingPipe,
     IncludePipe,

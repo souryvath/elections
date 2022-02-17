@@ -1,1 +1,46 @@
-<p>sponsorship-home works!</p>
+<app-breadcrumb></app-breadcrumb>
+<div class="container">
+  <div class="cs-title">
+    <h1>
+      Parrainages de la présidentielle 2022
+    </h1>
+    <p>
+      Dernière mise à jour le {{todayDate | date: 'fullDate'}}
+    </p>
+  </div>
+  <div class="content ranking">
+    <div class="cs-title">
+      <p class="subtitle">
+        Classement des parrainages
+      </p>
+    </div>
+    <ng-container *ngIf=" {
+      ranking: (ranking$ | loading | async)
+      } as obs">
+      <ng-container *ngIf="obs.ranking as rankingObs">
+        <ng-container *ngIf="rankingObs.value as ranking">
+          <app-sponsorship-ranking [data]="ranking" [candidate]="null">
+          </app-sponsorship-ranking>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="content search">
+    <p class="subtitle">
+      Parrainages des candidats
+    </p>
+    <app-search-postal-code [(results)]="resultsCandidates" (searchEvent)="searchCandidate($event)"
+    [searchLabel]="'Recherchez les parrainages d’un candidat :'" [buttonLabel]="'Valider'"
+    [placeholder]="'Nom du candidat'" [type]="'parrainages-presidentielles-2022/candidats'" (selectedPlaceEvent)="select($event, 'parrainages')">
+  </app-search-postal-code>
+  </div>
+  <div class="content search">
+    <p class="subtitle">
+      Parrainages par département
+    </p>
+    <app-search-postal-code [(results)]="resultsDepartments" (searchEvent)="searchDepartment($event)"
+    [searchLabel]="'Recherchez les parrainages dans votre département :'" [buttonLabel]="'Valider'"
+    [placeholder]="'Votre département'" [type]="'parrainages-presidentielles-2022/departements'"
+    (selectedPlaceEvent)="select($event, 'departements')"></app-search-postal-code>
+  </div>
+</div>

@@ -2,27 +2,24 @@
   <nav class="navbar navbar-expand-md navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        <!-- <img src="../../../assets/icons-app/voiture.png" width="20" height="20" class="d-inline-block" alt="applivoiture" /> -->
-        {{url.name}}
+        <span class="material-icons">
+          poll
+        </span>
+        <span>
+          {{url.name}}
+        </span>
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <div class="navbar-nav">
-          <!-- <a class="nav-link" [class.active]="router.url | include: 'prix-carburant'" href="prix-carburant">
-            <img class="icon" src="../../../assets/icons-app/gas-station.png" />
-            Prix des carburants</a>
-          <a class="nav-link" [class.active]="router.url | include: 'controle-technique'" aria-current="page"
-            href="controle-technique">
-            <img class="icon" src="../../../assets/icons-app/clipboard.png" />
-            Contrôle technique
-          </a> -->
-          <!-- <a class="nav-link" [class.active]="router.url | include: 'borne-electrique'" href="#">
-            <img class="icon" src="../../../assets/icons-app/electric-charge.png" />
-            Bornes de recharge</a> -->
-        </div>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="router.url | include: 'parrainages-presidentielles-2022'"
+            href="parrainages-presidentielles-2022">
+            Parrainages présidentielles 2022</a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>

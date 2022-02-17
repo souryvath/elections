@@ -4,6 +4,7 @@ import { Schema } from 'mongoose';
 export const CandidateSchema = new mongoose.Schema({
   name: String,
   slug: String,
+  party: String,
   numberSponsorships: Number,
   sponsorships: [Schema.Types.Mixed],
   numberDepartments: Number,

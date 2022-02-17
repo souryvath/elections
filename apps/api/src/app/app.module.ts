@@ -21,6 +21,8 @@ const mongo = environment.production === true ?
     SponsorshipModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService
+  ],
 })
 export class AppModule { }

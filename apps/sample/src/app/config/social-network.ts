@@ -5,22 +5,22 @@ export const SOCIAL_NETWORK = [
   },
   {
     name: 'facebook',
-    url: `test.fr`,
+    url: ``,
   },
   {
     name: 'instagram',
-    url: `test.fr`,
+    url: ``,
   },
   {
     name: 'tiktok',
-    url: `test.fr`,
+    url: ``,
   },
   {
     name: 'pinterest',
-    url: `test.fr`,
+    url: ``,
   },
   {
     name: 'linkedin',
-    url: `test.fr`,
+    url: ``,
   }
 ];

@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SponsorshipListComponent implements OnInit {
 
   @Input() data;
+  @Input() type;
   constructor() { }
 
   ngOnInit(): void {

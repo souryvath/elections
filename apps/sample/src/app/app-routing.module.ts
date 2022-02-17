@@ -13,13 +13,16 @@ const routes: Routes = [
   {
     loadChildren: () => import('./sponsorship/sponsorship.module')
       .then(m => m.SponsorshipModule),
-    path: '2022/parrainages-presidentielles',
-    data: { breadcrumb: 'Parrainages' }
+    path: 'parrainages-presidentielles-2022',
+    data: { breadcrumb: 'Parrainages présidentielles 2022' }
+  },
+  {
+    path: '', component: HomeComponent,  data: { breadcrumb: 'Accueil' }
   },
   // {
   //   path: '', component: HomeComponent,  data: { breadcrumb: 'Home' }
   // },
-  { path: '**', redirectTo: '2022/parrainages-presidentielles', pathMatch: 'full' }
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
