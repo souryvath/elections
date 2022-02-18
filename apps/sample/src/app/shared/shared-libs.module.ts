@@ -37,14 +37,12 @@ import { registerLocaleData } from '@angular/common';
     NgReplacePipeModule,
     NumberFixPipe,
     SortArrayPipe,
-    MomentModule
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgReplacePipeModule,
-    MomentModule
   ]
 })
 export class SharedLibsModule { }
