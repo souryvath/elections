@@ -141,34 +141,43 @@
               ],
               "sourceMap": false,
               "optimization": true
+            },
+            "dev": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
-          "options": {
-            "browserTarget": "sample:build",
-            "serverTarget": "sample:server"
-          },
           "configurations": {
+            "dev": {
+              "browserTarget": "sample:build:dev",
+              "serverTarget": "sample:server:dev"
+            },
             "production": {
               "browserTarget": "sample:build:production",
               "serverTarget": "sample:server:production"
             }
-          }
+          },
+          "defaultConfiguration": "dev"
         },
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "routes": ["/"]
+            "routes": [
+              "/"
+            ]
           },
           "configurations": {
             "production": {
               "browserTarget": "sample:build:production",
               "serverTarget": "sample:server:production"
             },
-            "development": {
-              "browserTarget": "sample:server:dev",
+            "dev": {
+              "browserTarget": "sample:build:dev",
               "serverTarget": "sample:server:dev"
             }
           },
