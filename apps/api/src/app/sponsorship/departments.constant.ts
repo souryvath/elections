@@ -953,6 +953,17 @@ export const FRANCE_DEPS = [
 		},
 		slug: 'nouvelle-caledonie'
 	},
+  {
+		code: 'FR-977',
+		name: 'Saint-Barthélemy',
+    region: {
+			name: 'Saint-Barthélemy',
+			code: 'FR-123'
+		},
+		slug: 'saint-barthelemy'
+	},
+
+
 ];
 
 // 'Parlement européen',

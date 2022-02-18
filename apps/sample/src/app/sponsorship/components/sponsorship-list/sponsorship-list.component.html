@@ -1,7 +1,7 @@
 <p-table #dt [value]="data"
 responsiveLayout="scroll" scrollHeight="50vh"
 [globalFilterFields]="['lastName','mandate', 'district', 'department', 'candidate']"
-[rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Page {first} sur {last}"
+[rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Page {currentPage} sur {totalPages}"
 [paginator]="true"
 >
   <ng-template pTemplate="caption">

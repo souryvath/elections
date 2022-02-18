@@ -28,7 +28,11 @@ export class SponsorshipMapComponent implements OnInit {
     root.fps = 30;
     let chart = root.container.children.push(
       am5map.MapChart.new(root, {
-        projection: am5map.geoMercator()
+        projection: am5map.geoMercator(),
+        wheelY: "none",
+        wheelX: "none",
+        panX: "none",
+        pinchZoom: false
       })
     );
     // Créer les polygones des départements

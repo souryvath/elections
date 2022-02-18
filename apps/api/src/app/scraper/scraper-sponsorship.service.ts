@@ -89,6 +89,9 @@ export class ScraperSponsorshipService {
         candidate = element[6].substring(match.index - 1, element[6].length).trim() + ' ' + element[6].substring(0, match.index - 1).trim()
       }
       const dep = FRANCE_DEPS.find((item) => item.name === element[5]);
+      if (!dep) {
+        console.log(element[5]);
+      }
       const sponsorship = {
         civility: element[0],
         lastName: element[1],
@@ -96,13 +99,12 @@ export class ScraperSponsorshipService {
         mandate: element[3],
         district: element[4],
         department: element[5],
-        departmentCode: dep.code,
-        departmentSlug: dep.slug,
+        departmentCode: dep?.code,
+        departmentSlug: dep?.slug,
         candidate: candidate.trim(),
         slugCandidate: slugify(candidate.trim(), { lower: true, remove: /[*+~.()'"!:@/]/g }),
         date: element[7],
-        region: dep.region.name,
-        departmentCode1: dep.code.slice(3),
+        region: dep?.region?.name,
       }
       sponsorships.push(sponsorship);
     });
@@ -125,7 +127,7 @@ export class ScraperSponsorshipService {
         date: element[10],
         location: {
           type: 'Point',
-          coordinates: [Number(element[14]), Number(element[13])]
+          coordinates: [Number(element[13]), Number(element[12])]
         }
       }
       sponsorships.push(sponsorship);
@@ -213,7 +215,7 @@ export class ScraperSponsorshipService {
     formData.append('data', fs.createReadStream('./sponsorships.csv'));
     formData.append('columns', 'district');
     formData.append('columns', 'department');
-    formData.append('columns', 'departmentCode1');
+    formData.append('columns', 'region');
     formData.append('delimiter', ',');
     const res = await fetch(this.URL_SEARCH_ADDRESS, { method: 'POST', body: formData });
     const text = await res.text();
