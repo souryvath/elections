@@ -80,4 +80,18 @@ a {
 .container {
   margin-top: 1em;
 }
+#map-france {
+  height: 300px;
+}
+
+@include media-breakpoint-up(md) {
+  #map-france {
+    height: 500px;
+  }
+}
+@include media-breakpoint-up(lg) {
+  #map-france {
+    height: 800px;
+  }
+}
 
