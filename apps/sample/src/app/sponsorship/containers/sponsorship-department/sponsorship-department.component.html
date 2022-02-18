@@ -3,7 +3,7 @@
   <app-search-postal-code [(results)]="results" (searchEvent)="search($event)"
     [searchLabel]="'Tous les parrainages dans votre département'" [buttonLabel]="'Valider'"
     [placeholder]="'Votre département'" [type]="'parrainages-presidentielle-2022/departements'"
-    (selectedPlaceEvent)="select($event, 'departements')">
+    (selectedPlaceEvent)="select($event, 'parrainages-presidentielle-2022/departements')">
   </app-search-postal-code>
   <ng-container *ngIf=" {
     department: (department$ | loading | async)

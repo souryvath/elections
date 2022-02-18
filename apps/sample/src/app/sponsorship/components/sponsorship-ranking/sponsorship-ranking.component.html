@@ -17,13 +17,13 @@
     <tbody>
       <tr *ngFor="let item of data; let i = index;" [class.yellow]="item.name === candidate">
 
-        <a [href]="'parrainages-presidentielle-2022/candidats/' + item.slug">
+
           <td class="number" scope="row">{{i + 1}}.</td>
           <td>
-            {{item.name}}
-            <div>
-              {{item.party}}
-            </div>
+            <a href="parrainages-presidentielle-2022/candidats/{{item.slug}}">
+            {{item.name}}<br>
+            {{item.party}}
+          </a>
           </td>
           <td>{{item.numberSponsorships}} parrainages
             <div class="progress">
@@ -38,7 +38,7 @@
             check_circle_outline
           </span>
           </td>
-        </a>
+
 
       </tr>
     </tbody>

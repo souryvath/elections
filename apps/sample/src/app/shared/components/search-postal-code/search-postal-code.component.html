@@ -1,11 +1,11 @@
-<div class="cs-form-search" *ngIf="placeholder">
+<div class="cs-form-search">
   <p class="label">
     {{searchLabel}}
   </p>
   <div class="form">
-    <div class="autocomplete">
-      <p-autoComplete #autocomplete [autofocus]="false" [inputId]="'autocomplete-input'"
-        [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder"
+    <div class="autocomplete" >
+      <p-autoComplete [inputId]="'autocomplete-input'"
+        [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [multiple]="false"
         [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)"
         (onSelect)="selectPlace($event)" field="name">
         <ng-template let-postalCode pTemplate="item">

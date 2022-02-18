@@ -26,7 +26,6 @@
               "apps/sample/src/assets",
               "apps/sample/src/manifest.webmanifest",
               "apps/sample/src/sitemap.xml",
-              "apps/sample/src/.well-known/assetlinks.json",
               {
                 "glob": "**/*",
                 "input": "apps/sample/src/sitemaps/",
@@ -40,12 +39,9 @@
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
-              "node_modules/primeflex/primeflex.min.css",
               "node_modules/ngx-sharebuttons/themes/modern.scss"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/leaflet/dist/leaflet.js",
               "node_modules/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.js"

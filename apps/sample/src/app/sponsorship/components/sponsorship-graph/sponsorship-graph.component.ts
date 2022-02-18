@@ -81,17 +81,17 @@ export class SponsorshipGraphComponent implements OnInit {
 
     series.strokes.template.set("strokeWidth", 2);
 
-    series.get("tooltip").label.set("text", "[bold]{name}[/]\n{valueX.formatDate()}: {valueY}")
+    // series.get("tooltip").label.set("text", "[bold]{name}[/]\n{valueX.formatDate()}: {valueY}")
 
     series.data.setAll(this.data);
-    xAxis.set("tooltip", am5.Tooltip.new(root, {
-      themeTags: ["axis"]
-    }));
+    // xAxis.set("tooltip", am5.Tooltip.new(root, {
+    //   themeTags: ["axis"]
+    // }));
 
-    chart.set("cursor", am5xy.XYCursor.new(root, {
-      behavior: "zoomXY",
-      xAxis: xAxis
-    }));
+    // chart.set("cursor", am5xy.XYCursor.new(root, {
+    //   behavior: "zoomXY",
+    //   xAxis: xAxis
+    // }));
   }
 
 }

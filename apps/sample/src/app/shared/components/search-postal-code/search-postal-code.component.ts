@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, EventEmitter, Output, ViewChild, HostListener } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Input, OnInit, EventEmitter, Output, ViewChild, HostListener, PLATFORM_ID, Inject } from '@angular/core';
 import { AutoComplete } from 'primeng/autocomplete';
 
 @Component({
@@ -9,7 +10,7 @@ import { AutoComplete } from 'primeng/autocomplete';
 export class SearchPostalCodeComponent implements OnInit {
 
   @Input() results;
-  @Input() city;
+  @Input() city = ' ';
   @Input() type;
   @Input() placeholder;
   @Input() searchLabel;
@@ -19,9 +20,11 @@ export class SearchPostalCodeComponent implements OnInit {
   @Output() readonly selectedPlaceEvent: EventEmitter<string> = new EventEmitter<string>(true);
   @Output() readonly searchEvent: EventEmitter<string> = new EventEmitter<string>(true);
   @Output() readonly geolocalisationEvent: EventEmitter<string> = new EventEmitter<string>(true);
-  @ViewChild('autocomplete') autocomplete: AutoComplete;
+  isBrowser = isPlatformBrowser(this.platformId);
   key: any;
-  constructor() { }
+  constructor(
+    @Inject(PLATFORM_ID) private readonly platformId: any
+  ) { }
 
   ngOnInit(): void {
   }
@@ -30,9 +33,9 @@ export class SearchPostalCodeComponent implements OnInit {
     if ($event) {
       this.city = $event;
     }
-    // setTimeout(function(){
-    //   document.getElementById('autocomplete-input').blur();
-    // }, 100);
+    setTimeout(function(){
+      document.getElementById('autocomplete-input').blur();
+    }, 100);
   }
 
   getKey($event) {
@@ -48,6 +51,5 @@ export class SearchPostalCodeComponent implements OnInit {
   findLocalisation($event): void {
     this.geolocalisationEvent.emit($event);
   }
-
 
 }

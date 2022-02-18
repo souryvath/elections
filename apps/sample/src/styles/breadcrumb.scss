@@ -5,7 +5,7 @@
 .breadcrumb {
   background: #FFFFFF !important;
   display: none !important;
-  padding: 1em;
+  padding: 1em !important;
   @include media-breakpoint-up(sm) {
     display: none !important;
   }
