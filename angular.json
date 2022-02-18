@@ -72,7 +72,8 @@
                 }
               ],
               "serviceWorker": true,
-              "ngswConfigPath": "apps/sample/ngsw-config.json"
+              "ngswConfigPath": "apps/sample/ngsw-config.json",
+              "outputHashing": "all"
             },
             "dev": {
               "buildOptimizer": false,
@@ -87,10 +88,6 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "sample:build",
-            "proxyConfig": "apps/sample/proxy.conf.json"
-          },
           "configurations": {
             "production": {
               "browserTarget": "sample:build:production"
@@ -98,7 +95,8 @@
             "dev": {
               "browserTarget": "sample:build:dev"
             }
-          }
+          },
+          "defaultConfiguration": "dev"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -138,9 +136,7 @@
                   "replace": "apps/sample/src/environments/environment.ts",
                   "with": "apps/sample/src/environments/environment.prod.ts"
                 }
-              ],
-              "sourceMap": false,
-              "optimization": true
+              ]
             },
             "dev": {
               "optimization": false,
