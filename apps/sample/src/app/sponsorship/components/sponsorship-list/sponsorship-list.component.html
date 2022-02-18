@@ -1,4 +1,9 @@
-<p-table #dt [value]="data" responsiveLayout="scroll" scrollHeight="50vh" [globalFilterFields]="['lastName','mandate', 'district', 'department', 'candidate']">
+<p-table #dt [value]="data"
+responsiveLayout="scroll" scrollHeight="50vh"
+[globalFilterFields]="['lastName','mandate', 'district', 'department', 'candidate']"
+[rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Page {first} sur {last}"
+[paginator]="true"
+>
   <ng-template pTemplate="caption">
     <div class="flex">
         <span class="p-input-icon-left ml-auto">

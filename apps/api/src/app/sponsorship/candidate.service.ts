@@ -36,7 +36,7 @@ export class CandidateService {
     const query = {};
     query[field] = value;
     const candidate = await this.candidateModel.findOne(
-      query
+      query, {}
     ).exec();
     return candidate;
   }

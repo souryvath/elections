@@ -30,9 +30,9 @@ export class SearchPostalCodeComponent implements OnInit {
     if ($event) {
       this.city = $event;
     }
-    setTimeout(function(){
-      document.getElementById('autocomplete-input').blur();
-    }, 100);
+    // setTimeout(function(){
+    //   document.getElementById('autocomplete-input').blur();
+    // }, 100);
   }
 
   getKey($event) {

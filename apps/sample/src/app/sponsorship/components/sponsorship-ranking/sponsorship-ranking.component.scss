@@ -14,7 +14,10 @@ thead {
 
 tr {
   &.yellow {
-    background: #42E695;
+    background: $main-color;
+    a {
+      color: #FFFFFF !important;
+    }
   }
 }
 

@@ -25,6 +25,7 @@ export class SponsorshipMapComponent implements OnInit {
 
   private initMainMap(): void {
     let root = am5.Root.new("map-france");
+    root.fps = 30;
     let chart = root.container.children.push(
       am5map.MapChart.new(root, {
         projection: am5map.geoMercator()
