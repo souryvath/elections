@@ -32,6 +32,8 @@ export class SponsorshipMapComponent implements OnInit {
         wheelY: "none",
         wheelX: "none",
         panX: "none",
+        panY: "none",
+        maxPanOut: 0,
         pinchZoom: false
       })
     );
