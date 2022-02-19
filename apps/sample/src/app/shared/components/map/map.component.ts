@@ -55,9 +55,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       if (this.city) {
         if (this.places.length !== 1) {
-          this.initMap(this.city.location.coordinates[1], this.city.location.coordinates[0], 13);
+          this.initMap(16);
         } else {
-          this.initMap(this.places[0].location.coordinates[1], this.places[0].location.coordinates[0], 16);
+          this.initMap(16, this.places[0].location.coordinates[1], this.places[0].location.coordinates[0]);
         }
         this.initAllPlacesMarker();
       }
@@ -94,70 +94,21 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
   initAllPlacesMarker(): void {
     const fg = L.featureGroup().addTo(this.map);
     this.places.forEach((place) => {
-
-      const marker = this.initMarker(place.location.coordinates[1], place.location.coordinates[0]);
-      // let infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 1em;font-size: 1.15em;">
-      // <a  style="color: #000000;" onmouseover='this.style.textDecoration="underline"'
-      // onmouseout='this.style.textDecoration="none"' href="controle-technique/${place.localisation.slug}/${place.slugName}" title="Contrôle technique ${place.name}">Contrôle technique ${place.name}</a>
-      // <br>
-      // </div>`;
-      let infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 1em;font-size: 1.15em;">${place.district} - ${place.candidate}
-      <br>
-      </div>`;
-      // if (this.isSheet === true) {
-      //   if (this.type === 'fuel') {
-      //     infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 0.5em;font-size: 1.15em;">
-      //     Station essence ${place.name}
-      //     </div>`;
-      //   } else {
-      //     infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 0.5em;font-size: 1.15em;">
-      //     Contrôle technique ${place.name}
-      //     </div>`;
-      //   }
-
-      // }
-      const popup = L.popup({}, marker).setContent(infos);
-      marker.bindPopup(popup);
-      marker.addTo(fg);
-    });
-    this.map.fitBounds(fg.getBounds());
-  }
-
-  initAllPlacesMarkerFuel(): void {
-    const fg = L.featureGroup().addTo(this.map);
-    this.places.forEach((place, i) => {
-
-      const marker = this.initMarker(place.location.coordinates[1], place.location.coordinates[0]);
-      let infos = `<div style="text-align: center; cursor: pointer; border: 1px solid blue;">
-      ${place.name}
-      <br>
-
-      </div> `;
-      if (this.isSheet === true) {
+      if (place.location) {
+        const marker = this.initMarker(place.location.coordinates[1], place.location.coordinates[0]);
+        let infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 1em;font-size: 1.15em;">${place.district} - ${place.candidate}
+        <br>
+        </div>`;
         const popup = L.popup({}, marker).setContent(infos);
-        marker.bindPopup(popup, {autoClose:false}).openPopup();
-      } else {
-        const popup = L.popup({}, marker).setContent(infos);
-        let paneCol = document.getElementsByClassName('leaflet-popup');
-        for (let i = 0; i < paneCol.length; i++) {
-          let paneToChange = paneCol[i] as HTMLElement;
-          if (paneToChange && paneToChange.innerHTML.includes('green')) {
-            paneToChange.style.zIndex = '99';
-          }
-        }
-        if (i < 3) {
-          marker.bindPopup(popup, {autoClose:false}).openPopup();
-        } else {
-          marker.bindPopup(popup, {autoClose:false});
-        }
-
+        marker.bindPopup(popup);
+        marker.addTo(fg);
       }
-      marker.addTo(fg);
+
     });
     this.map.fitBounds(fg.getBounds());
   }
 
-  initMap(latitude: number, longitude: number, zoom: number): void {
+  initMap(zoom: number, latitude?: number, longitude?: number): void {
     let latitudePos = 0;
     let longitudePos = 0;
 
@@ -167,7 +118,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     if (L) {
       this.map = L.map(this.id, {
-        center: [latitudePos, longitudePos],
+        // center: [latitudePos, longitudePos],
         gestureHandling: true,
         zoom: zoom
       });

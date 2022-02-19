@@ -32,6 +32,7 @@ export function app() {
 
   // tslint:disable-next-line:no-string-literal
   global['navigator'] = window.navigator;
+
   server.use(compression());
   server.use(cookieparser());
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)

@@ -1,3 +1,5 @@
+import { HomeComponent } from './containers/home/home.component';
+
 import { LayoutModule } from './../layout/layout.module';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -28,7 +30,8 @@ import { SponsorshipDepartmentComponent } from './containers/sponsorship-departm
     SponsorshipHomeComponent,
     SponsorshipHomeCandidateComponent,
     SponsorshipHomeDepartmentComponent,
-    SponsorshipDepartmentComponent
+    SponsorshipDepartmentComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

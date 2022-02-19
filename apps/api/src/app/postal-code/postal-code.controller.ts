@@ -46,14 +46,5 @@ export class PostalCodeController {
     return res.status(HttpStatus.OK).json(result.data);
   }
 
-  @Post('postal-code/sitemap/')
-  async sitemapPostalCodeStation(@Res() res, @Query() params): Promise<PostalCode[]> {
-    let postalCodes = await this.postalCodeService.findAllPostalCodes();
-    let sitemap = `<?xml version="1.0" encoding="utf-8"?><urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">`;
-    postalCodes.forEach((element) => {
-      sitemap += `<url><loc>https://www.applivoiture.fr/prix-carburant/${element.slug}</loc></url>`
-    });
-    sitemap += '</urlset>';
-    return res.status(HttpStatus.OK).json(sitemap);
-  }
+
 }

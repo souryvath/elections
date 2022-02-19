@@ -86,7 +86,7 @@ export class ScraperSponsorshipService {
       const match = (/[a-zéèàê]/).exec(element[6]);
       let candidate = '';
       if (match) {
-        candidate = element[6].substring(match.index - 1, element[6].length).trim() + ' ' + element[6].substring(0, match.index - 1).trim()
+        candidate = element[6].substring(match.index - 1, element[6].length).trim() + ' ' + this.titleCase(element[6].substring(0, match.index - 1).trim())
       }
       const dep = FRANCE_DEPS.find((item) => item.name === element[5]);
       if (!dep) {
@@ -111,9 +111,20 @@ export class ScraperSponsorshipService {
     return (sponsorships);
   }
 
+  private titleCase(string){
+    return string[0].toUpperCase() + string.slice(1).toLowerCase();
+  }
+
   setSponsorships(data) {
     let sponsorships = [];
     data.forEach((element) => {
+      let location = null;
+      if (element[23].substring(0, 2) === element[6].slice(3) && element[3] === 'Maire') {
+        location = {
+          type: 'Point',
+          coordinates: [Number(element[13]), Number(element[12])]
+        }
+      }
       const sponsorship = {
         lastName: element[1],
         firstName: element[2],
@@ -125,11 +136,8 @@ export class ScraperSponsorshipService {
         candidate: element[8],
         slugCandidate: element[9],
         date: element[10],
-        location: {
-          type: 'Point',
-          coordinates: [Number(element[13]), Number(element[12])]
-        }
-      }
+        location
+      };
       sponsorships.push(sponsorship);
     })
     this.sponsorshipService.addManySponsorship(sponsorships);
@@ -162,7 +170,7 @@ export class ScraperSponsorshipService {
       const candidate = {
         name: candidateItem,
         slug: slugify(candidateItem, { lower: true, remove: /[*+~.()'"!:@/]/g }),
-        party: CANDIDATES.find((candidateParty) => candidateParty.name === candidateItem)?.party,
+        party: CANDIDATES.find((candidateParty) => this.titleCase(candidateParty.name) === candidateItem)?.party,
         numberSponsorships: sponsorships.filter((item) => item.candidate === candidateItem).length,
         numberDepartments: departments.filter((depItem) => depItem.value > 0).length,
         sponsorships: sponsorships.filter((item) => item.candidate === candidateItem),

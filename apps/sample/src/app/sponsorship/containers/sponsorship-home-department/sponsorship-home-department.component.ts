@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JsonLdService } from 'ngx-seo';
+import { URL_DOMAIN } from '../../../config/url.config';
 import { SeoService } from '../../../core/services/seo.service';
 import { FRANCE_DEPS_LIST } from '../sponsorship-department/departments.constant';
 
@@ -15,12 +17,14 @@ export class SponsorshipHomeDepartmentComponent implements OnInit {
   todayDate: any = Date.now();
   constructor(
     private readonly seoService: SeoService,
+    private readonly jsonLdService: JsonLdService,
     public router: Router
   ) { }
 
   ngOnInit(): void {
     this.departments = FRANCE_DEPS_LIST;
     this.setSeo();
+    this.setBreadCrumbJsonLd();
   }
 
   search($event): void {
@@ -35,8 +39,32 @@ export class SponsorshipHomeDepartmentComponent implements OnInit {
 
   private setSeo(): void {
     this.seoService.setSeoPage(
-      'Carte des parrainages présidentielles 2022 par département et par ville',
-      'Retrouvez la carte des parrainages pour les présidentielles 2022 par département et par ville, avec la liste et le nombre parrainages, ainsi que les candidats soutenus'
+      'Carte des parrainages de la présidentielle 2022 par département et par ville - Les élections',
+      'Retrouvez la carte des parrainages pour l\'élection présidentielle 2022 par département et par ville, avec la liste et le nombre parrainages, ainsi que les candidats soutenus'
     );
+  }
+
+  private setBreadCrumbJsonLd(): void {
+    const breadCrumbObject = this.jsonLdService.getObject('BreadcrumbList', {
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Accueil",
+        "item": `${URL_DOMAIN.main}`
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": `Parrainages présidentielle 2022`,
+        "item": `${URL_DOMAIN.main}/parrainages-presidentielle-2022`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": `Parrainages par département`,
+        "item": `${URL_DOMAIN.main}/parrainages-presidentielle-2022/departements`
+      },
+    ]
+    });
+    this.jsonLdService.setData(breadCrumbObject);
   }
 }

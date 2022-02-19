@@ -7,21 +7,16 @@ thead {
 
 .table {
   border-collapse: collapse; width: 100%;
+
 }
 .table>:not(:first-child) {
   border-top: none;
 }
 
-tr {
-
-}
-
 th {
   background: $main-color;
-  // position: sticky;
-  // top: 0;
-  // z-index: 1;
-
+  display: flex;
+  align-items: center;
 }
 
 tbody {
@@ -33,7 +28,7 @@ table {
   width: 100%;
 }
 
-thead, tbody, tr, td, th { display: block; }
+thead, tbody, tr, td { display: block; }
 
 tr:after {
   content: ' ';
@@ -88,13 +83,20 @@ a {
 }
 
 .green {
-  font-size: 36px;
+  font-size: 30px;
   color: #42E695;
 }
 
 .table {
   td {
     border: none !important;
-
   }
 }
+
+@media screen and (max-width: 64em) {
+  table {
+    font-size: 0.9em;
+  }
+}
+
+

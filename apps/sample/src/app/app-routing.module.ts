@@ -1,6 +1,7 @@
+import { SponsorshipHomeComponent } from './sponsorship/containers/sponsorship-home/sponsorship-home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './layout/home/home.component';
+import { HomeComponent } from './sponsorship/containers/home/home.component';
 import { SponsorshipCandidateComponent } from './sponsorship/containers/sponsorship-candidate/sponsorship-candidate.component';
 
 const routes: Routes = [
@@ -22,7 +23,7 @@ const routes: Routes = [
   // {
   //   path: '', component: HomeComponent,  data: { breadcrumb: 'Home' }
   // },
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  { path: '**', redirectTo: 'parrainages-presidentielle-2022', pathMatch: 'full' }
 ];
 
 @NgModule({

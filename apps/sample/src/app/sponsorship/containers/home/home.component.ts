@@ -1,18 +1,18 @@
-import { JsonLdService } from 'ngx-seo';
-import { SponsorshipService } from './../../services/sponsorship.service';
-import { Observable } from 'rxjs';
-import { SeoService } from './../../../core/services/seo.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FRANCE_DEPS_LIST } from '../sponsorship-department/departments.constant';
+import { JsonLdService } from 'ngx-seo';
+import { Observable } from 'rxjs';
 import { URL_DOMAIN } from '../../../config/url.config';
+import { SeoService } from '../../../core/services/seo.service';
+import { FRANCE_DEPS_LIST } from '../sponsorship-department/departments.constant';
+import { SponsorshipService } from '../../services/sponsorship.service';
 
 @Component({
-  selector: 'app-sponsorship-home',
-  templateUrl: './sponsorship-home.component.html',
-  styleUrls: ['./sponsorship-home.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class SponsorshipHomeComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   ranking$: Observable<any>;
   resultsCandidates: any[];
@@ -23,7 +23,8 @@ export class SponsorshipHomeComponent implements OnInit {
     private readonly seoService: SeoService,
     private readonly sponsorshipService: SponsorshipService,
     private readonly jsonLdService: JsonLdService,
-    ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.setSeo();
@@ -33,8 +34,8 @@ export class SponsorshipHomeComponent implements OnInit {
 
   private setSeo(): void {
     this.seoService.setSeoPage(
-      'Liste des parrainages de la présidentielle 2022 par candidat et département - Les élections',
-      'Retrouvez la liste complète des parrainages pour l\'élection présidentielle 2022, pour chaque candidat, par nombre de parrainages obtenus, par élu, ville et département'
+      'Elections présidentielles 2022 et parrainages - Les élections',
+      'Résultats prochains de l\'élection présidentielle 2022 par ville et listes complètes des parrainages pour les présidentielles 2022, pour chaque candidat, par nombre de parrainages obtenus, par élu, ville et département'
     );
   }
 
@@ -61,11 +62,6 @@ export class SponsorshipHomeComponent implements OnInit {
         "position": 1,
         "name": "Accueil",
         "item": `${URL_DOMAIN.main}`
-      },{
-        "@type": "ListItem",
-        "position": 2,
-        "name": `Parrainages présidentielle 2022`,
-        "item": `${URL_DOMAIN.main}/parrainages-presidentielle-2022`
       }]
     });
     this.jsonLdService.setData(breadCrumbObject);

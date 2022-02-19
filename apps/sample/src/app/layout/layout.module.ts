@@ -3,15 +3,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { HomeComponent } from './home/home.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    HomeComponent,
     BreadcrumbComponent,
     NewsletterComponent
   ],
@@ -22,7 +20,6 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
   exports: [
     HeaderComponent,
     FooterComponent,
-    HomeComponent,
     BreadcrumbComponent,
     NewsletterComponent
   ]
