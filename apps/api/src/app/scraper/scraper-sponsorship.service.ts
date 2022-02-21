@@ -130,7 +130,7 @@ export class ScraperSponsorshipService {
     let sponsorships = [];
     data.forEach((element) => {
       let location = null;
-      if (element[23].substring(0, 2) === element[6].slice(3) && element[3] === 'Maire') {
+      if (element[23].substring(0, element[23].indexOf(',')) === element[6].slice(3) && element[3] === 'Maire') {
         location = {
           type: 'Point',
           coordinates: [Number(element[13]), Number(element[12])]
