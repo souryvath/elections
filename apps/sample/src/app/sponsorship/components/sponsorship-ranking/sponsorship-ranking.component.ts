@@ -16,6 +16,5 @@ export class SponsorshipRankingComponent {
 
   ngOnInit(): void {
     this.currentCandidateAdmitted = this.data.find((element) => element.name === this.candidate && element.numberSponsorships >= 500) ? true : false;
-    console.log(this.currentCandidateAdmitted);
   }
 }
