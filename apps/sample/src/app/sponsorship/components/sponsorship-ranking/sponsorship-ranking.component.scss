@@ -74,10 +74,25 @@ a {
   }
 }
 
-.select {
-  background: #65e697;
+.admisHome {
+  background-color: #42E695;
 }
 
+.admis {
+  background-color: #C7EAD8;
+}
+
+.dismiss {
+  background-color: #e64242;
+}
+
+.select {
+  background-color: #42E695;
+}
+
+.admisDismiss {
+  background-color: #42E695;
+}
 .ranking-table {
   background-color: #ffffff;
 }
@@ -111,11 +126,15 @@ a {
   width: 34px;
   height: 34px;
   padding: 3px;
-  background: #fff;
+  background: transparent;
   border: 1px solid #000;
   color: #000000;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.dep {
+  width: 42.5% !important;
 }

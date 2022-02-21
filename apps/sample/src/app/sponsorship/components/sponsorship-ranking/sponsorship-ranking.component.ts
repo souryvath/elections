@@ -11,4 +11,11 @@ export class SponsorshipRankingComponent {
   @Input() candidate;
   @Input() isHomepage;
   @Input() isDep;
+
+  currentCandidateAdmitted = false;
+
+  ngOnInit(): void {
+    this.currentCandidateAdmitted = this.data.find((element) => element.name === this.candidate && element.numberSponsorships >= 500) ? true : false;
+    console.log(this.currentCandidateAdmitted);
+  }
 }
