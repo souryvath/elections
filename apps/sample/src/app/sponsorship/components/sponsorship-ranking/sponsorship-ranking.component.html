@@ -38,9 +38,13 @@
            <ng-template ngPluralCase="other">
              {{ item.numberSponsorships }} parrainages
            </ng-template>
-            <div class="progress">
+            <div class="progress" *ngIf="!isDep">
               <div class="progress-bar" role="progressbar" [style.width]="(item.numberSponsorships / 500) * 100 + '%'"
                 [aria-valuenow]="(item.numberSponsorships / 500) * 100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="progress" *ngIf="isDep">
+              <div class="progress-bar" role="progressbar" [style.width]="(item.numberSponsorships / data[0].numberSponsorships ) * 100 + '%'"
+                [aria-valuenow]="(item.numberSponsorships / data[0].numberSponsorships) * 100" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </td>
           <td class="number">
