@@ -47,7 +47,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (this.isBrowser) {
-      console.log(this.city);
       if (!L) {
         return;
       }
