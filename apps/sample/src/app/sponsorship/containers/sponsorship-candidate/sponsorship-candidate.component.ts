@@ -59,7 +59,7 @@ export class SponsorshipCandidateComponent implements OnInit {
 
   private setSeo(candidateName: string): void {
     this.seoService.setSeoPage(
-      `Liste des parrainages de la présidentielle 2022 pour le candidat ${candidateName} - Les élections`,
+      `Liste des parrainages de ${candidateName} pour la présidentielle 2022 - Les élections`,
       `Retrouvez la liste des parrainages du candidat ${candidateName} pour l'élection présidentielle 2022, avec la liste des élus et le nombre parrainages obtenus, par ville et département.`
     );
   }

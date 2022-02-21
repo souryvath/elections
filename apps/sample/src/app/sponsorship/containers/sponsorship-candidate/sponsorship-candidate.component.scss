@@ -16,6 +16,13 @@
 
   .material-icons {
     font-size: 36px;
+    &.green {
+      color: #5BAD52;
+    }
+
+    &.red {
+      color: #FFFFFF;
+    }
   }
   &.green {
     background: #42E695;

@@ -41,9 +41,9 @@ responsiveLayout="scroll" scrollHeight="50vh"
       <td>{{item.mandate}}</td>
       <td>{{item.district}}</td>
       <td *ngIf="type === 'candidate'">
-        <a [href]="'parrainages-presidentielle-2022/departements/' + item.departmentSlug">{{item.department}}</a></td>
+        <a [href]="'parrainages-presidentielle-2022/departements/' + item.departmentSlug" title="Parrainages {{item.department}} présidentielle 2022">>{{item.department}}</a></td>
       <td *ngIf="type === 'department'">
-        <a [href]="'parrainages-presidentielle-2022/candidats/' + item.slugCandidate">{{item.candidate}}</a></td>
+        <a [href]="'parrainages-presidentielle-2022/candidats/' + item.slugCandidate" title="Parrainages {{item.candidate}} présidentielle 2022">{{item.candidate}}</a></td>
     </tr>
   </ng-template>
   <ng-template pTemplate="emptymessage">
