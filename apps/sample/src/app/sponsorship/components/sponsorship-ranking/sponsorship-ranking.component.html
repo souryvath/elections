@@ -14,18 +14,30 @@
         </th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let item of data; let i = index;" [class.yellow]="item.name === candidate">
+    <tbody [class.scroll]="isHomepage === false">
+      <tr *ngFor="let item of data; let i = index;" [class.select]="item.name === candidate">
 
 
-          <td class="number" scope="row">{{i + 1}}.</td>
+          <td class="number" scope="row">
+            <div class="circle">
+              {{i + 1}}
+            </div></td>
           <td>
-            <a href="parrainages-presidentielle-2022/candidats/{{item.slug}}">
-            {{item.name}}<br>
-            {{item.party}}
+            <a href="parrainages-presidentielle-2022/candidats/{{item.slug}}" title="Parrainages {{item.name}} présidentielle 2022">
+            {{item.name}}
           </a>
+          {{item.party}}
           </td>
-          <td>{{item.numberSponsorships}} parrainages
+          <td [ngPlural]="item.numberSponsorships">
+            <ng-template ngPluralCase="=0">
+              Aucun parrainage
+           </ng-template>
+           <ng-template ngPluralCase="=1">
+             {{item.numberSponsorships}} parrainage
+           </ng-template>
+           <ng-template ngPluralCase="other">
+             {{ item.numberSponsorships }} parrainages
+           </ng-template>
             <div class="progress">
               <div class="progress-bar" role="progressbar" [style.width]="(item.numberSponsorships / 500) * 100 + '%'"
                 [aria-valuenow]="(item.numberSponsorships / 500) * 100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -33,10 +45,15 @@
           </td>
           <td class="number">
             <span
-            *ngIf="item.numberSponsorships >= 500"
+            *ngIf="item.numberSponsorships >= 500 && !isDep"
             class="material-icons green">
             check_circle_outline
           </span>
+          <span
+          *ngIf="item.numberSponsorships < 500 && !isDep"
+          class="material-icons grey">
+          pending_actions
+        </span>
           </td>
 
 

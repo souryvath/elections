@@ -59,6 +59,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
         } else {
           this.initMap(16, this.places[0].location.coordinates[1], this.places[0].location.coordinates[0]);
         }
+
         this.initAllPlacesMarker();
       }
     }
@@ -78,14 +79,12 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
     return L.marker([latitude, longitude], this.iconCurrentPosition).addTo(this.map);
   }
 
-  initMarker(latitude: number, longitude: number): any {
+  initMarker(latitude: number, longitude: number, color: string): any {
     this.icon = {
-      icon: L.icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-        shadowUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-shadow.png',
-        iconSize: [24, 36],
-        iconAnchor: [12, 36],
-        popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
+      icon: L.divIcon({
+        className: 'map-marker marker-color-gray a-class',
+        iconSize: [38, 38],
+        html:`<span style="color: ${color}" class="material-icons">circle</span>`
       })
     };
     return L.marker([latitude, longitude], this.icon).addTo(this.map);
@@ -93,10 +92,16 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   initAllPlacesMarker(): void {
     const fg = L.featureGroup().addTo(this.map);
-    this.places.forEach((place) => {
+    const candidates= [...new Set(this.places.map(item => item.candidate))];
+    const object: any = {};
+    for (let i = 0; i < candidates.length; i++) {
+      const str = candidates[i];
+      object[str as string] = this.selectColor();
+    }
+    this.places.forEach((place,) => {
       if (place.location) {
-        const marker = this.initMarker(place.location.coordinates[1], place.location.coordinates[0]);
-        let infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 1em;font-size: 1.15em;">${place.district} - ${place.candidate}
+        const marker = this.initMarker(place.location.coordinates[1], place.location.coordinates[0], object[place.candidate]);
+        let infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 1em;font-size: 1.15em;">${place.district} - <span style="font-weight: bold;">${place.candidate}</span>
         <br>
         </div>`;
         const popup = L.popup({}, marker).setContent(infos);
@@ -106,6 +111,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
 
     });
     this.map.fitBounds(fg.getBounds());
+  }
+
+  selectColor() {
+    return "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
   }
 
   initMap(zoom: number, latitude?: number, longitude?: number): void {
@@ -129,5 +138,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
       tiles.addTo(this.map);
     }
   }
+
+
 
 }

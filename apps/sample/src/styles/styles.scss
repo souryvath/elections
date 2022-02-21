@@ -84,14 +84,51 @@ a {
   height: 300px;
 }
 
+.content {
+  &.carte, &.graph {
+    background-color: #FFFFFF;
+    height: 300px;
+  }
+}
+
+
 @include media-breakpoint-up(md) {
+  .content {
+    &.carte {
+      height: 500px;
+    }
+  }
   #map-france {
     height: 500px;
   }
 }
 @include media-breakpoint-up(lg) {
+  .content {
+    &.carte {
+      height: 800px;
+    }
+  }
   #map-france {
     height: 800px;
   }
 }
+
+
+// Style with css
+.map-marker {
+  text-align: center;
+  position: absolute;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5));
+  .material-icons {
+    font-size: 24px;
+  }
+}
+
+// Style background
+.map-marker.marker-color-gray {background: transparent;}
 

@@ -57,12 +57,12 @@ export class ScraperSponsorshipService {
           delimiter: ';'
         }).fromString(response.data).then(async (result) => {
           result.shift();
-          this.resetDatabase();
           const sponsorships = this.getSponsorships(result);
           const resCsv = await converter.json2csvAsync(sponsorships);
           console.log('START');
           fs.writeFile('sponsorships.csv', resCsv, async (err) => {
             const sponsorshipsFromGouv = await this.fetchAdressFromGouv();
+            this.resetDatabase();
             const sponsos = this.setSponsorships(sponsorshipsFromGouv);
             this.setCandidates(sponsos);
             this.setDepartments(sponsos);
@@ -94,7 +94,7 @@ export class ScraperSponsorshipService {
       }
       const sponsorship = {
         civility: element[0],
-        lastName: element[1],
+        lastName: this.titleCase(element[1]).trim(),
         firstName: element[2],
         mandate: element[3],
         district: element[4],
@@ -112,7 +112,18 @@ export class ScraperSponsorshipService {
   }
 
   private titleCase(string){
-    return string[0].toUpperCase() + string.slice(1).toLowerCase();
+    var separateWord = string.toLowerCase().split(' ');
+    for (var i = 0; i < separateWord.length; i++) {
+       separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
+       separateWord[i].substring(1);
+    }
+    let str = '';
+    const index = separateWord.join(' ').indexOf('-');
+    if (index !== -1) {
+      str = separateWord.join(' ').substring(0, index + 1) + separateWord.join(' ').substring(index, separateWord.join(' ').length).charAt(1).toUpperCase() + separateWord.join(' ').substring(index + 2, separateWord.join(' ').length);
+      return str;
+    }
+    return separateWord.join(' ');
   }
 
   setSponsorships(data) {
@@ -167,10 +178,11 @@ export class ScraperSponsorshipService {
           value: dates.length
         });
       });
+      const cand = CANDIDATES.find((candidateParty) => candidateParty.name === candidateItem);
       const candidate = {
         name: candidateItem,
         slug: slugify(candidateItem, { lower: true, remove: /[*+~.()'"!:@/]/g }),
-        party: CANDIDATES.find((candidateParty) => this.titleCase(candidateParty.name) === candidateItem)?.party,
+        party: cand ? cand.party : '-',
         numberSponsorships: sponsorships.filter((item) => item.candidate === candidateItem).length,
         numberDepartments: departments.filter((depItem) => depItem.value > 0).length,
         sponsorships: sponsorships.filter((item) => item.candidate === candidateItem),

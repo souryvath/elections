@@ -9,5 +9,6 @@ export class SponsorshipRankingComponent {
 
   @Input() data;
   @Input() candidate;
-
+  @Input() isHomepage;
+  @Input() isDep;
 }

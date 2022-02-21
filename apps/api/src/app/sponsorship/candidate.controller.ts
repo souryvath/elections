@@ -25,4 +25,10 @@ export class CandidateController {
     let candidates = await this.candidateService.rankingCandidate();
     return res.status(HttpStatus.OK).json(candidates);
   }
+
+  @Get('candidates')
+  async getCandidates(@Res() res, @Query() params): Promise<Department[]> {
+    let candidates = await this.candidateService.findDistinctCandidates(params.query);
+    return res.status(HttpStatus.OK).json(candidates);
+  }
 }

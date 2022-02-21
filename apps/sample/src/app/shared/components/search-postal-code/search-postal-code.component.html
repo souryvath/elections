@@ -6,7 +6,7 @@
     <div class="autocomplete" >
       <p-autoComplete [inputId]="'autocomplete-input'"
         [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [multiple]="false"
-        [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)"
+        [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)" [dropdown]="true"
         (onSelect)="selectPlace($event)" field="name">
         <ng-template let-postalCode pTemplate="item">
           <a [href]="type + '/' + postalCode.slug">

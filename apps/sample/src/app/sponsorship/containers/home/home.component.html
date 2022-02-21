@@ -27,7 +27,7 @@
       } as obs">
       <ng-container *ngIf="obs.ranking as rankingObs">
         <ng-container *ngIf="rankingObs.value as ranking">
-          <app-sponsorship-ranking [data]="ranking" [candidate]="null">
+          <app-sponsorship-ranking [isHomepage]="true" [data]="ranking" [candidate]="null">
           </app-sponsorship-ranking>
         </ng-container>
       </ng-container>

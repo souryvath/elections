@@ -12,12 +12,30 @@
   padding: 0 !important;
 }
 
-.p-inputtext {
+.p-autocomplete {
+  .p-inputtext {
+    border-top-left-radius: $border-radius-input !important;
+    border-bottom-left-radius: $border-radius-input !important;
+  }
+}
+
+.p-input-icon-left {
+  .p-inputtext {
+    border-radius: $border-radius-input !important;
+  }
+}
+
+.p-button-primary {
   border-radius: $border-radius-input !important;
 }
 
-.p-button {
-  border-radius: $border-radius-input !important;
+.p-autocomplete {
+  .p-button {
+    background: $main-color !important;
+    border: $main-color !important;
+    border-top-right-radius: $border-radius-input !important;
+    border-bottom-right-radius: $border-radius-input !important;
+  }
 }
 
 .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item {
@@ -37,18 +55,18 @@
 }
 
 .p-dropdown .p-dropdown-trigger {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 .p-button-primary {
   background: $main-color !important;
   border: 1px solid $main-color !important;
   &.p-button-outlined {
-    background-color: #FFFFFF !important;
+    background-color: #ffffff !important;
     color: $main-color !important;
   }
   &:hover {
-    color: #FFFFFF;
+    color: #ffffff;
   }
 }
 
@@ -56,11 +74,11 @@
   background: #3c3c3c !important;
   border: 1px solid #3c3c3c !important;
   &.p-button-outlined {
-    background-color: #FFFFFF !important;
+    background-color: #ffffff !important;
     color: #3c3c3c !important;
   }
   &:hover {
-    color: #FFFFFF;
+    color: #ffffff;
   }
 }
 
@@ -68,11 +86,11 @@
   background: $second-color !important;
   border: 1px solid $second-color !important;
   &.p-button-outlined {
-    background-color: #FFFFFF !important;
+    background-color: #ffffff !important;
     color: $second-color !important;
   }
   &:hover {
-    color: #FFFFFF;
+    color: #ffffff;
   }
 }
 
@@ -100,10 +118,10 @@
 }
 
 .p-datatable .p-sortable-column .p-sortable-column-icon {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
-.p-datatable-responsive-scroll>.p-datatable-wrapper>table {
+.p-datatable-responsive-scroll > .p-datatable-wrapper > table {
   table-layout: fixed !important;
 }
 
@@ -113,4 +131,12 @@
 
 .p-datatable .p-sortable-column .p-sortable-column-icon {
   margin-left: 0 !important;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  text-align: center !important;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  text-align: center !important;
 }

@@ -13,7 +13,7 @@
 
         <div class="cs-title">
           <h1>
-            Liste des parrainages des présidentielles 2022 pour le candidat {{candidate.name}}
+            Liste des parrainages de la présidentielle 2022 pour le candidat {{candidate.name}}
           </h1>
         </div>
         <div class="content">
@@ -49,13 +49,15 @@
 
         <div class="content">
           <p>
-            Retrouvez la liste des parrainages du candidat {{candidate.name}} pour les présidentielles 2022,
+            Retrouvez la liste des parrainages du candidat {{candidate.name}} pour la présidentielle 2022,
             avec la liste des élus et le nombre parrainages obtenus, par ville et département (dernière mise à jour le
             {{todayDate | date: 'fullDate'}})
           </p>
         </div>
-        <div class="content" *ngIf="isBrowser">
-          <app-sponsorship-map [data]="candidate.departments"></app-sponsorship-map>
+        <div class="content carte">
+          <div *ngIf="isBrowser">
+            <app-sponsorship-map [data]="candidate.departments"></app-sponsorship-map>
+          </div>
         </div>
         <div class="content">
           <div class="row g-2">
@@ -65,7 +67,7 @@
                 <span *ngIf="candidate.numberSponsorships >= 500" class="icon material-icons green">
                   check_circle_outline
                 </span>
-                <span *ngIf="candidate.numberSponsorships < 500" class="icon material-icons">
+                <span *ngIf="candidate.numberSponsorships < 500" class="icon material-icons red">
                   highlight_off
                 </span>
                 <div class="text">
@@ -82,10 +84,10 @@
             <div class="col-lg-4">
               <div class="bloc" [class.green]="candidate.numberDepartments >= 30"
                 [class.red]="candidate.numberDepartments < 30">
-                <span *ngIf="candidate.numberSponsorships >= 30" class="icon material-icons green">
+                <span *ngIf="candidate.numberDepartments >= 30" class="icon material-icons green">
                   check_circle_outline
                 </span>
-                <span *ngIf="candidate.numberSponsorships < 30" class="icon material-icons">
+                <span *ngIf="candidate.numberDepartments < 30" class="icon material-icons red">
                   highlight_off
                 </span>
                 <div class="text">
@@ -96,7 +98,7 @@
                     départements / <br>
                     au moins 30
                   </div>
-                  </div>
+                </div>
 
 
               </div>
@@ -107,7 +109,7 @@
                 <span *ngIf="candidate.hasTenPercent === false" class="icon material-icons green">
                   check_circle_outline
                 </span>
-                <span *ngIf="candidate.hasTenPercent === true" class="icon material-icons">
+                <span *ngIf="candidate.hasTenPercent === true" class="icon material-icons red">
                   highlight_off
                 </span>
                 <div class="text">
@@ -128,12 +130,15 @@
         </div>
         <div class="cs-title">
           <p class="subtitle">
-            Evolution des parrainages dans le temps pour le candidat {{candidate.name}} pour les
-            présidentielles 2022
+            Evolution des parrainages dans le temps pour le candidat {{candidate.name}} pour la
+            présidentielle 2022
           </p>
         </div>
-        <div class="content" *ngIf="isBrowser">
-          <app-sponsorship-graph [data]="candidate.timeline"></app-sponsorship-graph>
+        <div class="content graph">
+          <div *ngIf="isBrowser">
+            <app-sponsorship-graph [data]="candidate.timeline"></app-sponsorship-graph>
+          </div>
+
         </div>
 
         <div class="cs-title">
@@ -142,12 +147,12 @@
           </p>
         </div>
         <div class="content cs-card card-table" *ngIf="ranking">
-          <app-sponsorship-ranking [data]="ranking" [candidate]="candidate.name">
+          <app-sponsorship-ranking [isHomepage]="false" [data]="ranking" [candidate]="candidate.name">
           </app-sponsorship-ranking>
         </div>
         <div class="cs-title">
           <h2>
-            Liste des élus et parrainages du candidat {{candidate.name}} pour les présidentielles 2022 par
+            Liste des élus et parrainages du candidat {{candidate.name}} pour la présidentielle 2022 par
             ville et département
           </h2>
         </div>

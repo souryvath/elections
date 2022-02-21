@@ -21,7 +21,7 @@
     background: #42E695;
   }
   &.red {
-    background: red;
+    background: #e64242;
   }
 }
 
@@ -37,7 +37,7 @@
     background: #42E695;
   }
   &.red {
-    background: red;
+    background: #e64242;
   }
   text-align: center;
 
@@ -47,6 +47,21 @@
   }
   .message {
     font-size: 1.2em;
+  }
+
+  .icon {
+    position: absolute;
+    top:0;
+    right:0;
+    padding: 0.25em;
+    font-size: 40px;
+    &.green {
+      color: #5BAD52;
+    }
+
+    &.red {
+      color: #FFFFFF;
+    }
   }
 }
 
@@ -62,11 +77,4 @@
   background-color: #FFFFFF;
 }
 
-.icon {
-  position: absolute;
-  top:0;
-  right:0;
-  padding: 0.25em;
-  font-size: 40px;
-}
 

@@ -1,7 +1,7 @@
 export const SOCIAL_NETWORK = [
   {
     name: 'twitter',
-    url: `test.fr`,
+    url: `https://twitter.com/leselectionsfr`,
   },
   {
     name: 'facebook',

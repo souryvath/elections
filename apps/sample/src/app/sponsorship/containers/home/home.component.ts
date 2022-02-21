@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   private setSeo(): void {
     this.seoService.setSeoPage(
-      'Elections présidentielles 2022 et parrainages - Les élections',
+      'Résultats des élections de la présidentielle 2022 et parrainages - Les élections',
       'Résultats prochains de l\'élection présidentielle 2022 par ville et listes complètes des parrainages pour les présidentielles 2022, pour chaque candidat, par nombre de parrainages obtenus, par élu, ville et département'
     );
   }

@@ -37,7 +37,7 @@ responsiveLayout="scroll" scrollHeight="50vh"
   </ng-template>
   <ng-template pTemplate="body" let-item>
     <tr>
-      <td>{{item.lastName}} <br> {{item.firstName}}</td>
+      <td>{{item.firstName}} <br> {{item.lastName}}</td>
       <td>{{item.mandate}}</td>
       <td>{{item.district}}</td>
       <td *ngIf="type === 'candidate'">

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import slugify from 'slugify';
 import { CandidateDTO } from './dto/candidate.dto';
 import { Candidate } from './interfaces/candidate.interface';
 
@@ -30,6 +31,23 @@ export class CandidateService {
   async findAllCandidates(): Promise<Candidate[]> {
     const candidates = await this.candidateModel.find();
     return candidates;
+  }
+
+  async findDistinctCandidates(query: string): Promise<Candidate[]> {
+    const candidates = await this.candidateModel.aggregate([
+      {'$sort': {'slug': 1}},
+      {'$group': {
+          '_id': '$_id',
+          'slug': { '$first' : '$slug'},
+          'name': { '$first' : '$name'},
+          }
+      }]);
+
+    if (!query) {
+      return candidates.sort((a, b) => (a.slug < b.slug) ? -1 : 1);
+    }
+    const regex = new RegExp(`${slugify(query, { lower: true, remove: /[*+~.()'"!:@/]/g })}`);
+    return candidates.filter(value => regex.test(value.slug)).sort((a, b) => (a.slug < b.slug) ? -1 : 1);
   }
 
   async findCandidate(field: string, value: string): Promise<Candidate> {

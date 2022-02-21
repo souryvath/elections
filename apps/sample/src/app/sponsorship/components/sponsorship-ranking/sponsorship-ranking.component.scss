@@ -2,14 +2,14 @@
 
 thead {
   background: $main-color;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .table {
-  border-collapse: collapse; width: 100%;
-
+  border-collapse: collapse;
+  width: 100%;
 }
-.table>:not(:first-child) {
+.table > :not(:first-child) {
   border-top: none;
 }
 
@@ -19,16 +19,16 @@ th {
   align-items: center;
 }
 
-tbody {
-  height: 120px;
-  overflow-y: auto;
-}
-
 table {
   width: 100%;
 }
 
-thead, tbody, tr, td { display: block; }
+thead,
+tbody,
+tr,
+td {
+  display: block;
+}
 
 tr:after {
   content: ' ';
@@ -42,12 +42,15 @@ thead th {
 }
 
 tbody {
-  height: 600px;
-  overflow-y: auto;
+  &.scroll {
+    height: 600px;
+    overflow-y: auto;
+  }
+
 }
 
-
-tbody td, thead th {
+tbody td,
+thead th {
   width: 40%;
   float: left;
 }
@@ -55,6 +58,9 @@ tbody td, thead th {
 .number {
   width: 10% !important;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 a {
@@ -67,24 +73,24 @@ a {
   }
 }
 
-
-.yellow {
-  background: $main-color;
-  color: #FFFFFF !important;
-  a {
-    color: #FFFFFF !important;
-  }
+.select {
+  background: #65e697;
 }
-
-
 
 .ranking-table {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
-.green {
+.material-icons {
   font-size: 30px;
-  color: #42E695;
+
+  &.green {
+    color: #5bad52;
+  }
+
+  &.grey {
+    color: #dcdcdc;
+  }
 }
 
 .table {
@@ -99,4 +105,13 @@ a {
   }
 }
 
-
+.circle {
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  padding: 3px;
+  background: #fff;
+  border: 1px solid #000;
+  color: #000000;
+  text-align: center;
+}
