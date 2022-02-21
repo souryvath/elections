@@ -22,6 +22,7 @@ export class SponsorshipDepartmentComponent implements OnInit {
   region: any[];
   places: any[]
   todayDate: any = Date.now();
+  city: any;
   constructor(
     public router: Router,
     private readonly route: ActivatedRoute,
@@ -38,7 +39,8 @@ export class SponsorshipDepartmentComponent implements OnInit {
         this.breadcrumbService.set('parrainages-presidentielle-2022/departements/:slugDepartment', element.name);
         const dep = FRANCE_DEPS_LIST.find((depItem) => depItem.name === element.name);
         this.region = FRANCE_DEPS_LIST.filter((item) => item.region.name === dep.region.name);
-        this.places = element.sponsorships.filter((item) => item.mandate === 'Maire');
+        this.places = element.sponsorships.filter((item) => item.mandate === 'Maire' && item.location);
+        this.city = dep;
         this.setBreadCrumbJsonLd(dep.name, params.slugDepartment);
         this.setSeo(element.name);
       }));
@@ -46,7 +48,7 @@ export class SponsorshipDepartmentComponent implements OnInit {
   }
 
   search($event): void {
-    this.results = FRANCE_DEPS_LIST.filter((element) => element.name.toLowerCase().includes($event.query.toLowerCase()));
+    this.results = FRANCE_DEPS_LIST.filter((element) => element.name.toLowerCase().includes($event.query.toLowerCase())).sort((a, b) => (a.name < b.name) ? -1 : 1);
   }
 
   select($event, type) {

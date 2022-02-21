@@ -51,16 +51,17 @@ tbody {
 
 tbody td,
 thead th {
-  width: 40%;
+  width: 35%;
   float: left;
 }
 
 .number {
-  width: 10% !important;
+  width: 15% !important;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 a {
@@ -114,4 +115,7 @@ a {
   border: 1px solid #000;
   color: #000000;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

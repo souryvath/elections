@@ -51,7 +51,7 @@ export class SponsorshipHomeComponent implements OnInit {
   }
 
   searchDepartment($event): void {
-    this.resultsDepartments = FRANCE_DEPS_LIST.filter((element) => element.name.toLowerCase().includes($event.query));
+    this.resultsDepartments = FRANCE_DEPS_LIST.filter((element) => element.name.toLowerCase().includes($event.query)).sort((a, b) => (a.name < b.name) ? -1 : 1);;
   }
 
   setBreadCrumbJsonLd(): void {

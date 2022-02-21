@@ -201,8 +201,10 @@ export class ScraperSponsorshipService {
       let rankings = [];
       candidates.forEach((candidateItem) => {
         const sponsorshipsCandidates = sponsorshipsDep.filter((item) => item.candidate === candidateItem);
+        const cand = CANDIDATES.find((candidateParty) => candidateParty.name === candidateItem);
         const ranking = {
           name: candidateItem,
+          party: cand ? cand.party : '-',
           numberSponsorships: sponsorshipsCandidates.length,
           slug: slugify(candidateItem, { lower: true, remove: /[*+~.()'"!:@/]/g })
         }

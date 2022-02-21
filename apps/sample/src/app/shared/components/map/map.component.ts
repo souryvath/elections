@@ -1,5 +1,6 @@
 import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, PLATFORM_ID } from '@angular/core';
+import { CANDIDATES_COLORS, CANDIDATES_FRONT } from '../../../sponsorship/containers/sponsorship-candidate/candidates.constants';
 
 declare const L: any;
 @Component({
@@ -28,7 +29,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
     'human': 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
   }
 
-  constructor(@Inject(PLATFORM_ID) private readonly platformId: any, private datePipe: DatePipe) {
+  constructor(@Inject(PLATFORM_ID) private readonly platformId: any) {
   }
 
   ngOnInit(): void {
@@ -46,21 +47,21 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (this.isBrowser) {
+      console.log(this.city);
       if (!L) {
         return;
       }
       if (!this.city) {
-        this.initMap(48.864716, 2.349014, 10);
+        this.initMap(10, 48.864716, 2.349014);
         return;
       }
       if (this.city) {
-        if (this.places.length !== 1) {
-          this.initMap(16);
+        if (this.places.length === 0) {
+          this.initMap(8, this.city.lat, this.city.lon);
         } else {
           this.initMap(16, this.places[0].location.coordinates[1], this.places[0].location.coordinates[0]);
+          this.initAllPlacesMarker();
         }
-
-        this.initAllPlacesMarker();
       }
     }
   }
@@ -92,15 +93,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   initAllPlacesMarker(): void {
     const fg = L.featureGroup().addTo(this.map);
-    const candidates= [...new Set(this.places.map(item => item.candidate))];
-    const object: any = {};
-    for (let i = 0; i < candidates.length; i++) {
-      const str = candidates[i];
-      object[str as string] = this.selectColor();
-    }
     this.places.forEach((place,) => {
       if (place.location) {
-        const marker = this.initMarker(place.location.coordinates[1], place.location.coordinates[0], object[place.candidate]);
+        const marker = this.initMarker(place.location.coordinates[1], place.location.coordinates[0], CANDIDATES_COLORS[place.candidate]);
         let infos = `<div style="text-align: center; cursor: pointer; text-align: center; padding: 1em;font-size: 1.15em;">${place.district} - <span style="font-weight: bold;">${place.candidate}</span>
         <br>
         </div>`;
@@ -118,8 +113,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   initMap(zoom: number, latitude?: number, longitude?: number): void {
-    let latitudePos = 0;
-    let longitudePos = 0;
+    let latitudePos = 46.232193;
+    let longitudePos = 2.209667;
 
     if (latitude && longitude) {
       latitudePos = latitude;
@@ -127,7 +122,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     if (L) {
       this.map = L.map(this.id, {
-        // center: [latitudePos, longitudePos],
+        center: [latitudePos, longitudePos],
         gestureHandling: true,
         zoom: zoom
       });

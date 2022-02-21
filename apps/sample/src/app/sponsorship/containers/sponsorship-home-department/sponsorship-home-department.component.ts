@@ -28,7 +28,7 @@ export class SponsorshipHomeDepartmentComponent implements OnInit {
   }
 
   search($event): void {
-    this.results = FRANCE_DEPS_LIST.filter((element) => element.name.toLowerCase().includes($event.query));
+    this.results = FRANCE_DEPS_LIST.filter((element) => element.name.toLowerCase().includes($event.query)).sort((a, b) => (a.name < b.name) ? -1 : 1);
   }
 
   select($event, type) {

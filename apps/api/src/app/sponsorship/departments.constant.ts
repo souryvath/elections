@@ -965,9 +965,3 @@ export const FRANCE_DEPS = [
 
 
 ];
-
-// 'Parlement européen',
-// 'Polynésie française',
-// "Français de l'étranger",
-// 'Saint-Martin',
-// 'Nouvelle-Calédonie'

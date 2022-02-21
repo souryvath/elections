@@ -321,7 +321,9 @@ export const FRANCE_DEPS_LIST = [
 			name: 'Guyane',
 			code: 'FR-GF'
 		},
-		slug: 'guyane'
+		slug: 'guyane',
+    lon: '-53.125782',
+    lat: '3.933889'
 	},
 	{
 		code: 'FR-68',
@@ -692,6 +694,15 @@ export const FRANCE_DEPS_LIST = [
 		},
 		slug: 'paris'
 	},
+  {
+		code: 'FR-EU',
+		name: 'Parlement européen',
+    region: {
+			name: 'FR',
+			code: 'FR'
+		},
+		slug: 'parlement-europeen'
+	},
 	{
 		code: 'FR-62',
 		name: 'Pas-de-Calais',
@@ -908,15 +919,7 @@ export const FRANCE_DEPS_LIST = [
 		},
 		slug: 'yvelines'
 	},
-  {
-		code: 'FR-EU',
-		name: 'Parlement européen',
-    region: {
-			name: 'FR',
-			code: 'FR'
-		},
-		slug: 'parlement-europeen'
-	},
+
   {
 		code: 'FR-987',
 		name: 'Polynésie française',
@@ -924,7 +927,9 @@ export const FRANCE_DEPS_LIST = [
 			name: 'FR',
 			code: 'FR'
 		},
-		slug: 'polynesie-francaise'
+		slug: 'polynesie-francaise',
+    lon: '-143.903496',
+    lat: '-17.7785725'
 	},
   {
 		code: 'FR-INT',
@@ -942,7 +947,9 @@ export const FRANCE_DEPS_LIST = [
 			name: 'FR',
 			code: 'FR'
 		},
-		slug: 'saint-martin'
+		slug: 'saint-martin',
+    lon: '-63.052251',
+    lat: '18.08255'
 	},
   {
 		code: 'FR-988',
@@ -951,13 +958,19 @@ export const FRANCE_DEPS_LIST = [
 			name: 'FR',
 			code: 'FR'
 		},
-		slug: 'nouvelle-caledonie'
+		slug: 'nouvelle-caledonie',
+    lon: '165.846901',
+    lat: '-21.123889'
 	},
-
+  {
+		code: 'FR-977',
+		name: 'Saint-Barthélemy',
+    region: {
+			name: 'Saint-Barthélemy',
+			code: 'FR-123'
+		},
+		slug: 'saint-barthelemy',
+    lon: '-62.833162',
+    lat: '17.903494'
+	}
 ];
-
-// 'Parlement européen',
-// 'Polynésie française',
-// "Français de l'étranger",
-// 'Saint-Martin',
-// 'Nouvelle-Calédonie'

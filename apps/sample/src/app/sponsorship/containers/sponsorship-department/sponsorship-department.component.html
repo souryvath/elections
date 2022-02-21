@@ -23,7 +23,7 @@
         </div>
         <div class="content map">
           <app-map [id]="'departments-map'" [places]="places" [type]="'parrainages'" [tiles]="'human'"
-            [city]="places[0]"></app-map>
+            [city]="places[0] ? places[0] : city"></app-map>
         </div>
         <div class="content">
           <div class="row g-2">
