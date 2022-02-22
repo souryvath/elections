@@ -19,7 +19,7 @@ const converter = require('json-2-csv');
 @Injectable()
 export class ScraperSponsorshipService {
 
-  readonly URL_SPONSORSHIP = 'https://www.data.gouv.fr/fr/datasets/r/3e34f95f-917f-4d34-9524-eec88284bfd1';
+  readonly URL_SPONSORSHIP = 'https://presidentielle2022.conseil-constitutionnel.fr/telechargement/parrainagestotal.csv';
   readonly URL_SEARCH_ADDRESS = 'http://195.154.90.2:7878/search/csv/';
   private readonly logger = new Logger(this.constructor.name);
 
