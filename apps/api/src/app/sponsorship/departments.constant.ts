@@ -963,7 +963,7 @@ export const FRANCE_DEPS = [
 		slug: 'saint-barthelemy'
 	},
   {
-		code: 'FR-977',
+		code: 'FR-977-978',
 		name: 'Saint-Martin / Saint-Barthélemy',
     region: {
 			name: 'Saint-Martin / Saint-Barthélemy',
@@ -981,7 +981,7 @@ export const FRANCE_DEPS = [
 		slug: 'wallis-et-futuna'
 	},
   {
-		code: 'FR-977',
+		code: 'FR-975',
 		name: 'Saint-Pierre-et-Miquelon',
     region: {
 			name: 'Saint-Pierre-et-Miquelon',

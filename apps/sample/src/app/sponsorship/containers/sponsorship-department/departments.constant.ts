@@ -974,7 +974,7 @@ export const FRANCE_DEPS_LIST = [
     lat: '17.903494'
 	},
   {
-		code: 'FR-977',
+		code: 'FR-977-978',
 		name: 'Saint-Martin / Saint-Barthélemy',
     region: {
 			name: 'Saint-Martin / Saint-Barthélemy',
@@ -996,7 +996,7 @@ export const FRANCE_DEPS_LIST = [
     lat: '-13.768752'
 	},
   {
-		code: 'FR-977',
+		code: 'FR-975',
 		name: 'Saint-Pierre-et-Miquelon',
     region: {
 			name: 'Saint-Pierre-et-Miquelon',
