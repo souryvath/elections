@@ -962,6 +962,31 @@ export const FRANCE_DEPS = [
 		},
 		slug: 'saint-barthelemy'
 	},
-
-
+  {
+		code: 'FR-977',
+		name: 'Saint-Martin / Saint-Barthélemy',
+    region: {
+			name: 'Saint-Martin / Saint-Barthélemy',
+			code: 'FR-123'
+		},
+		slug: 'saint-barthelemy-saint-martin'
+	},
+  {
+		code: 'FR-986',
+		name: 'Wallis et Futuna',
+    region: {
+			name: 'Wallis et Futuna',
+			code: 'FR-123'
+		},
+		slug: 'wallis-et-futuna'
+	},
+  {
+		code: 'FR-977',
+		name: 'Saint-Pierre-et-Miquelon',
+    region: {
+			name: 'Saint-Pierre-et-Miquelon',
+			code: 'FR-123'
+		},
+		slug: 'saint-pierre-et-miquelon'
+	}
 ];

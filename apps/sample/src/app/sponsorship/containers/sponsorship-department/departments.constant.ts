@@ -972,5 +972,38 @@ export const FRANCE_DEPS_LIST = [
 		slug: 'saint-barthelemy',
     lon: '-62.833162',
     lat: '17.903494'
+	},
+  {
+		code: 'FR-977',
+		name: 'Saint-Martin / Saint-Barthélemy',
+    region: {
+			name: 'Saint-Martin / Saint-Barthélemy',
+			code: 'FR-123'
+		},
+		slug: 'saint-barthelemy-saint-martin',
+    lon: '-62.833162',
+    lat: '17.903494'
+	},
+  {
+		code: 'FR-986',
+		name: 'Wallis et Futuna',
+    region: {
+			name: 'Wallis et Futuna',
+			code: 'FR-123'
+		},
+		slug: 'wallis-et-futuna',
+    lon: '-177.156097',
+    lat: '-13.768752'
+	},
+  {
+		code: 'FR-977',
+		name: 'Saint-Pierre-et-Miquelon',
+    region: {
+			name: 'Saint-Pierre-et-Miquelon',
+			code: 'FR-123'
+		},
+		slug: 'saint-pierre-et-miquelon',
+    lon: '-56.336825',
+    lat: '46.966164'
 	}
 ];
