@@ -134,7 +134,6 @@
     "@types/mongoose": "^5.11.96",
     "@types/node": "17.0.14",
     "codelyzer": "^6.0.2",
-    "cypress": "^9.4.1",
     "eslint": "8.8.0",
     "jest": "27.4.7",
     "jest-preset-angular": "11.1.0",
