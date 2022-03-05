@@ -1,0 +1,27 @@
+<div >
+  <div class="top">
+    <div class="label">
+      Second tour - 2017
+    </div>
+    <div class="stat">
+      Taux d'absentation: {{((stat.pctAbsent / stat.nbrSubscriptions) * 100) | number: '1.2-2' }} %
+    </div>
+  </div>
+  <ng-container *ngFor="let item of result; let i = index;">
+    <div [class.hidden]="i > this.numberResults - 1">
+      <app-presidential-progress-result [item]="item"></app-presidential-progress-result>
+    </div>
+  </ng-container>
+  <div class="bottom">
+    <p>
+      5 premiers résultats affichés
+    </p>
+    <button class="p-button p-button-primary" (click)="displayMore()">
+      afficher tous les résultats
+      <span class="material-icons">
+        keyboard_arrow_down
+      </span>
+    </button>
+  </div>
+</div>
+

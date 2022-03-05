@@ -5,4 +5,6 @@ export interface PostalCodeDTO {
   readonly slug?: string;
   readonly longitude?: string;
   readonly latitude?: string;
+  readonly departementSlug?: string;
+  readonly regionSlug?: string;
 }

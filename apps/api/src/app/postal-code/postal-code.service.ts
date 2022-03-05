@@ -107,8 +107,9 @@ export class PostalCodeService {
   }
 
   async findPostalCodesByDepartment(departementCode: string): Promise<PostalCode[]> {
+    console.log(departementCode);
     const postalCodes = await this.postalCodeModel.find(
-      { "departement.code": departementCode }
+      {"postalCode": {$regex: '^' + departementCode, $options: 'i'}}
     ).exec();
     return postalCodes;
   }

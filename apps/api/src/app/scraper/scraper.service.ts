@@ -6,6 +6,8 @@ import slugify from 'slugify';
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
 import { HttpService } from '@nestjs/axios';
+import { FRANCE_DEPS } from '../sponsorship/departments.constant';
+import { FRANCE_REGIONS_LIST } from '../sponsorship/regions.constant';
 
 @Injectable()
 export class ScraperService {
@@ -51,6 +53,7 @@ export class ScraperService {
             const latitude = element[5].split(',')[0];
             const longitude = element[5].split(',')[1];
             const slug = `${element[1]}-${element[2]}`;
+            const departement = FRANCE_DEPS.find((item) => item.code.substring(3) === element[2].substring(0, item.code.substring(3).length));
             const postalCode = {
               name: element[1],
               postalCode: element[2],
@@ -59,9 +62,46 @@ export class ScraperService {
                 coordinates: [longitude ? longitude : 0, latitude ? latitude : 0]
               },
               slug: `${slugify(slug, { lower: true, remove: /[*+~.()'"!:@/]/g })}`,
+              regionSlug: departement?.region.slug,
+              departementSlug: departement?.slug,
               longitude: longitude ? longitude : 0,
               latitude: latitude ? latitude : 0,
               insee: element[0]
+            };
+            this.postalCodeService.addPostalCode(postalCode);
+          });
+          FRANCE_DEPS.forEach((item) => {
+            const region = FRANCE_REGIONS_LIST.find((element) => element.slug === item.region.slug);
+            const postalCode = {
+              name: item.name,
+              postalCode: item.code.substring(3),
+              location: {
+                type: 'Point',
+                coordinates: [0, 0]
+              },
+              slug: item.slug,
+              regionSlug: region?.slug,
+              departementSlug: null,
+              longitude: null,
+              latitude: null,
+              insee: null
+            };
+            this.postalCodeService.addPostalCode(postalCode);
+          });
+          FRANCE_REGIONS_LIST.forEach((item) => {
+            const postalCode = {
+              name: item.name,
+              postalCode: null,
+              location: {
+                type: 'Point',
+                coordinates: [0, 0]
+              },
+              slug: item.slug,
+              regionSlug: null,
+              departementSlug: null,
+              longitude: null,
+              latitude: null,
+              insee: null
             };
             this.postalCodeService.addPostalCode(postalCode);
           });
@@ -73,5 +113,5 @@ export class ScraperService {
     });
   }
 
-  
+
 }

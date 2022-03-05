@@ -12,11 +12,23 @@
   padding: 0 !important;
 }
 
-.p-autocomplete {
-  .p-inputtext {
-    border-top-left-radius: $border-radius-input !important;
-    border-bottom-left-radius: $border-radius-input !important;
+#autocomplete-input {
+  .p-autocomplete {
+    .p-inputtext {
+      border-top-left-radius: $border-radius-input !important;
+      border-bottom-left-radius: $border-radius-input !important;
+    }
   }
+
+}
+
+#autocomplete-search {
+  .p-autocomplete {
+    .p-inputtext {
+      border-radius: $border-radius-input !important;
+    }
+  }
+
 }
 
 .p-input-icon-left {

@@ -1,4 +1,4 @@
-import { FRANCE_DEPS_LIST } from './departments.constant';
+import { FRANCE_DEPS_LIST } from '../../../shared/constants/departments.constant';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';

@@ -16,8 +16,8 @@ export const PostalCodeSchema = new mongoose.Schema({
       required: true
     }
   },
-  departement: Schema.Types.Mixed,
-  region: Schema.Types.Mixed
+  departementSlug: String,
+  regionSlug: String
 });
 
 PostalCodeSchema.index({location: '2dsphere'});

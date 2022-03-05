@@ -1,0 +1,22 @@
+thead {
+  th {
+    background: #E7E7E7;
+    text-transform: uppercase;
+    border: none;
+  }
+}
+
+.dark {
+  td {
+    background: #F1F1F1;
+  }
+}
+.light {
+  td {
+    background: #F8F8F8;
+  }
+}
+
+th, td {
+  text-align: center;
+}

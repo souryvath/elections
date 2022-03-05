@@ -4,15 +4,58 @@
   </p>
   <div class="form">
     <div class="autocomplete" >
-      <p-autoComplete [inputId]="'autocomplete-input'"
-        [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [multiple]="false"
-        [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)" [dropdown]="true"
-        (onSelect)="selectPlace($event)" field="name">
-        <ng-template let-postalCode pTemplate="item">
-          <a [href]="type + '/' + postalCode.slug">
-            {{postalCode.name}}</a>
-        </ng-template>
-      </p-autoComplete>
+      <ng-container *ngIf="type === 'parrainages-presidentielle-2022/candidats'">
+        <div id="autocomplete-input">
+          <p-autoComplete [inputId]="'autocomplete-input'"
+          [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [multiple]="false"
+          [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)" [dropdown]="true"
+          (onSelect)="selectPlace($event)" field="name">
+          <ng-template let-postalCode pTemplate="item">
+            <a [href]="type + '/' + postalCode.slug">
+              {{postalCode.name}}</a>
+          </ng-template>
+        </p-autoComplete>
+        </div>
+
+      </ng-container>
+      <ng-container *ngIf="type === 'resultats-presidentielle-2022'">
+        <div id="autocomplete-search">
+          <p-autoComplete [inputId]="'autocomplete-search'"
+          [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [multiple]="false"
+          [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)"
+          (onSelect)="selectPlace($event)" field="name">
+          <ng-template let-postalCode pTemplate="item">
+            <ng-container *ngIf="postalCode.departementSlug && postalCode.regionSlug">
+              <a [href]="type + '/' + postalCode.regionSlug + '/' + postalCode.departementSlug + '/' + postalCode.slug">
+                {{postalCode.name}}
+              <ng-container *ngIf="postalCode.postalCode">
+                ({{postalCode.postalCode}})
+              </ng-container>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="postalCode.regionSlug && !postalCode.departementSlug">
+              <a [href]="type + '/' + postalCode.regionSlug + '/' + postalCode.slug">
+                {{postalCode.name}}
+              <ng-container *ngIf="postalCode.postalCode">
+                ({{postalCode.postalCode}})
+              </ng-container>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="!postalCode.regionSlug && !postalCode.departementSlug">
+              <a [href]="type + '/' + postalCode.slug">
+                {{postalCode.name}}
+              <ng-container *ngIf="postalCode.postalCode">
+                ({{postalCode.postalCode}})
+              </ng-container>
+              </a>
+            </ng-container>
+
+          </ng-template>
+        </p-autoComplete>
+          </div>
+
+      </ng-container>
+
     </div>
 
     <div class="buttons">

@@ -1,0 +1,24 @@
+<h3>
+  {{title}}
+</h3>
+<div class="row list">
+  <div *ngIf="type === 'region'">
+    <strong>FRANCE</strong>
+  </div>
+
+  <div *ngFor="let item of list" class="col-6">
+    <ng-container *ngIf="item.region && item.region.slug">
+
+      <a href="resultats-presidentielle-2022/{{item.region.slug}}/{{item.slug}}"
+        [class.bold]="place === item?.name">{{item.name}}
+        ({{item.code | slice: 3}})
+      </a>
+    </ng-container>
+    <ng-container *ngIf="!item.region">
+      <a href="resultats-presidentielle-2022/{{item.slug}}" [class.bold]="place === item?.name">{{item.name}}
+      </a>
+    </ng-container>
+  </div>
+
+
+</div>

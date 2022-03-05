@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { SeoService } from './../../../core/services/seo.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FRANCE_DEPS_LIST } from '../sponsorship-department/departments.constant';
+import { FRANCE_DEPS_LIST } from '../../../shared/constants/departments.constant';
 import { URL_DOMAIN } from '../../../config/url.config';
 
 @Component({

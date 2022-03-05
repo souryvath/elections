@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { JsonLdService } from 'ngx-seo';
 import { URL_DOMAIN } from '../../../config/url.config';
 import { SeoService } from '../../../core/services/seo.service';
-import { FRANCE_DEPS_LIST } from '../sponsorship-department/departments.constant';
+import { FRANCE_DEPS_LIST } from '../../../shared/constants/departments.constant';
 
 @Component({
   selector: 'app-sponsorship-home-department',

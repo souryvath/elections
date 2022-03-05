@@ -1,0 +1,115 @@
+<div class="cs-title">
+  <h2 *ngIf="type === 'region'">
+    Résultats du second tour de l'élection présidentielle 2022 en {{place.name | uppercaseFirst}} :
+    <ng-container *ngIf="round === '1'">
+      1er tour
+    </ng-container>
+    <ng-container *ngIf="round === '2'">
+      2nd tour
+    </ng-container>
+
+  </h2>
+  <h2 *ngIf="type === 'departement'">
+    Résultats du second tour de l'élection présidentielle 2022 en {{place.name | uppercaseFirst}} ({{place.code | slice:
+    3}}) :
+    <ng-container *ngIf="round === '1'">
+      1er tour
+    </ng-container>
+    <ng-container *ngIf="round === '2'">
+      2nd tour
+    </ng-container>
+
+  </h2>
+  <h2 *ngIf="type === 'city'">
+    Résultats du second tour de l'élection présidentielle 2022 à {{place.name | uppercaseFirst}} ({{place.postalCode}})
+    :
+    <ng-container *ngIf="round === '1'">
+      1er tour
+    </ng-container>
+    <ng-container *ngIf="round === '2'">
+      2nd tour
+    </ng-container>
+
+  </h2>
+</div>
+<div class="content result">
+  <app-presidential-result [result]="result" [stat]="stat"></app-presidential-result>
+  <app-presidential-table [stat]="stat"></app-presidential-table>
+  <ng-container *ngIf="round === '2'">
+    <p>
+      Lors du <strong>second tour</strong> de cette <strong>élection
+        présidentielle</strong> en <strong>{{place.name | uppercaseFirst}}
+        <ng-container *ngIf="type === 'departement'">
+          ({{place.code | slice: 3}})
+        </ng-container>
+      </strong>
+      ,
+      Emmanuel Macron arrive en tête des voix. Emmanuel Macron (La République en Marche !) a
+      récolté le plus grand nombre de voix avec 66,66% des suffrages (321 votes) face à Marine Le Pen (Front National)
+      qui
+      a réuni 44,44% des voix (54 votes).
+    </p>
+    <p [class.hidden]="isHidden">
+      Le <strong>taux d'abstention</strong> en <strong>{{place.name | uppercaseFirst}}
+        <ng-container *ngIf="type === 'departement'">
+          ({{place.code | slice: 3}})
+        </ng-container>
+      </strong> pour ce 2nd tour de l’élection présidentielle s’élève à 24,71%.<br>
+
+      Le <strong>taux de participation</strong> en <strong>{{place.name | uppercaseFirst}}
+        <ng-container *ngIf="type === 'departement'">
+          ({{place.code | slice: 3}})
+        </ng-container>
+      </strong> au 2ème tour des élections est de 75,29%, (supérieur|inférieur) à
+      celui du 1er tour (XX,XX%).<br>
+
+      Parmi les électeurs, XX,XX% ont <strong>voté blanc</strong> (XXX personnes) en {{place.name | uppercaseFirst}}.
+    </p>
+  </ng-container>
+  <ng-container *ngIf="round === '1'">
+    <p>
+      <strong>Le 1er tour de l'élection présidentielle en {{place.name | uppercaseFirst}}
+        <ng-container *ngIf="type === 'departement'">
+          ({{place.code | slice: 3}})
+        </ng-container>
+        <ng-container *ngIf="type === 'city'">
+          ({{place.postalCode}})
+        </ng-container>
+      </strong> a été remporté par
+      Emmanuel Macron (La République en Marche!), en tête des résultats ave
+      c XX,XX% des suffrages (XXX voix), suivi(e) en 2ème position du
+      candidat|de la candidate Marine Le Pen (Front National),
+      avec XX,XX% des votes (XXX voix).
+    </p>
+    <p [class.hidden]="isHidden">
+      En 3ème position arrive Jean-Luc Mélenchon (La France insoumise), avec XX,XX% des voix (XXX votes), puis François
+      Fillon (Les Républicains) qui comptabilise XX,XX% des voix soit XXX votes.<br>
+
+      Les <strong>électeurs de {{place.name | uppercaseFirst}}</strong> ont
+      ensuite voté pour Nicolas Dupont-Aignan (Debout la France - XX,XX% - XXX votes),
+      Benoît Hamon (PS, 4,6%), François Asselineau (UPR, 1,28%), Jean Lassalle (Indépendant, 0,85%),
+      Philippe Poutou (NPA, 0,71%), Nathalie Arthaud (Lutte ouvrière, 0,52%)
+      et enfin Jacques Cheminade (Solidarité et progrès, 0,19%).<br>
+
+      Le <strong>taux d'abstention</strong> pour <strong>ce premier tour de la Présidentielle 2022 en {{place.name | uppercaseFirst}}      <ng-container *ngIf="type === 'departement'">
+        ({{place.code | slice: 3}})
+      </ng-container>
+      <ng-container *ngIf="type === 'city'">
+        ({{place.postalCode}})
+      </ng-container>
+    </strong> s'élève à XX,XX%, et XX,XX% des
+      électeurs ont <strong>voté blanc</strong>.
+    </p>
+  </ng-container>
+
+  <div class="button">
+    <button class="p-button p-button-primary" (click)="displayMore()">
+      voir plus
+      <span class="material-icons">
+        keyboard_arrow_down
+      </span>
+    </button>
+
+  </div>
+
+</div>

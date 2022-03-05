@@ -22,6 +22,10 @@ export class PostalCodeService {
     return this.httpClient.get(`${environment.api}/api/postal-code?slug=${slug}`);
   }
 
+  getPostalCodeByDepartement(departementCode: string): Observable<any> {
+    return this.httpClient.get(`${environment.api}/api/postal-code?departementCode=${departementCode}`);
+  }
+
   getNeareastPostalCodes(latitude: number, longitude: number, postalCode: string): Observable<any> {
     return this.httpClient.get(`${environment.api}/api/postal-code/nearest?lat=${latitude}&long=${longitude}&postalCode=${postalCode}`);
   }

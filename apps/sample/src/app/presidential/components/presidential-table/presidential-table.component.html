@@ -1,0 +1,77 @@
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Participation</th>
+      <th scope="col">%</th>
+      <th scope="col">Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="dark">
+      <td>
+        Nombre d'inscrits
+      </td>
+      <td>
+        100%
+      </td>
+      <td>
+        {{stat.nbrSubscriptions}} inscrits
+      </td>
+    </tr>
+    <tr class="light">
+      <td>
+        Taux d'abstention
+      </td>
+      <td>
+        {{((stat.pctAbsent / stat.nbrSubscriptions) * 100) | number:'1.0-0'}} %
+      </td>
+      <td>
+        {{stat.pctAbsent}} votes
+      </td>
+    </tr>
+    <tr class="dark">
+      <td>
+        Taux de participation
+      </td>
+      <td>
+        {{((stat.pctParticipation / stat.nbrSubscriptions) * 100) | number:'1.0-0'}} %
+      </td>
+      <td>
+        {{stat.pctParticipation}} votes
+      </td>
+    </tr>
+    <tr class="light">
+      <td>
+        Votes exprimés
+      </td>
+      <td>
+        {{((stat.nbrVotes / stat.nbrSubscriptions) * 100) | number:'1.0-0'}} %
+      </td>
+      <td>
+        {{stat.nbrVotes}} votes
+      </td>
+    </tr>
+    <tr class="dark">
+      <td>
+        Votes blancs
+      </td>
+      <td>
+        {{((stat.nbrWhiteVotes / stat.nbrSubscriptions) * 100) | number:'1.0-0'}} %
+      </td>
+      <td>
+        {{stat.nbrWhiteVotes}} votes
+      </td>
+    </tr>
+    <tr class="light">
+      <td>
+        Votes nuls
+      </td>
+      <td>
+        {{((stat.nbrNullVotes / stat.nbrSubscriptions) * 100) | number:'1.0-0'}} %
+      </td>
+      <td>
+        {{stat.nbrNullVotes}} votes
+      </td>
+    </tr>
+  </tbody>
+</table>
