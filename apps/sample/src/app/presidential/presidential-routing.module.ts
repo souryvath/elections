@@ -1,3 +1,4 @@
+import { PresidentialCandidateSheetComponent } from './containers/presidential-candidate-sheet/presidential-candidate-sheet.component';
 import { PresidentialCandidateHomeComponent } from './containers/presidential-candidate-home/presidential-candidate-home.component';
 import { PresidentialSheetComponent } from './containers/presidential-sheet/presidential-sheet.component';
 import { PresidentialComponent } from './containers/presidential/presidential.component';
@@ -18,7 +19,13 @@ export const routes: Routes = [
       {
         path: 'candidats',
         component: PresidentialCandidateHomeComponent,
-        data: { breadcrumb: 'Candidats' }
+        data: { breadcrumb: 'Candidats' },
+        children: [
+          {
+            path: ':candidate',
+            component: PresidentialCandidateSheetComponent,
+          }
+        ]
       },
       {
         path: ':region',

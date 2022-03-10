@@ -11,12 +11,27 @@ export class PresidentialListLinkComponent implements OnInit {
   @Input() list;
   @Input() type;
   @Input() place;
+  NUMBER_RESULT = 25;
+  numberResults = this.NUMBER_RESULT;
+  labelDisplayMore = 'voir plus';
+  icon = 'keyboard_arrow_down'
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.place);
     this.list.sort((a, b) => (a.slug > b.slug) ? 1 : -1);
+  }
+
+  displayMore(): void {
+    if (this.numberResults === this.NUMBER_RESULT) {
+      this.numberResults = this.list.length;
+      this.labelDisplayMore = 'voir moins';
+      this.icon = 'keyboard_arrow_up';
+    } else {
+      this.numberResults = this.NUMBER_RESULT;
+      this.labelDisplayMore = 'voir plus';
+      this.icon = 'keyboard_arrow_down';
+    }
   }
 
 }

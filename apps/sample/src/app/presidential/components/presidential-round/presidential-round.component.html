@@ -5,7 +5,7 @@
     </ng-container>
     <ng-container *ngIf="round === '2'">
       second
-    </ng-container> tour de l'élection présidentielle 2022 en {{result.place.name | uppercaseFirst}} :
+    </ng-container> tour de l'élection présidentielle 2022 en {{result.place.name}} :
     <ng-container *ngIf="round === '1'">
       1er tour
     </ng-container>
@@ -20,7 +20,7 @@
     </ng-container>
     <ng-container *ngIf="round === '2'">
       second
-    </ng-container>  tour de l'élection présidentielle 2022 en {{result.place.name | uppercaseFirst}}
+    </ng-container>  tour de l'élection présidentielle 2022 en {{result.place.name}}
     ({{result.place.code | slice:
     3}}) :
     <ng-container *ngIf="round === '1'">
@@ -37,7 +37,7 @@
     </ng-container>
     <ng-container *ngIf="round === '2'">
       second
-    </ng-container>  tour de l'élection présidentielle 2022 à {{result.place.name | uppercaseFirst}}
+    </ng-container>  tour de l'élection présidentielle 2022 à {{result.place.name}}
 
     <ng-container *ngIf="result.place.postalCode">
       ({{result.place.postalCode}})
@@ -69,12 +69,21 @@
 </div>
 <div class="content result">
   <app-presidential-result [result]="result"></app-presidential-result>
+  <ng-container *ngIf="isBrowser">
+    <div class="content button">
+      <div class="label">
+        Partager le résultat des votes {{result.place.name}}
+      </div>
+      <share-buttons [theme]="'modern-dark'" [include]="['facebook','twitter','messenger','whatsapp','email']"
+        [show]="8" [autoSetMeta]="false"></share-buttons>
+    </div>
+  </ng-container>
   <app-presidential-table [result]="result"></app-presidential-table>
   <ng-container *ngIf="round === '2'">
     <ng-container *ngIf="type !== 'France'">
       <p>
         Lors du <strong>second tour</strong> de cette <strong>élection
-          présidentielle</strong> en <strong>{{result.place.name | uppercaseFirst}}
+          présidentielle</strong> en <strong>{{result.place.name}}
           <ng-container *ngIf="type === 'departement'">
             ({{result.place.code | slice: 3}})
           </ng-container>
@@ -89,20 +98,28 @@
         a réuni {{result.candidates[1].pctVotesOnSubscriptions}}% des voix ({{result.candidates[1].nbrVotes | number: "":"fr-FR"}} votes).
       </p>
       <p [class.hidden]="isHidden">
-        Le <strong>taux d'abstention</strong> en <strong>{{result.place.name | uppercaseFirst}}
+        Le <strong>taux d'abstention</strong> en <strong>{{result.place.name}}
           <ng-container *ngIf="type === 'departement'">
             ({{result.place.code | slice: 3}})
           </ng-container>
         </strong> pour ce 2nd tour de l’élection présidentielle s'élève à {{result.pctAbsentOnSubscriptions}}%.<br>
 
-        Le <strong>taux de participation</strong> en <strong>{{result.place.name | uppercaseFirst}}
+        Le <strong>taux de participation</strong> en <strong>{{result.place.name}}
           <ng-container *ngIf="type === 'departement'">
             ({{result.place.code | slice: 3}})
           </ng-container>
-        </strong> au 2ème tour des élections est de {{result.pctVotesOnSubscriptions}}%, (supérieur|inférieur) à
-        celui du 1er tour (XX,XX%).<br>
+        </strong> au 2ème tour des élections est de {{result.pctVotesOnSubscriptions}}%,
+        <ng-container *ngIf="result.pctVotesOnSubscriptions > resultBefore.pctVotesOnSubscriptions">
+          supérieur
+        </ng-container>
+        <ng-container *ngIf="result.pctVotesOnSubscriptions < resultBefore.pctVotesOnSubscriptions">
+          inférieur
+        </ng-container>
 
-        Parmi les électeurs en {{result.place.name | uppercaseFirst}}, {{result.pctWhiteVotesOnSubscriptions}}% ont
+        à
+        celui du 1er tour ({{resultBefore.pctVotesOnSubscriptions}}%).<br>
+
+        Parmi les électeurs en {{result.place.name}}, {{result.pctWhiteVotesOnSubscriptions}}% ont
         <strong>voté blanc</strong> ({{result.nbrWhiteVotes | number: "":"fr-FR"}} personnes).
       </p>
     </ng-container>
@@ -124,8 +141,15 @@
         {{result.pctAbsentOnSubscriptions}}%.<br>
 
         Le <strong>taux de participation</strong> en France au 2ème tour des élections est de
-        {{result.pctVotesOnSubscriptions}}%, (supérieur|inférieur) à
-        celui du 1er tour (XX,XX%).<br>
+        {{result.pctVotesOnSubscriptions}}%,       <ng-container *ngIf="result.pctVotesOnSubscriptions > resultBefore.pctVotesOnSubscriptions">
+          supérieur
+        </ng-container>
+        <ng-container *ngIf="result.pctVotesOnSubscriptions < resultBefore.pctVotesOnSubscriptions">
+          inférieur
+        </ng-container>
+
+        à
+        celui du 1er tour ({{resultBefore.pctVotesOnSubscriptions}}%).<br>
         Parmi les électeurs en France, {{result.pctWhiteVotesOnSubscriptions}}% ont <strong>voté blanc</strong>
         ({{result.nbrWhiteVotes | number: "":"fr-FR"}} personnes).
       </p>
@@ -135,7 +159,7 @@
   </ng-container>
   <ng-container *ngIf="round === '1'">
     <p>
-      <strong>Le 1er tour de l'élection présidentielle en {{result.place.name | uppercaseFirst}}
+      <strong>Le 1er tour de l'élection présidentielle en {{result.place.name}}
         <ng-container *ngIf="type === 'departement'">
           ({{result.place.code | slice: 3}})
         </ng-container>
@@ -164,7 +188,7 @@
       qui comptabilise {{result.candidates[3].pctVotesOnSubscriptions}}% des voix soit
       {{result.candidates[3].nbrVotes | number: "":"fr-FR"}} votes.<br>
 
-      Les <strong>électeurs de {{result.place.name | uppercaseFirst}}</strong> ont
+      Les <strong>électeurs de {{result.place.name}}</strong> ont
       ensuite voté pour
       <ng-container *ngFor="let candidate of result.candidates | slice: 4; let i = index">
         <ng-container *ngIf="i !== (result.candidates | slice: 4).length - 1">
@@ -181,7 +205,7 @@
         </ng-container>
       </ng-container><br>
       Le <strong>taux d'abstention</strong> pour <strong>ce premier tour de la Présidentielle 2022 en
-        {{result.place.name | uppercaseFirst}} <ng-container *ngIf="type === 'departement'">
+        {{result.place.name}} <ng-container *ngIf="type === 'departement'">
           ({{result.place.code | slice: 3}})
         </ng-container>
         <ng-container *ngIf="type === 'city'">
@@ -196,7 +220,7 @@
   </ng-container>
 
   <div class="button">
-    <button class="p-button p-button-primary" (click)="displayMore()">
+    <button class="p-button p-button-more" (click)="displayMore()">
       {{labelDisplayMore}}
       <span class="material-icons">
         {{icon}}

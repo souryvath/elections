@@ -21,7 +21,7 @@
     <ng-container *ngIf="obs.result as resultObs">
       <ng-container *ngIf="resultObs.value as result">
         <div class="content" *ngIf="result | find : '2'">
-          <app-presidential-round [result]="result | find : '2'" [type]="type" [round]="'2'">
+          <app-presidential-round [result]="result | find : '2'" [resultBefore]="result | find : '1'" [type]="type" [round]="'2'">
           </app-presidential-round>
         </div>
         <div class="content" *ngIf="result | find : '1'">

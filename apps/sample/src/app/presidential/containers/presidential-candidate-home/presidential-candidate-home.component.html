@@ -2,15 +2,68 @@
 <div class="container">
   <div class="cs-title">
     <h1>
-      Résultats d’Emmanuel Macron pour l'élection présidentielle 2022 en France : 1er et 2ème tour
+      Résultats des candidats pour l'élection présidentielle 2022 en France : 1er et 2ème tour
     </h1>
   </div>
   <div class="content">
-    Consultez dès maintenant les résultats de l'élection présidentielle 2022 du candidat Emmanuel Macron pour le (1er et
-    2nd tour|1er tour) en France et découvrez les résultats des votes et suffrages de ses électeurs par région et par
-    département.
+    Consultez dès maintenant les <strong>résultats</strong> des candidats de l'<strong>élection présidentielle 2022</strong>
+    pour le premier et second tour en <strong>France</strong> et découvrez les résultats des votes des électeurs par <strong>région</strong> et par <strong>département</strong>.
   </div>
   <div class="content">
     <app-presidential-search></app-presidential-search>
   </div>
+  <div class="cs-title">
+    <h2>
+      Tous les résultats par candidat
+    </h2>
+  </div>
+  <div class="content result">
+    <div class="label">
+      Tri par nombre décroissant de parrainages obtenus
+    </div>
+    <ul>
+      <li *ngFor="let item of candidates; let i = index;" class="candidate" [class.line]=" i !== candidates.length - 1" >
+        <div class="left">
+          <span class="dot" [style.background-color]="item.color"></span>
+          <strong class="name">{{item.name}}</strong>
+          <div>
+            {{item.party}}
+          </div>
+        </div>
+        <div class="right">
+          <a href="candidats/{{item.slug}}" title="'résultats présidentielle 2022 {{item.name}} par département et par région'" class="p-button p-button-primary">
+            Voir les résultats
+          </a>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+  <div class="content result" *ngIf="listRegions">
+    <!-- Affiche toutes les regions -->
+    <app-presidential-list-link [title]="'Résultats de l\'élection présidentielle 2022 par région'" [list]="listRegions"
+      [type]="'region'" [place]="region?.name">
+    </app-presidential-list-link>
+  </div>
+  <div class="content result" *ngIf="listDepartements">
+    <!-- Affiche les départements dans la région selectionne -->
+    <app-presidential-list-link [title]="'Résultats de l\'élection présidentielle 2022 par département'"
+      [list]="listDepartements">
+    </app-presidential-list-link>
+  </div>
+  <div class="content result">
+    <ng-container *ngIf=" {
+      cities: (listCity$ | loading | async)
+      } as obs">
+      <ng-container *ngIf="obs.cities as citiesObs">
+        <ng-container *ngIf="citiesObs.value as cities">
+          <app-presidential-list-link
+            [title]="'Résultats de l’élection présidentielle 2022 par ville et par commune'"
+            [list]="cities">
+          </app-presidential-list-link>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+
 </div>

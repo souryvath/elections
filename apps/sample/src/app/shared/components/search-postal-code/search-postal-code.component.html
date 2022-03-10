@@ -4,7 +4,7 @@
   </p>
   <div class="form">
     <div class="autocomplete" >
-      <ng-container *ngIf="type === 'parrainages-presidentielle-2022/candidats' || 'parrainages-presidentielle-2022/departements'">
+      <ng-container *ngIf="type === 'parrainages-presidentielle-2022/candidats' || type === 'parrainages-presidentielle-2022/departements'">
         <div id="autocomplete-input">
           <p-autoComplete [inputId]="'autocomplete-input'"
           [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [multiple]="false"

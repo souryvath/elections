@@ -37,7 +37,7 @@
   }
 }
 
-.p-button-primary {
+.p-button-primary, .p-button-more {
   border-radius: $border-radius-input !important;
 }
 
@@ -72,6 +72,19 @@
 
 .p-button-primary {
   background: $main-color !important;
+  border: 1px solid $main-color !important;
+  &.p-button-outlined {
+    background-color: #ffffff !important;
+    color: $main-color !important;
+  }
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.p-button-more {
+  background: #ffffff !important;
+  color: $main-color !important;
   border: 1px solid $main-color !important;
   &.p-button-outlined {
     background-color: #ffffff !important;
