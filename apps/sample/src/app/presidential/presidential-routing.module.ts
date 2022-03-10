@@ -1,7 +1,9 @@
+import { PresidentialCandidateHomeComponent } from './containers/presidential-candidate-home/presidential-candidate-home.component';
 import { PresidentialSheetComponent } from './containers/presidential-sheet/presidential-sheet.component';
 import { PresidentialComponent } from './containers/presidential/presidential.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { PresidentialHomeComponent } from './containers/presidential-home/presidential-home.component';
 
 export const routes: Routes = [
   {
@@ -10,8 +12,13 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: PresidentialSheetComponent,
+        component: PresidentialHomeComponent,
         data: { breadcrumb: 'Election présidentielle 2022' }
+      },
+      {
+        path: 'candidats',
+        component: PresidentialCandidateHomeComponent,
+        data: { breadcrumb: 'Candidats' }
       },
       {
         path: ':region',

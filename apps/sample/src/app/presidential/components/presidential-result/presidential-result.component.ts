@@ -8,8 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PresidentialResultComponent implements OnInit {
 
   @Input() result;
-  @Input() stat;
   numberResults = 5;
+  labelDisplayMore = 'afficher tous les résultats';
+  icon = 'keyboard_arrow_down'
 
   constructor() { }
 
@@ -19,10 +20,13 @@ export class PresidentialResultComponent implements OnInit {
   displayMore(): void {
     if (this.numberResults === 5) {
       this.numberResults = this.result.length;
+      this.labelDisplayMore = 'afficher moins de résultats';
+      this.icon = 'keyboard_arrow_up';
     } else {
       this.numberResults = 5;
+      this.labelDisplayMore = 'afficher tous les résultats';
+      this.icon = 'keyboard_arrow_down';
     }
-
   }
 
 }

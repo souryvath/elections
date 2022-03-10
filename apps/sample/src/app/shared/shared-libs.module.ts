@@ -8,8 +8,7 @@ import { LoadingPipe } from './pipes/loading.pipe';
 import { WordFirstUppercasePipe } from './pipes/word-first-uppercase.pipe';
 import { WordSeoPipe } from './pipes/word-seo.pipe';
 import { NgReplacePipeModule } from 'angular-pipes';
-import { MomentModule } from 'ngx-moment';
-import { registerLocaleData } from '@angular/common';
+import { FindPipe } from './pipes/find.pipe';
 @NgModule({
   declarations: [
     WordFirstUppercasePipe,
@@ -17,7 +16,8 @@ import { registerLocaleData } from '@angular/common';
     IncludePipe,
     NumberFixPipe,
     SortArrayPipe,
-    WordSeoPipe
+    WordSeoPipe,
+    FindPipe
   ],
   providers: [
     DatePipe,
@@ -37,6 +37,7 @@ import { registerLocaleData } from '@angular/common';
     NgReplacePipeModule,
     NumberFixPipe,
     SortArrayPipe,
+    FindPipe
   ],
   imports: [
     CommonModule,

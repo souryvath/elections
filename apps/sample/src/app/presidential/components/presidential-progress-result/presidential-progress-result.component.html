@@ -1,8 +1,8 @@
 <div class="progressResult">
   <div class="left">
     <div class="name">
-      <span class="dot"></span>
-      <strong>{{item.name}}</strong>
+      <span class="dot" [style.background-color]="item.color"></span>
+      <strong>{{item.firstName}} {{item.lastName}}</strong>
     </div>
     <div class="pa">
       {{item.party}}
@@ -10,13 +10,13 @@
   </div>
   <div class="right">
     <div class="percent">
-      {{item.percent}}%
+      {{item.pctVotesOnSubscriptions}}%
     </div>
     <div class="numberVotes">
-      {{item.numberVotes}} votes
+      {{item.nbrVotes | number: "":"fr-FR"}} votes
     </div>
   </div>
 </div>
 <div class="progress">
-  <div [style.background-color]="item.color" class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50"></div>
+  <div [style.background-color]="item.color" class="progress-bar" role="progressbar" [style.width]="item.pctVotesOnSubscriptions + '%'" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 </div>

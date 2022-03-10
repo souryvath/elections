@@ -6,6 +6,5 @@ export interface PostalCode extends Document {
   readonly insee?: string;
   readonly slug?: string;
   readonly location?: Location;
-  readonly departementSlug?: string;
-  readonly regionSlug?: string;
+  readonly departement?: Object;
 }

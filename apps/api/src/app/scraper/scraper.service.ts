@@ -62,46 +62,10 @@ export class ScraperService {
                 coordinates: [longitude ? longitude : 0, latitude ? latitude : 0]
               },
               slug: `${slugify(slug, { lower: true, remove: /[*+~.()'"!:@/]/g })}`,
-              regionSlug: departement?.region.slug,
-              departementSlug: departement?.slug,
+              departement,
               longitude: longitude ? longitude : 0,
               latitude: latitude ? latitude : 0,
               insee: element[0]
-            };
-            this.postalCodeService.addPostalCode(postalCode);
-          });
-          FRANCE_DEPS.forEach((item) => {
-            const region = FRANCE_REGIONS_LIST.find((element) => element.slug === item.region.slug);
-            const postalCode = {
-              name: item.name,
-              postalCode: item.code.substring(3),
-              location: {
-                type: 'Point',
-                coordinates: [0, 0]
-              },
-              slug: item.slug,
-              regionSlug: region?.slug,
-              departementSlug: null,
-              longitude: null,
-              latitude: null,
-              insee: null
-            };
-            this.postalCodeService.addPostalCode(postalCode);
-          });
-          FRANCE_REGIONS_LIST.forEach((item) => {
-            const postalCode = {
-              name: item.name,
-              postalCode: null,
-              location: {
-                type: 'Point',
-                coordinates: [0, 0]
-              },
-              slug: item.slug,
-              regionSlug: null,
-              departementSlug: null,
-              longitude: null,
-              latitude: null,
-              insee: null
             };
             this.postalCodeService.addPostalCode(postalCode);
           });

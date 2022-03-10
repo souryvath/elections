@@ -55,7 +55,6 @@ export class PostalCodeService {
   }
 
   async findPostalCodesByGeolocation(postalCode: string, long: string, lat: string): Promise<PostalCode[]> {
-    const postalCodesTmp = await this.getPostalCodes(postalCode);
     const gquery = [
       {
         $geoNear: {
@@ -86,7 +85,7 @@ export class PostalCodeService {
       {
         $replaceRoot: { newRoot: "$document" }
       },
-      { $limit: postalCodesTmp.length + 6 }
+      { $limit: 25 }
     ] as PipelineStage[];
     const postalCodes = await this.postalCodeModel.aggregate(gquery).exec();
     return this.removeDuplicatesBy(x => x.name, postalCodes.sort((a, b) => (a.name > b.name) ? 1 : -1));

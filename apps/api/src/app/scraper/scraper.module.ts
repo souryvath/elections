@@ -1,3 +1,7 @@
+import { ScraperPresidentialNationalService } from './scraper-presidential-national.service';
+import { ScraperPresidentialCityService } from './scraper-presidential-city.service';
+import { ScraperPresidentialDepartementService } from './scraper-presidential-departement.service';
+import { PresidentialModule } from './../presidential/presidential.module';
 import { SponsorshipModule } from './../sponsorship/sponsorship.module';
 import { PostalCodeModule } from './../postal-code/postal-code.module';
 import { ScraperService } from './scraper.service';
@@ -8,12 +12,14 @@ import { ScraperProcessor } from './scraper.processor';
 import { environment } from '../../environments/environment';
 import { HttpModule } from '@nestjs/axios';
 import { ScraperSponsorshipService } from './scraper-sponsorship.service';
+import { ScraperPresidentialRegionService } from './scraper-presidential-region.service';
 
 @Module({
   imports: [
     HttpModule,
     PostalCodeModule,
     SponsorshipModule,
+    PresidentialModule,
     BullModule.registerQueueAsync({
       name: 'scraper',
       useFactory: () => ({
@@ -32,7 +38,11 @@ import { ScraperSponsorshipService } from './scraper-sponsorship.service';
   providers: [
     ScraperService,
     ScraperSponsorshipService,
-    ScraperProcessor
+    ScraperProcessor,
+    ScraperPresidentialRegionService,
+    ScraperPresidentialCityService,
+    ScraperPresidentialDepartementService,
+    ScraperPresidentialNationalService
   ]
 })
 export class ScraperModule { }

@@ -39,6 +39,7 @@ export class SearchPostalCodeComponent implements OnInit {
   }
 
   getKey($event) {
+    // A RETRAVAILLER
     if ($event.key === 'Enter') {
       this.selectedPlaceEvent.emit(this.city);
     }

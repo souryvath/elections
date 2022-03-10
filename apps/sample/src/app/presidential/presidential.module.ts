@@ -15,6 +15,9 @@ import { LayoutModule } from '../layout/layout.module';
 import { PresidentialHomeComponent } from './containers/presidential-home/presidential-home.component';
 import { PresidentialResultComponent } from './components/presidential-result/presidential-result.component';
 import { PresidentialRoundComponent } from './components/presidential-round/presidential-round.component';
+import { PresidentialCandidateHomeComponent } from './containers/presidential-candidate-home/presidential-candidate-home.component';
+import { PresidentialCandidateSheetComponent } from './containers/presidential-candidate-sheet/presidential-candidate-sheet.component';
+import { PresidentialCandidateMapComponent } from './containers/presidential-candidate-map/presidential-candidate-map.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { PresidentialRoundComponent } from './components/presidential-round/pres
     PresidentialProgressResultComponent,
     PresidentialHomeComponent,
     PresidentialResultComponent,
-    PresidentialRoundComponent
+    PresidentialRoundComponent,
+    PresidentialCandidateHomeComponent,
+    PresidentialCandidateSheetComponent,
+    PresidentialCandidateMapComponent
   ],
   imports: [
     CommonModule,

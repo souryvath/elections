@@ -4,7 +4,7 @@
   </p>
   <div class="form">
     <div class="autocomplete" >
-      <ng-container *ngIf="type === 'parrainages-presidentielle-2022/candidats'">
+      <ng-container *ngIf="type === 'parrainages-presidentielle-2022/candidats' || 'parrainages-presidentielle-2022/departements'">
         <div id="autocomplete-input">
           <p-autoComplete [inputId]="'autocomplete-input'"
           [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [multiple]="false"
@@ -25,27 +25,28 @@
           [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)"
           (onSelect)="selectPlace($event)" field="name">
           <ng-template let-postalCode pTemplate="item">
-            <ng-container *ngIf="postalCode.departementSlug && postalCode.regionSlug">
-              <a [href]="type + '/' + postalCode.regionSlug + '/' + postalCode.departementSlug + '/' + postalCode.slug">
-                {{postalCode.name}}
-              <ng-container *ngIf="postalCode.postalCode">
-                ({{postalCode.postalCode}})
+            <ng-container *ngIf="postalCode.place.departement">
+              <a [href]="type + '/' + postalCode.place.departement.region.slug + '/' + postalCode.place.departement.slug + '/' + postalCode.place.slug">
+                {{postalCode.place.name}}
+              <ng-container *ngIf="postalCode.place.postalCode">
+                ({{postalCode.place.postalCode}})
               </ng-container>
               </a>
             </ng-container>
-            <ng-container *ngIf="postalCode.regionSlug && !postalCode.departementSlug">
-              <a [href]="type + '/' + postalCode.regionSlug + '/' + postalCode.slug">
-                {{postalCode.name}}
-              <ng-container *ngIf="postalCode.postalCode">
-                ({{postalCode.postalCode}})
+            <ng-container *ngIf="postalCode.place.region && !postalCode.place.departement">
+              <a [href]="type + '/' + postalCode.place.region.slug + '/' + postalCode.place.slug">
+                {{postalCode.place.name}}
+              <ng-container *ngIf="postalCode.place.postalCode">
+                ({{postalCode.place.postalCode}})
               </ng-container>
+              ({{postalCode.place.code | slice: 3}})
               </a>
             </ng-container>
-            <ng-container *ngIf="!postalCode.regionSlug && !postalCode.departementSlug">
-              <a [href]="type + '/' + postalCode.slug">
-                {{postalCode.name}}
-              <ng-container *ngIf="postalCode.postalCode">
-                ({{postalCode.postalCode}})
+            <ng-container *ngIf="!postalCode.place.region && !postalCode.place.departement">
+              <a [href]="type + '/' + postalCode.place.slug">
+                {{postalCode.place.name}}
+              <ng-container *ngIf="postalCode.place.postalCode">
+                ({{postalCode.place.postalCode}})
               </ng-container>
               </a>
             </ng-container>

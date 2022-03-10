@@ -15,7 +15,7 @@
         100%
       </td>
       <td>
-        {{stat.nbrSubscriptions}} inscrits
+        {{result.nbrSubscriptions | number: "":"fr-FR"}} inscrits
       </td>
     </tr>
     <tr class="light">
@@ -23,10 +23,10 @@
         Taux d'abstention
       </td>
       <td>
-        {{((stat.pctAbsent / stat.nbrSubscriptions) * 100) | number:'1.0-0'}} %
+        {{result.pctAbsentOnSubscriptions}}%
       </td>
       <td>
-        {{stat.pctAbsent}} votes
+        {{result.nbrAbsents | number: "":"fr-FR"}} votes
       </td>
     </tr>
     <tr class="dark">
@@ -34,10 +34,10 @@
         Taux de participation
       </td>
       <td>
-        {{((stat.pctParticipation / stat.nbrSubscriptions) * 100) | number:'1.0-0'}} %
+        {{result.pctVotesOnSubscriptions}}%
       </td>
       <td>
-        {{stat.pctParticipation}} votes
+        {{result.nbrVotes | number: "":"fr-FR"}} votes
       </td>
     </tr>
     <tr class="light">
@@ -45,10 +45,10 @@
         Votes exprimés
       </td>
       <td>
-        {{((stat.nbrVotes / stat.nbrSubscriptions) * 100) | number:'1.0-0'}} %
+        {{result.nbrExprimatedVotesOnSubscriptions}}%
       </td>
       <td>
-        {{stat.nbrVotes}} votes
+        {{result.nbrExprimatedVotes | number: "":"fr-FR"}} votes
       </td>
     </tr>
     <tr class="dark">
@@ -56,10 +56,10 @@
         Votes blancs
       </td>
       <td>
-        {{((stat.nbrWhiteVotes / stat.nbrSubscriptions) * 100) | number:'1.0-0'}} %
+        {{result.pctWhiteVotesOnSubscriptions}} %
       </td>
       <td>
-        {{stat.nbrWhiteVotes}} votes
+        {{result.nbrWhiteVotes | number: "":"fr-FR"}} votes
       </td>
     </tr>
     <tr class="light">
@@ -67,10 +67,10 @@
         Votes nuls
       </td>
       <td>
-        {{((stat.nbrNullVotes / stat.nbrSubscriptions) * 100) | number:'1.0-0'}} %
+        {{result.nbrNullVotesOnSubscriptions}}%
       </td>
       <td>
-        {{stat.nbrNullVotes}} votes
+        {{result.nbrNullVotes | number: "":"fr-FR"}} votes
       </td>
     </tr>
   </tbody>

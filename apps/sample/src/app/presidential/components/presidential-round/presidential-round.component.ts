@@ -7,17 +7,25 @@ import { Component, Input } from '@angular/core';
 })
 export class PresidentialRoundComponent {
 
-  @Input() stat;
   @Input() result;
-  @Input() place;
   @Input() type;
   @Input() round;
+  labelDisplayMore = 'voir plus';
+  icon = 'keyboard_arrow_down'
 
   isHidden = true;
 
-  displayMore() {
+  displayMore(): void {
+    if (this.isHidden === true) {
+      this.labelDisplayMore = 'voir moins';
+      this.icon = 'keyboard_arrow_up';
+    } else {
+      this.labelDisplayMore = 'voir plus';
+      this.icon = 'keyboard_arrow_down';
+    }
     this.isHidden = !this.isHidden;
   }
+
 
 
 }

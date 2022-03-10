@@ -1,6 +1,11 @@
 <div class="cs-title">
   <h2 *ngIf="type === 'region'">
-    Résultats du second tour de l'élection présidentielle 2022 en {{place.name | uppercaseFirst}} :
+    Résultats du     <ng-container *ngIf="round === '1'">
+      premier
+    </ng-container>
+    <ng-container *ngIf="round === '2'">
+      second
+    </ng-container> tour de l'élection présidentielle 2022 en {{result.place.name | uppercaseFirst}} :
     <ng-container *ngIf="round === '1'">
       1er tour
     </ng-container>
@@ -10,7 +15,13 @@
 
   </h2>
   <h2 *ngIf="type === 'departement'">
-    Résultats du second tour de l'élection présidentielle 2022 en {{place.name | uppercaseFirst}} ({{place.code | slice:
+    Résultats du <ng-container *ngIf="round === '1'">
+      premier
+    </ng-container>
+    <ng-container *ngIf="round === '2'">
+      second
+    </ng-container>  tour de l'élection présidentielle 2022 en {{result.place.name | uppercaseFirst}}
+    ({{result.place.code | slice:
     3}}) :
     <ng-container *ngIf="round === '1'">
       1er tour
@@ -21,8 +32,32 @@
 
   </h2>
   <h2 *ngIf="type === 'city'">
-    Résultats du second tour de l'élection présidentielle 2022 à {{place.name | uppercaseFirst}} ({{place.postalCode}})
+    Résultats du <ng-container *ngIf="round === '1'">
+      premier
+    </ng-container>
+    <ng-container *ngIf="round === '2'">
+      second
+    </ng-container>  tour de l'élection présidentielle 2022 à {{result.place.name | uppercaseFirst}}
+
+    <ng-container *ngIf="result.place.postalCode">
+      ({{result.place.postalCode}})
+    </ng-container>
     :
+    <ng-container *ngIf="round === '1'">
+      1er tour
+    </ng-container>
+    <ng-container *ngIf="round === '2'">
+      2nd tour
+    </ng-container>
+
+  </h2>
+  <h2 *ngIf="type === 'France'">
+    Résultats du <ng-container *ngIf="round === '1'">
+      premier
+    </ng-container>
+    <ng-container *ngIf="round === '2'">
+      second
+    </ng-container>  tour de l'élection présidentielle 2022 en France :
     <ng-container *ngIf="round === '1'">
       1er tour
     </ng-container>
@@ -33,80 +68,138 @@
   </h2>
 </div>
 <div class="content result">
-  <app-presidential-result [result]="result" [stat]="stat"></app-presidential-result>
-  <app-presidential-table [stat]="stat"></app-presidential-table>
+  <app-presidential-result [result]="result"></app-presidential-result>
+  <app-presidential-table [result]="result"></app-presidential-table>
   <ng-container *ngIf="round === '2'">
-    <p>
-      Lors du <strong>second tour</strong> de cette <strong>élection
-        présidentielle</strong> en <strong>{{place.name | uppercaseFirst}}
-        <ng-container *ngIf="type === 'departement'">
-          ({{place.code | slice: 3}})
-        </ng-container>
-      </strong>
-      ,
-      Emmanuel Macron arrive en tête des voix. Emmanuel Macron (La République en Marche !) a
-      récolté le plus grand nombre de voix avec 66,66% des suffrages (321 votes) face à Marine Le Pen (Front National)
-      qui
-      a réuni 44,44% des voix (54 votes).
-    </p>
-    <p [class.hidden]="isHidden">
-      Le <strong>taux d'abstention</strong> en <strong>{{place.name | uppercaseFirst}}
-        <ng-container *ngIf="type === 'departement'">
-          ({{place.code | slice: 3}})
-        </ng-container>
-      </strong> pour ce 2nd tour de l’élection présidentielle s’élève à 24,71%.<br>
+    <ng-container *ngIf="type !== 'France'">
+      <p>
+        Lors du <strong>second tour</strong> de cette <strong>élection
+          présidentielle</strong> en <strong>{{result.place.name | uppercaseFirst}}
+          <ng-container *ngIf="type === 'departement'">
+            ({{result.place.code | slice: 3}})
+          </ng-container>
+        </strong>
+        ,
+        {{result.candidates[0].firstName}} {{result.candidates[0].lastName}} arrive en tête des voix.
+        {{result.candidates[0].firstName }} {{result.candidates[0].lastName}} ({{result.candidates[0].party}}) a
+        récolté le plus grand nombre de voix avec {{result.candidates[0].pctVotesOnSubscriptions}}% des suffrages
+        ({{result.candidates[0].nbrVotes | number: "":"fr-FR"}} votes) face à {{result.candidates[1].firstName}}
+        {{result.candidates[1].lastName}} ({{result.candidates[1].party}})
+        qui
+        a réuni {{result.candidates[1].pctVotesOnSubscriptions}}% des voix ({{result.candidates[1].nbrVotes | number: "":"fr-FR"}} votes).
+      </p>
+      <p [class.hidden]="isHidden">
+        Le <strong>taux d'abstention</strong> en <strong>{{result.place.name | uppercaseFirst}}
+          <ng-container *ngIf="type === 'departement'">
+            ({{result.place.code | slice: 3}})
+          </ng-container>
+        </strong> pour ce 2nd tour de l’élection présidentielle s'élève à {{result.pctAbsentOnSubscriptions}}%.<br>
 
-      Le <strong>taux de participation</strong> en <strong>{{place.name | uppercaseFirst}}
-        <ng-container *ngIf="type === 'departement'">
-          ({{place.code | slice: 3}})
-        </ng-container>
-      </strong> au 2ème tour des élections est de 75,29%, (supérieur|inférieur) à
-      celui du 1er tour (XX,XX%).<br>
+        Le <strong>taux de participation</strong> en <strong>{{result.place.name | uppercaseFirst}}
+          <ng-container *ngIf="type === 'departement'">
+            ({{result.place.code | slice: 3}})
+          </ng-container>
+        </strong> au 2ème tour des élections est de {{result.pctVotesOnSubscriptions}}%, (supérieur|inférieur) à
+        celui du 1er tour (XX,XX%).<br>
 
-      Parmi les électeurs, XX,XX% ont <strong>voté blanc</strong> (XXX personnes) en {{place.name | uppercaseFirst}}.
-    </p>
+        Parmi les électeurs en {{result.place.name | uppercaseFirst}}, {{result.pctWhiteVotesOnSubscriptions}}% ont
+        <strong>voté blanc</strong> ({{result.nbrWhiteVotes | number: "":"fr-FR"}} personnes).
+      </p>
+    </ng-container>
+    <ng-container *ngIf="type === 'France'">
+      <p>
+        Lors du <strong>second tour</strong> de cette
+        <strong>élection présidentielle</strong>, {{result.candidates[0].firstName}} {{result.candidates[0].lastName}}
+        arrive en tête des voix en France et
+        devient le <strong>nouveau Président de la République</strong>.
+        {{result.candidates[0].firstName}} {{result.candidates[0].lastName}} ({{result.candidates[0].party}})
+        a récolté le plus grand nombre de voix avec {{result.candidates[0].pctVotesOnSubscriptions}}% des suffrages
+        ({{result.candidates[0].nbrVotes | number: "":"fr-FR"}} votes)
+        face à {{result.candidates[1].firstName}} {{result.candidates[1].lastName}} ({{result.candidates[1].party}})
+        qui a réuni {{result.candidates[1].pctVotesOnSubscriptions}}% des voix ({{result.candidates[1].nbrVotes | number: "":"fr-FR"}}
+        votes).
+      </p>
+      <p [class.hidden]="isHidden">
+        Le <strong>taux d'abstention</strong> en Francepour ce 2nd tour de l'élection présidentielle s'élève à
+        {{result.pctAbsentOnSubscriptions}}%.<br>
+
+        Le <strong>taux de participation</strong> en France au 2ème tour des élections est de
+        {{result.pctVotesOnSubscriptions}}%, (supérieur|inférieur) à
+        celui du 1er tour (XX,XX%).<br>
+        Parmi les électeurs en France, {{result.pctWhiteVotesOnSubscriptions}}% ont <strong>voté blanc</strong>
+        ({{result.nbrWhiteVotes | number: "":"fr-FR"}} personnes).
+      </p>
+
+    </ng-container>
+
   </ng-container>
   <ng-container *ngIf="round === '1'">
     <p>
-      <strong>Le 1er tour de l'élection présidentielle en {{place.name | uppercaseFirst}}
+      <strong>Le 1er tour de l'élection présidentielle en {{result.place.name | uppercaseFirst}}
         <ng-container *ngIf="type === 'departement'">
-          ({{place.code | slice: 3}})
+          ({{result.place.code | slice: 3}})
         </ng-container>
-        <ng-container *ngIf="type === 'city'">
-          ({{place.postalCode}})
+        <ng-container *ngIf="type === 'city' && result.place.postalCode">
+          ({{result.place.postalCode}})
         </ng-container>
       </strong> a été remporté par
-      Emmanuel Macron (La République en Marche!), en tête des résultats ave
-      c XX,XX% des suffrages (XXX voix), suivi(e) en 2ème position du
-      candidat|de la candidate Marine Le Pen (Front National),
-      avec XX,XX% des votes (XXX voix).
+      {{result.candidates[0].firstName}} {{result.candidates[0].lastName}} ({{result.candidates[0].party}}), en tête
+      des résultats avec
+      {{result.candidates[0].pctVotesOnSubscriptions}}% des suffrages ({{result.candidates[0].nbrVotes | number: "":"fr-FR"}} voix),
+      suivi(e) en 2ème position
+      <ng-container *ngIf="result.candidates[0].gender === 'M'">
+        du candidat
+      </ng-container>
+      <ng-container *ngIf="result.candidates[0].gender === 'F'">
+        de la candidate
+      </ng-container> {{result.candidates[1].firstName}} {{result.candidates[1].lastName}}
+      ({{result.candidates[1].party}}),
+      avec {{result.candidates[1].pctVotesOnSubscriptions}}% des votes ({{result.candidates[1].nbrVotes | number: "":"fr-FR"}} voix).
     </p>
     <p [class.hidden]="isHidden">
-      En 3ème position arrive Jean-Luc Mélenchon (La France insoumise), avec XX,XX% des voix (XXX votes), puis François
-      Fillon (Les Républicains) qui comptabilise XX,XX% des voix soit XXX votes.<br>
+      En 3ème position arrive {{result.candidates[2].firstName }} {{result.candidates[2].lastName}}
+      ({{result.candidates[2].party}}),
+      avec {{result.candidates[2].pctVotesOnSubscriptions}}% des voix ({{result.candidates[2].nbrVotes | number: "":"fr-FR"}} votes), puis
+      {{result.candidates[3].firstName}} {{result.candidates[3].lastName}} ({{result.candidates[3].party}})
+      qui comptabilise {{result.candidates[3].pctVotesOnSubscriptions}}% des voix soit
+      {{result.candidates[3].nbrVotes | number: "":"fr-FR"}} votes.<br>
 
-      Les <strong>électeurs de {{place.name | uppercaseFirst}}</strong> ont
-      ensuite voté pour Nicolas Dupont-Aignan (Debout la France - XX,XX% - XXX votes),
-      Benoît Hamon (PS, 4,6%), François Asselineau (UPR, 1,28%), Jean Lassalle (Indépendant, 0,85%),
-      Philippe Poutou (NPA, 0,71%), Nathalie Arthaud (Lutte ouvrière, 0,52%)
-      et enfin Jacques Cheminade (Solidarité et progrès, 0,19%).<br>
-
-      Le <strong>taux d'abstention</strong> pour <strong>ce premier tour de la Présidentielle 2022 en {{place.name | uppercaseFirst}}      <ng-container *ngIf="type === 'departement'">
-        ({{place.code | slice: 3}})
-      </ng-container>
-      <ng-container *ngIf="type === 'city'">
-        ({{place.postalCode}})
-      </ng-container>
-    </strong> s'élève à XX,XX%, et XX,XX% des
+      Les <strong>électeurs de {{result.place.name | uppercaseFirst}}</strong> ont
+      ensuite voté pour
+      <ng-container *ngFor="let candidate of result.candidates | slice: 4; let i = index">
+        <ng-container *ngIf="i !== (result.candidates | slice: 4).length - 1">
+          {{candidate.firstName}} {{candidate.lastName}} ({{candidate.party}} - {{candidate.pctVotesOnSubscriptions}}%
+          - {{candidate.nbrVotes | number: "":"fr-FR"}} votes),
+        </ng-container>
+        <ng-container *ngIf="i === (result.candidates | slice: 4).length - 2">
+          {{candidate.firstName}} {{candidate.lastName}} ({{candidate.party}} - {{candidate.pctVotesOnSubscriptions}}%
+          - {{candidate.nbrVotes | number: "":"fr-FR"}} votes)
+        </ng-container>
+        <ng-container *ngIf="i === (result.candidates | slice: 4).length - 1">
+          et enfin {{candidate.firstName}} {{candidate.lastName}} ({{candidate.party}} -
+          {{candidate.pctVotesOnSubscriptions}}% - {{candidate.nbrVotes | number: "":"fr-FR"}} votes)
+        </ng-container>
+      </ng-container><br>
+      Le <strong>taux d'abstention</strong> pour <strong>ce premier tour de la Présidentielle 2022 en
+        {{result.place.name | uppercaseFirst}} <ng-container *ngIf="type === 'departement'">
+          ({{result.place.code | slice: 3}})
+        </ng-container>
+        <ng-container *ngIf="type === 'city'">
+          <ng-container *ngIf="result.place.postalCode">
+            ({{result.place.postalCode}})
+          </ng-container>
+        </ng-container>
+      </strong> s'élève à {{result.pctAbsentOnSubscriptions}}%, et {{result.pctWhiteVotesOnSubscriptions}}% des
       électeurs ont <strong>voté blanc</strong>.
     </p>
+
   </ng-container>
 
   <div class="button">
     <button class="p-button p-button-primary" (click)="displayMore()">
-      voir plus
+      {{labelDisplayMore}}
       <span class="material-icons">
-        keyboard_arrow_down
+        {{icon}}
       </span>
     </button>
 

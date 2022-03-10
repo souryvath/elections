@@ -3,19 +3,34 @@
 </h3>
 <div class="row list">
   <div *ngIf="type === 'region'">
-    <strong>FRANCE</strong>
+    <!-- <a title="résultats élection présidentielle 2022 France" href="resultats-presidentielle-2022">
+      <strong>France</strong>
+    </a> -->
   </div>
 
   <div *ngFor="let item of list" class="col-6">
     <ng-container *ngIf="item.region && item.region.slug">
+      <!-- Affichage Departement -->
 
-      <a href="resultats-presidentielle-2022/{{item.region.slug}}/{{item.slug}}"
+      <a title="résultats élection présidentielle 2022 {{item.name}} ({{item.code | slice: 3}})"
+        href="resultats-presidentielle-2022/{{item.region.slug}}/{{item.slug}}"
         [class.bold]="place === item?.name">{{item.name}}
         ({{item.code | slice: 3}})
       </a>
     </ng-container>
-    <ng-container *ngIf="!item.region">
-      <a href="resultats-presidentielle-2022/{{item.slug}}" [class.bold]="place === item?.name">{{item.name}}
+    <ng-container *ngIf="item.departementSlug && item.regionSlug">
+      <!-- Affichage Ville -->
+      <a *ngIf="item.postalCode" title="résultats élection présidentielle 2022 {{item.name}} ({{item.postalCode}})"
+        href="resultats-presidentielle-2022/{{item.regionSlug}}/{{item.departementSlug}}/{{item.slug}}">{{item.name}}
+      </a>
+      <a *ngIf="!item.postalCode" title="résultats élection présidentielle 2022 {{item.name}}"
+        href="resultats-presidentielle-2022/{{item.regionSlug}}/{{item.departementSlug}}/{{item.slug}}">{{item.name}}
+      </a>
+    </ng-container>
+    <ng-container *ngIf="!item.departement && !item.departementSlug && !item.regionSlug && !item.region">
+      <!-- Affichage Region -->
+      <a title="résultats élection présidentielle 2022 {{item.name}}" href="resultats-presidentielle-2022/{{item.slug}}"
+        [class.bold]="place === item?.name">{{item.name}}
       </a>
     </ng-container>
   </div>

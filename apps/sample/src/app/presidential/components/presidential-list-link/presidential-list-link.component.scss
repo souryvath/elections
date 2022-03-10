@@ -1,6 +1,6 @@
 .list {
   line-height: 1.8;
-  margin-top: 1em;
+  margin-top: 1.5em;
 }
 
 h3 {
@@ -10,6 +10,7 @@ h3 {
 a {
   text-decoration: none;
   color: #000000;
+
   &:hover {
     text-decoration: underline;
   }

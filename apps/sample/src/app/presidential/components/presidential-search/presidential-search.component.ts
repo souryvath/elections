@@ -1,3 +1,4 @@
+import { PresidentialService } from './../../services/presidential.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostalCodeService } from '../../../core/services/postal-code.service';
@@ -12,14 +13,14 @@ export class PresidentialSearchComponent implements OnInit {
   results: any[];
   constructor(
     public router: Router,
-    private readonly postalCodeService: PostalCodeService
+    private readonly presidentialService: PresidentialService
   ) { }
 
   ngOnInit(): void {
   }
 
   search($event): void {
-    this.postalCodeService.getPostalCodes($event.query).subscribe(data => {
+    this.presidentialService.getPlaces($event.query).subscribe(data => {
       this.results = data;
     });
   }

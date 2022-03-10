@@ -1,16 +1,26 @@
+import { ScraperPresidentialCityService } from './scraper-presidential-city.service';
+import { ScraperPresidentialDepartementService } from './scraper-presidential-departement.service';
 import { ScraperSponsorshipService } from './scraper-sponsorship.service';
 import { OnQueueActive, OnQueueCompleted, OnQueueFailed, Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 import { Job } from 'bull';
 import { ScraperService } from './scraper.service';
+import { ScraperPresidentialRegionService } from './scraper-presidential-region.service';
+import { PresidentialService } from '../presidential/presidential.service';
+import { ScraperPresidentialNationalService } from './scraper-presidential-national.service';
 
 @Processor('scraper')
 export class ScraperProcessor {
   private readonly logger = new Logger(this.constructor.name)
 
   constructor(
+    private readonly presidentialService: PresidentialService,
     private readonly scraperService: ScraperService,
     private readonly scraperSponsorshipService: ScraperSponsorshipService,
+    private readonly scraperPresidentialRegionService: ScraperPresidentialRegionService,
+    private readonly scraperPresidentialDepartementService: ScraperPresidentialDepartementService,
+    private readonly scraperPresidentialCityService: ScraperPresidentialCityService,
+    private readonly scraperPresidentialNationalService: ScraperPresidentialNationalService
   ) {}
 
   @OnQueueActive()
@@ -46,6 +56,30 @@ export class ScraperProcessor {
       await this.scraperSponsorshipService.scrapSponsorship().toPromise();
     } catch (error) {
       this.logger.error('Scraper Sponsorship Failed', error.stack)
+      throw error
+    }
+  }
+
+  @Process('scrapPresidential')
+  async scrapPresidential(): Promise<any> {
+    this.logger.log('Scraper Presidential Region Processing');
+    this.presidentialService.deleteAllPresidential();
+    try {
+      const execScraper = async () => {
+        await Promise.all([
+          this.scraperPresidentialNationalService.scrapPresidentialNational().toPromise(),
+          this.scraperPresidentialCityService.scrapPresidentialCity(2).toPromise(),
+          this.scraperPresidentialCityService.scrapPresidentialCity(1).toPromise(),
+          this.scraperPresidentialRegionService.scrapPresidentialRegion().toPromise(),
+          this.scraperPresidentialDepartementService.scrapPresidentialDepartement().toPromise()
+        ]);
+      };
+      execScraper().then(() => {
+        console.log(`SCRAPER PRESIDENTIAL DONE : ${new Date()}`);
+       });
+
+    } catch (error) {
+      this.logger.error('Scraper Presidential Region Failed', error.stack)
       throw error
     }
   }

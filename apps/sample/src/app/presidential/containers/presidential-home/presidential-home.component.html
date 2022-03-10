@@ -1,1 +1,61 @@
-<p>presidential-home works!</p>
+<app-breadcrumb></app-breadcrumb>
+<div class="container">
+  <div class="cs-title">
+    <h1>
+      Résultats de l'élection présidentielle 2022 en France : 1er et 2ème tour
+    </h1>
+  </div>
+  <div class="content">
+    Consultez dès maintenant les <strong>résultats</strong> de l'<strong>élection présidentielle 2022</strong> du 1er et
+    2nd tour
+    en <strong>France</strong> et découvrez les résultats des votes et suffrages en direct des françaises et français.
+    Le 1er tour de l'élection présidentielle 2022 se tient le dimanche 10 avril 2022,
+    et le 2ème tour le dimanche 24 avril 2022.
+  </div>
+  <div class="content">
+    <app-presidential-search></app-presidential-search>
+  </div>
+  <ng-container *ngIf=" {
+    result: (result$ | loading | async)
+    } as obs">
+    <ng-container *ngIf="obs.result as resultObs">
+      <ng-container *ngIf="resultObs.value as result">
+        <div class="content" *ngIf="result | find : '2'">
+          <app-presidential-round [result]="result | find : '2'" [type]="type" [round]="'2'">
+          </app-presidential-round>
+        </div>
+        <div class="content" *ngIf="result | find : '1'">
+          <app-presidential-round [result]="result | find : '1'" [type]="type" [round]="'1'">
+          </app-presidential-round>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <div class="content result" *ngIf="listRegions">
+    <!-- Affiche toutes les regions -->
+    <app-presidential-list-link [title]="'Résultats de l\'élection présidentielle 2022 par région'" [list]="listRegions"
+      [type]="'region'" [place]="region?.name">
+    </app-presidential-list-link>
+  </div>
+  <div class="content result" *ngIf="listDepartements">
+    <!-- Affiche les départements dans la région selectionne -->
+    <app-presidential-list-link [title]="'Résultats de l\'élection présidentielle 2022 par département'"
+      [list]="listDepartements">
+    </app-presidential-list-link>
+  </div>
+  <div class="content result">
+    <ng-container *ngIf=" {
+      cities: (listCity$ | loading | async)
+      } as obs">
+      <ng-container *ngIf="obs.cities as citiesObs">
+        <ng-container *ngIf="citiesObs.value as cities">
+          <app-presidential-list-link
+            [title]="'Résultats de l’élection présidentielle 2022 par ville et par commune'"
+            [list]="cities">
+          </app-presidential-list-link>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+
+</div>

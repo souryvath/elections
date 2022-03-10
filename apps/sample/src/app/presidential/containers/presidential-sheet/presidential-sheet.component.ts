@@ -8,6 +8,7 @@ import { Observable, of, tap } from 'rxjs';
 import { RESULT } from '../../mocks/candidate.mock';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbService } from 'xng-breadcrumb';
+import { PresidentialService } from '../../services/presidential.service';
 
 @Component({
   selector: 'app-presidential-sheet',
@@ -16,8 +17,7 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 })
 export class PresidentialSheetComponent implements OnInit {
 
-  result: any[];
-  stat: any;
+  result$: Observable<any>;
   region$: Observable<any>;
   departement$: Observable<any>;
   city$: Observable<any>;
@@ -35,14 +35,11 @@ export class PresidentialSheetComponent implements OnInit {
   constructor(
     public router: Router,
     private readonly route: ActivatedRoute,
-    private readonly postalCodeService: PostalCodeService,
-    private readonly breadcrumbService: BreadcrumbService
+    private readonly breadcrumbService: BreadcrumbService,
+    private readonly presidentialService: PresidentialService
   ) { }
 
   ngOnInit(): void {
-    // this.city$ = of(CITY);
-    this.result = RESULT;
-    this.stat = STAT;
     const regionParams = this.route.snapshot.params['region'];
     let departementParams = null;
     let cityParams = null;
@@ -53,14 +50,25 @@ export class PresidentialSheetComponent implements OnInit {
       cityParams = this.route.snapshot.firstChild.firstChild.params['city'];
     }
     if (regionParams && departementParams && cityParams) {
+      this.result$ = this.presidentialService.getResult(cityParams).pipe(tap((element) => {
+        if (element[0].place.location) {
+          this.listCity$ = this.presidentialService.getNearestCities(element[0].place.location.coordinates[0], element[0].place.location.coordinates[1]);
+        } else {
+          this.listCity$ = this.presidentialService.getCities(this.departement.slug, 'departement');
+        }
+        this.city = element;
+        this.breadcrumbService.set('resultats-presidentielle-2022/:region/:departement/:city', `${element[0].place.name} (${element[0].place.postalCode})`);
+      }));
       this.initPageCity(regionParams, departementParams, cityParams);
       return;
     }
     if (regionParams && departementParams) {
+      this.result$ = this.presidentialService.getResult(departementParams);
       this.initPageDepartement(regionParams, departementParams);
       return;
     }
     if (regionParams) {
+
       this.initPageRegion(regionParams);
       return;
     }
@@ -71,11 +79,7 @@ export class PresidentialSheetComponent implements OnInit {
     this.departement = this.listDepartements.find((item) => item.slug === departementParams);
     this.region = FRANCE_REGIONS.find((item) => item.slug === regionParams);
     this.listDepartements = FRANCE_DEPS_LIST.filter((item) => item.region.code === `FR-${this.region.code}`);
-    this.city$ = this.postalCodeService.getPostalCodeBySlug(cityParams).pipe(tap((element) => {
-      this.city = element;
-      this.breadcrumbService.set('resultats-presidentielle-2022/:region/:departement/:city', `${element.name} (${element.postalCode})`);
-    }));
-    this.listCity$ = this.postalCodeService.getPostalCodeByDepartement(this.departement.code.substring(3));
+    this.city$ = of({});
     this.place$ = this.city$;
     this.type = 'city';
     this.breadcrumbService.set('resultats-presidentielle-2022/:region', this.region.name);
@@ -87,9 +91,13 @@ export class PresidentialSheetComponent implements OnInit {
     this.region = FRANCE_REGIONS.find((item) => item.slug === regionParams);
     this.departement = this.listDepartements.find((item) => item.slug === departementParams);
     this.listDepartements = FRANCE_DEPS_LIST.filter((item) => item.region.code === `FR-${this.region.code}` && item.slug !== departementParams);
+    this.listRegions = FRANCE_REGIONS;
     this.departement$ = of(this.departement);
     this.place$ = this.departement$;
     this.type = 'departement';
+    console.log('DEPARTEMENT');
+    this.listCity$ = this.presidentialService.getCities(this.departement.slug, 'departement');
+
     this.breadcrumbService.set('resultats-presidentielle-2022/:region', this.region.name);
     this.breadcrumbService.set('resultats-presidentielle-2022/:region/:departement', `${this.departement.name} (${this.departement.code.substring(3)})`);
     return;
@@ -97,11 +105,18 @@ export class PresidentialSheetComponent implements OnInit {
 
   initPageRegion(regionParams: string): void {
     this.region = FRANCE_REGIONS.find((item) => item.slug === regionParams);
+    if (this.region && this.region.slugDep) {
+      this.result$ = this.presidentialService.getResult(this.region.slugDep);
+    }
+    if (this.region && !this.region.slugDep) {
+      this.result$ = this.presidentialService.getResult(regionParams);
+    }
     if (this.region) {
       this.region$ = of(this.region);
       this.place$ = this.region$;
       this.listDepartements = FRANCE_DEPS_LIST.filter((item) => item.region.code === `FR-${this.region.code}`);
-      this.listRegions = this.listRegions.filter((item) => item.slug !== this.region.slug);
+      this.listRegions = FRANCE_REGIONS.filter((item) => item.slug !== regionParams);
+      this.listCity$ = this.presidentialService.getCities(this.region.slug, 'region');
       this.type = 'region';
     }
     this.breadcrumbService.set('resultats-presidentielle-2022/:region', this.region.name);

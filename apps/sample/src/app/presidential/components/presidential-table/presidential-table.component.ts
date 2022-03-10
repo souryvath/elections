@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PresidentialTableComponent implements OnInit {
 
-  @Input() stat;
+  @Input() result;
   constructor() { }
 
   ngOnInit(): void {
