@@ -26,7 +26,7 @@ export class PresidentialRoundComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.resultDepartement);
+    console.log(this.result);
   }
 
   displayMore(): void {

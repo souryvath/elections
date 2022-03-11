@@ -7,6 +7,11 @@
       <strong>France</strong>
     </a>
   </div>
+  <div *ngIf="type === 'candidat'">
+    <a title="résultats élection présidentielle 2022 candidats" href="resultats-presidentielle-2022/candidats">
+      <strong>Tous les candidats</strong>
+    </a>
+  </div>
   <div *ngFor="let item of list; let i = index;" class="col-6 col-lg-4 col-md-4 col-sm-6">
     <div [class.hidden]="i > this.numberResults - 1">
       <ng-container *ngIf="item.region && item.region.slug">
@@ -26,10 +31,16 @@
           href="resultats-presidentielle-2022/{{item.regionSlug}}/{{item.departementSlug}}/{{item.slug}}">{{item.name}}
         </a>
       </ng-container>
-      <ng-container *ngIf="!item.departement && !item.departementSlug && !item.regionSlug && !item.region">
+      <ng-container *ngIf="!item.departement && !item.departementSlug && !item.regionSlug && !item.region && !item.party">
         <!-- Affichage Region -->
         <a title="résultats élection présidentielle 2022 {{item.name}}"
           href="resultats-presidentielle-2022/{{item.slug}}" [class.bold]="place === item?.name">{{item.name}}
+        </a>
+      </ng-container>
+      <ng-container *ngIf="item.party">
+        <!-- Affichage candidat -->
+        <a title="résultats élection présidentielle 2022 {{item.name}} par département et par région"
+          href="resultats-presidentielle-2022/candidats/{{item.slug}}">{{item.name}}
         </a>
       </ng-container>
     </div>

@@ -6,6 +6,7 @@ import { JsonLdService } from 'ngx-seo';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { SeoService } from '../../../core/services/seo.service';
 import { PresidentialService } from '../../services/presidential.service';
+import { FRANCE_REGIONS } from '../../../shared/constants/regions.constant';
 
 @Component({
   selector: 'app-presidential-candidate-sheet',
@@ -20,6 +21,9 @@ export class PresidentialCandidateSheetComponent implements OnInit {
   departement$: Observable<any>;
   resultRegion: any;
   resultDepartement: any;
+  listRegions: any[] = FRANCE_REGIONS;
+  listCity$: Observable<any>;
+  listCandidates = CANDIDATES_PRESIDENTIAL_FRONT;
   constructor(
     public router: Router,
     private readonly route: ActivatedRoute,
@@ -31,6 +35,8 @@ export class PresidentialCandidateSheetComponent implements OnInit {
 
   ngOnInit(): void {
     const candidateParams = this.route.snapshot.params['slugCandidate'];
+    this.listCity$ = this.presidentialService.getMostVotedCities();
+
     this.result$ = this.presidentialService.getCandidate(candidateParams, 'national').pipe(tap((element) => {
       this.resultRound = element;
       this.resultRound.forEach((item) => {

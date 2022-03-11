@@ -54,4 +54,30 @@
       </ng-container>
     </ng-container>
   </ng-container>
+  <div class="content result" *ngIf="listCandidates">
+    <!-- Affiche toutes les candidats -->
+    <app-presidential-list-link [title]="'Résultats de l’élection présidentielle 2022 par candidat'" [list]="listCandidates"
+      [type]="'candidat'" [place]="region?.name">
+    </app-presidential-list-link>
+  </div>
+  <div class="content result" *ngIf="listRegions">
+    <!-- Affiche toutes les regions -->
+    <app-presidential-list-link [title]="'Résultats de l\'élection présidentielle 2022 par région'" [list]="listRegions"
+      [type]="'region'" [place]="region?.name">
+    </app-presidential-list-link>
+  </div>
+  <div class="content result">
+    <ng-container *ngIf=" {
+      cities: (listCity$ | loading | async)
+      } as obs">
+      <ng-container *ngIf="obs.cities as citiesObs">
+        <ng-container *ngIf="citiesObs.value as cities">
+          <app-presidential-list-link
+            [title]="'Résultats de l’élection présidentielle 2022 par ville et par commune'"
+            [list]="cities">
+          </app-presidential-list-link>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
 </div>
