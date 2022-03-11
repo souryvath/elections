@@ -96,6 +96,7 @@ export class ScraperPresidentialNationalService {
         nbrVotes: item[1],
         party: 'PARTI POLITIQUE',
         color: ' ',
+        slug: '',
         pctVotesOnSubscriptions: item[2].replace(/,/g, '.'),
         pctVotesOnExprimated: item[3].replace(/,/g, '.')
       };
@@ -103,6 +104,7 @@ export class ScraperPresidentialNationalService {
       if (option) {
         candidate.party = option.party;
         candidate.color = option.color;
+        candidate.slug = option.slug;
       }
       if (item[0] !== '') {
         finalCandidates.push(candidate);

@@ -16,21 +16,28 @@
     <app-presidential-search></app-presidential-search>
   </div>
   <ng-container *ngIf=" {
-    result: (result$ | loading | async)
+    result: (result$ | loading | async),
+    table: (table$ | loading | async)
     } as obs">
     <ng-container *ngIf="obs.result as resultObs">
       <ng-container *ngIf="resultObs.value as result">
-        <div class="content" *ngIf="result | find : '2'">
-          <app-presidential-round [result]="result | find : '2'" [resultBefore]="result | find : '1'" [type]="type" [round]="'2'">
-          </app-presidential-round>
-        </div>
-        <div class="content" *ngIf="result | find : '1'">
-          <app-presidential-round [result]="result | find : '1'" [type]="type" [round]="'1'">
-          </app-presidential-round>
-        </div>
+        <ng-container *ngIf="obs.table as tableObs">
+          <ng-container *ngIf="tableObs.value as table">
+            <div class="content" *ngIf="result | find : '2'">
+              <app-presidential-round [selectedTab]="selectedTab" [table]="table" [result]="result | find : '2'" [resultBefore]="result | find : '1'" [type]="type" (selectTabEvent)="selectTab($event)"
+                [round]="'2'">
+              </app-presidential-round>
+            </div>
+            <div class="content" *ngIf="result | find : '1'">
+              <app-presidential-round [result]="result | find : '1'" [type]="type" [round]="'1'">
+              </app-presidential-round>
+            </div>
+          </ng-container>
+        </ng-container>
       </ng-container>
     </ng-container>
   </ng-container>
+
   <div class="content result" *ngIf="listRegions">
     <!-- Affiche toutes les regions -->
     <app-presidential-list-link [title]="'Résultats de l\'élection présidentielle 2022 par région'" [list]="listRegions"
@@ -49,8 +56,7 @@
       } as obs">
       <ng-container *ngIf="obs.cities as citiesObs">
         <ng-container *ngIf="citiesObs.value as cities">
-          <app-presidential-list-link
-            [title]="'Résultats de l’élection présidentielle 2022 par ville et par commune'"
+          <app-presidential-list-link [title]="'Résultats de l’élection présidentielle 2022 par ville et par commune'"
             [list]="cities">
           </app-presidential-list-link>
         </ng-container>

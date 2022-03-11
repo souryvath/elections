@@ -1,0 +1,47 @@
+<div class="table-map">
+  <p-table #dt [value]="table" responsiveLayout="scroll" scrollHeight="50vh" [rows]="100"   [globalFilterFields]="['name']">
+    <ng-template pTemplate="caption">
+      <div class="flex">
+          <span class="p-input-icon-left ml-auto">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Rechercher un {{selectedTab | lowercase}}" />
+          </span>
+      </div>
+      </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">{{selectedTab}}
+          <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="candidate.lastName">Candidat élu
+
+          <p-sortIcon field="candidate.lastName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="nbrVotes">Pourcentage au second tour
+          <p-sortIcon field="nbrVotes"></p-sortIcon>
+        </th>
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr [style.background-color]="item.candidate.color">
+        <td>
+          <a *ngIf="!item.regionSlug" href="resultats-presidentielle-2022/{{item.slug}}" title="résultats présidentielle {{item.name}}">
+            {{item.name}}
+          </a>
+          <a *ngIf="item.regionSlug" href="resultats-presidentielle-2022/{{item.regionSlug}}/{{item.slug}}" title="résultats présidentielle {{item.name}}">
+            {{item.name}}
+          </a>
+        </td>
+        <td>{{item.candidate.firstName}} {{item.candidate.lastName}}</td>
+        <td>{{item.candidate.pctVotesOnExprimated | number: "":"fr-FR"}}%</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">Aucun élement trouvé, veuillez recommencer.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>

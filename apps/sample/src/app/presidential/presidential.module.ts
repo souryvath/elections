@@ -18,6 +18,7 @@ import { PresidentialRoundComponent } from './components/presidential-round/pres
 import { PresidentialCandidateHomeComponent } from './containers/presidential-candidate-home/presidential-candidate-home.component';
 import { PresidentialCandidateSheetComponent } from './containers/presidential-candidate-sheet/presidential-candidate-sheet.component';
 import { PresidentialCandidateMapComponent } from './containers/presidential-candidate-map/presidential-candidate-map.component';
+import { PresidentialTableMapComponent } from './components/presidential-table-map/presidential-table-map.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PresidentialCandidateMapComponent } from './containers/presidential-can
     PresidentialRoundComponent,
     PresidentialCandidateHomeComponent,
     PresidentialCandidateSheetComponent,
-    PresidentialCandidateMapComponent
+    PresidentialCandidateMapComponent,
+    PresidentialTableMapComponent
   ],
   imports: [
     CommonModule,

@@ -18,12 +18,16 @@ export const routes: Routes = [
       },
       {
         path: 'candidats',
-        component: PresidentialCandidateHomeComponent,
-        data: { breadcrumb: 'Candidats' },
         children: [
           {
-            path: ':candidate',
+            path: '',
+            component: PresidentialCandidateHomeComponent,
+            data: { breadcrumb: 'Candidats' },
+          },
+          {
+            path: ':slugCandidate',
             component: PresidentialCandidateSheetComponent,
+            data: { breadcrumbAlias: 'candidate' }
           }
         ]
       },

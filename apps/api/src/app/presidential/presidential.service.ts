@@ -52,14 +52,153 @@ export class PresidentialService {
     return presidential;
   }
 
-  async findRegions(): Promise<Presidential[]> {
-    const presidential = await this.presidentialModel.find(
+  async findRegions(round: string): Promise<Presidential[]> {
+    const gquery = [
+      { $match: { 'place.id': { $exists: true }, "round": round } },
       {
-        'place.id': { $exists: true },
-        'round': '1'
-      }, { "place": 1, "_id": 0 }
-    ).exec();
-    return presidential.sort((a: any, b: any) => (a.place.slug < b.place.slug) ? 1 : -1);;
+        "$addFields": {
+          "candidate": {
+            "$arrayElemAt": [
+              "$candidates",
+              { "$indexOfArray": ["$candidates.pctVotesOnExprimated", { "$max": "$candidates.pctVotesOnExprimated" }] }
+            ]
+          },
+        }
+      },
+      {
+        $group: {
+          _id: '$code',
+          name: { $first: '$name' },
+          slug: { $first: '$place.slug' },
+          candidate: { $first: '$candidate' }
+        }
+      },
+      { $sort: { "slug": 1 } }
+    ] as PipelineStage[];
+    const cities = await this.presidentialModel.aggregate(gquery).exec();
+    return cities;
+  }
+
+  async findRegionsByCandidates(candidate: string): Promise<Presidential[]> {
+    const gquery = [
+      { $match: { 'place.id': { $exists: true }} },
+      {
+        "$addFields": {
+          "candidate": {
+            "$arrayElemAt": [
+              "$candidates",
+              { "$indexOfArray": ["$candidates.slug", candidate] }
+            ]
+          },
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          slug: '$place.slug',
+          round: 1,
+          candidate: {
+            name: '$candidate.lastName',
+            slug: '$candidate.slug',
+            pctVotesOnExprimated: '$candidate.pctVotesOnExprimated'
+          }
+        },
+      },
+      { $sort: { "slug": 1 } }
+    ] as PipelineStage[];
+    const cities = await this.presidentialModel.aggregate(gquery).exec();
+    return cities;
+  }
+
+  async findDepartements(round: string): Promise<Presidential[]> {
+    const gquery = [
+      { $match: { 'place.region': { $exists: true }, "round": round } },
+      {
+        "$addFields": {
+          "candidate": {
+            "$arrayElemAt": [
+              "$candidates",
+              { "$indexOfArray": ["$candidates.nbrVotes", { "$max": "$candidates.nbrVotes" }] }
+            ]
+          },
+        }
+      },
+      {
+        $group: {
+          _id: '$code',
+          nbrVotes: { $first: '$nbrVotes' },
+          name: { $first: '$name' },
+          slug: { $first: '$place.slug' },
+          regionSlug: { $first: '$place.region.slug' },
+          candidate: { $first: '$candidate' }
+        }
+      },
+      { $sort: { "slug": 1 } }
+    ] as PipelineStage[];
+    const cities = await this.presidentialModel.aggregate(gquery).exec();
+    return cities;
+  }
+
+  async findDepartementsByCandidates(candidate: string): Promise<Presidential[]> {
+    const gquery = [
+      { $match: { 'place.region': { $exists: true }} },
+      {
+        "$addFields": {
+          "candidate": {
+            "$arrayElemAt": [
+              "$candidates",
+              { "$indexOfArray": ["$candidates.slug", candidate] }
+            ]
+          },
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          slug: '$place.slug',
+          round: 1,
+          code: '$place.code',
+          candidate: {
+            name: '$candidate.lastName',
+            slug: '$candidate.slug',
+            pctVotesOnExprimated: '$candidate.pctVotesOnExprimated'
+          }
+        },
+      },
+      { $sort: { "slug": 1 } }
+    ] as PipelineStage[];
+    const cities = await this.presidentialModel.aggregate(gquery).exec();
+    return cities;
+  }
+
+  async findNationalByCandidates(candidate: string): Promise<Presidential[]> {
+    const gquery = [
+      { $match: { 'place.name': 'France' } },
+      {
+        "$addFields": {
+          "candidate": {
+            "$arrayElemAt": [
+              "$candidates",
+              { "$indexOfArray": ["$candidates.slug", candidate] }
+            ]
+          },
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          name: { $concat: [ "$candidate.firstName", " ", "$candidate.lastName" ]},
+          slug: 1,
+          round: 1,
+          candidates: 1
+        },
+      },
+      { $sort: { "slug": 1 } }
+    ] as PipelineStage[];
+    const cities = await this.presidentialModel.aggregate(gquery).exec();
+    return cities;
   }
 
   async findCities(value: string, zone: string): Promise<Presidential[]> {

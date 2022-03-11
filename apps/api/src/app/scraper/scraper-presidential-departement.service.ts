@@ -93,12 +93,14 @@ export class ScraperPresidentialDepartementService {
           party: 'PARTI POLITIQUE',
           color: ' ',
           pctVotesOnSubscriptions: item[i + 4].replace(/,/g, '.'),
-          pctVotesOnExprimated: item[i + 5].replace(/,/g, '.')
+          pctVotesOnExprimated: item[i + 5].replace(/,/g, '.'),
+          slug: ''
         };
         const option = CANDIDATES_PRESIDENTIAL.find((candidateItem) => candidateItem.name === `${candidate.firstName} ${candidate.lastName}`);
         if (option) {
           candidate.party = option.party;
           candidate.color = option.color;
+          candidate.slug = option.slug;
         }
         finalCandidates.push(candidate);
       }

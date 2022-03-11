@@ -6,8 +6,8 @@
     <div class="label" *ngIf="result.round === '2'">
       Second tour - 2017
     </div>
-    <div class="stat">
-      Taux d'absentation : {{result.pctAbsentOnSubscriptions}} %
+    <div class="stat" *ngIf="result.pctAbsentOnSubscriptions">
+      Taux d'abstention : {{result.pctAbsentOnSubscriptions}} %
     </div>
   </div>
   <ng-container *ngFor="let item of result.candidates; let i = index;">

@@ -25,6 +25,7 @@ export interface PresidentialCandidate {
   readonly gender?: string;
   readonly lastName?: string;
   readonly firstName?: string;
+  readonly slug?: string;
   readonly nbrVotes?: Number;
   readonly party?: string;
   readonly pctVotesOnSubscriptions?: Number;

@@ -142,8 +142,16 @@
   margin-bottom: 1em;
 }
 
-.p-datatable .p-sortable-column .p-sortable-column-icon {
-  color: #ffffff !important;
+.table-map {
+  .p-datatable .p-sortable-column .p-sortable-column-icon {
+    color: #000000 !important;
+  }
+}
+
+.sponsorship-list {
+  .p-datatable .p-sortable-column .p-sortable-column-icon {
+    color: #ffffff !important;
+  }
 }
 
 .p-datatable-responsive-scroll > .p-datatable-wrapper > table {

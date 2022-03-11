@@ -18,8 +18,12 @@ export class PresidentialService {
     return this.httpClient.get(`${environment.api}/api/presidential/places?slug=${query}`);
   }
 
-  getRegions(): Observable<any> {
-    return this.httpClient.get(`${environment.api}/api/presidential/regions`);
+  getRegions(round: string): Observable<any> {
+    return this.httpClient.get(`${environment.api}/api/presidential/regions?round=${round}`);
+  }
+
+  getDepartements(round: string): Observable<any> {
+    return this.httpClient.get(`${environment.api}/api/presidential/departements?round=${round}`);
   }
 
   getCities(query: string, zone: string): Observable<any> {
@@ -37,6 +41,11 @@ export class PresidentialService {
   getMostVotedCities(): Observable<any> {
     return this.httpClient.get(`${environment.api}/api/presidential/most-voted`);
   }
+
+  getCandidate(slugCandidate: string, type: string): Observable<any> {
+    return this.httpClient.get(`${environment.api}/api/presidential/candidates?type=${type}&candidate=${slugCandidate}`);
+  }
+
 
 
 }

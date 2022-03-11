@@ -1,3 +1,57 @@
 <app-breadcrumb></app-breadcrumb>
 <div class="container">
-  </div>
+  <ng-container *ngIf=" {
+    result: (result$ | loading | async)
+    } as obs">
+    <ng-container *ngIf="obs.result as resultObs">
+      <ng-container *ngIf="resultObs.value as result">
+        <div class="cs-title">
+          <h1>
+            Résultats {{result[0].candidates[0].firstName}} {{result[0].candidates[0].lastName}} pour l'élection
+            présidentielle 2022 en France : 1er et 2ème tour
+          </h1>
+        </div>
+        <div class="content">
+          <p>
+            Consultez dès maintenant les résultats
+            de l'élection présidentielle 2022 du
+            candidat {{result[0].candidates[0].firstName}} {{result[0].candidates[0].lastName}} pour le (1er et 2nd
+            tour|1er tour) en France et
+            découvrez les résultats des votes et
+            suffrages de ses électeurs par région et par département.
+          </p>
+        </div>
+        <div class="content">
+          <app-presidential-search></app-presidential-search>
+        </div>
+        <div class="content" *ngIf="resultRound | find : '2'">
+          <ng-container *ngIf="type === 'candidate' && resultRegion && resultDepartement">
+            <app-presidential-round [result]="resultRound | find : '2'"
+             [resultBefore]="resultRound | find : '1'"  [resultRegion]="resultRegion | find : '2'"
+             [resultDepartement]="resultDepartement | find : '2'" [type]="type"
+            [round]="'2'">
+          </app-presidential-round>
+          </ng-container>
+          <ng-container *ngIf="type !== 'candidate'">
+            <app-presidential-round [result]="resultRound | find : '2'" [resultBefore]="resultRound | find : '1'"  [type]="type"
+            [round]="'2'">
+          </app-presidential-round>
+          </ng-container>
+
+        </div>
+        <div class="content" *ngIf="resultRound | find : '1'">
+          <ng-container *ngIf="type === 'candidate' && resultRegion && resultDepartement">
+            <app-presidential-round [result]="resultRound | find : '1'" [type]="type" [round]="'1'"  [resultRegion]="resultRegion | find : '1'" [resultDepartement]="resultDepartement | find : '1'">
+            </app-presidential-round>
+          </ng-container>
+          <ng-container *ngIf="type !== 'candidate'">
+            <app-presidential-round [result]="resultRound | find : '1'" [type]="type" [round]="'1'" >
+            </app-presidential-round>
+          </ng-container>
+
+        </div>
+
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

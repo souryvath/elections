@@ -20,6 +20,8 @@ export class PresidentialHomeComponent implements OnInit {
   listDepartements: any[] = FRANCE_DEPS_LIST.filter((item) => item.code !== 'FR-EU');
   listRegions: any[] = FRANCE_REGIONS;
   listCity$: Observable<any>;
+  table$: Observable<any>;
+  selectedTab = 'Département';
   constructor(
     private readonly breadcrumbService: BreadcrumbService,
     private readonly presidentialService: PresidentialService,
@@ -30,6 +32,7 @@ export class PresidentialHomeComponent implements OnInit {
   ngOnInit(): void {
     this.result$ = this.presidentialService.getFranceResult();
     this.listCity$ = this.presidentialService.getMostVotedCities();
+    this.table$ = this.presidentialService.getDepartements('2');
     this.setSeo();
     this.setBreadCrumbJsonLd();
   }
@@ -56,6 +59,15 @@ export class PresidentialHomeComponent implements OnInit {
       }]
     });
     this.jsonLdService.setData(breadCrumbObject);
+  }
+
+  selectTab($event): void {
+    if ($event === 'Département') {
+      this.table$ = this.presidentialService.getDepartements('2');
+    } else if($event === 'Région') {
+      this.table$ = this.presidentialService.getRegions('2');
+    }
+    this.selectedTab = $event;
   }
 
 }

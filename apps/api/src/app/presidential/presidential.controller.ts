@@ -31,8 +31,31 @@ export class PresidentialController {
 
   @Get('presidential/regions')
   async getRegions(@Res() res, @Query() params): Promise<Presidential[]> {
-    let presidentials = await this.presidentialService.findRegions();
+    let presidentials = await this.presidentialService.findRegions(params.round);
     return res.status(HttpStatus.OK).json(presidentials);
+  }
+
+  @Get('presidential/departements')
+  async getDepartements(@Res() res, @Query() params): Promise<Presidential[]> {
+    let presidentials = await this.presidentialService.findDepartements(params.round);
+    return res.status(HttpStatus.OK).json(presidentials);
+  }
+
+  @Get('presidential/candidates')
+  async getCandidates(@Res() res, @Query() params): Promise<Presidential[]> {
+    if (params.type === 'region') {
+      let presidentials = await this.presidentialService.findRegionsByCandidates(params.candidate);
+      return res.status(HttpStatus.OK).json(presidentials);
+    }
+    if (params.type === 'departement') {
+      let presidentials = await this.presidentialService.findDepartementsByCandidates(params.candidate);
+      return res.status(HttpStatus.OK).json(presidentials);
+    }
+    if (params.type === 'national') {
+      let presidentials = await this.presidentialService.findNationalByCandidates(params.candidate);
+      return res.status(HttpStatus.OK).json(presidentials);
+    }
+    return res.status(HttpStatus.OK).json([]);
   }
 
   @Get('presidential/cities')
@@ -54,4 +77,5 @@ export class PresidentialController {
     presidentials = await this.presidentialService.findMostVotedCities();
     return res.status(HttpStatus.OK).json(presidentials);
   }
+
 }

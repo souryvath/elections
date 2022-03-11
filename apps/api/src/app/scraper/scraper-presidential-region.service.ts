@@ -107,6 +107,7 @@ export class ScraperPresidentialRegionService {
           firstName: this.titleCase(item[i + 2]).trim(),
           nbrVotes: item[i + 3],
           party: 'PARTI POLITIQUE',
+          slug: '',
           pctVotesOnSubscriptions: item[i + 4].replace(/,/g, '.'),
           pctVotesOnExprimated: item[i + 5].replace(/,/g, '.'),
           color: ''
@@ -115,6 +116,7 @@ export class ScraperPresidentialRegionService {
         if (option) {
           candidate.party = option.party;
           candidate.color = option.color;
+          candidate.slug = option.slug;
         }
         finalCandidates.push(candidate);
       }

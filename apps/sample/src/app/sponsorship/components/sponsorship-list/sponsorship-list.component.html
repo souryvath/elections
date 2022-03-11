@@ -1,54 +1,59 @@
-<p-table #dt [value]="data"
-responsiveLayout="scroll" scrollHeight="50vh"
-[globalFilterFields]="['lastName','mandate', 'district', 'department', 'candidate']"
-[rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Page {currentPage} sur {totalPages}"
-[paginator]="true"
->
-  <ng-template pTemplate="caption">
-    <div class="flex">
+<div class="sponsorship-list">
+  <p-table #dt [value]="data" responsiveLayout="scroll" scrollHeight="50vh"
+    [globalFilterFields]="['lastName','mandate', 'district', 'department', 'candidate']" [rows]="10"
+    [showCurrentPageReport]="true" currentPageReportTemplate="Page {currentPage} sur {totalPages}" [paginator]="true">
+    <ng-template pTemplate="caption">
+      <div class="flex">
         <span class="p-input-icon-left ml-auto">
-            <i class="pi pi-search"></i>
-            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Rechercher" />
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            placeholder="Rechercher" />
         </span>
-    </div>
+      </div>
     </ng-template>
-  <ng-template pTemplate="header">
-    <tr>
-      <th pSortableColumn="lastName" >Elu
-        <p-sortIcon field="lastName"></p-sortIcon>
-      </th>
-      <th pSortableColumn="mandate">Fonction
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="lastName">Elu
+          <p-sortIcon field="lastName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="mandate">Fonction
 
-        <p-sortIcon field="mandate"></p-sortIcon>
-      </th>
-      <th pSortableColumn="district">Ville
+          <p-sortIcon field="mandate"></p-sortIcon>
+        </th>
+        <th pSortableColumn="district">Ville
 
-        <p-sortIcon field="district"></p-sortIcon>
-      </th>
-      <th *ngIf="type === 'candidate'" pSortableColumn="department">Departement
+          <p-sortIcon field="district"></p-sortIcon>
+        </th>
+        <th *ngIf="type === 'candidate'" pSortableColumn="department">Departement
 
-        <p-sortIcon field="department"></p-sortIcon>
-      </th>
-      <th *ngIf="type === 'department'" pSortableColumn="candidate">Candidat soutenu
+          <p-sortIcon field="department"></p-sortIcon>
+        </th>
+        <th *ngIf="type === 'department'" pSortableColumn="candidate">Candidat soutenu
 
-        <p-sortIcon field="candidate"></p-sortIcon>
-      </th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-item>
-    <tr>
-      <td>{{item.firstName}} <br> {{item.lastName}}</td>
-      <td>{{item.mandate}}</td>
-      <td>{{item.district}}</td>
-      <td *ngIf="type === 'candidate'">
-        <a [href]="'parrainages-presidentielle-2022/departements/' + item.departmentSlug" title="Parrainages présidentielle 2022 {{item.department}}">{{item.department}}</a></td>
-      <td *ngIf="type === 'department'">
-        <a [href]="'parrainages-presidentielle-2022/candidats/' + item.slugCandidate" title="Parrainages {{item.candidate}} présidentielle 2022">{{item.candidate}}</a></td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="emptymessage">
-    <tr>
+          <p-sortIcon field="candidate"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{item.firstName}} <br> {{item.lastName}}</td>
+        <td>{{item.mandate}}</td>
+        <td>{{item.district}}</td>
+        <td *ngIf="type === 'candidate'">
+          <a [href]="'parrainages-presidentielle-2022/departements/' + item.departmentSlug"
+            title="Parrainages présidentielle 2022 {{item.department}}">{{item.department}}</a>
+        </td>
+        <td *ngIf="type === 'department'">
+          <a [href]="'parrainages-presidentielle-2022/candidats/' + item.slugCandidate"
+            title="Parrainages {{item.candidate}} présidentielle 2022">{{item.candidate}}</a>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
         <td colspan="4">Aucun élement trouvé, veuillez recommencer.</td>
-    </tr>
-</ng-template>
-</p-table>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>

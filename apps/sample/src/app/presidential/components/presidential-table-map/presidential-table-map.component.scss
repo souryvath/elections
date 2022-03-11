@@ -1,0 +1,51 @@
+@import '../../../../styles/variables.scss';
+
+th {
+  background-color: #E7E7E7 !important;
+  color: black !important;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.layout-news-active :host ::ng-deep .p-datatable tr > th {
+  top: 0;
+}
+
+@media screen and (max-width: 64em) {
+  table {
+    width: 100% !important;
+  }
+  :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+      top: 0;
+      font-size: 0.75em !important;
+      padding: 0.25em !important;
+  }
+
+  :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    top: 0;
+    font-size: 0.75em !important;
+    padding: 0.25em !important;
+}
+
+  .layout-news-active :host ::ng-deep .p-datatable tr > th {
+      top: 0;
+  }
+}
+
+
+
+a {
+  color: #000000;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+td {
+  color: #000000 !important;
+}

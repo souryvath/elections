@@ -10,7 +10,7 @@
   </div>
   <div class="right">
     <div class="percent">
-      {{item.pctVotesOnSubscriptions}}%
+      {{item.pctVotesOnExprimated}}%
     </div>
     <div class="numberVotes">
       {{item.nbrVotes | number: "":"fr-FR"}} votes
@@ -18,5 +18,5 @@
   </div>
 </div>
 <div class="progress">
-  <div [style.background-color]="item.color" class="progress-bar" role="progressbar" [style.width]="item.pctVotesOnSubscriptions + '%'" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+  <div [style.background-color]="item.color" class="progress-bar" role="progressbar" [style.width]="item.pctVotesOnExprimated + '%'" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 </div>

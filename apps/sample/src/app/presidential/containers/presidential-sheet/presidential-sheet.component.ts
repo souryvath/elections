@@ -81,7 +81,7 @@ export class PresidentialSheetComponent implements OnInit {
         }
         this.setBreadCrumbJsonLdCity(this.region, this.departement, element[0].place);
       }));
-      this.initPageCity(regionParams, departementParams, cityParams);
+      this.initPageCity();
       return;
     }
     if (regionParams && departementParams) {
@@ -101,7 +101,7 @@ export class PresidentialSheetComponent implements OnInit {
 
   }
 
-  initPageCity(regionParams: string, departementParams: string, cityParams: string) {
+  initPageCity() {
     this.listDepartements = FRANCE_DEPS_LIST.filter((item) => item.region.code === `FR-${this.region.code}`);
     this.city$ = of({});
     this.place$ = this.city$;
@@ -182,7 +182,7 @@ export class PresidentialSheetComponent implements OnInit {
         "name": `${city.name}`,
         "item": `${URL_DOMAIN.main}/resultats-presidentielle-2022/${region.slug}/${departement.slug}/${city.slug}`
       },
-    ]
+      ]
     });
     this.jsonLdService.setData(breadCrumbObject);
   }
@@ -213,7 +213,7 @@ export class PresidentialSheetComponent implements OnInit {
         "name": `${departement.slug} (${departement.code})`,
         "item": `${URL_DOMAIN.main}/resultats-presidentielle-2022/${region.slug}/${departement.slug}`
       },
-    ]
+      ]
     });
     this.jsonLdService.setData(breadCrumbObject);
   }
@@ -238,7 +238,7 @@ export class PresidentialSheetComponent implements OnInit {
         "name": `${region.name}`,
         "item": `${URL_DOMAIN.main}/resultats-presidentielle-2022/${region.slug}`
       },
-    ]
+      ]
     });
     this.jsonLdService.setData(breadCrumbObject);
   }
