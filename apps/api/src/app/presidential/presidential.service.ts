@@ -160,6 +160,7 @@ export class PresidentialService {
           slug: '$place.slug',
           round: 1,
           code: '$place.code',
+          regionSlug: '$place.region.slug',
           candidate: {
             name: '$candidate.lastName',
             slug: '$candidate.slug',
