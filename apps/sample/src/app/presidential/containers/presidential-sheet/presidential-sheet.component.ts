@@ -112,7 +112,6 @@ export class PresidentialSheetComponent implements OnInit {
     this.departement$ = of(this.departement);
     this.place$ = this.departement$;
     this.type = 'departement';
-    console.log('DEPARTEMENT');
     this.listCity$ = this.presidentialService.getCities(this.departement.slug, 'departement');
     this.seoService.setSeoPage(
       `Résultats de l'élection présidentielle 2022 en ${this.departement.name} (${this.departement.code.substring(3)}) : 1er et 2ème tour`,

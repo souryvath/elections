@@ -23,6 +23,11 @@ export class ScraperController {
 
   @Post('scraper/presidential')
   scrapPresidential(): Promise<any> {
+    return this.scraperPresidentialRegionService.addPresidentialScrapingQueue();
+  }
+
+  @Post('scraper/presidential-region')
+  scrapPresidentialRegion(): Promise<any> {
     return this.scraperPresidentialRegionService.addPresidentialRegionScrapingQueue();
   }
 }

@@ -66,11 +66,29 @@ export class ScraperProcessor {
     this.presidentialService.deleteAllPresidential();
     try {
       const execScraper = async () => {
+        await Promise.all([,
+          this.scraperPresidentialCityService.scrapPresidentialCity(1).toPromise(),
+          this.scraperPresidentialCityService.scrapPresidentialCity(2).toPromise(),
+        ]);
+      };
+      execScraper().then(() => {
+        console.log(`SCRAPER PRESIDENTIAL DONE : ${new Date()}`);
+       });
+
+    } catch (error) {
+      this.logger.error('Scraper Presidential Region Failed', error.stack)
+      throw error
+    }
+  }
+
+  @Process('scrapPresidentialRegion')
+  async scrapPresidentialRegion(): Promise<any> {
+    this.logger.log('Scraper Presidential Region Processing');
+    try {
+      const execScraper = async () => {
         await Promise.all([
           this.scraperPresidentialNationalService.scrapPresidentialNational(1).toPromise(),
           this.scraperPresidentialNationalService.scrapPresidentialNational(2).toPromise(),
-          this.scraperPresidentialCityService.scrapPresidentialCity(1).toPromise(),
-          this.scraperPresidentialCityService.scrapPresidentialCity(2).toPromise(),
           this.scraperPresidentialRegionService.scrapPresidentialRegion(1).toPromise(),
           this.scraperPresidentialRegionService.scrapPresidentialRegion(2).toPromise(),
           this.scraperPresidentialDepartementService.scrapPresidentialDepartement(1).toPromise(),
@@ -87,3 +105,5 @@ export class ScraperProcessor {
     }
   }
 }
+
+

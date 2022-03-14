@@ -68,7 +68,6 @@ export class PresidentialController {
       presidentials = await this.presidentialService.findCities(params.value, params.zone);
     }
     if (params.long && params.lat) {
-      console.log(params.long);
       presidentials = await this.presidentialService.findPostalCodesByGeolocation(params.long, params.lat);
     }
     return res.status(HttpStatus.OK).json(presidentials);

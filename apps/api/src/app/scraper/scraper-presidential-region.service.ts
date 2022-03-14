@@ -41,10 +41,20 @@ export class ScraperPresidentialRegionService {
 
   async addPresidentialRegionScrapingQueue(): Promise<boolean> {
     try {
-      await this.scraperQueue.add('scrapPresidential');
+      await this.scraperQueue.add('scrapPresidentialRegion');
       return true;
     } catch (error) {
       this.logger.log(`Scrap PresidentialRegion Failed ${error}`);
+      return false;
+    }
+  }
+
+  async addPresidentialScrapingQueue(): Promise<boolean> {
+    try {
+      await this.scraperQueue.add('scrapPresidential');
+      return true;
+    } catch (error) {
+      this.logger.log(`Scrap Presidential Failed ${error}`);
       return false;
     }
   }
