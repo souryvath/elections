@@ -119,7 +119,7 @@ export class PresidentialService {
           "candidate": {
             "$arrayElemAt": [
               "$candidates",
-              { "$indexOfArray": ["$candidates.nbrVotes", { "$max": "$candidates.nbrVotes" }] }
+              { "$indexOfArray": ["$candidates.pctVotesOnExprimated", { "$max": "$candidates.pctVotesOnExprimated" }] }
             ]
           },
         }
