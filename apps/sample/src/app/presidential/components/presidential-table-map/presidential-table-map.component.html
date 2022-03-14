@@ -7,7 +7,7 @@
       Région
     </button>
   </div>
-  <p-table #dt [value]="table" responsiveLayout="scroll" scrollHeight="50vh" [rows]="100"   [globalFilterFields]="['name']">
+  <p-table #dt [value]="table" responsiveLayout="scroll" scrollHeight="50vh" [rows]="100"   [globalFilterFields]="['name']" sortField="name">
     <ng-template pTemplate="caption">
       <div class="flex">
           <span class="p-input-icon-left ml-auto">
