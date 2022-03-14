@@ -1047,7 +1047,7 @@ export const FRANCE_DEPS = [
     "name": "Nouvelle-Calédonie",
     "region": {
       "name": "Nouvelle-Calédonie",
-      "code": "FR-988",
+      "code": "FR-NC",
       "slug": "nouvelle-caledonie"
     },
     "slug": "nouvelle-caledonie-988",
@@ -1071,7 +1071,7 @@ export const FRANCE_DEPS = [
     "name": "Saint-Martin / Saint-Barthélemy",
     "region": {
       "name": "Saint-Martin / Saint-Barthélemy",
-      "code": "FR-978",
+      "code": "FR-MAF/BL",
       "slug": "saint-martin-saint-barthelemy"
     },
     "slug": "saint-martin-saint-barthelemy-978",
@@ -1083,7 +1083,7 @@ export const FRANCE_DEPS = [
     "name": "Wallis et Futuna",
     "region": {
       "name": "Wallis et Futuna",
-      "code": "FR-986",
+      "code": "FR-WLF",
       "slug": "wallis-et-futuna"
     },
     "slug": "wallis-et-futuna-986",
@@ -1095,7 +1095,7 @@ export const FRANCE_DEPS = [
     "name": "Saint-Pierre-et-Miquelon",
     "region": {
       "name": "Saint-Pierre-et-Miquelon",
-      "code": "FR-975",
+      "code": "FR-SPM",
       "slug": "saint-pierre-et-miquelon"
     },
     "slug": "saint-pierre-et-miquelon-975",

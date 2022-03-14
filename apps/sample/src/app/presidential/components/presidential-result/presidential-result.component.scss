@@ -5,14 +5,16 @@
   .stat {
     border-radius: 50px;
     padding-top: 0.15em;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     padding-bottom: 0.15em;
     color: white;
     background: #F05858;
     font-style: italic;
+    font-size: 0.85em;
   }
   .label {
+    font-size: 0.85em;
     font-style: italic;
   }
 }

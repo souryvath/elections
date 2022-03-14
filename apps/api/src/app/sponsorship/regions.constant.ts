@@ -110,7 +110,7 @@ export const FRANCE_REGIONS_LIST = [
   {
     "name": "Polynésie française",
     "slug": "polynesie-francaise",
-    "code": "987",
+    "code": "PF",
     "id": "PF",
     "slugDep": "polynesie-francaise-987",
   },
@@ -123,24 +123,24 @@ export const FRANCE_REGIONS_LIST = [
   {
     "name": "Nouvelle-Calédonie",
     "slug": "nouvelle-caledonie",
-    "code": "988",
+    "code": "NC",
     "slugDep": "nouvelle-caledonie-988"
   },
   {
     "name": "Saint-Martin / Saint-Barthélemy",
     "slug": "saint-martin-saint-barthelemy",
-    "code": "978",
+    "code": "MAF/BL",
     "slugDep": "saint-martin-saint-barthelemy-978"
   },
   {
     "name": "Wallis et Futuna",
     "slug": "wallis-et-futuna",
-    "code": "986",
+    "code": "WLF",
     "slugDep": "wallis-et-futuna-986"
   },
   {
     "name": "Saint-Pierre-et-Miquelon",
-    "code": "975",
+    "code": "SPM",
     "slug": "saint-pierre-et-miquelon",
     "slugDep": "saint-pierre-et-miquelon-975"
   }

@@ -85,7 +85,7 @@
 <div class="content result">
   <app-presidential-result [result]="result"></app-presidential-result>
   <ng-container *ngIf="result.candidates.length === 0">
-    Le candidat <strong>{{result.name}}</strong> n'est pas passé au <strong>deuxième tour</strong> de l’élection
+    Le candidat <strong>{{result.name}}</strong> n'est pas passé au <strong>deuxième tour</strong> de l'élection
     présidentielle.
   </ng-container>
   <ng-container *ngIf="result.candidates.length > 0">
