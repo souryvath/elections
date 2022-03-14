@@ -1,3 +1,4 @@
+import { PronounPipe } from './pipes/pronoun.pipe';
 import { SortArrayPipe } from './pipes/sort-array.pipe';
 import { NumberFixPipe } from './pipes/number-fix.pipe';
 import { IncludePipe } from './pipes/include.pipe';
@@ -17,7 +18,8 @@ import { FindPipe } from './pipes/find.pipe';
     NumberFixPipe,
     SortArrayPipe,
     WordSeoPipe,
-    FindPipe
+    FindPipe,
+    PronounPipe
   ],
   providers: [
     DatePipe,
@@ -37,7 +39,8 @@ import { FindPipe } from './pipes/find.pipe';
     NgReplacePipeModule,
     NumberFixPipe,
     SortArrayPipe,
-    FindPipe
+    FindPipe,
+    PronounPipe
   ],
   imports: [
     CommonModule,

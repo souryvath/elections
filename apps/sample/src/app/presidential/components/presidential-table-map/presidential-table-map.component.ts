@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-presidential-table-map',
@@ -9,10 +9,17 @@ export class PresidentialTableMapComponent implements OnInit {
 
   @Input() table;
   @Input() selectedTab;
+  @Input() type;
+  @Input() round;
+
+  @Output() readonly selectTabEvent: EventEmitter<string> = new EventEmitter<string>(true);
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.table);
+  }
+
+  selectTab(type: string) {
+    this.selectTabEvent.emit(type);
   }
 
 }

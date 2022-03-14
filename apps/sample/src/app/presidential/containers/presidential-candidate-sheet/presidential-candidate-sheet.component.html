@@ -25,27 +25,21 @@
           <app-presidential-search></app-presidential-search>
         </div>
         <div class="content" *ngIf="resultRound | find : '2'">
-          <ng-container *ngIf="type === 'candidate' && resultRegion && resultDepartement">
+          <ng-container *ngIf="type === 'candidate' && resultRegion && resultDepartement && tableRound2">
             <app-presidential-round [result]="resultRound | find : '2'"
              [resultBefore]="resultRound | find : '1'"  [resultRegion]="resultRegion | find : '2'"
-             [resultDepartement]="resultDepartement | find : '2'" [type]="type"
-            [round]="'2'">
+             [resultDepartement]="resultDepartement | find : '2'" [type]="type"  [table]="tableRound2"
+            [round]="'2'" (selectTabEvent)="selectTab($event)" [selectedTab]="selectedTab">
           </app-presidential-round>
           </ng-container>
-          <ng-container *ngIf="type !== 'candidate'">
-            <app-presidential-round [result]="resultRound | find : '2'" [resultBefore]="resultRound | find : '1'"  [type]="type"
-            [round]="'2'">
-          </app-presidential-round>
-          </ng-container>
-
         </div>
         <div class="content" *ngIf="resultRound | find : '1'">
-          <ng-container *ngIf="type === 'candidate' && resultRegion && resultDepartement">
-            <app-presidential-round [result]="resultRound | find : '1'" [type]="type" [round]="'1'"  [resultRegion]="resultRegion | find : '1'" [resultDepartement]="resultDepartement | find : '1'">
-            </app-presidential-round>
-          </ng-container>
-          <ng-container *ngIf="type !== 'candidate'">
-            <app-presidential-round [result]="resultRound | find : '1'" [type]="type" [round]="'1'" >
+          <ng-container *ngIf="type === 'candidate' && resultRegion && resultDepartement && tableRound1">
+            <app-presidential-round
+            [result]="resultRound | find : '1'"
+            [type]="type" [round]="'1'"
+            [resultRegion]="resultRegion | find : '1'"
+            [resultDepartement]="resultDepartement | find : '1'" (selectTabEvent)="selectTab($event)" [selectedTab]="selectedTab" [table]="tableRound1">
             </app-presidential-round>
           </ng-container>
 

@@ -31,29 +31,27 @@ export class ScraperPresidentialDepartementService {
     slugify.extend({ ']': '' });
   }
 
-  scrapPresidentialDepartement(): Observable<any> {
+  scrapPresidentialDepartement(round: number): Observable<any> {
     this.logger.log('Scrap PresidentialDepartement Function started');
     const urls = [this.URL_PRESIDENTIAL_DEPARTEMENT_ROUND_1, this.URL_PRESIDENTIAL_DEPARTEMENT_ROUND_2];
     return new Observable((observer: NextObserver<any>) => {
-      urls.forEach((item, i) => {
-        this.httpService.get(item, { responseEncoding: 'latin1'}).subscribe((response) => {
-          csv({
-            noheader: true,
-            output: 'csv',
-            delimiter: ';'
-          }).fromString(response.data.toString('latin1')).then(async (result) => {
-            this.setPresidentialResult(result, (i + 1).toString());
-            observer.next(result);
-            observer.complete();
-            console.log('sponsorship presidential departement is done');
-          });
+      this.httpService.get(urls[round - 1], { responseEncoding: 'latin1'}).subscribe((response) => {
+        csv({
+          noheader: true,
+          output: 'csv',
+          delimiter: ';'
+        }).fromString(response.data.toString('latin1')).then(async (result) => {
+          this.setPresidentialResult(result, (round).toString());
+          observer.next(result);
+          observer.complete();
+          console.log('sponsorship presidential departement is done');
         });
-      })
-
+      });
     });
   }
 
   setPresidentialResult(result: any[], round: string) {
+    const presidentialData = [];
     result.shift();
     result.forEach((item) => {
       let codeDep = item[0].length === 1 ? `0${item[0]}` : item[0];
@@ -105,8 +103,9 @@ export class ScraperPresidentialDepartementService {
         finalCandidates.push(candidate);
       }
       presidentialResult.candidates = finalCandidates;
-      this.presidentialService.addPresidential(presidentialResult);
+      presidentialData.push(presidentialResult);
     });
+    this.presidentialService.addManyPresidential(presidentialData);
   }
 
   private titleCase(string){

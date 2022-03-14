@@ -25,6 +25,9 @@ export class PresidentialController {
 
   @Get('presidential/places')
   async getPlaces(@Res() res, @Query() params): Promise<Presidential[]> {
+    if (params.slug === '') {
+      return res.status(HttpStatus.OK).json([]);
+    }
     let presidentials = await this.presidentialService.findPlaces(params.slug);
     return res.status(HttpStatus.OK).json(presidentials);
   }

@@ -33,25 +33,23 @@ export class ScraperPresidentialNationalService {
     slugify.extend({ ']': '' });
   }
 
-  scrapPresidentialNational(): Observable<any> {
+  scrapPresidentialNational(round: number): Observable<any> {
     this.logger.log('ScrapPresidentialNational Function started');
-    const urls = [this.URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_1, this.URL_PRESIDENTIAL_NATIONAL_ROUND_1];
+    const urls = [];
+    if (round === 1) {
+      urls.push(this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_1, { responseEncoding: 'latin1' }).toPromise());
+      urls.push(this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_ROUND_1, { responseEncoding: 'latin1' }).toPromise());
+    }
+    if (round === 2) {
+      urls.push(this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_2, { responseEncoding: 'latin1' }).toPromise());
+      urls.push(this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_ROUND_2, { responseEncoding: 'latin1' }).toPromise());
+    }
     return new Observable((observer: NextObserver<any>) => {
-      Promise.all([
-        this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_1, { responseEncoding: 'latin1' }).toPromise(),
-        this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_ROUND_1, { responseEncoding: 'latin1' }).toPromise(),
-        this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_2, { responseEncoding: 'latin1' }).toPromise(),
-        this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_ROUND_2, { responseEncoding: 'latin1' }).toPromise(),
-      ]).then((data) => {
-        const round1 = {
+      Promise.all(urls).then((data) => {
+        let rounds = [{
           candidate: data[0].data,
           stat: data[1].data
-        }
-        const round2 = {
-          candidate: data[2].data,
-          stat: data[3].data
-        }
-        const rounds = [round1, round2];
+        }];
         rounds.forEach((roundItem, i) => {
           Promise.all([
             csv({
@@ -65,7 +63,7 @@ export class ScraperPresidentialNationalService {
               delimiter: ';'
             }).fromString(roundItem.stat.toString('latin1')),
           ]).then((roundTab) => {
-            this.setPresidentialResult(roundTab, (i + 1).toString());
+            this.setPresidentialResult(roundTab, (round).toString());
           });
         });
         observer.next(rounds);

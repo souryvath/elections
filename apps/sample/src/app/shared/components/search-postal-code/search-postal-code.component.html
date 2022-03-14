@@ -22,7 +22,7 @@
         <div id="autocomplete-search">
           <p-autoComplete [inputId]="'autocomplete-search'"
           [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [multiple]="false"
-          [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)"
+          [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)" [dropdown]="true" [dropdownIcon]="'pi pi-search'"
           (onSelect)="selectPlace($event)" field="name">
           <ng-template let-postalCode pTemplate="item">
             <ng-container *ngIf="postalCode.place.departement">
@@ -59,7 +59,7 @@
 
     </div>
 
-    <div class="buttons">
+    <div class="buttons" *ngIf="type !== 'resultats-presidentielle-2022'">
       <button pButton type="button" class="search-button p-button-primary" label="{{buttonLabel}}"
         (click)="search(null)" [disabled]="!city"></button>
       <button pButton type="button" class="cs-icon-button p-button-primary geoloc-button" label="Géolocaliser"

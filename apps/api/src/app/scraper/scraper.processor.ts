@@ -63,15 +63,18 @@ export class ScraperProcessor {
   @Process('scrapPresidential')
   async scrapPresidential(): Promise<any> {
     this.logger.log('Scraper Presidential Region Processing');
-    // this.presidentialService.deleteAllPresidential();
+    this.presidentialService.deleteAllPresidential();
     try {
       const execScraper = async () => {
         await Promise.all([
-          this.scraperPresidentialNationalService.scrapPresidentialNational().toPromise(),
-          // this.scraperPresidentialCityService.scrapPresidentialCity(2).toPromise(),
-          // this.scraperPresidentialCityService.scrapPresidentialCity(1).toPromise(),
-          this.scraperPresidentialRegionService.scrapPresidentialRegion().toPromise(),
-          this.scraperPresidentialDepartementService.scrapPresidentialDepartement().toPromise()
+          this.scraperPresidentialNationalService.scrapPresidentialNational(1).toPromise(),
+          this.scraperPresidentialNationalService.scrapPresidentialNational(2).toPromise(),
+          this.scraperPresidentialCityService.scrapPresidentialCity(1).toPromise(),
+          this.scraperPresidentialCityService.scrapPresidentialCity(2).toPromise(),
+          this.scraperPresidentialRegionService.scrapPresidentialRegion(1).toPromise(),
+          this.scraperPresidentialRegionService.scrapPresidentialRegion(2).toPromise(),
+          this.scraperPresidentialDepartementService.scrapPresidentialDepartement(1).toPromise(),
+          this.scraperPresidentialDepartementService.scrapPresidentialDepartement(2).toPromise()
         ]);
       };
       execScraper().then(() => {

@@ -7,10 +7,10 @@
       <ng-container *ngIf="resultObs.value as result">
         <div class="cs-title">
           <h1 *ngIf="region$">
-            Résultats de l'élection présidentielle 2022 en {{result[0].place.name | uppercaseFirst}} : 1er et 2ème tour
+            Résultats de l'élection présidentielle 2022 en {{result[0].place.name}} : 1er et 2ème tour
           </h1>
           <h1 *ngIf="departement$">
-            Résultats de l'élection présidentielle 2022 en {{result[0].place.name | uppercaseFirst}} ({{result[0].place.code | slice: 3}}) :
+            Résultats de l'élection présidentielle 2022 en {{result[0].place.name}} ({{result[0].place.code | slice: 3}}) :
             1er et 2ème tour
           </h1>
           <h1 *ngIf="city$">
@@ -23,8 +23,7 @@
         <div class="content">
           <p *ngIf="region$">
             Consultez dès maintenant les <strong>résultats de
-              l'élection présidentielle 2022</strong> du premier et second tour en <strong>{{result[0].place.name |
-              uppercaseFirst}}</strong>
+              l'élection présidentielle 2022</strong> du premier et second tour en <strong>{{result[0].place.name}}</strong>
             et découvrez les résultats des votes et suffrages en direct pour cette région
             <strong>{{result[0].place.code}}</strong>.
             Le 1er tour de l'élection présidentielle 2022 se tient
@@ -32,8 +31,7 @@
           </p>
           <p *ngIf="departement$">
             Consultez dès maintenant les <strong>résultats de
-              l'élection présidentielle 2022</strong> du premier et second tour en <strong>{{result[0].place.name |
-              uppercaseFirst}}</strong>
+              l'élection présidentielle 2022</strong> du premier et second tour en <strong>{{result[0].place.name}}</strong>
             et découvrez les résultats des votes et suffrages en direct pour le <strong>{{result[0].place.code | slice:
               3}}</strong>.
             Le 1er tour de l'élection présidentielle 2022 se tient

@@ -49,32 +49,30 @@ export class ScraperPresidentialRegionService {
     }
   }
 
-  scrapPresidentialRegion(): Observable<any> {
+  scrapPresidentialRegion(round: number): Observable<any> {
     this.logger.log('Scrap PresidentialRegion Function started');
     const urls = [this.URL_PRESIDENTIAL_REGION_ROUND_1, this.URL_PRESIDENTIAL_REGION_ROUND_2];
     return new Observable((observer: NextObserver<any>) => {
-      urls.forEach((item, i) => {
-        this.httpService.get(item, { responseEncoding: 'latin1'}).subscribe((response) => {
-          csv({
-            noheader: true,
-            output: 'csv',
-            delimiter: ';'
-          }).fromString(response.data.toString('latin1')).then(async (result) => {
+      this.httpService.get(urls[round - 1], { responseEncoding: 'latin1'}).subscribe((response) => {
+        csv({
+          noheader: true,
+          output: 'csv',
+          delimiter: ';'
+        }).fromString(response.data.toString('latin1')).then(async (result) => {
 
-            this.setPresidentialResult(result, (i + 1).toString());
-            observer.next(result);
-            observer.complete();
-            console.log('sponsorship presidential region is done');
-          });
+          this.setPresidentialResult(result, (round).toString());
+          observer.next(result);
+          observer.complete();
+          console.log('sponsorship presidential region is done');
         });
-      })
+      });
 
     });
   }
 
   setPresidentialResult(result: any[], round: string) {
     result.shift();
-
+    const presidentialData = [];
     result.forEach((item) => {
       const id = item[0].length === 1 ? `0${item[0]}` : item[0];
       const presidentialResult = {
@@ -121,8 +119,9 @@ export class ScraperPresidentialRegionService {
         finalCandidates.push(candidate);
       }
       presidentialResult.candidates = finalCandidates;
-      this.presidentialService.addPresidential(presidentialResult);
+      presidentialData.push(presidentialResult);
     });
+    this.presidentialService.addManyPresidential(presidentialData);
   }
 
   private titleCase(string){

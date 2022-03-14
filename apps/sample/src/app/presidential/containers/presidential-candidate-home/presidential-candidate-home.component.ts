@@ -1,8 +1,9 @@
+import { isPlatformBrowser } from '@angular/common';
 import { SeoService } from './../../../core/services/seo.service';
 import { Observable } from 'rxjs';
 import { FRANCE_REGIONS } from './../../../shared/constants/regions.constant';
 import { FRANCE_DEPS_LIST } from './../../../shared/constants/departments.constant';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { CANDIDATES_PRESIDENTIAL_FRONT } from '../../../shared/constants/candidates.constants';
 import { PresidentialService } from '../../services/presidential.service';
 import { JsonLdService } from 'ngx-seo';
@@ -19,11 +20,12 @@ export class PresidentialCandidateHomeComponent implements OnInit {
   listDepartements: any[] = FRANCE_DEPS_LIST.filter((item) => item.code !== 'FR-EU');
   listRegions: any[] = FRANCE_REGIONS;
   listCity$: Observable<any>;
-
+  isBrowser = isPlatformBrowser(this.platformId);
   constructor(
     private readonly presidentialService: PresidentialService,
     private readonly jsonLdService: JsonLdService,
-    private readonly seoService: SeoService
+    private readonly seoService: SeoService,
+    @Inject(PLATFORM_ID) private readonly platformId: any
   ) { }
 
   ngOnInit(): void {
@@ -54,7 +56,6 @@ export class PresidentialCandidateHomeComponent implements OnInit {
         "name": `Candidats`,
         "item": `${URL_DOMAIN.main}/resultats-presidentielle-2022/candidats`
       }
-
     ]
     });
     this.jsonLdService.setData(breadCrumbObject);

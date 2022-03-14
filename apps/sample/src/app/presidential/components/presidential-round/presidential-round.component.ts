@@ -20,13 +20,12 @@ export class PresidentialRoundComponent implements OnInit {
   icon = 'keyboard_arrow_down'
   isHidden = true;
   isBrowser = isPlatformBrowser(this.platformId);
-  @Output() readonly selectTabEvent: EventEmitter<string> = new EventEmitter<string>(true);
+  @Output() readonly selectTabEvent: EventEmitter<any> = new EventEmitter<any>(true);
 
   constructor(@Inject(PLATFORM_ID) private readonly platformId: any) {
   }
 
   ngOnInit(): void {
-    console.log(this.result);
   }
 
   displayMore(): void {
@@ -41,9 +40,11 @@ export class PresidentialRoundComponent implements OnInit {
   }
 
   selectTab(type: string) {
-    this.selectTabEvent.emit(type);
+    const object = {
+      type,
+      round: this.round
+    };
+    this.selectTabEvent.emit(object);
   }
-
-
 
 }

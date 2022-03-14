@@ -21,7 +21,7 @@ export class PresidentialHomeComponent implements OnInit {
   listRegions: any[] = FRANCE_REGIONS;
   listCity$: Observable<any>;
   table$: Observable<any>;
-  selectedTab = 'Département';
+  selectedTab: any;
   constructor(
     private readonly breadcrumbService: BreadcrumbService,
     private readonly presidentialService: PresidentialService,
@@ -35,6 +35,9 @@ export class PresidentialHomeComponent implements OnInit {
     this.table$ = this.presidentialService.getDepartements('2');
     this.setSeo();
     this.setBreadCrumbJsonLd();
+    this.selectedTab = {
+      '2': 'Département'
+    }
   }
 
   private setSeo(): void {
@@ -62,12 +65,12 @@ export class PresidentialHomeComponent implements OnInit {
   }
 
   selectTab($event): void {
-    if ($event === 'Département') {
+    if ($event.type === 'Département') {
       this.table$ = this.presidentialService.getDepartements('2');
-    } else if($event === 'Région') {
+    } else if ($event.type === 'Région') {
       this.table$ = this.presidentialService.getRegions('2');
     }
-    this.selectedTab = $event;
+    this.selectedTab[$event.round] = $event.type;
   }
 
 }

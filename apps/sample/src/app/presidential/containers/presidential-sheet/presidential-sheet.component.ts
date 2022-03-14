@@ -1,18 +1,13 @@
-import { PostalCodeService } from './../../../core/services/postal-code.service';
 import { FRANCE_DEPS_LIST } from './../../../shared/constants/departments.constant';
 import { FRANCE_REGIONS } from '../../../shared/constants/regions.constant';
-import { STAT } from './../../mocks/stat.mock';
-import { CITY } from './../../mocks/city.mock';
-import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
-import { RESULT } from '../../mocks/candidate.mock';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { PresidentialService } from '../../services/presidential.service';
 import { SeoService } from '../../../core/services/seo.service';
 import { JsonLdService } from 'ngx-seo';
 import { URL_DOMAIN } from '../../../config/url.config';
-import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-presidential-sheet',

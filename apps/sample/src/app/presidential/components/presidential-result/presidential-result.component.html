@@ -7,7 +7,7 @@
       Second tour - 2017
     </div>
     <div class="stat" *ngIf="result.pctAbsentOnSubscriptions">
-      Taux d'abstention : {{result.pctAbsentOnSubscriptions}} %
+      Taux d'abstention : {{result.pctAbsentOnSubscriptions | number: "":"fr-FR"}} %
     </div>
   </div>
   <ng-container *ngFor="let item of result.candidates; let i = index;">
@@ -15,16 +15,19 @@
       <app-presidential-progress-result [item]="item"></app-presidential-progress-result>
     </div>
   </ng-container>
-  <div class="bottom" *ngIf="result.round === '1'">
-    <p *ngIf="numberResults === 5">
-      5 premiers résultats affichés
-    </p>
-    <button class="p-button p-button-more" (click)="displayMore()">
-      {{labelDisplayMore}}
-      <span class="material-icons">
-        {{icon}}
-      </span>
-    </button>
-  </div>
+  <ng-container *ngIf="result.candidates && result.candidates.length > 5">
+    <div class="bottom" *ngIf="result.round === '1'">
+      <p *ngIf="numberResults === 5">
+        5 premiers résultats affichés
+      </p>
+      <button class="p-button p-button-more"  (click)="displayMore()">
+        {{labelDisplayMore}}
+        <span class="material-icons">
+          {{icon}}
+        </span>
+      </button>
+    </div>
+  </ng-container>
+
 </div>
 

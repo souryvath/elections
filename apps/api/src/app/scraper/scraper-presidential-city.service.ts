@@ -17,7 +17,6 @@ export class ScraperPresidentialCityService {
   readonly URL_PRESIDENTIAL_CITY_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%201er%20tour%20-%20communes.csv';
   readonly URL_PRESIDENTIAL_CITY_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%202eme%20tour%20-%20communes.csv';
   // readonly URL_PRESIDENTIAL_CITY_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%202eme%20tour%20-%20communes-test-monthurel.csv';
-  readonly URL_SEARCH_ADDRESS = 'http://195.154.90.2:7878/search/csv/';
   private readonly logger = new Logger(this.constructor.name);
 
   constructor(
@@ -54,6 +53,7 @@ export class ScraperPresidentialCityService {
 
   async setPresidentialResult(result: any[], round: string) {
     result.shift();
+    const presidentialData = [];
     for await (const item of result) {
       let codeDepartement = item[0].length === 1 ? `0${item[0]}` : item[0];
       if (DOM_TOM_INSEE[codeDepartement]) {
@@ -127,8 +127,9 @@ export class ScraperPresidentialCityService {
         finalCandidates.push(candidate);
       }
       presidentialResult.candidates = finalCandidates;
-      this.presidentialService.addPresidential(presidentialResult);
+      presidentialData.push(presidentialResult);
     }
+    this.presidentialService.addManyPresidential(presidentialData);
     return ([]);
   }
 

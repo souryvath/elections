@@ -23,7 +23,7 @@
         Taux d'abstention
       </td>
       <td>
-        {{result.pctAbsentOnSubscriptions}}%
+        {{result.pctAbsentOnSubscriptions | number: "":"fr-FR"}}%
       </td>
       <td>
         {{result.nbrAbsents | number: "":"fr-FR"}} votes
@@ -34,7 +34,7 @@
         Taux de participation
       </td>
       <td>
-        {{result.pctVotesOnSubscriptions}}%
+        {{result.pctVotesOnSubscriptions | number: "":"fr-FR"}}%
       </td>
       <td>
         {{result.nbrVotes | number: "":"fr-FR"}} votes
@@ -45,7 +45,7 @@
         Votes exprimés
       </td>
       <td>
-        {{result.nbrExprimatedVotesOnSubscriptions}}%
+        {{result.nbrExprimatedVotesOnSubscriptions | number: "":"fr-FR"}}%
       </td>
       <td>
         {{result.nbrExprimatedVotes | number: "":"fr-FR"}} votes
@@ -56,7 +56,7 @@
         Votes blancs
       </td>
       <td>
-        {{result.pctWhiteVotesOnSubscriptions}} %
+        {{result.pctWhiteVotesOnSubscriptions | number: "":"fr-FR"}} %
       </td>
       <td>
         {{result.nbrWhiteVotes | number: "":"fr-FR"}} votes
@@ -67,7 +67,7 @@
         Votes nuls
       </td>
       <td>
-        {{result.nbrNullVotesOnSubscriptions}}%
+        {{result.nbrNullVotesOnSubscriptions | number: "":"fr-FR"}}%
       </td>
       <td>
         {{result.nbrNullVotes | number: "":"fr-FR"}} votes
