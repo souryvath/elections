@@ -21,7 +21,7 @@
       <ng-container *ngIf="type === 'resultats-presidentielle-2022'">
         <div id="autocomplete-search">
           <p-autoComplete [inputId]="'autocomplete-search'"
-          [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [multiple]="false"
+          [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [multiple]="false" [delay]="500"
           [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)" [dropdown]="true" [dropdownIcon]="'pi pi-search'"
           (onSelect)="selectPlace($event)" field="name">
           <ng-template let-postalCode pTemplate="item">
