@@ -238,7 +238,7 @@
     <ng-container *ngIf="round === '1'">
       <ng-container *ngIf="type !== 'candidate'">
         <p>
-          <strong>Le 1er tour de l'élection présidentielle </strong><span [innerHtml]="result.name | pronoun : type: 'strong'"></span>
+          Le <strong>1er tour de l'élection présidentielle </strong><span [innerHtml]="result.name | pronoun : type: 'strong'"></span>
             <ng-container *ngIf="type === 'departement'">
               <strong> ({{result.place.code | slice: 3}})</strong>
             </ng-container>
@@ -266,14 +266,14 @@
           ({{result.candidates[2].party}}),
           avec {{result.candidates[2].pctVotesOnExprimated | number: "":"fr-FR"}}% des voix ({{result.candidates[2].nbrVotes | number:
           "":"fr-FR"}} votes), puis
-          <a href="resultats-presidentielle-3033/candidats/{{result.candidates[3].slug}}" title="résultats présidentielle 3333 {{result.candidates[3].firstName}} {{result.candidates[3].lastName}} par département et par région">{{result.candidates[3].firstName}} {{result.candidates[3].lastName}}</a> ({{result.candidates[3].party}})
+          <a href="resultats-presidentielle-2022/candidats/{{result.candidates[3].slug}}" title="résultats présidentielle 2022 {{result.candidates[3].firstName}} {{result.candidates[3].lastName}} par département et par région">{{result.candidates[3].firstName}} {{result.candidates[3].lastName}}</a> ({{result.candidates[3].party}})
           qui comptabilise {{result.candidates[3].pctVotesOnExprimated | number: "":"fr-FR"}}% des voix soit
-          {{result.candidates[3].nbrVotes | number: "":"fr-FR"}} votes.<br>
+          {{result.candidates[3].nbrVotes | number: "":"fr-FR"}} votes.<br><br>
 
           Les <strong>électeurs </strong> <span [innerHtml]="result.name | pronoun : 'de': 'strong'"></span> ont
           ensuite voté pour
           <ng-container *ngFor="let candidate of result.candidates | slice: 4; let i = index">
-            <ng-container *ngIf="i !== (result.candidates | slice: 4).length - 1">
+            <ng-container *ngIf="i !== (result.candidates | slice: 4).length - 1 && i !== (result.candidates | slice: 4).length - 2">
               <a href="resultats-presidentielle-2022/candidats/{{candidate.slug}}" title="résultats présidentielle 2022 {{candidate.firstName}} {{candidate.lastName}} par département et par région">{{candidate.firstName}} {{candidate.lastName}}</a> ({{candidate.party}} -
               {{candidate.pctVotesOnExprimated | number: "":"fr-FR"}}%
               - {{candidate.nbrVotes | number: "":"fr-FR"}} votes),
@@ -287,8 +287,8 @@
               et enfin <a href="resultats-presidentielle-2022/candidats/{{candidate.slug}}" title="résultats présidentielle 2022 {{candidate.firstName}} {{candidate.lastName}} par département et par région">{{candidate.firstName}} {{candidate.lastName}}</a> ({{candidate.party}} -
               {{candidate.pctVotesOnExprimated| number: "":"fr-FR"}}% - {{candidate.nbrVotes | number: "":"fr-FR"}} votes)
             </ng-container>
-          </ng-container><br>
-          Le <strong>taux d'abstention</strong> pour <strong>ce premier tour de la Présidentielle 2022 </strong>
+          </ng-container><br><br>
+          Le <strong>taux d'abstention</strong> pour ce <strong>premier tour de la Présidentielle 2022 </strong>
             <span [innerHtml]="result.name | pronoun : type: 'strong'"></span>
             <ng-container *ngIf="type === 'departement'">
               <strong> ({{result.place.code | slice: 3}})</strong>

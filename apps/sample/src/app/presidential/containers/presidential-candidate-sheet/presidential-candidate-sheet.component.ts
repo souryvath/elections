@@ -48,6 +48,7 @@ export class PresidentialCandidateSheetComponent implements OnInit {
     const candidate = CANDIDATES_PRESIDENTIAL_FRONT.find((candItem) => candItem.slug === candidateParams);
 
     this.result$ = this.presidentialService.getCandidate(candidateParams, 'national').pipe(tap((element) => {
+      console.log(element);
       this.resultRound = element;
       this.initPage(candidate, candidateParams);
       this.resultRound.forEach((item) => {

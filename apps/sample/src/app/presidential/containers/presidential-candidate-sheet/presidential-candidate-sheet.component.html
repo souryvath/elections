@@ -7,7 +7,7 @@
       <ng-container *ngIf="resultObs.value as result">
         <div class="cs-title">
           <h1>
-            Résultats {{result[0].candidates[0].firstName}} {{result[0].candidates[0].lastName}} pour l'élection
+            Résultats {{result[0].name}} pour l'élection
             présidentielle 2022 en France : 1er et 2ème tour
           </h1>
         </div>
@@ -15,7 +15,7 @@
           <p>
             Consultez dès maintenant les résultats
             de l'élection présidentielle 2022 du
-            candidat {{result[0].candidates[0].firstName}} {{result[0].candidates[0].lastName}} pour le (1er et 2nd
+            candidat {{result[0].name}} pour le (1er et 2nd
             tour|1er tour) en France et
             découvrez les résultats des votes et
             suffrages de ses électeurs par région et par département.

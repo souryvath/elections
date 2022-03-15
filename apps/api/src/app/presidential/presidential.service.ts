@@ -308,7 +308,7 @@ export class PresidentialService {
 
   async findMostVotedCities(): Promise<Presidential[]> {
     const gquery = [
-      { $match: { 'place.postalCode': { $exists: true }, "round": '1' } },
+      { $match: { 'place.postalCode': { $exists: true }, "round": '1', 'place.departement.region.slug': { $ne: 'francais-etranger' } } },
       {
         $group: {
           _id: '$code',

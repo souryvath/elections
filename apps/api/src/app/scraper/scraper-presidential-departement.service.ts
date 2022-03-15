@@ -7,7 +7,6 @@ import { HttpService } from '@nestjs/axios';
 import { NextObserver, Observable } from 'rxjs';
 import * as csv from 'csvtojson';
 import { PresidentialService } from '../presidential/presidential.service';
-import { FRANCE_REGIONS_LIST } from '../sponsorship/regions.constant';
 import { DOM_TOM_CODE_DEPARTEMENT } from './tab_dom_tom';
 import { CANDIDATES_PRESIDENTIAL } from '../presidential/candidates.constants';
 
@@ -21,8 +20,7 @@ export class ScraperPresidentialDepartementService {
 
   constructor(
     private readonly httpService: HttpService,
-    private readonly presidentialService: PresidentialService,
-    @InjectQueue('scraper') private scraperQueue: Queue
+    private readonly presidentialService: PresidentialService
   ) {
     slugify.extend({ '\'': '-' });
     slugify.extend({ '(': '-' });
@@ -63,20 +61,20 @@ export class ScraperPresidentialDepartementService {
         code: codeDep,
         place: place,
         name: item[1],
-        nbrSubscriptions: item[2],
-        nbrAbsents: item[3],
-        pctAbsentOnSubscriptions: item[4].replace(/,/g, '.'),
-        nbrVotes: item[5],
-        pctVotesOnSubscriptions: item[6].replace(/,/g, '.'),
-        nbrWhiteVotes: item[7],
-        pctWhiteVotesOnSubscriptions: item[8].replace(/,/g, '.'),
-        pctWhiteVotesOnVotes: item[9].replace(/,/g, '.'),
-        nbrNullVotes: item[10],
-        nbrNullVotesOnSubscriptions: item[11].replace(/,/g, '.'),
-        nbrNullVotesOnVotes: item[12].replace(/,/g, '.'),
-        nbrExprimatedVotes: item[13],
-        nbrExprimatedVotesOnSubscriptions: item[14].replace(/,/g, '.'),
-        nbrExprimatedVotesOnVotes: item[15].replace(/,/g, '.'),
+        nbrSubscriptions: Number(item[2]),
+        nbrAbsents: Number(item[3]),
+        pctAbsentOnSubscriptions: Number(item[4].replace(/,/g, '.')),
+        nbrVotes: Number(item[5]),
+        pctVotesOnSubscriptions: Number(item[6].replace(/,/g, '.')),
+        nbrWhiteVotes: Number(item[7]),
+        pctWhiteVotesOnSubscriptions: Number(item[8].replace(/,/g, '.')),
+        pctWhiteVotesOnVotes: Number(item[9].replace(/,/g, '.')),
+        nbrNullVotes: Number(item[10]),
+        nbrNullVotesOnSubscriptions: Number(item[11].replace(/,/g, '.')),
+        nbrNullVotesOnVotes: Number(item[12].replace(/,/g, '.')),
+        nbrExprimatedVotes: Number(item[13]),
+        nbrExprimatedVotesOnSubscriptions: Number(item[14].replace(/,/g, '.')),
+        nbrExprimatedVotesOnVotes: Number(item[15].replace(/,/g, '.')),
         candidates: [],
         round
       };
@@ -87,11 +85,11 @@ export class ScraperPresidentialDepartementService {
           gender: item[i],
           lastName: this.titleCase(item[i + 1]).trim(),
           firstName: this.titleCase(item[i + 2]).trim(),
-          nbrVotes: item[i + 3],
+          nbrVotes: Number(item[i + 3]),
           party: 'PARTI POLITIQUE',
           color: ' ',
-          pctVotesOnSubscriptions: item[i + 4].replace(/,/g, '.'),
-          pctVotesOnExprimated: item[i + 5].replace(/,/g, '.'),
+          pctVotesOnSubscriptions: Number(item[i + 4].replace(/,/g, '.')),
+          pctVotesOnExprimated: Number(item[i + 5].replace(/,/g, '.')),
           slug: ''
         };
         const option = CANDIDATES_PRESIDENTIAL.find((candidateItem) => candidateItem.name === `${candidate.firstName} ${candidate.lastName}`);

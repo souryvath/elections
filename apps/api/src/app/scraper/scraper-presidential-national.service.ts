@@ -1,5 +1,3 @@
-import { PresidentialDTO } from './../presidential/dto/presidential.dto';
-import { FRANCE_DEPS } from './../sponsorship/departments.constant';
 import { Injectable, Logger } from '@nestjs/common';
 import slugify from 'slugify';
 import { InjectQueue } from '@nestjs/bull';
@@ -8,8 +6,6 @@ import { HttpService } from '@nestjs/axios';
 import { NextObserver, Observable } from 'rxjs';
 import * as csv from 'csvtojson';
 import { PresidentialService } from '../presidential/presidential.service';
-import { FRANCE_REGIONS_LIST } from '../sponsorship/regions.constant';
-import { DOM_TOM_CODE_DEPARTEMENT } from './tab_dom_tom';
 import { CANDIDATES_PRESIDENTIAL } from '../presidential/candidates.constants';
 
 @Injectable()
@@ -23,8 +19,7 @@ export class ScraperPresidentialNationalService {
 
   constructor(
     private readonly httpService: HttpService,
-    private readonly presidentialService: PresidentialService,
-    @InjectQueue('scraper') private scraperQueue: Queue
+    private readonly presidentialService: PresidentialService
   ) {
     slugify.extend({ '\'': '-' });
     slugify.extend({ '(': '-' });
@@ -95,8 +90,8 @@ export class ScraperPresidentialNationalService {
         party: 'PARTI POLITIQUE',
         color: ' ',
         slug: '',
-        pctVotesOnSubscriptions: item[2].replace(/,/g, '.'),
-        pctVotesOnExprimated: item[3].replace(/,/g, '.')
+        pctVotesOnSubscriptions: Number(item[2].replace(/,/g, '.')),
+        pctVotesOnExprimated: Number(item[3].replace(/,/g, '.'))
       };
       const option = CANDIDATES_PRESIDENTIAL.find((candidateItem) => candidateItem.name === `${candidate.firstName} ${candidate.lastName}`);
       if (option) {
@@ -121,20 +116,20 @@ export class ScraperPresidentialNationalService {
         'name': 'France'
       },
       name: 'France',
-      nbrSubscriptions: round1Stat[0][1],
-      nbrAbsents: round1Stat[1][1],
-      pctAbsentOnSubscriptions: round1Stat[1][2].replace(/,/g, '.'),
-      nbrVotes: round1Stat[2][1],
-      pctVotesOnSubscriptions: round1Stat[2][2].replace(/,/g, '.'),
-      nbrWhiteVotes: round1Stat[3][1].replace(/,/g, '.'),
-      pctWhiteVotesOnSubscriptions: round1Stat[3][2].replace(/,/g, '.'),
-      pctWhiteVotesOnVotes: round1Stat[3][3].replace(/,/g, '.'),
-      nbrNullVotes: round1Stat[4][1].replace(/,/g, '.'),
-      nbrNullVotesOnSubscriptions: round1Stat[4][2].replace(/,/g, '.'),
-      nbrNullVotesOnVotes: round1Stat[4][3].replace(/,/g, '.'),
-      nbrExprimatedVotes: round1Stat[5][1].replace(/,/g, '.'),
-      nbrExprimatedVotesOnSubscriptions: round1Stat[5][2].replace(/,/g, '.'),
-      nbrExprimatedVotesOnVotes: round1Stat[5][3].replace(/,/g, '.'),
+      nbrSubscriptions: Number(round1Stat[0][1]),
+      nbrAbsents: Number(round1Stat[1][1]),
+      pctAbsentOnSubscriptions: Number(round1Stat[1][2].replace(/,/g, '.')),
+      nbrVotes: Number(round1Stat[2][1]),
+      pctVotesOnSubscriptions: Number(round1Stat[2][2].replace(/,/g, '.')),
+      nbrWhiteVotes: Number(round1Stat[3][1].replace(/,/g, '.')),
+      pctWhiteVotesOnSubscriptions: Number(round1Stat[3][2].replace(/,/g, '.')),
+      pctWhiteVotesOnVotes: Number(round1Stat[3][3].replace(/,/g, '.')),
+      nbrNullVotes: Number(round1Stat[4][1].replace(/,/g, '.')),
+      nbrNullVotesOnSubscriptions: Number(round1Stat[4][2].replace(/,/g, '.')),
+      nbrNullVotesOnVotes: Number(round1Stat[4][3].replace(/,/g, '.')),
+      nbrExprimatedVotes: Number(round1Stat[5][1].replace(/,/g, '.')),
+      nbrExprimatedVotesOnSubscriptions: Number(round1Stat[5][2].replace(/,/g, '.')),
+      nbrExprimatedVotesOnVotes: Number(round1Stat[5][3].replace(/,/g, '.')),
       candidates: this.getCandidates(round1Candidate),
       round
     };
