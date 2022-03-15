@@ -191,7 +191,7 @@
           <ng-container *ngIf="type === 'departement'">
             <strong> ({{result.place.code | slice: 3}})</strong>
           </ng-container>
-          <ng-container *ngIf="result.place.postalCode !== ''">
+          <ng-container *ngIf="result.place.postalCode && result.place.postalCode !== ''">
             <strong> ({{result.place.postalCode}})</strong>
           </ng-container> pour ce 2nd tour de l’élection présidentielle s'élève à {{result.pctAbsentOnSubscriptions |
           number: "":"fr-FR"}}%.<br>
