@@ -98,11 +98,7 @@ export class PresidentialService {
           name: 1,
           slug: '$place.slug',
           round: 1,
-          candidate: {
-            name: '$candidate.lastName',
-            slug: '$candidate.slug',
-            pctVotesOnExprimated: '$candidate.pctVotesOnExprimated'
-          }
+          pctVotesOnExprimated: '$candidate.pctVotesOnExprimated'
         },
       },
       { $sort: { "slug": 1 } }
@@ -174,11 +170,7 @@ export class PresidentialService {
           round: 1,
           code: '$place.code',
           regionSlug: '$place.region.slug',
-          candidate: {
-            name: '$candidate.lastName',
-            slug: '$candidate.slug',
-            pctVotesOnExprimated: '$candidate.pctVotesOnExprimated'
-          }
+          pctVotesOnExprimated: '$candidate.pctVotesOnExprimated'
         },
       },
       { $sort: { "slug": 1 } }

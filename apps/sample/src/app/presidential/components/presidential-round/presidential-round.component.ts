@@ -6,7 +6,7 @@ import { Component, EventEmitter, Inject, Input, OnInit, Output, PLATFORM_ID } f
   templateUrl: './presidential-round.component.html',
   styleUrls: ['./presidential-round.component.scss']
 })
-export class PresidentialRoundComponent implements OnInit {
+export class PresidentialRoundComponent {
 
   @Input() result;
   @Input() type;
@@ -16,6 +16,7 @@ export class PresidentialRoundComponent implements OnInit {
   @Input() selectedTab;
   @Input() resultRegion;
   @Input() resultDepartement;
+  @Input() hasTwoRounds;
   labelDisplayMore = 'voir plus';
   icon = 'keyboard_arrow_down'
   isHidden = true;
@@ -23,9 +24,6 @@ export class PresidentialRoundComponent implements OnInit {
   @Output() readonly selectTabEvent: EventEmitter<any> = new EventEmitter<any>(true);
 
   constructor(@Inject(PLATFORM_ID) private readonly platformId: any) {
-  }
-
-  ngOnInit(): void {
   }
 
   displayMore(): void {

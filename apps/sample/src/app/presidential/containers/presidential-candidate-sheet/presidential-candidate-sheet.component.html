@@ -36,7 +36,7 @@
             <app-presidential-round [result]="round2"
              [resultBefore]="round1"  [resultRegion]="resultRegion | find : '2'"
              [resultDepartement]="resultDepartement | find : '2'" [type]="type"  [table]="tableRound2"
-            [round]="'2'" (selectTabEvent)="selectTab($event)" [selectedTab]="selectedTab">
+            [round]="'2'" (selectTabEvent)="selectTab($event)" [selectedTab]="selectedTab" [hasTwoRounds]="hasTwoRounds">
           </app-presidential-round>
           </ng-container>
         </div>
@@ -46,7 +46,7 @@
             [result]="round1"
             [type]="type" [round]="'1'"
             [resultRegion]="resultRegion | find : '1'"
-            [resultDepartement]="resultDepartement | find : '1'" (selectTabEvent)="selectTab($event)" [selectedTab]="selectedTab" [table]="tableRound1">
+            [resultDepartement]="resultDepartement | find : '1'" (selectTabEvent)="selectTab($event)" [selectedTab]="selectedTab" [table]="tableRound1" [hasTwoRounds]="hasTwoRounds">
             </app-presidential-round>
           </ng-container>
 

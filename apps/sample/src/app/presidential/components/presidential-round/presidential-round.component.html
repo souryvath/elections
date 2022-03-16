@@ -97,8 +97,7 @@
       </ng-container>
 
     </ng-container>
-
-    <ng-container *ngIf="isBrowser">
+    <ng-container *ngIf="isBrowser && ((round === '2') || ((round === '1') && hasTwoRounds === false))">
       <div class="content button">
         <div class="label">
           Partager le résultat des votes
@@ -142,12 +141,12 @@
           <p>
             Au niveau départemental, le <strong>plus haut score </strong><span
               [innerHtml]="result.name | pronoun : 'de': 'strong'"></span> est en
-            {{resultDepartement.places[0].name}} ({{resultDepartement.places[0].code | slice: 3}}) avec
-            {{resultDepartement.places[0].candidate.pctVotesOnExprimated | number: "":"fr-FR"}}%, et son <strong>plus
+            {{resultDepartement.places[0].name}} avec
+            {{resultDepartement.places[0].pctVotesOnExprimated | number: "":"fr-FR"}}%, et son <strong>plus
               bas
               score</strong> se
             situe en {{resultDepartement.places[resultDepartement.places.length - 1].name}},
-            avec {{resultDepartement.places[resultDepartement.places.length - 1].candidate.pctVotesOnExprimated |
+            avec {{resultDepartement.places[resultDepartement.places.length - 1].pctVotesOnExprimated |
             number:
             "":"fr-FR"}}% des
             suffrages.
@@ -158,10 +157,10 @@
             Au niveau régional, le <strong>plus haut score </strong> <span
               [innerHtml]="result.name | pronoun : 'de': 'strong'"></span> est en
             {{resultRegion.places[0].name}} avec
-            {{resultRegion.places[0].candidate.pctVotesOnExprimated | number: "":"fr-FR"}}%, et son <strong>plus bas
+            {{resultRegion.places[0].pctVotesOnExprimated | number: "":"fr-FR"}}%, et son <strong>plus bas
               score</strong> se situe en
             {{resultRegion.places[resultRegion.places.length - 1].name}}, avec
-            {{resultRegion.places[resultRegion.places.length - 1].candidate.pctVotesOnExprimated | number: "":"fr-FR"}}%
+            {{resultRegion.places[resultRegion.places.length - 1].pctVotesOnExprimated | number: "":"fr-FR"}}%
             des suffrages.
           </p>
         </ng-container>
@@ -377,7 +376,8 @@
       <ng-container *ngIf="type === 'candidate'">
         <p>
           Le <strong>1er tour de l'élection présidentielle en France</strong> voit le candidat
-          <strong> {{result.name}}</strong> ({{result.candidates[0].party}}) en {{result.ranking}}ème position avec
+          <strong> {{result.name}}</strong> ({{result.candidates[0].party}}) en {{result.ranking}}<ng-container *ngIf="result.ranking === 1">ère</ng-container><ng-container *ngIf="result.ranking !== 1">ème</ng-container>
+          position avec
           {{result.candidates[0].pctVotesOnExprimated | number: "":"fr-FR"}}% des suffrages
           ({{result.candidates[0].nbrVotes | number:
           "":"fr-FR"}} voix).
@@ -386,12 +386,12 @@
           <p>
             Au niveau départemental, le <strong>plus haut score </strong> <span
               [innerHtml]="result.name | pronoun : 'de': 'strong'"></span> est en
-            {{resultDepartement.places[0].name}} ({{resultDepartement.places[0].code | slice: 3}}) avec
-            {{resultDepartement.places[0].candidate.pctVotesOnExprimated | number: "":"fr-FR"}}%, et son <strong>plus
+            {{resultDepartement.places[0].name}} avec
+            {{resultDepartement.places[0].pctVotesOnExprimated | number: "":"fr-FR"}}%, et son <strong>plus
               bas
               score</strong> se
             situe en {{resultDepartement.places[resultDepartement.places.length - 1].name}},
-            avec {{resultDepartement.places[resultDepartement.places.length - 1].candidate.pctVotesOnExprimated |
+            avec {{resultDepartement.places[resultDepartement.places.length - 1].pctVotesOnExprimated |
             number:
             "":"fr-FR"}}% des
             suffrages.
@@ -402,10 +402,10 @@
             Au niveau régional, le <strong>plus haut score </strong><span
               [innerHtml]="result.name | pronoun : 'de': 'strong'"></span> est en
             {{resultRegion.places[0].name}} avec
-            {{resultRegion.places[0].candidate.pctVotesOnExprimated | number: "":"fr-FR"}}%, et son <strong>plus bas
+            {{resultRegion.places[0].pctVotesOnExprimated | number: "":"fr-FR"}}%, et son <strong>plus bas
               score</strong> se situe en
             {{resultRegion.places[resultRegion.places.length - 1].name}}, avec
-            {{resultRegion.places[resultRegion.places.length - 1].candidate.pctVotesOnExprimated | number: "":"fr-FR"}}%
+            {{resultRegion.places[resultRegion.places.length - 1].pctVotesOnExprimated | number: "":"fr-FR"}}%
             des suffrages.
           </p>
         </ng-container>

@@ -7,7 +7,7 @@
       Région
     </button>
   </div>
-  <p-table #dt [value]="table" responsiveLayout="scroll" scrollHeight="50vh" [rows]="100"   [globalFilterFields]="['name']" sortField="name">
+  <p-table #dt [value]="table" responsiveLayout="scroll" scrollHeight="50vh" [rows]="100"   sortField="name" [globalFilterFields]="['name']" >
     <ng-template pTemplate="caption">
       <div class="flex">
           <span class="p-input-icon-left ml-auto">
@@ -26,20 +26,20 @@
 
           <p-sortIcon field="candidate.lastName"></p-sortIcon>
         </th>
-        <th pSortableColumn="candidate.pctVotesOnExprimated" >
+        <th pSortableColumn="pctVotesOnExprimated" >
           <ng-container *ngIf="round === '1'">
             Pourcentage au premier tour
           </ng-container>
           <ng-container *ngIf="round === '2'">
             Pourcentage au second tour
           </ng-container>
-          <p-sortIcon field="candidate.pctVotesOnExprimated"></p-sortIcon>
+          <p-sortIcon field="pctVotesOnExprimated"></p-sortIcon>
         </th>
 
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item>
-      <tr [style.background-color]="item.candidate.color">
+      <tr [style.background-color]="item.candidate ? item.candidate.color : ''">
         <td>
           <a *ngIf="!item.regionSlug" href="resultats-presidentielle-2022/{{item.slug}}" title="résultats présidentielle {{item.name}}">
             {{item.name}}
@@ -49,7 +49,8 @@
           </a>
         </td>
         <td *ngIf="type !== 'candidate'">{{item.candidate.firstName}} {{item.candidate.lastName}}</td>
-        <td>{{item.candidate.pctVotesOnExprimated | number: "":"fr-FR"}}%</td>
+        <td *ngIf="item.pctVotesOnExprimated">{{item.pctVotesOnExprimated | number: "":"fr-FR"}}%</td>
+        <td *ngIf="item.candidate && item.candidate.pctVotesOnExprimated">{{item.candidate.pctVotesOnExprimated | number: "":"fr-FR"}}%</td>
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">

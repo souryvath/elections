@@ -34,6 +34,7 @@ export class PresidentialCandidateSheetComponent implements OnInit {
   };
   round1: any;
   round2: any;
+  hasTwoRounds = false;
 
   constructor(
     public router: Router,
@@ -61,9 +62,11 @@ export class PresidentialCandidateSheetComponent implements OnInit {
       });
       this.round1 = this.resultRound.find((item) => item.round === '1');
       this.round2 = this.resultRound.find((item) => item.round === '2');
-      this.handleTabRegion(candidateParams);
+      if (this.round1 && this.round2) {
+        this.hasTwoRounds = true;
+      }
       this.handleTabDepartement(candidateParams);
-
+      this.handleTabRegion(candidateParams);
     }));
   }
 
@@ -97,8 +100,8 @@ export class PresidentialCandidateSheetComponent implements OnInit {
 
   private handleTabRegion(candidateParams: string): void {
     this.presidentialService.getCandidate(candidateParams, 'region').subscribe((result) => {
-      const regionRound1 = result.filter((item) => item.round === '1').sort((a, b) => (Number(a.candidate.pctVotesOnExprimated) > Number(b.candidate.pctVotesOnExprimated)) ? -1 : 1);
-      const regionRound2 = result.filter((item) => item.round === '2').sort((a, b) => (Number(a.candidate.pctVotesOnExprimated) > Number(b.candidate.pctVotesOnExprimated)) ? -1 : 1);
+      const regionRound1 = result.filter((item) => item.round === '1').sort((a, b) => a.pctVotesOnExprimated > b.pctVotesOnExprimated ? -1 : 1);
+      const regionRound2 = result.filter((item) => item.round === '2').sort((a, b) => a.pctVotesOnExprimated > b.pctVotesOnExprimated ? -1 : 1);
       this.resultRegion = [];
       if (regionRound1.length > 0) {
         this.resultRegion.push({
@@ -117,9 +120,10 @@ export class PresidentialCandidateSheetComponent implements OnInit {
 
   private handleTabDepartement(candidateParams: string): void {
     this.presidentialService.getCandidate(candidateParams, 'departement').subscribe((result) => {
-      const departementRound1 = result.filter((item) => item.round === '1').sort((a, b) => (Number(a.candidate.pctVotesOnExprimated) > Number(b.candidate.pctVotesOnExprimated)) ? -1 : 1);
-      const departementRound2 = result.filter((item) => item.round === '2').sort((a, b) => (Number(a.candidate.pctVotesOnExprimated) > Number(b.candidate.pctVotesOnExprimated)) ? -1 : 1);
+      const departementRound1 = result.filter((item) => item.round === '1').sort((a, b) => a.pctVotesOnExprimated > b.pctVotesOnExprimated ? -1 : 1);
+      const departementRound2 = result.filter((item) => item.round === '2').sort((a, b) => a.pctVotesOnExprimated > b.pctVotesOnExprimated ? -1 : 1);
       this.resultDepartement = [];
+      departementRound1.sort((a, b) => a.pctVotesOnExprimated < b.pctVotesOnExprimated);
       if (departementRound1.length > 0) {
         this.resultDepartement.push({
           round: '1',
@@ -132,8 +136,8 @@ export class PresidentialCandidateSheetComponent implements OnInit {
           places: departementRound2
         });
       }
-      this.tableRound1 = this.resultDepartement.find(((item) => item.round === '1')).places;
-      this.tableRound2 = this.resultDepartement.find(((item) => item.round === '2')).places;
+      this.tableRound1 = [...this.resultDepartement.find(((item) => item.round === '1')).places]
+      this.tableRound2 = [...this.resultDepartement.find(((item) => item.round === '2')).places]
     })
   }
 
