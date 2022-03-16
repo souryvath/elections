@@ -84,7 +84,7 @@ export class PresidentialSheetComponent implements OnInit {
       this.region = FRANCE_REGIONS.find((item) => item.slug === regionParams);
       this.departement = this.listDepartements.find((item) => item.slug === departementParams);
       this.setBreadCrumbJsonLdDepartement(this.region, this.departement);
-      this.initPageDepartement(regionParams);
+      this.initPageDepartement(departementParams);
       return;
     }
     if (regionParams) {
@@ -108,6 +108,8 @@ export class PresidentialSheetComponent implements OnInit {
 
   initPageDepartement(departementParams: string) {
     this.listDepartements = FRANCE_DEPS_LIST.filter((item) => item.region.code === `FR-${this.region.code}` && item.slug !== departementParams);
+    console.log(departementParams);
+
     this.listRegions = FRANCE_REGIONS;
     this.departement$ = of(this.departement);
     this.place$ = this.departement$;

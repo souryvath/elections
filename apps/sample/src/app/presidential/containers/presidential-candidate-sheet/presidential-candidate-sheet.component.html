@@ -15,8 +15,15 @@
           <p>
             Consultez dès maintenant les résultats
             de l'élection présidentielle 2022 du
-            candidat {{result[0].name}} pour le (1er et 2nd
-            tour|1er tour) en France et
+            candidat {{result[0].name}} pour le
+            <ng-container *ngIf="round1 && round2">
+              1er et 2nd
+            </ng-container>
+            <ng-container *ngIf="round1 && !round2">
+              1er
+            </ng-container>
+            tour
+            en France et
             découvrez les résultats des votes et
             suffrages de ses électeurs par région et par département.
           </p>
@@ -24,19 +31,19 @@
         <div class="content">
           <app-presidential-search></app-presidential-search>
         </div>
-        <div class="content" *ngIf="resultRound | find : '2'">
+        <div class="content" *ngIf="round2">
           <ng-container *ngIf="type === 'candidate' && resultRegion && resultDepartement && tableRound2">
-            <app-presidential-round [result]="resultRound | find : '2'"
-             [resultBefore]="resultRound | find : '1'"  [resultRegion]="resultRegion | find : '2'"
+            <app-presidential-round [result]="round2"
+             [resultBefore]="round1"  [resultRegion]="resultRegion | find : '2'"
              [resultDepartement]="resultDepartement | find : '2'" [type]="type"  [table]="tableRound2"
             [round]="'2'" (selectTabEvent)="selectTab($event)" [selectedTab]="selectedTab">
           </app-presidential-round>
           </ng-container>
         </div>
-        <div class="content" *ngIf="resultRound | find : '1'">
+        <div class="content" *ngIf="round1">
           <ng-container *ngIf="type === 'candidate' && resultRegion && resultDepartement && tableRound1">
             <app-presidential-round
-            [result]="resultRound | find : '1'"
+            [result]="round1"
             [type]="type" [round]="'1'"
             [resultRegion]="resultRegion | find : '1'"
             [resultDepartement]="resultDepartement | find : '1'" (selectTabEvent)="selectTab($event)" [selectedTab]="selectedTab" [table]="tableRound1">
@@ -50,14 +57,14 @@
   </ng-container>
   <div class="content result" *ngIf="listCandidates">
     <!-- Affiche toutes les candidats -->
-    <app-presidential-list-link [title]="'Résultats de l’élection présidentielle 2022 par candidat'" [list]="listCandidates"
-      [type]="'candidat'" [place]="region?.name">
+    <app-presidential-list-link [title]="'Résultats de l\'élection présidentielle 2022 par candidat'" [list]="listCandidates"
+      [type]="'candidat'">
     </app-presidential-list-link>
   </div>
   <div class="content result" *ngIf="listRegions">
     <!-- Affiche toutes les regions -->
     <app-presidential-list-link [title]="'Résultats de l\'élection présidentielle 2022 par région'" [list]="listRegions"
-      [type]="'region'" [place]="region?.name">
+      [type]="'region'">
     </app-presidential-list-link>
   </div>
   <div class="content result">

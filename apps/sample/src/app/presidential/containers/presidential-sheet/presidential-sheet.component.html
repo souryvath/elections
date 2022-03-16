@@ -71,7 +71,7 @@
                   'Résultats de l\'élection présidentielle 2022 par ville et par commune à proximité de ' + result[0].place.name + ' (' + result[0].place.postalCode + ')' :
                   'Résultats de l\'élection présidentielle 2022 par ville et par commune à proximité de ' + result[0].place.name
                   "
-                  [list]="cities" [type]="'region'">
+                  [list]="cities">
                 </app-presidential-list-link>
               </ng-container>
             </ng-container>
@@ -80,13 +80,13 @@
         <div class="content result" *ngIf="departement && listDepartements"> <!-- Affiche les départements dans la région selectionne -->
           <app-presidential-list-link
             [title]="'Résultats de l\'élection présidentielle 2022 par département en ' + departement.region.name"
-            [list]="listDepartements" [type]="'region'" [place]="departement?.name" >
+            [list]="listDepartements" [place]="departement?.name" >
           </app-presidential-list-link>
         </div>
         <div class="content result" *ngIf="!departement && listDepartements">
           <app-presidential-list-link
           [title]="'Résultats de l\'élection présidentielle 2022 par département dans la région ' + result[0].place.name"
-          [list]="listDepartements" [type]="'region'">
+          [list]="listDepartements">
         </app-presidential-list-link>
         </div>
         <div class="content result" *ngIf="listRegions"> <!-- Affiche toutes les regions -->
@@ -105,7 +105,7 @@
                   departement ?
                   'Résultats de l\'élection présidentielle 2022 par ville et par commune en ' + result[0].place.name + ' (' + departement.code.substring(3) + ')' :
                   'Résultats de l\'élection présidentielle 2022 par ville et par commune en ' + result[0].place.name"
-                  [list]="cities" [type]="'region'">
+                  [list]="cities">
                 </app-presidential-list-link>
               </ng-container>
             </ng-container>

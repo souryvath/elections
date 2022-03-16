@@ -25,13 +25,15 @@ export class PresidentialCandidateSheetComponent implements OnInit {
   resultDepartement: any;
   listRegions: any[] = FRANCE_REGIONS;
   listCity$: Observable<any>;
-  listCandidates = CANDIDATES_PRESIDENTIAL_FRONT;
+  listCandidates = []
   tableRound1: any[];
   tableRound2: any[];
   selectedTab: any = {
     '1': 'Département',
     '2': 'Département'
   };
+  round1: any;
+  round2: any;
 
   constructor(
     public router: Router,
@@ -46,9 +48,8 @@ export class PresidentialCandidateSheetComponent implements OnInit {
     const candidateParams = this.route.snapshot.params['slugCandidate'];
     this.listCity$ = this.presidentialService.getMostVotedCities();
     const candidate = CANDIDATES_PRESIDENTIAL_FRONT.find((candItem) => candItem.slug === candidateParams);
-
+    this.listCandidates = CANDIDATES_PRESIDENTIAL_FRONT.filter((candItem) => candItem.slug !== candidateParams);;
     this.result$ = this.presidentialService.getCandidate(candidateParams, 'national').pipe(tap((element) => {
-      console.log(element);
       this.resultRound = element;
       this.initPage(candidate, candidateParams);
       this.resultRound.forEach((item) => {
@@ -58,6 +59,8 @@ export class PresidentialCandidateSheetComponent implements OnInit {
         item.ranking = rank + 1;
         item.name = candidate.name;
       });
+      this.round1 = this.resultRound.find((item) => item.round === '1');
+      this.round2 = this.resultRound.find((item) => item.round === '2');
       this.handleTabRegion(candidateParams);
       this.handleTabDepartement(candidateParams);
 

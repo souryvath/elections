@@ -95,6 +95,7 @@ export class ScraperPresidentialNationalService {
       };
       const option = CANDIDATES_PRESIDENTIAL.find((candidateItem) => candidateItem.name === `${candidate.firstName} ${candidate.lastName}`);
       if (option) {
+        candidate.gender = option.gender;
         candidate.party = option.party;
         candidate.color = option.color;
         candidate.slug = option.slug;
