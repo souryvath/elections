@@ -30,6 +30,7 @@ export class PresidentialSheetComponent implements OnInit {
   region: any;
   departement: any;
   city: any;
+  resultSheet: any;
 
 
   constructor(
@@ -56,6 +57,7 @@ export class PresidentialSheetComponent implements OnInit {
       this.departement = this.listDepartements.find((item) => item.slug === departementParams);
       this.region = FRANCE_REGIONS.find((item) => item.slug === regionParams);
       this.result$ = this.presidentialService.getResult(cityParams).pipe(tap((element) => {
+        this.resultSheet = element;
         if (element[0].place.location) {
           this.listCity$ = this.presidentialService.getNearestCities(element[0].place.location.coordinates[0], element[0].place.location.coordinates[1]);
         } else {
@@ -80,7 +82,9 @@ export class PresidentialSheetComponent implements OnInit {
       return;
     }
     if (regionParams && departementParams) {
-      this.result$ = this.presidentialService.getResult(departementParams);
+      this.result$ = this.presidentialService.getResult(departementParams).pipe(tap((element) => {
+        this.resultSheet = element;
+      }));
       this.region = FRANCE_REGIONS.find((item) => item.slug === regionParams);
       this.departement = this.listDepartements.find((item) => item.slug === departementParams);
       this.setBreadCrumbJsonLdDepartement(this.region, this.departement);
@@ -108,8 +112,6 @@ export class PresidentialSheetComponent implements OnInit {
 
   initPageDepartement(departementParams: string) {
     this.listDepartements = FRANCE_DEPS_LIST.filter((item) => item.region.code === `FR-${this.region.code}` && item.slug !== departementParams);
-    console.log(departementParams);
-
     this.listRegions = FRANCE_REGIONS;
     this.departement$ = of(this.departement);
     this.place$ = this.departement$;
@@ -126,10 +128,14 @@ export class PresidentialSheetComponent implements OnInit {
 
   initPageRegion(regionParams: string): void {
     if (this.region && this.region.slugDep) {
-      this.result$ = this.presidentialService.getResult(this.region.slugDep);
+      this.result$ = this.presidentialService.getResult(this.region.slugDep).pipe(tap((element) => {
+        this.resultSheet = element;
+      }));
     }
     if (this.region && !this.region.slugDep) {
-      this.result$ = this.presidentialService.getResult(regionParams);
+      this.result$ = this.presidentialService.getResult(regionParams).pipe(tap((element) => {
+        this.resultSheet = element;
+      }));
     }
     if (this.region) {
       this.region$ = of(this.region);

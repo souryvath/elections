@@ -127,12 +127,25 @@ export class PresidentialService {
       {
         $group: {
           _id: '$code',
-          nbrVotes: { $first: '$nbrVotes' },
           name: { $first: '$name' },
           slug: { $first: '$place.slug' },
           regionSlug: { $first: '$place.region.slug' },
           candidate: { $first: '$candidate' }
         }
+      },
+      {
+        $project: {
+          _id: 0,
+          name: 1,
+          slug: 1,
+          regionSlug: 1,
+          candidate: {
+            firstName: '$candidate.firstName',
+            lastName: '$candidate.lastName',
+            pctVotesOnExprimated: '$candidate.pctVotesOnExprimated',
+            color: '$candidate.color'
+          }
+        },
       },
       { $sort: { "slug": 1 } }
     ] as PipelineStage[];
@@ -207,15 +220,15 @@ export class PresidentialService {
       const gquery = [
         { $match: { 'place.departement.region.slug': value, "round": '1' } },
         {
-          $group: {
-            _id: '$code',
-            nbrVotes: { $first: '$nbrVotes' },
-            name: { $first: '$name' },
-            slug: { $first: '$place.slug' },
-            departementSlug: { $first: '$place.departement.slug' },
-            postalCode: { $first: '$place.postalCode' },
-            regionSlug: { $first: '$place.departement.region.slug' }
-          },
+          $project: {
+            _id: 0,
+            nbrVotes: '$nbrVotes',
+            name: '$name',
+            slug: '$place.slug',
+            departementSlug: '$place.departement.slug',
+            postalCode: '$place.postalCode',
+            regionSlug: '$place.departement.region.slug'
+          }
         },
         { $sort: { "nbrVotes": -1 } },
         { $limit: 25 },
@@ -228,15 +241,15 @@ export class PresidentialService {
       const gquery = [
         { $match: { 'place.departement.slug': value, "round": '1' } },
         {
-          $group: {
-            _id: '$code',
-            nbrVotes: { $first: '$nbrVotes' },
-            name: { $first: '$name' },
-            slug: { $first: '$place.slug' },
-            departementSlug: { $first: '$place.departement.slug' },
-            postalCode: { $first: '$place.postalCode' },
-            regionSlug: { $first: '$place.departement.region.slug' }
-          },
+          $project: {
+            _id: 0,
+            nbrVotes: '$nbrVotes',
+            name: '$name',
+            slug: '$place.slug',
+            departementSlug: '$place.departement.slug',
+            postalCode: '$place.postalCode',
+            regionSlug: '$place.departement.region.slug'
+          }
         },
         { $sort: { "nbrVotes": -1 } },
         { $limit: 25 },
@@ -310,19 +323,19 @@ export class PresidentialService {
     const gquery = [
       { $match: { 'place.postalCode': { $exists: true }, "round": '1', 'place.departement.region.slug': { $ne: 'francais-etranger' } } },
       {
-        $group: {
-          _id: '$code',
-          nbrVotes: { $first: '$nbrVotes' },
-          name: { $first: '$name' },
-          slug: { $first: '$place.slug' },
-          departementSlug: { $first: '$place.departement.slug' },
-          postalCode: { $first: '$place.postalCode' },
-          regionSlug: { $first: '$place.departement.region.slug' }
-        },
+        $project: {
+          nbrVotes: '$nbrVotes',
+          name: '$name',
+          slug: '$place.slug',
+          departementSlug: '$place.departement.slug',
+          postalCode: '$place.postalCode',
+          regionSlug: '$place.departement.region.slug'
+        }
       },
       { $sort: { "nbrVotes": -1 } },
       { $limit: 50 },
       { $sort: { "slug": 1 } },
+
     ] as PipelineStage[];
     const postalCodes = await this.presidentialModel.aggregate(gquery).exec();
     return postalCodes;

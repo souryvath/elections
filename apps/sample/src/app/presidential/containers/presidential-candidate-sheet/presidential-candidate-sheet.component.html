@@ -53,6 +53,15 @@
         </div>
 
       </ng-container>
+      <div class="content loader" *ngIf="resultObs.loading">
+        <p-progressSpinner [style]="{width: '70px', height: '70px'}" styleClass="custom-spinner" strokeWidth="5"
+          animationDuration=".5s"></p-progressSpinner>
+      </div>
+      <ng-container *ngIf="(!resultObs.value) && !resultObs.loading">
+        <div class="content">
+          <p-message severity="error" text="Aucune résultat trouvé"></p-message>
+        </div>
+      </ng-container>
     </ng-container>
   </ng-container>
   <div class="content result" *ngIf="listCandidates">

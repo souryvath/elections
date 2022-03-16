@@ -60,58 +60,67 @@
           <app-presidential-round [result]="result | find : '1'" [type]="type" [round]="'1'">
           </app-presidential-round>
         </div>
-        <div class="content result" *ngIf="city$">
-          <ng-container *ngIf=" {
-            cities: (listCity$ | loading | async)
-            } as obs">
-            <ng-container *ngIf="obs.cities as citiesObs">
-              <ng-container *ngIf="citiesObs.value as cities">
-                <app-presidential-list-link
-                  [title]="result[0].place.postalCode !== '' ?
-                  'Résultats de l\'élection présidentielle 2022 par ville et par commune à proximité de ' + result[0].place.name + ' (' + result[0].place.postalCode + ')' :
-                  'Résultats de l\'élection présidentielle 2022 par ville et par commune à proximité de ' + result[0].place.name
-                  "
-                  [list]="cities">
-                </app-presidential-list-link>
-              </ng-container>
-            </ng-container>
-          </ng-container>
-        </div>
-        <div class="content result" *ngIf="departement && listDepartements"> <!-- Affiche les départements dans la région selectionne -->
-          <app-presidential-list-link
-            [title]="'Résultats de l\'élection présidentielle 2022 par département en ' + departement.region.name"
-            [list]="listDepartements" [place]="departement?.name" >
-          </app-presidential-list-link>
-        </div>
-        <div class="content result" *ngIf="!departement && listDepartements">
-          <app-presidential-list-link
-          [title]="'Résultats de l\'élection présidentielle 2022 par département dans la région ' + result[0].place.name"
-          [list]="listDepartements">
-        </app-presidential-list-link>
-        </div>
-        <div class="content result" *ngIf="listRegions"> <!-- Affiche toutes les regions -->
-          <app-presidential-list-link [title]="'Résultats de l\'élection présidentielle 2022 par région en France'"
-            [list]="listRegions" [type]="'region'" [place]="region?.name">
-          </app-presidential-list-link>
-        </div>
-        <div class="content result" *ngIf="!city$">
-          <ng-container *ngIf=" {
-            cities: (listCity$ | loading | async)
-            } as obs">
-            <ng-container *ngIf="obs.cities as citiesObs">
-              <ng-container *ngIf="citiesObs.value as cities">
-                <app-presidential-list-link
-                  [title]="
-                  departement ?
-                  'Résultats de l\'élection présidentielle 2022 par ville et par commune en ' + result[0].place.name + ' (' + departement.code.substring(3) + ')' :
-                  'Résultats de l\'élection présidentielle 2022 par ville et par commune en ' + result[0].place.name"
-                  [list]="cities">
-                </app-presidential-list-link>
-              </ng-container>
-            </ng-container>
-          </ng-container>
+      </ng-container>
+      <div class="content loader" *ngIf="resultObs.loading">
+        <p-progressSpinner [style]="{width: '70px', height: '70px'}" styleClass="custom-spinner" strokeWidth="5"
+          animationDuration=".5s"></p-progressSpinner>
+      </div>
+      <ng-container *ngIf="(!resultObs.value) && !resultObs.loading">
+        <div class="content">
+          <p-message severity="error" text="Aucune résultat trouvé"></p-message>
         </div>
       </ng-container>
     </ng-container>
   </ng-container>
+  <div class="content result" *ngIf="city$">
+    <ng-container *ngIf=" {
+      cities: (listCity$ | loading | async)
+      } as obs">
+      <ng-container *ngIf="obs.cities as citiesObs">
+        <ng-container *ngIf="citiesObs.value as cities">
+          <app-presidential-list-link
+            [title]="resultSheet[0].place.postalCode !== '' ?
+            'Résultats de l\'élection présidentielle 2022 par ville et par commune à proximité de ' + resultSheet[0].place.name + ' (' + resultSheet[0].place.postalCode + ')' :
+            'Résultats de l\'élection présidentielle 2022 par ville et par commune à proximité de ' + resultSheet[0].place.name
+            "
+            [list]="cities">
+          </app-presidential-list-link>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="content result" *ngIf="departement && listDepartements"> <!-- Affiche les départements dans la région selectionne -->
+    <app-presidential-list-link
+      [title]="'Résultats de l\'élection présidentielle 2022 par département en ' + departement.region.name"
+      [list]="listDepartements" [place]="departement?.name" >
+    </app-presidential-list-link>
+  </div>
+  <div class="content result" *ngIf="!departement && listDepartements">
+    <app-presidential-list-link
+    [title]="'Résultats de l\'élection présidentielle 2022 par département dans la région ' + resultSheet[0].place.name"
+    [list]="listDepartements">
+  </app-presidential-list-link>
+  </div>
+  <div class="content result" *ngIf="listRegions"> <!-- Affiche toutes les regions -->
+    <app-presidential-list-link [title]="'Résultats de l\'élection présidentielle 2022 par région en France'"
+      [list]="listRegions" [type]="'region'" [place]="region?.name">
+    </app-presidential-list-link>
+  </div>
+  <div class="content result" *ngIf="!city$">
+    <ng-container *ngIf=" {
+      cities: (listCity$ | loading | async)
+      } as obs">
+      <ng-container *ngIf="obs.cities as citiesObs">
+        <ng-container *ngIf="citiesObs.value as cities">
+          <app-presidential-list-link
+            [title]="
+            departement ?
+            'Résultats de l\'élection présidentielle 2022 par ville et par commune en ' + resultSheet[0].place.name + ' (' + departement.code.substring(3) + ')' :
+            'Résultats de l\'élection présidentielle 2022 par ville et par commune en ' + resultSheet[0].place.name"
+            [list]="cities">
+          </app-presidential-list-link>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
 </div>
