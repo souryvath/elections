@@ -3,4 +3,16 @@
 <sitemap>
   <loc>https://www.les-elections.fr/sitemaps/sitemap_parrainages.xml</loc>
 </sitemap>
+<sitemap>
+  <loc>https://www.les-elections.fr/sitemaps/sitemap_presidentielle_candidats.xml</loc>
+</sitemap>
+<sitemap>
+  <loc>https://www.les-elections.fr/sitemaps/sitemap_presidentielle_departements.xml</loc>
+</sitemap>
+<sitemap>
+  <loc>https://www.les-elections.fr/sitemaps/sitemap_presidentielle_regions.xml</loc>
+</sitemap>
+<sitemap>
+  <loc>https://www.les-elections.fr/sitemaps/sitemap_presidentielle_villes.xml</loc>
+</sitemap>
 </sitemapindex>

@@ -333,4 +333,13 @@ export class PresidentialService {
     return postalCodes;
   }
 
+  async findAllCities(): Promise<any[]> {
+    const gquery = [
+      { $match: { 'place.postalCode': { $exists: true }, "round": '1' } },
+
+    ] as PipelineStage[];
+    const postalCodes = await this.presidentialModel.aggregate(gquery).exec();
+    return postalCodes;
+  }
+
 }
