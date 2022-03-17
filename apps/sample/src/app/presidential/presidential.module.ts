@@ -17,7 +17,6 @@ import { PresidentialResultComponent } from './components/presidential-result/pr
 import { PresidentialRoundComponent } from './components/presidential-round/presidential-round.component';
 import { PresidentialCandidateHomeComponent } from './containers/presidential-candidate-home/presidential-candidate-home.component';
 import { PresidentialCandidateSheetComponent } from './containers/presidential-candidate-sheet/presidential-candidate-sheet.component';
-import { PresidentialCandidateMapComponent } from './containers/presidential-candidate-map/presidential-candidate-map.component';
 import { PresidentialTableMapComponent } from './components/presidential-table-map/presidential-table-map.component';
 
 @NgModule({
@@ -33,7 +32,6 @@ import { PresidentialTableMapComponent } from './components/presidential-table-m
     PresidentialRoundComponent,
     PresidentialCandidateHomeComponent,
     PresidentialCandidateSheetComponent,
-    PresidentialCandidateMapComponent,
     PresidentialTableMapComponent
   ],
   exports: [
