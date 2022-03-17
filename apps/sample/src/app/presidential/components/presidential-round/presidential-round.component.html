@@ -240,7 +240,9 @@
       <ng-container *ngIf="type === 'France'">
         <p>
           Lors du <strong>second tour</strong> de cette
-          <strong>élection présidentielle</strong>, {{result.candidates[0].firstName}} {{result.candidates[0].lastName}}
+          <strong>élection présidentielle</strong>,     <a href="resultats-presidentielle-2022/candidats/{{result.candidates[0].slug}}"
+          title="résultats présidentielle 2022 {{result.candidates[0].firstName}} {{result.candidates[0].lastName}} par département et par région">{{result.candidates[0].firstName}}
+          {{result.candidates[0].lastName}}</a>
           arrive en tête des voix en France et
           devient le <strong>nouveau Président de la République</strong>.
           <a href="resultats-presidentielle-2022/candidats/{{result.candidates[0].slug}}"
