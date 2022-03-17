@@ -82,6 +82,14 @@
 
   </h2>
 </div>
+<div class="content" *ngIf="isHomepage">
+  <div class="alert alert-warning" role="alert">
+    En attendant 2022, les résultats de la dernière élection d'il y a 5 ans
+  </div>
+</div>
+<div class="content search" *ngIf="isHomepage">
+  <app-presidential-search></app-presidential-search>
+</div>
 <div class="content result">
   <app-presidential-result [result]="result"></app-presidential-result>
   <ng-container *ngIf="result.candidates.length === 0">
