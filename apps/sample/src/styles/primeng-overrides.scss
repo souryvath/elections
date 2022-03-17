@@ -23,7 +23,9 @@
 }
 
 #autocomplete-search {
+
   .p-autocomplete {
+    margin-bottom: 0 !important;
     .p-inputtext {
       border-top-left-radius: $border-radius-input !important;
       border-bottom-left-radius: $border-radius-input !important;

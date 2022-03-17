@@ -1,0 +1,91 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="container">
+  <div class="cs-title">
+    <h1>
+      Elections présidentielles 2022
+    </h1>
+  </div>
+  <div class="content">
+    <p>
+      Bienvenue sur le site Les Elections, qui vous présente les résultats de l’élection présidentielle 2022 dès leur publication dans votre commune et dans votre ville. <br>Retrouvez également les résultats des parrainages de la présidentielle 2022.
+    </p>
+  </div>
+  <div class="content">
+    <div class="alert alert-warning" role="alert">
+      En attendant 2022, les résultats de la dernière élection d'il y a 5 ans
+    </div>
+  </div>
+  <div class="content search">
+    <app-presidential-search></app-presidential-search>
+  </div>
+  <ng-container *ngIf=" {
+    result: (result$ | loading | async),
+    table: (table$ | loading | async)
+    } as obs">
+    <ng-container *ngIf="obs.result as resultObs">
+      <ng-container *ngIf="resultObs.value as result">
+        <ng-container *ngIf="obs.table as tableObs">
+          <ng-container *ngIf="tableObs.value as table">
+            <div class="content" *ngIf="result | find : '2'">
+              <app-presidential-round
+              [selectedTab]="selectedTab"
+              [table]="table"
+              [result]="result | find : '2'"
+              [resultBefore]="result | find : '1'"
+              [type]="type" (selectTabEvent)="selectTab($event)" [isHomepage]="true"
+                [round]="'2'">
+              </app-presidential-round>
+            </div>
+          </ng-container>
+          <div class="content loader" *ngIf="tableObs.loading">
+            <p-progressSpinner [style]="{width: '70px', height: '70px'}" styleClass="custom-spinner" strokeWidth="5"
+              animationDuration=".5s"></p-progressSpinner>
+          </div>
+          <ng-container *ngIf="(!tableObs.value) && !tableObs.loading">
+            <div class="content">
+              <p-message severity="error" text="Aucune résultat trouvé"></p-message>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <div class="content">
+    <div class="cs-title">
+      <h2>
+        Classement des parrainages
+      </h2>
+    </div>
+  </div>
+
+  <div class="content ranking">
+    <ng-container *ngIf=" {
+      ranking: (ranking$ | loading | async)
+      } as obs">
+      <ng-container *ngIf="obs.ranking as rankingObs">
+        <ng-container *ngIf="rankingObs.value as ranking">
+          <app-sponsorship-ranking [isHomepage]="true" [data]="ranking" [candidate]="null">
+          </app-sponsorship-ranking>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="content search">
+    <p class="subtitle">
+      Parrainages des candidats
+    </p>
+    <app-search-postal-code [(results)]="resultsCandidates" (searchEvent)="searchCandidate($event)"
+    [searchLabel]="'Recherchez les parrainages d’un candidat :'" [buttonLabel]="'Valider'"
+    [placeholder]="'Nom du candidat'" [type]="'parrainages-presidentielle-2022/candidats'" (selectedPlaceEvent)="select($event, 'parrainages')">
+  </app-search-postal-code>
+  </div>
+  <div class="content search">
+    <p class="subtitle">
+      Parrainages par département
+    </p>
+    <app-search-postal-code [(results)]="resultsDepartments" (searchEvent)="searchDepartment($event)"
+    [searchLabel]="'Recherchez les parrainages dans votre département :'" [buttonLabel]="'Valider'"
+    [placeholder]="'Votre département'" [type]="'parrainages-presidentielle-2022/departements'"
+    (selectedPlaceEvent)="select($event, 'departements')"></app-search-postal-code>
+  </div>
+</div>

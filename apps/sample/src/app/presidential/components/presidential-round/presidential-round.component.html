@@ -97,7 +97,7 @@
       </ng-container>
 
     </ng-container>
-    <ng-container *ngIf="isBrowser && ((round === '2') || ((round === '1') && hasTwoRounds === false))">
+    <ng-container *ngIf="isBrowser && ((round === '2') || ((round === '1') && hasTwoRounds === false)) && !isHomepage">
       <div class="content button">
         <div class="label">
           Partager le résultat des votes
@@ -108,10 +108,10 @@
           [show]="8" [autoSetMeta]="false"></share-buttons>
       </div>
     </ng-container>
-    <ng-container *ngIf="type !== 'candidate'">
+    <ng-container *ngIf="type !== 'candidate' && !isHomepage">
       <app-presidential-table [result]="result"></app-presidential-table>
     </ng-container>
-    <ng-container *ngIf="round === '2'">
+    <ng-container *ngIf="round === '2' && !isHomepage">
       <ng-container *ngIf="type === 'candidate'">
         <ng-container *ngIf="result.ranking === 1">
           <p>
@@ -412,7 +412,7 @@
 
       </ng-container>
     </ng-container>
-    <div class="button" *ngIf="type !== 'candidate'">
+    <div class="button" *ngIf="type !== 'candidate' && !isHomepage">
       <button class="p-button p-button-more" (click)="displayMore()">
         {{labelDisplayMore}}
         <span class="material-icons">
@@ -420,6 +420,12 @@
         </span>
       </button>
     </div>
+    <div class="home-button">
+      <a *ngIf="isHomepage" href="resultats-presidentielle-2022" class="p-button p-button-primary" title="résultats élection présidentielle 2022 france 1er tour">
+        Voir les résultats complets du 1er et 2nd tour
+      </a>
+    </div>
+
   </ng-container>
 
 </div>

@@ -15,7 +15,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [
     HeaderComponent,

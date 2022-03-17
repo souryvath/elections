@@ -11,7 +11,6 @@
 
 .cs-form-search {
   width: 100%;
-  margin-bottom: 1em;
   p {
     text-align: center;
     margin-bottom: 0.5em !important;
@@ -79,5 +78,14 @@
   .p-button-label {
     margin-left: 5px;
     flex: unset !important;
+  }
+}
+
+a {
+  &.p-button {
+    text-decoration: none;
+  }
+  &:hover {
+    text-decoration: underline;
   }
 }

@@ -17,6 +17,7 @@ export class PresidentialRoundComponent {
   @Input() resultRegion;
   @Input() resultDepartement;
   @Input() hasTwoRounds;
+  @Input() isHomepage;
   labelDisplayMore = 'voir plus';
   icon = 'keyboard_arrow_down'
   isHidden = true;

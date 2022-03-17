@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JsonLdService } from 'ngx-seo';
 import { Observable } from 'rxjs';
-import { URL_DOMAIN } from '../../../config/url.config';
-import { SeoService } from '../../../core/services/seo.service';
-import { FRANCE_DEPS_LIST } from '../../../shared/constants/departments.constant';
-import { SponsorshipService } from '../../services/sponsorship.service';
+import { URL_DOMAIN } from '../../config/url.config';
+import { SeoService } from '../../core/services/seo.service';
+import { FRANCE_DEPS_LIST } from '../../shared/constants/departments.constant';
+import { SponsorshipService } from '../../sponsorship/services/sponsorship.service';
+import { PresidentialService } from '../../presidential/services/presidential.service';
 
 @Component({
   selector: 'app-home',
@@ -18,11 +19,16 @@ export class HomeComponent implements OnInit {
   resultsCandidates: any[];
   resultsDepartments: any[];
   todayDate: any = Date.now();
+  result$: Observable<any>;
+  type = 'France';
+  table$: Observable<any>;
+  selectedTab: any;
   constructor(
     public router: Router,
     private readonly seoService: SeoService,
     private readonly sponsorshipService: SponsorshipService,
     private readonly jsonLdService: JsonLdService,
+    private readonly presidentialService: PresidentialService
   ) {
   }
 
@@ -30,6 +36,11 @@ export class HomeComponent implements OnInit {
     this.setSeo();
     this.setBreadCrumbJsonLd();
     this.ranking$ = this.sponsorshipService.getRanking();
+    this.result$ = this.presidentialService.getFranceResult();
+    this.table$ = this.presidentialService.getDepartements('2');
+    this.selectedTab = {
+      '2': 'Département'
+    }
   }
 
   private setSeo(): void {
@@ -65,6 +76,15 @@ export class HomeComponent implements OnInit {
       }]
     });
     this.jsonLdService.setData(breadCrumbObject);
+  }
+
+  selectTab($event): void {
+    if ($event.type === 'Département') {
+      this.table$ = this.presidentialService.getDepartements('2');
+    } else if ($event.type === 'Région') {
+      this.table$ = this.presidentialService.getRegions('2');
+    }
+    this.selectedTab[$event.round] = $event.type;
   }
 
 }

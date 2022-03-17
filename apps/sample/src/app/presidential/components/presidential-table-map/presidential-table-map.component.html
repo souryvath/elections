@@ -26,7 +26,7 @@
 
           <p-sortIcon field="candidate.lastName"></p-sortIcon>
         </th>
-        <th pSortableColumn="pctVotesOnExprimated" >
+        <th pSortableColumn="pctVotesOnExprimated" *ngIf="type === 'candidate'">
           <ng-container *ngIf="round === '1'">
             Pourcentage au premier tour
           </ng-container>
@@ -34,6 +34,16 @@
             Pourcentage au second tour
           </ng-container>
           <p-sortIcon field="pctVotesOnExprimated"></p-sortIcon>
+        </th>
+
+        <th pSortableColumn="candidate.pctVotesOnExprimated" *ngIf="type !== 'candidate'">
+          <ng-container *ngIf="round === '1'">
+            Pourcentage au premier tour
+          </ng-container>
+          <ng-container *ngIf="round === '2'">
+            Pourcentage au second tour
+          </ng-container>
+          <p-sortIcon field="candidate.pctVotesOnExprimated"></p-sortIcon>
         </th>
 
       </tr>

@@ -36,6 +36,10 @@ import { PresidentialTableMapComponent } from './components/presidential-table-m
     PresidentialCandidateMapComponent,
     PresidentialTableMapComponent
   ],
+  exports: [
+    PresidentialRoundComponent,
+    PresidentialSearchComponent
+  ],
   imports: [
     CommonModule,
     PresidentialRoutingModule,

@@ -1,5 +1,3 @@
-import { HomeComponent } from './containers/home/home.component';
-
 import { LayoutModule } from './../layout/layout.module';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -31,7 +29,9 @@ import { SponsorshipDepartmentComponent } from './containers/sponsorship-departm
     SponsorshipHomeCandidateComponent,
     SponsorshipHomeDepartmentComponent,
     SponsorshipDepartmentComponent,
-    HomeComponent
+  ],
+  exports: [
+    SponsorshipRankingComponent
   ],
   imports: [
     CommonModule,
