@@ -1,3 +1,4 @@
+import { AdsModule } from './../ads/ads.module';
 import { LayoutModule } from './../layout/layout.module';
 import { SponsorshipModule } from './../sponsorship/sponsorship.module';
 import { PresidentialModule } from './../presidential/presidential.module';
@@ -19,7 +20,8 @@ import { HomeRoutingModule } from './home-routing.module';
     SharedModule,
     PresidentialModule,
     SponsorshipModule,
-    LayoutModule
+    LayoutModule,
+    AdsModule
   ]
 })
 export class HomeModule { }

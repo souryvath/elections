@@ -51,7 +51,7 @@
     </ng-container>
 
   </h2>
-  <h2 *ngIf="type === 'France'">
+  <h2 *ngIf="type === 'France' || type == 'Home'">
     Résultats du <ng-container *ngIf="round === '1'">
       premier
     </ng-container>
@@ -82,11 +82,19 @@
 
   </h2>
 </div>
+<ng-container *ngIf="round === '1' && (type === 'candidate')">
+  <app-display-ads [slot]="8421416892"></app-display-ads>
+</ng-container>
+<ng-container *ngIf="round === '2' && (type === 'Home')">
+  <app-display-ads [slot]="8421416892"></app-display-ads>
+</ng-container>
+
 <div class="content">
   <div class="alert alert-warning" role="alert">
     En attendant 2022, les résultats de la dernière élection d'il y a 5 ans
   </div>
 </div>
+
 <div class="content search" *ngIf="isHomepage">
   <app-presidential-search></app-presidential-search>
 </div>
@@ -97,7 +105,7 @@
     présidentielle.
   </ng-container>
   <ng-container *ngIf="result.candidates.length > 0">
-    <ng-container *ngIf="(type === 'France' || type === 'candidate')">
+    <ng-container *ngIf="(type === 'France' || type === 'candidate' || type == 'Home')">
       <ng-container *ngIf="(round === '2') || (round === '1' && type === 'candidate')">
         <app-presidential-table-map [type]="type" [round]="round" [selectedTab]="selectedTab" [table]="table"
           *ngIf="table" (selectTabEvent)="selectTab($event)">
@@ -114,6 +122,13 @@
         </div>
           <app-share-buttons></app-share-buttons>
       </div>
+    </ng-container>
+    <ng-container *ngIf="round !== '1' && type !=='Home'">
+      <app-display-ads [slot]="8421416892"></app-display-ads>
+    </ng-container>
+
+    <ng-container *ngIf="round === '1' && type === 'France'">
+      <app-display-ads [slot]="8421416892"></app-display-ads>
     </ng-container>
     <ng-container *ngIf="type !== 'candidate' && !isHomepage">
       <app-presidential-table [result]="result"></app-presidential-table>

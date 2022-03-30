@@ -16,6 +16,7 @@
             Liste des parrainages de la présidentielle 2022 pour le candidat {{candidate.name}}
           </h1>
         </div>
+        <app-display-ads [slot]="8421416892"></app-display-ads>
         <div class="content">
           <div class="banner"
             [class.green]="candidate.numberSponsorships >= NBR_SPONSORSHIPS && candidate.numberDepartments >= 30 && candidate.hasTenPercent === false"
@@ -120,6 +121,7 @@
             </div>
           </div>
         </div>
+        <app-display-ads [slot]="8421416892"></app-display-ads>
         <div class="cs-title">
           <p class="subtitle">
             Evolution des parrainages dans le temps pour le candidat {{candidate.name}} pour la
@@ -142,6 +144,7 @@
           <app-sponsorship-ranking [isHomepage]="false" [data]="ranking" [candidate]="candidate.name">
           </app-sponsorship-ranking>
         </div>
+        <app-display-ads [slot]="8421416892"></app-display-ads>
         <div class="cs-title">
           <h2>
             Liste des élus et parrainages du candidat {{candidate.name}} pour la présidentielle 2022 par
@@ -151,6 +154,7 @@
         <div class="content list">
           <app-sponsorship-list [data]="candidate.sponsorships" [type]="'candidate'"></app-sponsorship-list>
         </div>
+        <app-display-ads [slot]="8421416892"></app-display-ads>
         <div class="content">
           <app-list-buttons [list]="ranking" [candidate]="candidate.name" [type]="'candidate'"
             [title]="'Tous les parrainages par candidat'" [link]="'parrainages-presidentielle-2022/candidats/'">

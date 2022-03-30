@@ -12,6 +12,7 @@
     Le 1er tour de l'élection présidentielle 2022 se tient le dimanche 10 avril 2022,
     et le 2ème tour le dimanche 24 avril 2022.
   </div>
+  <app-display-ads [slot]="8421416892"></app-display-ads>
   <div class="content search">
     <app-presidential-search></app-presidential-search>
   </div>
@@ -28,6 +29,7 @@
                 [round]="'2'">
               </app-presidential-round>
             </div>
+            <app-display-ads [slot]="8421416892"></app-display-ads>
             <div class="content" *ngIf="result | find : '1'">
               <app-presidential-round [result]="result | find : '1'" [type]="type" [round]="'1'">
               </app-presidential-round>
@@ -46,7 +48,7 @@
       </ng-container>
     </ng-container>
   </ng-container>
-
+  <app-display-ads [slot]="4290600195"></app-display-ads>
   <div class="content result" *ngIf="listRegions">
     <!-- Affiche toutes les regions -->
     <app-presidential-list-link [title]="'Résultats de l\'élection présidentielle 2022 par région'" [list]="listRegions"

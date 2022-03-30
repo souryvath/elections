@@ -15,6 +15,7 @@
             Carte des parrainages de la présidentielle 2022 dans le département {{department.name}} par ville
           </h1>
         </div>
+        <app-display-ads [slot]="8421416892"></app-display-ads>
         <div class="content">
           <p>
             Retrouvez la carte des parrainages pour la présidentielle 2022 dans le département {{department.name}} et
@@ -25,6 +26,7 @@
           <app-map [id]="'departments-map'" [places]="places" [type]="'parrainages'" [tiles]="'human'"
             [city]="places[0] ? places[0] : city"></app-map>
         </div>
+
         <div class="content">
           <div class="row g-2">
             <div class="col-bloc col-lg-6">
@@ -50,6 +52,7 @@
             </div>
           </div>
         </div>
+        <app-display-ads [slot]="8421416892"></app-display-ads>
         <div class="cs-title">
           <p class="subtitle">
             Classement des candidats soutenus en parrainages pour la présidentielle 2022 dans le département
@@ -60,6 +63,7 @@
           <app-sponsorship-ranking [isHomepage]="false" [data]="department.candidates" [candidate]="null" [isDep]="true">
           </app-sponsorship-ranking>
         </div>
+        <app-display-ads [slot]="8421416892"></app-display-ads>
         <div class="cs-title">
           <h2>
             Liste des élus et parrainages pour la présidentielle 2022 par ville dans le département

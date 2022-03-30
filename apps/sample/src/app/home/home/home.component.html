@@ -10,7 +10,6 @@
       Bienvenue sur le site Les Elections, qui vous présente les résultats de l’élection présidentielle 2022 dès leur publication dans votre commune et dans votre ville. <br>Retrouvez également les résultats des parrainages de la présidentielle 2022.
     </p>
   </div>
-
   <ng-container *ngIf=" {
     result: (result$ | loading | async),
     table: (table$ | loading | async)
@@ -43,6 +42,7 @@
       </ng-container>
     </ng-container>
   </ng-container>
+  <app-display-ads [slot]="8421416892"></app-display-ads>
   <div class="content">
     <div class="cs-title">
       <h2>
@@ -81,4 +81,6 @@
     [placeholder]="'Votre département'" [type]="'parrainages-presidentielle-2022/departements'"
     (selectedPlaceEvent)="select($event, 'departements')"></app-search-postal-code>
   </div>
+  <app-display-ads [slot]="4290600195"></app-display-ads>
 </div>
+

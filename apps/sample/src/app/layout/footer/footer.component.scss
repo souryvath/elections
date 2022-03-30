@@ -1,4 +1,6 @@
 
+@import '../../../styles/variables.scss';
+
 .links {
   a {
     color: black;
@@ -31,6 +33,7 @@ ul {
     justify-content: flex-start;
   }
   a {
+    color: $main-color;
     text-decoration: none;
   }
   .fa {

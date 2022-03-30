@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   resultsDepartments: any[];
   todayDate: any = Date.now();
   result$: Observable<any>;
-  type = 'France';
+  type = 'Home';
   table$: Observable<any>;
   selectedTab: any;
   constructor(
