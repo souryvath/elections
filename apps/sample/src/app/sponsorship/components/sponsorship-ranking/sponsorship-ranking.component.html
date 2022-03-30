@@ -57,13 +57,11 @@
           <td class="number" *ngIf="!isDep">
             <span
             *ngIf="item.numberSponsorships >= 500 && !isDep"
-            class="material-icons green">
-            check_circle_outline
+            class="fa-solid fa-circle-check green">
           </span>
           <span
           *ngIf="item.numberSponsorships < 500 && !isDep"
-          class="material-icons grey">
-          pending_actions
+          class="fa-solid fa-user-clock grey">
         </span>
           </td>
 

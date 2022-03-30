@@ -6,13 +6,14 @@ import { PrimeModule } from './prime.module';
 import { MapComponent } from './components/map/map.component';
 import { SearchPostalCodeComponent } from './components/search-postal-code/search-postal-code.component';
 import { BreadcrumbModule } from 'xng-breadcrumb';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ShareButtonsComponent } from './components/share-buttons/share-buttons.component';
 
 @NgModule({
   declarations: [
     MapComponent,
     SearchPostalCodeComponent,
-    ListButtonsComponent
+    ListButtonsComponent,
+    ShareButtonsComponent
   ],
   exports: [
     CommonModule,
@@ -22,14 +23,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SearchPostalCodeComponent,
     ListButtonsComponent,
     BreadcrumbModule,
-    FontAwesomeModule
+    ShareButtonsComponent
   ],
   imports: [
     CommonModule,
     SharedLibsModule,
     PrimeModule,
-    BreadcrumbModule,
-    FontAwesomeModule
+    BreadcrumbModule
   ]
 })
 export class SharedModule { }

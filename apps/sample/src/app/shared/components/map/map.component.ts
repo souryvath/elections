@@ -84,7 +84,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
       icon: L.divIcon({
         className: 'map-marker marker-color-gray a-class',
         iconSize: [38, 38],
-        html:`<span style="color: ${color}" class="material-icons">circle</span>`
+        html:`<span style="color: ${color}" class="fa-solid fa-circle">circle</span>`
       })
     };
     return L.marker([latitude, longitude], this.icon).addTo(this.map);

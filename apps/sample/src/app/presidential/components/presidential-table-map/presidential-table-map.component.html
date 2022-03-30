@@ -11,7 +11,8 @@
     <ng-template pTemplate="caption">
       <div class="flex">
           <span class="p-input-icon-left ml-auto">
-              <i class="pi pi-search"></i>
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <!-- <i class="pi pi-search"></i> -->
               <input *ngIf="selectedTab[round] === 'Région' "pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Rechercher une région" />
               <input *ngIf="selectedTab[round] === 'Département' "pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Rechercher un département" />
           </span>

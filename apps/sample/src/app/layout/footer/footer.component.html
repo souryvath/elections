@@ -1,22 +1,52 @@
-<div class="container">
-  <ul class="links">
-    <li>
-      <a href="infos/mentions-legales">Mentions légales</a>
-    </li>
-    <li>
-      <a href="infos/cgu">CGU</a>
-    </li>
-  </ul>
-  <ul class="networks">
-    <ng-container *ngFor="let network of networks">
-      <li *ngIf="network.url !== ''">
-        <a href="{{network.url}}" target="_blank" rel="noopener noreferrer nofollow">
-          <fa-icon [icon]="['fab', network.name]" [classes]="['icon-network']" size="2x"></fa-icon>
-        </a>
-      </li>
-    </ng-container>
-
-  </ul>
-
-
-</div>
+<section class="section container">
+  <div class="left">
+    <div class="newsletter">
+      <strong>Newsletter</strong>
+      <app-newsletter></app-newsletter>
+    </div>
+  </div>
+  <div class="middle">
+    <div class="partners">
+      <strong class="title">Partenaires</strong>
+      <ul class="links">
+        <li>
+          <a href="https://www.cascoronavirus.fr/" target="_blank">Cas Coronavirus</a>
+        </li>
+        <li>
+          <a href="https://www.bilancoronavirus.fr/" target="_blank">Bilancoronavirus</a>
+        </li>
+        <li>
+          <a href="https://www.applivoiture.fr/" target="_blank">Essence Applivoiture</a>
+        </li>
+        <li>
+          <a href="https://www.essencepascher.fr/" target="_blank">Essence pas cher</a>
+        </li>
+      </ul>
+    </div>
+    <div class="networks">
+      <strong class="title">Réseaux sociaux</strong>
+      <ul class="list">
+        <ng-container *ngFor="let network of networks">
+          <li *ngIf="network.url !== ''">
+            <a href="{{network.url}}" target="_blank" rel="noopener noreferrer nofollow">
+              <span class="fa fa-brands fa-{{network.name}}"></span>
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+  <div class="right">
+    <div class="navigation">
+      <strong class="title">Navigation</strong>
+      <ul class="links">
+        <li>
+          <a href="infos/mentions-legales/">Mentions légales</a>
+        </li>
+        <li>
+          <a href="infos/cgu">CGU</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

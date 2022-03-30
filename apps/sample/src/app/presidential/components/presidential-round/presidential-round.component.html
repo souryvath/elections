@@ -112,8 +112,7 @@
 
           {{result.name | pronoun : type}}
         </div>
-        <share-buttons [theme]="'modern-dark'" [include]="['facebook','twitter','messenger','whatsapp','email']"
-          [show]="8" [autoSetMeta]="false"></share-buttons>
+          <app-share-buttons></app-share-buttons>
       </div>
     </ng-container>
     <ng-container *ngIf="type !== 'candidate' && !isHomepage">
@@ -425,8 +424,7 @@
     <div class="button" *ngIf="type !== 'candidate' && !isHomepage">
       <button class="p-button p-button-more" (click)="displayMore()">
         {{labelDisplayMore}}
-        <span class="material-icons">
-          {{icon}}
+        <span class="fa-solid {{icon}}">
         </span>
       </button>
     </div>

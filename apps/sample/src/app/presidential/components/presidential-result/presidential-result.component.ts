@@ -10,7 +10,7 @@ export class PresidentialResultComponent implements OnInit {
   @Input() result;
   numberResults = 5;
   labelDisplayMore = 'afficher tous les résultats';
-  icon = 'keyboard_arrow_down'
+  icon = 'fa-chevron-down'
 
   constructor() { }
 
@@ -21,11 +21,11 @@ export class PresidentialResultComponent implements OnInit {
     if (this.numberResults === 5) {
       this.numberResults = this.result.length;
       this.labelDisplayMore = 'afficher moins de résultats';
-      this.icon = 'keyboard_arrow_up';
+      this.icon = 'fa-chevron-up';
     } else {
       this.numberResults = 5;
       this.labelDisplayMore = 'afficher tous les résultats';
-      this.icon = 'keyboard_arrow_down';
+      this.icon = 'fa-chevron-down';
     }
   }
 

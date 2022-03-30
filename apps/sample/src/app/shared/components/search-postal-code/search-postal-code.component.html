@@ -8,7 +8,7 @@
         <div id="autocomplete-input">
           <p-autoComplete [inputId]="'autocomplete-input'"
           [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [multiple]="false"
-          [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)" [dropdown]="true"
+          [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)" [dropdown]="true" [dropdownIcon]="'fa-solid fa-chevron-down'"
           (onSelect)="selectPlace($event)" field="name">
           <ng-template let-postalCode pTemplate="item">
             <a [href]="type + '/' + postalCode.slug">
@@ -22,7 +22,7 @@
         <div id="autocomplete-search">
           <p-autoComplete [inputId]="'autocomplete-search'"
           [emptyMessage]="'Aucun résultat, veuillez réessayer'" [showEmptyMessage]="true" [placeholder]="placeholder" [multiple]="false" [delay]="500"
-          [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)" [dropdown]="true" [dropdownIcon]="'pi pi-search'"
+          [(ngModel)]="city" [suggestions]="results" (completeMethod)="search($event)" (onKeyUp)="getKey($event)" [dropdown]="true" [dropdownIcon]="'fa-solid fa-magnifying-glass'"
           (onSelect)="selectPlace($event)" field="name">
           <ng-template let-postalCode pTemplate="item">
             <ng-container *ngIf="postalCode.place.departement">
@@ -64,7 +64,7 @@
         (click)="search(null)" [disabled]="!city"></button>
       <button pButton type="button" class="cs-icon-button p-button-primary geoloc-button" label="Géolocaliser"
         *ngIf="geolocalisation" (click)="findLocalisation($event)">
-        <span class="material-icons">
+        <span class="fa-solid fa-location">
           my_location
         </span>
       </button>

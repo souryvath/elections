@@ -3,15 +3,11 @@
   <main>
     <router-outlet></router-outlet>
     <div class="share" *ngIf="(router.url | include :'infos') === false">
-      <ng-container *ngIf="isBrowser && (router.url | include :'resultats-presidentielle-2022') === false">
+      <ng-container *ngIf="(router.url | include :'resultats-presidentielle-2022') === false">
         <div class="content button">
-          <share-buttons [theme]="'modern-dark'" [include]="['facebook','twitter','messenger','whatsapp','email']"
-            [show]="8" [autoSetMeta]="false"></share-buttons>
+          <app-share-buttons></app-share-buttons>
         </div>
       </ng-container>
-      <div class="content">
-        <app-newsletter></app-newsletter>
-      </div>
     </div>
   </main>
 </div>

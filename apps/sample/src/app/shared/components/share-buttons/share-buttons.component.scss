@@ -1,0 +1,52 @@
+button {
+  border: none;
+  background: transparent;
+}
+
+.fa {
+  font-size: 25px;
+  width: 45px;
+  text-align: center;
+  text-decoration: none;
+  height: 45px;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook-f {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-facebook-messenger {
+  background-color: #006AFF;
+  color: white;
+}
+
+.fa-whatsapp {
+  background-color: #25D366;
+  color: white;
+}
+
+.fa-envelope {
+  background-color: #ff6600;
+  color: white;
+}
+
+.share-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.75em;
+}

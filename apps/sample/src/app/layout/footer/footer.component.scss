@@ -1,9 +1,19 @@
-@import '../../../styles/variables.scss';
+
+.links {
+  a {
+    color: black;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+}
 
 .container {
-  text-align: center;
+  text-align: left;
   margin-top: 0;
-  color: $footer-text-color;
+  color: #000000;
 }
 
 ul {
@@ -12,25 +22,29 @@ ul {
   margin: 0;
 }
 
-li {
-  display: inline;
+.networks {
+  margin-top: 1em;
+  .list {
+    margin-top: 0.3em;
+    display: flex;
+    gap: 1em;
+    justify-content: flex-start;
+  }
+  a {
+    text-decoration: none;
+  }
+  .fa {
+    font-size: 2rem;
+  }
 }
+
 
 .links {
-  margin-bottom: 1em;
-  a {
-    color: $footer-text-color;
-  }
-
-  li + li::before {
-    content: "|";
-    padding: .35em;
-  }
+  margin-top: 0.5em;
 }
 
-.networks {
-  display: flex;
-  gap: 1em;
-  justify-content: center;
+.newsletter {
+  strong {
+    margin-left: 2.25em;
+  }
 }
-

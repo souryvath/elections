@@ -180,3 +180,10 @@
 .p-datatable .p-datatable-thead > tr > th {
   text-align: center !important;
 }
+
+.p-input-icon-left>i, .p-input-icon-right>i {
+  position: absolute;
+  top: 40%;
+  margin-top: -0.5rem;
+  font-style: normal;
+}

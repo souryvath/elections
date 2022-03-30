@@ -8,8 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingPipe } from './pipes/loading.pipe';
 import { WordFirstUppercasePipe } from './pipes/word-first-uppercase.pipe';
 import { WordSeoPipe } from './pipes/word-seo.pipe';
-import { NgReplacePipeModule } from 'angular-pipes';
 import { FindPipe } from './pipes/find.pipe';
+import { ShareModule } from 'ngx-sharebuttons';
 @NgModule({
   declarations: [
     WordFirstUppercasePipe,
@@ -36,17 +36,17 @@ import { FindPipe } from './pipes/find.pipe';
     WordSeoPipe,
     LoadingPipe,
     IncludePipe,
-    NgReplacePipeModule,
     NumberFixPipe,
     SortArrayPipe,
     FindPipe,
-    PronounPipe
+    PronounPipe,
+    ShareModule
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgReplacePipeModule,
+    ShareModule
   ]
 })
 export class SharedLibsModule { }

@@ -19,7 +19,7 @@ export class PresidentialRoundComponent {
   @Input() hasTwoRounds;
   @Input() isHomepage;
   labelDisplayMore = 'voir plus';
-  icon = 'keyboard_arrow_down'
+  icon = 'fa-chevron-down'
   isHidden = true;
   isBrowser = isPlatformBrowser(this.platformId);
   @Output() readonly selectTabEvent: EventEmitter<any> = new EventEmitter<any>(true);
@@ -30,10 +30,10 @@ export class PresidentialRoundComponent {
   displayMore(): void {
     if (this.isHidden === true) {
       this.labelDisplayMore = 'voir moins';
-      this.icon = 'keyboard_arrow_up';
+      this.icon = 'fa-chevron-up';
     } else {
       this.labelDisplayMore = 'voir plus';
-      this.icon = 'keyboard_arrow_down';
+      this.icon = 'fa-chevron-down';
     }
     this.isHidden = !this.isHidden;
   }

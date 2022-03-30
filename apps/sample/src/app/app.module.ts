@@ -1,6 +1,4 @@
 import localeFr from '@angular/common/locales/fr';
-import { ShareIconsModule } from 'ngx-sharebuttons/icons';
-import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -35,9 +33,7 @@ registerLocaleData(localeFr, 'fr-FR');
     AdsModule,
     TransferHttpCacheModule,
     JsonLdModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    ShareButtonsModule,
-    ShareIconsModule
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   bootstrap: [
     AppComponent

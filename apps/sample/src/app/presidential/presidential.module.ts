@@ -8,8 +8,6 @@ import { PresidentialTableComponent } from './components/presidential-table/pres
 import { PresidentialListLinkComponent } from './components/presidential-list-link/presidential-list-link.component';
 import { PresidentialSearchComponent } from './components/presidential-search/presidential-search.component';
 import { PresidentialProgressResultComponent } from './components/presidential-progress-result/presidential-progress-result.component';
-import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
-import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { AdsModule } from '../ads/ads.module';
 import { LayoutModule } from '../layout/layout.module';
 import { PresidentialHomeComponent } from './containers/presidential-home/presidential-home.component';
@@ -43,8 +41,6 @@ import { PresidentialTableMapComponent } from './components/presidential-table-m
     PresidentialRoutingModule,
     SharedModule,
     AdsModule,
-    ShareButtonsModule,
-    ShareIconsModule,
     LayoutModule
   ]
 })

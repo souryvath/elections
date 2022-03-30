@@ -3,8 +3,6 @@ import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SponsorshipRoutingModule } from './sponsorship-routing.module';
-import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
-import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { AdsModule } from '../ads/ads.module';
 import { SponsorshipCandidateComponent } from './containers/sponsorship-candidate/sponsorship-candidate.component';
 import { SponsorshipMapComponent } from './components/sponsorship-map/sponsorship-map.component';
@@ -38,8 +36,6 @@ import { SponsorshipDepartmentComponent } from './containers/sponsorship-departm
     SponsorshipRoutingModule,
     SharedModule,
     AdsModule,
-    ShareButtonsModule,
-    ShareIconsModule,
     LayoutModule
   ]
 })

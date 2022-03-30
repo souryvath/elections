@@ -14,7 +14,7 @@ export class PresidentialListLinkComponent implements OnInit {
   NUMBER_RESULT = 25;
   numberResults = this.NUMBER_RESULT;
   labelDisplayMore = 'voir plus';
-  icon = 'keyboard_arrow_down'
+  icon = 'fa-chevron-down'
 
   constructor() { }
 
@@ -26,11 +26,11 @@ export class PresidentialListLinkComponent implements OnInit {
     if (this.numberResults === this.NUMBER_RESULT) {
       this.numberResults = this.list.length;
       this.labelDisplayMore = 'voir moins';
-      this.icon = 'keyboard_arrow_up';
+      this.icon = 'fa-chevron-up';
     } else {
       this.numberResults = this.NUMBER_RESULT;
       this.labelDisplayMore = 'voir plus';
-      this.icon = 'keyboard_arrow_down';
+      this.icon = 'fa-chevron-down';
     }
   }
 
