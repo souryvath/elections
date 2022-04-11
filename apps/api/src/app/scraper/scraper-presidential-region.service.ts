@@ -15,7 +15,7 @@ const converter = require('json-2-csv');
 @Injectable()
 export class ScraperPresidentialRegionService {
 
-  readonly URL_PRESIDENTIAL_REGION_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%201er%20tour%20-%20r%C3%A9gions.csv';
+  readonly URL_PRESIDENTIAL_REGION_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/2022%20-%201er%20tour%20-%20regions.csv';
   readonly URL_PRESIDENTIAL_REGION_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%202eme%20tour%20-%20r%C3%A9gions.csv';
   readonly URL_SEARCH_ADDRESS = 'http://195.154.90.2:7878/search/csv/';
   private readonly logger = new Logger(this.constructor.name);
@@ -56,12 +56,12 @@ export class ScraperPresidentialRegionService {
     this.logger.log('Scrap PresidentialRegion Function started');
     const urls = [this.URL_PRESIDENTIAL_REGION_ROUND_1, this.URL_PRESIDENTIAL_REGION_ROUND_2];
     return new Observable((observer: NextObserver<any>) => {
-      this.httpService.get(urls[round - 1], { responseEncoding: 'latin1'}).subscribe((response) => {
+      this.httpService.get(urls[round - 1]).subscribe((response) => {
         csv({
           noheader: true,
           output: 'csv',
           delimiter: ';'
-        }).fromString(response.data.toString('latin1')).then(async (result) => {
+        }).fromString(response.data).then(async (result) => {
 
           this.setPresidentialResult(result, (round).toString());
           observer.next(result);
@@ -122,6 +122,7 @@ export class ScraperPresidentialRegionService {
         finalCandidates.push(candidate);
       }
       presidentialResult.candidates = finalCandidates;
+      presidentialResult.candidates.sort((a, b) => (a.nbrVotes > b.nbrVotes) ? -1 : 1);
       presidentialData.push(presidentialResult);
     });
     this.presidentialService.addManyPresidential(presidentialData);

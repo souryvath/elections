@@ -18,11 +18,11 @@
       <ng-container *ngIf="resultObs.value as result">
         <ng-container *ngIf="obs.table as tableObs">
           <ng-container *ngIf="tableObs.value as table">
-            <div class="content" *ngIf="result | find : '2'">
+            <div class="content" *ngIf="result | find : '1'">
               <app-presidential-round
               [selectedTab]="selectedTab"
               [table]="table"
-              [result]="result | find : '2'"
+              [result]="result | find : '1'"
               [resultBefore]="result | find : '1'"
               [type]="type" (selectTabEvent)="selectTab($event)" [isHomepage]="true"
                 [round]="'2'">

@@ -14,7 +14,7 @@ import { MAYOTTE } from './tab_mayotte';
 export class ScraperPresidentialCityService {
 
   // readonly URL_PRESIDENTIAL_CITY_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%202eme%20tour%20-%20communes-test-monthurel.csv';
-  readonly URL_PRESIDENTIAL_CITY_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%201er%20tour%20-%20communes.csv';
+  readonly URL_PRESIDENTIAL_CITY_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/2022%20-%201er%20tour%20-%20communes.csv';
   readonly URL_PRESIDENTIAL_CITY_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%202eme%20tour%20-%20communes.csv';
   // readonly URL_PRESIDENTIAL_CITY_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%202eme%20tour%20-%20communes-test-monthurel.csv';
   private readonly logger = new Logger(this.constructor.name);
@@ -35,12 +35,12 @@ export class ScraperPresidentialCityService {
     this.logger.log('Scrap PresidentialCity Function started');
     const urls = [this.URL_PRESIDENTIAL_CITY_ROUND_1, this.URL_PRESIDENTIAL_CITY_ROUND_2];
     return new Observable((observer: NextObserver<any>) => {
-      this.httpService.get(urls[round - 1], { responseEncoding: 'latin1'}).subscribe((response) => {
+      this.httpService.get(urls[round - 1]).subscribe((response) => {
         csv({
           noheader: true,
           output: 'csv',
           delimiter: ';'
-        }).fromString(response.data.toString('latin1')).then(async (result) => {
+        }).fromString(response.data).then(async (result) => {
           const res = await this.setPresidentialResult(result, (round).toString());
           observer.next(result);
           observer.complete();
@@ -127,6 +127,7 @@ export class ScraperPresidentialCityService {
         finalCandidates.push(candidate);
       }
       presidentialResult.candidates = finalCandidates;
+      presidentialResult.candidates.sort((a, b) => (a.nbrVotes > b.nbrVotes) ? -1 : 1);
       presidentialData.push(presidentialResult);
     }
     this.presidentialService.addManyPresidential(presidentialData);

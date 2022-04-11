@@ -11,8 +11,8 @@ import { CANDIDATES_PRESIDENTIAL } from '../presidential/candidates.constants';
 @Injectable()
 export class ScraperPresidentialNationalService {
 
-  readonly URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_1 = 'https://github.com/souryvath/deconfinement_data/raw/master/presidentielles%202017%20csv/2017%20-%201er%20tour%20-%20national%20-%20candidat.csv';
-  readonly URL_PRESIDENTIAL_NATIONAL_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%201er%20tour%20-%20national%20-%20chiffres.csv';
+  readonly URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/2022%20-%201er%20tour%20-%20national%20-%20candidat_.csv';
+  readonly URL_PRESIDENTIAL_NATIONAL_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/2022%20-%201er%20tour%20-%20national%20-%20chiffres.csv';
   readonly URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_2 = 'https://github.com/souryvath/deconfinement_data/raw/master/presidentielles%202017%20csv/2017%20-%202eme%20tour%20-%20national%20-%20candidat.csv';
   readonly URL_PRESIDENTIAL_NATIONAL_ROUND_2 = 'https://github.com/souryvath/deconfinement_data/raw/master/presidentielles%202017%20csv/2017%20-%202eme%20tour%20-%20national%20-%20chiffres.csv';
   private readonly logger = new Logger(this.constructor.name);
@@ -32,12 +32,12 @@ export class ScraperPresidentialNationalService {
     this.logger.log('ScrapPresidentialNational Function started');
     const urls = [];
     if (round === 1) {
-      urls.push(this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_1, { responseEncoding: 'latin1' }).toPromise());
-      urls.push(this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_ROUND_1, { responseEncoding: 'latin1' }).toPromise());
+      urls.push(this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_1).toPromise());
+      urls.push(this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_ROUND_1).toPromise());
     }
     if (round === 2) {
-      urls.push(this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_2, { responseEncoding: 'latin1' }).toPromise());
-      urls.push(this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_ROUND_2, { responseEncoding: 'latin1' }).toPromise());
+      urls.push(this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_2).toPromise());
+      urls.push(this.httpService.get(this.URL_PRESIDENTIAL_NATIONAL_ROUND_2).toPromise());
     }
     return new Observable((observer: NextObserver<any>) => {
       Promise.all(urls).then((data) => {
@@ -51,12 +51,12 @@ export class ScraperPresidentialNationalService {
               noheader: true,
               output: 'csv',
               delimiter: ';'
-            }).fromString(roundItem.candidate.toString('latin1')),
+            }).fromString(roundItem.candidate),
             csv({
               noheader: true,
               output: 'csv',
               delimiter: ';'
-            }).fromString(roundItem.stat.toString('latin1')),
+            }).fromString(roundItem.stat),
           ]).then((roundTab) => {
             this.setPresidentialResult(roundTab, (round).toString());
           });
