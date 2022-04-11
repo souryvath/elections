@@ -32,11 +32,11 @@ export class PresidentialHomeComponent implements OnInit {
   ngOnInit(): void {
     this.result$ = this.presidentialService.getFranceResult();
     this.listCity$ = this.presidentialService.getMostVotedCities();
-    this.table$ = this.presidentialService.getDepartements('2');
+    this.table$ = this.presidentialService.getDepartements('1');
     this.setSeo();
     this.setBreadCrumbJsonLd();
     this.selectedTab = {
-      '2': 'Département'
+      '1': 'Département'
     }
   }
 
@@ -66,9 +66,9 @@ export class PresidentialHomeComponent implements OnInit {
 
   selectTab($event): void {
     if ($event.type === 'Département') {
-      this.table$ = this.presidentialService.getDepartements('2');
+      this.table$ = this.presidentialService.getDepartements('1');
     } else if ($event.type === 'Région') {
-      this.table$ = this.presidentialService.getRegions('2');
+      this.table$ = this.presidentialService.getRegions('1');
     }
     this.selectedTab[$event.round] = $event.type;
   }

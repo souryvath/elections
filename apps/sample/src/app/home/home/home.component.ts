@@ -37,9 +37,9 @@ export class HomeComponent implements OnInit {
     this.setBreadCrumbJsonLd();
     this.ranking$ = this.sponsorshipService.getRanking();
     this.result$ = this.presidentialService.getFranceResult();
-    this.table$ = this.presidentialService.getDepartements('2');
+    this.table$ = this.presidentialService.getDepartements('1');
     this.selectedTab = {
-      '2': 'Département'
+      '1': 'Département'
     }
   }
 
@@ -80,9 +80,9 @@ export class HomeComponent implements OnInit {
 
   selectTab($event): void {
     if ($event.type === 'Département') {
-      this.table$ = this.presidentialService.getDepartements('2');
+      this.table$ = this.presidentialService.getDepartements('1');
     } else if ($event.type === 'Région') {
-      this.table$ = this.presidentialService.getRegions('2');
+      this.table$ = this.presidentialService.getRegions('1');
     }
     this.selectedTab[$event.round] = $event.type;
   }
