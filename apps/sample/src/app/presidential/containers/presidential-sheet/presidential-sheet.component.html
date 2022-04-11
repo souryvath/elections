@@ -5,15 +5,16 @@
     } as obs">
     <ng-container *ngIf="obs.result as resultObs">
       <ng-container *ngIf="resultObs.value as result">
+
         <div class="cs-title">
-          <h1 *ngIf="region$">
+          <h1 *ngIf="region$ && result[0]">
             Résultats de l'élection présidentielle 2022 en {{result[0].place.name}} : 1er et 2ème tour
           </h1>
-          <h1 *ngIf="departement$">
+          <h1 *ngIf="departement$ && result[0]">
             Résultats de l'élection présidentielle 2022 en {{result[0].place.name}} ({{result[0].place.code | slice: 3}}) :
             1er et 2ème tour
           </h1>
-          <h1 *ngIf="city$">
+          <h1 *ngIf="city$ && result[0]">
             Résultats de l'élection présidentielle 2022 à {{result[0].name}}     <ng-container *ngIf="result[0].place.postalCode">
               ({{result[0].place.postalCode}})
             </ng-container> : 1er
@@ -21,7 +22,7 @@
           </h1>
         </div>
         <div class="content">
-          <p *ngIf="region$">
+          <p *ngIf="region$ && result[0]">
             Consultez dès maintenant les <strong>résultats de
               l'élection présidentielle 2022</strong> du premier et second tour en <strong>{{result[0].place.name}}</strong>
             et découvrez les résultats des votes et suffrages en direct pour cette région
@@ -29,7 +30,7 @@
             Le 1er tour de l'élection présidentielle 2022 se tient
             le dimanche 10 avril 2022, et le 2ème tour le dimanche 24 avril 2022.
           </p>
-          <p *ngIf="departement$">
+          <p *ngIf="departement$ && result[0]">
             Consultez dès maintenant les <strong>résultats de
               l'élection présidentielle 2022</strong> du premier et second tour en <strong>{{result[0].place.name}}</strong>
             et découvrez les résultats des votes et suffrages en direct pour le <strong>{{result[0].place.code | slice:
@@ -37,7 +38,7 @@
             Le 1er tour de l'élection présidentielle 2022 se tient
             le dimanche 10 avril 2022, et le 2ème tour le dimanche 24 avril 2022.
           </p>
-          <p *ngIf="city$">
+          <p *ngIf="city$ && result[0]">
             Consultez dès maintenant les <strong>résultats de
               l'élection présidentielle 2022</strong> du premier et second tour à <strong>{{result[0].name}}</strong>
             et découvrez les résultats des votes et suffrages en direct
@@ -50,9 +51,15 @@
           </p>
 
         </div>
+
         <app-display-ads [slot]="8421416892"></app-display-ads>
         <div class="content search">
           <app-presidential-search></app-presidential-search>
+        </div>
+        <div class="content">
+          <div class="alert alert-danger" role="alert" *ngIf="result && !result[0]">
+            Aucun résultat trouvé pour le moment, veuillez réessayer plus tard.
+          </div>
         </div>
         <div class="content" *ngIf="result | find : '2'">
           <app-presidential-round [result]="result | find : '2'"  [resultBefore]="result | find : '1'" [type]="type" [round]="'2'" >
@@ -70,7 +77,9 @@
       </div>
       <ng-container *ngIf="(!resultObs.value) && !resultObs.loading">
         <div class="content">
-          <p-message severity="error" text="Aucune résultat trouvé"></p-message>
+          <div class="alert alert-danger" role="alert">
+            Aucun résultat trouvé pour le moment, veuillez réessayer plus tard.
+          </div>
         </div>
       </ng-container>
     </ng-container>
@@ -99,7 +108,7 @@
       [list]="listDepartements" [place]="departement?.name" >
     </app-presidential-list-link>
   </div>
-  <div class="content result" *ngIf="!departement && listDepartements">
+  <div class="content result" *ngIf="!departement && listDepartements && resultSheet && resultSheet[0]">
     <app-presidential-list-link
     [title]="'Résultats de l\'élection présidentielle 2022 par département dans la région ' + resultSheet[0].place.name"
     [list]="listDepartements">
@@ -116,15 +125,19 @@
       } as obs">
       <ng-container *ngIf="obs.cities as citiesObs">
         <ng-container *ngIf="citiesObs.value as cities">
-          <app-presidential-list-link
+          <ng-container *ngIf="resultSheet && resultSheet[0]">
+            <app-presidential-list-link
             [title]="
             departement ?
             'Résultats de l\'élection présidentielle 2022 par ville et par commune en ' + resultSheet[0].place.name + ' (' + departement.code.substring(3) + ')' :
             'Résultats de l\'élection présidentielle 2022 par ville et par commune en ' + resultSheet[0].place.name"
             [list]="cities">
           </app-presidential-list-link>
+          </ng-container>
+
         </ng-container>
       </ng-container>
     </ng-container>
   </div>
+
 </div>
