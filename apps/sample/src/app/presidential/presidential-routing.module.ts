@@ -41,10 +41,24 @@ export const routes: Routes = [
             children: [
               {
                 path: ':city',
-                component: PresidentialSheetComponent
+                component: PresidentialSheetComponent,
+                children: [
+                  {
+                    path: ':round',
+                    component: PresidentialSheetComponent
+                  }
+                ]
               },
+              {
+                path: ':round',
+                component: PresidentialSheetComponent
+              }
             ]
           },
+          {
+            path: ':round',
+            component: PresidentialSheetComponent
+          }
         ]
       }
     ]

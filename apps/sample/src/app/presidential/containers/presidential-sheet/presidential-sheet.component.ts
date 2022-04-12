@@ -31,6 +31,25 @@ export class PresidentialSheetComponent implements OnInit {
   departement: any;
   city: any;
   resultSheet: any;
+  link: string;
+  roundParams: string;
+  roundParamsSeo = {
+    '1er-tour': {
+      'title': '1er tour',
+      'ariane': '1er tour',
+      'desc': 'premier tour'
+    },
+    '2nd-tour': {
+      'title': '2nd tour (ou 2ème tour)',
+      'ariane': '2nd tour',
+      'desc': 'second tour'
+    },
+    '1er et 2ème tour': {
+
+      'title': '1er et 2nd tour (ou 2ème tour)',
+      'desc': 'premier tour et second tour'
+    }
+  }
 
 
   constructor(
@@ -47,13 +66,31 @@ export class PresidentialSheetComponent implements OnInit {
     const regionParams = this.route.snapshot.params['region'];
     let departementParams = null;
     let cityParams = null;
+
     if (this.route.snapshot.firstChild) {
-      departementParams = this.route.snapshot.firstChild.params['departement'];
+      if (this.route.snapshot.firstChild.params['departement']) {
+        if (this.route.snapshot.firstChild.params['departement'] !== '1er-tour' && this.route.snapshot.firstChild.params['departement'] !== '2nd-tour') {
+          departementParams = this.route.snapshot.firstChild.params['departement'];
+        } else {
+          this.roundParams = this.route.snapshot.firstChild.params['departement'];
+          this.seoService.createLinkForCanonicalURL();
+        }
+      }
     }
     if (this.route.snapshot.firstChild && this.route.snapshot.firstChild.firstChild) {
-      cityParams = this.route.snapshot.firstChild.firstChild.params['city'];
+      if (this.route.snapshot.firstChild.firstChild.params['city'] !== '1er-tour' && this.route.snapshot.firstChild.firstChild.params['city'] !== '2nd-tour') {
+        cityParams = this.route.snapshot.firstChild.firstChild.params['city'];
+      } else {
+        this.roundParams = this.route.snapshot.firstChild.firstChild.params['city'];
+        this.seoService.createLinkForCanonicalURL();
+      }
+    }
+    if (this.route.snapshot.firstChild && this.route.snapshot.firstChild.firstChild && this.route.snapshot.firstChild.firstChild.firstChild) {
+      this.roundParams = this.route.snapshot.firstChild.firstChild.firstChild.params['round'];
+      this.seoService.createLinkForCanonicalURL();
     }
     if (regionParams && departementParams && cityParams) {
+      this.link = `${regionParams}/${departementParams}/${cityParams}`;
       this.departement = this.listDepartements.find((item) => item.slug === departementParams);
       this.region = FRANCE_REGIONS.find((item) => item.slug === regionParams);
       this.result$ = this.presidentialService.getResult(cityParams).pipe(tap((element) => {
@@ -64,18 +101,23 @@ export class PresidentialSheetComponent implements OnInit {
           this.listCity$ = this.presidentialService.getCities(this.departement.slug, 'departement');
         }
         this.city = element;
-
+        let roundParams = this.roundParams;
+        if (!roundParams) {
+          roundParams = '1er et 2ème tour';
+        }
         if (element[0].place.postalCode !== '') {
           this.breadcrumbService.set('resultats-presidentielle-2022/:region/:departement/:city', `${element[0].place.name} (${element[0].place.postalCode})`);
+          this.breadcrumbService.set('resultats-presidentielle-2022/:region/:departement/:city/:round', `${this.roundParamsSeo[roundParams]['ariane']}`);
           this.seoService.setSeoPage(
-            `Résultats de l'élection présidentielle 2022 à ${element[0].place.name} (${element[0].place.postalCode}) : 1er et 2ème tour`,
-            `Consultez dès maintenant les résultats de l'élection présidentielle 2022 du premier tour et second tour à ${element[0].place.name} et découvrez les résultats des votes et suffrages en direct du ${element[0].place.postalCode}.`
+            `Résultats de l'élection présidentielle 2022 à ${element[0].place.name} (${element[0].place.postalCode}) : ${this.roundParamsSeo[roundParams]['title']}`,
+            `Consultez dès maintenant les résultats de l'élection présidentielle 2022 du ${this.roundParamsSeo[roundParams]['desc']} à ${element[0].place.name} et découvrez les résultats des votes et suffrages en direct du ${element[0].place.postalCode}.`
           );
         } else {
           this.breadcrumbService.set('resultats-presidentielle-2022/:region/:departement/:city', `${element[0].place.name}`);
+          this.breadcrumbService.set('resultats-presidentielle-2022/:region/:departement/:city/:round', `${this.roundParamsSeo[roundParams]['ariane']}`);
           this.seoService.setSeoPage(
-            `Résultats de l'élection présidentielle 2022 à ${element[0].place.name} : 1er et 2ème tour`,
-            `Consultez dès maintenant les résultats de l'élection présidentielle 2022 du premier tour et second tour à ${element[0].place.name} et découvrez les résultats des votes et suffrages en direct.`
+            `Résultats de l'élection présidentielle 2022 à ${element[0].place.name} : ${this.roundParamsSeo[roundParams]['title']}`,
+            `Consultez dès maintenant les résultats de l'élection présidentielle 2022 du ${this.roundParamsSeo[roundParams]['desc']} à ${element[0].place.name} et découvrez les résultats des votes et suffrages en direct.`
           );
         }
         this.setBreadCrumbJsonLdCity(this.region, this.departement, element[0].place);
@@ -84,19 +126,21 @@ export class PresidentialSheetComponent implements OnInit {
       return;
     }
     if (regionParams && departementParams) {
+      this.link = `${regionParams}/${departementParams}`;
       this.result$ = this.presidentialService.getResult(departementParams).pipe(tap((element) => {
         this.resultSheet = element;
       }));
       this.region = FRANCE_REGIONS.find((item) => item.slug === regionParams);
       this.departement = this.listDepartements.find((item) => item.slug === departementParams);
       this.setBreadCrumbJsonLdDepartement(this.region, this.departement);
-      this.initPageDepartement(departementParams);
+      this.initPageDepartement(departementParams, this.roundParams);
       return;
     }
     if (regionParams) {
+      this.link = regionParams;
       this.region = FRANCE_REGIONS.find((item) => item.slug === regionParams);
       this.setBreadCrumbJsonLdRegion(this.region);
-      this.initPageRegion(regionParams);
+      this.initPageRegion(regionParams, this.roundParams);
       return;
     }
 
@@ -112,23 +156,27 @@ export class PresidentialSheetComponent implements OnInit {
     return;
   }
 
-  initPageDepartement(departementParams: string) {
+  initPageDepartement(departementParams: string, roundParams: string) {
     this.listDepartements = FRANCE_DEPS_LIST.filter((item) => item.region.code === `FR-${this.region.code}` && item.slug !== departementParams);
     this.listRegions = FRANCE_REGIONS;
     this.departement$ = of(this.departement);
     this.place$ = this.departement$;
     this.type = 'departement';
     this.listCity$ = this.presidentialService.getCities(this.departement.slug, 'departement');
+    if (!roundParams) {
+      roundParams = '1er et 2ème tour';
+    }
     this.seoService.setSeoPage(
-      `Résultats de l'élection présidentielle 2022 en ${this.departement.name} (${this.departement.code.substring(3)}) : 1er et 2ème tour`,
-      `Consultez dès maintenant les résultats de l'élection présidentielle 2022 du premier tour et second tour en ${this.departement.name} et découvrez les résultats des votes et suffrages en direct pour le ${this.departement.code.substring(3)}.`
+      `Résultats de l'élection présidentielle 2022 en ${this.departement.name} (${this.departement.code.substring(3)}) : ${this.roundParamsSeo[roundParams]['title']}`,
+      `Consultez dès maintenant les résultats de l'élection présidentielle 2022 du ${this.roundParamsSeo[roundParams]['desc']} en ${this.departement.name} et découvrez les résultats des votes et suffrages en direct pour le ${this.departement.code.substring(3)}.`
     );
     this.breadcrumbService.set('resultats-presidentielle-2022/:region', this.region.name);
     this.breadcrumbService.set('resultats-presidentielle-2022/:region/:departement', `${this.departement.name} (${this.departement.code.substring(3)})`);
+    this.breadcrumbService.set('resultats-presidentielle-2022/:region/:departement/:round', `${this.roundParamsSeo[roundParams]['ariane']}`);
     return;
   }
 
-  initPageRegion(regionParams: string): void {
+  initPageRegion(regionParams: string, roundParams: string): void {
     if (this.region && this.region.slugDep) {
       this.result$ = this.presidentialService.getResult(this.region.slugDep).pipe(tap((element) => {
         this.resultSheet = element;
@@ -147,11 +195,15 @@ export class PresidentialSheetComponent implements OnInit {
       this.listCity$ = this.presidentialService.getCities(this.region.slug, 'region');
       this.type = 'region';
     }
+    if (!roundParams) {
+      roundParams = '1er et 2ème tour';
+    }
     this.seoService.setSeoPage(
-      `Résultats de l'élection présidentielle 2022 en ${this.region.name} : 1er et 2ème tour`,
-      `Consultez dès maintenant les résultats de l'élection présidentielle 2022 du 1er et 2nd tour en ${this.region.name} et découvrez les résultats des votes et suffrages en direct pour cette région ${this.region.code}.`
+      `Résultats de l'élection présidentielle 2022 en ${this.region.name} : ${this.roundParamsSeo[roundParams]['title']}`,
+      `Consultez dès maintenant les résultats de l'élection présidentielle 2022 du ${this.roundParamsSeo[roundParams]['desc']} en ${this.region.name} et découvrez les résultats des votes et suffrages en direct pour cette région ${this.region.code}.`
     );
     this.breadcrumbService.set('resultats-presidentielle-2022/:region', this.region.name);
+    this.breadcrumbService.set('resultats-presidentielle-2022/:region/:round', `${this.roundParamsSeo[roundParams]['ariane']}`);
   }
 
   setBreadCrumbJsonLdCity(region: any, departement: any, city: any): void {

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api: 'https://www.les-elections.fr'
+  api: 'https://www.les-elections.fr',
+  // api: 'http://localhost:3342'
 };
 
 /*

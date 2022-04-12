@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { URL_DOMAIN } from '../../config/url.config';
 import { SEO } from '../../config/seo.config';
 import { JsonLdService } from 'ngx-seo';
 import { JsonLd } from 'ngx-seo/lib/json-ld';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class SeoService {
     private readonly title: Title,
     private readonly meta: Meta,
     private readonly jsonLdService: JsonLdService,
+    @Inject(DOCUMENT) private doc: any
   ) {}
 
   setSeoPage(title: string, description: string, image?: string): void {
@@ -41,6 +43,13 @@ export class SeoService {
     const jsonLdObject = this.jsonLdService.getObject('Organization', JSON_LD_OBJECT);
     this.jsonLdService.setData(jsonLdObject);
   }
+
+  createLinkForCanonicalURL() {
+    let link: HTMLLinkElement = this.doc.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    this.doc.head.appendChild(link);
+    link.setAttribute('href', this.doc.URL);
+ }
 
   private setTitle(title: string): void {
     this.title.setTitle(title);

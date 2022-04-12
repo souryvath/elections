@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, EventEmitter, Inject, Input, OnInit, Output, PLATFORM_ID } from '@angular/core';
+import { AVAILABLE_ROUND } from '../../../config/round.config';
 
 @Component({
   selector: 'app-presidential-round',
@@ -18,10 +19,13 @@ export class PresidentialRoundComponent {
   @Input() resultDepartement;
   @Input() hasTwoRounds;
   @Input() isHomepage;
+  @Input() roundParams;
+  @Input() link;
   labelDisplayMore = 'voir plus';
   icon = 'fa-chevron-down'
   isHidden = true;
   isBrowser = isPlatformBrowser(this.platformId);
+  AVAILABLE_ROUND = AVAILABLE_ROUND;
   @Output() readonly selectTabEvent: EventEmitter<any> = new EventEmitter<any>(true);
 
   constructor(@Inject(PLATFORM_ID) private readonly platformId: any) {

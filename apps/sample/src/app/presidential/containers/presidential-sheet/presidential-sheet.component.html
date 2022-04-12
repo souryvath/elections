@@ -61,16 +61,62 @@
             Aucun résultat trouvé pour le moment, veuillez réessayer plus tard.
           </div>
         </div>
-        <div class="content" *ngIf="result | find : '2'">
-          <app-presidential-round [result]="result | find : '2'"  [resultBefore]="result | find : '1'" [type]="type" [round]="'2'" >
-          </app-presidential-round>
+        <div class="buttons-results" *ngIf="!roundParams">
+          <ng-container *ngIf="city$">
+            <a [href]="'resultats-presidentielle-2022/'+ link + '/1er-tour'" class="p-button p-button-primary" title="résultats 1er tour présidentielle 2022 {{result[0].place.name}} ({{result[0].place.postalCode}})" *ngIf="result | find : '1'">
+              Voir résultats 1er tour
+            </a>
+            <a [href]="'resultats-presidentielle-2022/'+ link + '/2nd-tour'" class="p-button p-button-primary" title="résultats 2nd tour présidentielle 2022 {{result[0].place.name}} ({{result[0].place.postalCode}})" *ngIf="result | find : '2'">
+              Voir résultats 2nd tour
+            </a>
+          </ng-container>
+          <ng-container *ngIf="departement$">
+            <a [href]="'resultats-presidentielle-2022/'+ link + '/1er-tour'" class="p-button p-button-primary" title="résultats 1er tour présidentielle 2022 {{result[0].place.name}} ({{result[0].place.code | slice:
+              3}})" *ngIf="result | find : '1'">
+              Voir résultats 1er tour
+            </a>
+            <a [href]="'resultats-presidentielle-2022/'+ link + '/2nd-tour'" class="p-button p-button-primary" title="résultats 2nd tour présidentielle 2022 {{result[0].place.name}} ({{result[0].place.code | slice:
+              3}})" *ngIf="result | find : '2'">
+              Voir résultats 2nd tour
+            </a>
+          </ng-container>
+          <ng-container *ngIf="region$">
+            <a [href]="'resultats-presidentielle-2022/'+ link + '/1er-tour'" class="p-button p-button-primary" title="résultats 1er tour présidentielle 2022 {{result[0].place.name}} ({{region.code}})" *ngIf="result | find : '1'">
+              Voir résultats 1er tour
+            </a>
+            <a [href]="'resultats-presidentielle-2022/'+ link + '/2nd-tour'" class="p-button p-button-primary" title="résultats 2nd tour présidentielle 2022 {{result[0].place.name}} ({{region.code}})" *ngIf="result | find : '2'">
+              Voir résultats 2nd tour
+            </a>
+          </ng-container>
         </div>
-        <app-display-ads [slot]="8421416892"></app-display-ads>
-        <div class="content" *ngIf="result | find : '1'">
-          <app-presidential-round [result]="result | find : '1'" [type]="type" [round]="'1'">
-          </app-presidential-round>
-        </div>
+        <ng-container *ngIf="!roundParams">
+          <div class="content" *ngIf="result | find : '2'">
+            <app-presidential-round [link]="link" [roundParams]="roundParams" [result]="result | find : '2'"  [resultBefore]="result | find : '1'" [type]="type" [round]="'2'" >
+            </app-presidential-round>
+          </div>
+          <app-display-ads [slot]="8421416892"></app-display-ads>
+          <div class="content" *ngIf="result | find : '1'">
+            <app-presidential-round [link]="link" [roundParams]="roundParams" [result]="result | find : '1'" [type]="type" [round]="'1'">
+            </app-presidential-round>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="roundParams === '2nd-tour'">
+          <div class="content" *ngIf="result | find : '2'">
+            <app-presidential-round [link]="link" [roundParams]="roundParams" [result]="result | find : '2'"  [resultBefore]="result | find : '1'" [type]="type" [round]="'2'" >
+            </app-presidential-round>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="roundParams === '1er-tour'">
+          <div class="content" *ngIf="result | find : '1'">
+            <app-presidential-round [link]="link" [roundParams]="roundParams" [result]="result | find : '1'" [type]="type" [round]="'1'">
+            </app-presidential-round>
+          </div>
+        </ng-container>
+
+
+
       </ng-container>
+
       <div class="content loader" *ngIf="resultObs.loading">
         <p-progressSpinner [style]="{width: '70px', height: '70px'}" styleClass="custom-spinner" strokeWidth="5"
           animationDuration=".5s"></p-progressSpinner>

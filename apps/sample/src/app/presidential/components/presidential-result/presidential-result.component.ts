@@ -8,13 +8,18 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PresidentialResultComponent implements OnInit {
 
   @Input() result;
-  numberResults = 5;
+  @Input() roundParams;
+  @Input() type;
+  numberResults = 3;
   labelDisplayMore = 'afficher tous les résultats';
   icon = 'fa-chevron-down'
 
   constructor() { }
 
   ngOnInit(): void {
+    if (this.roundParams || this.type === 'France') {
+      this.numberResults = 5;
+    }
   }
 
   displayMore(): void {
