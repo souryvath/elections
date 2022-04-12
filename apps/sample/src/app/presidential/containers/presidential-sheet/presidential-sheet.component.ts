@@ -73,7 +73,7 @@ export class PresidentialSheetComponent implements OnInit {
           departementParams = this.route.snapshot.firstChild.params['departement'];
         } else {
           this.roundParams = this.route.snapshot.firstChild.params['departement'];
-          this.seoService.createLinkForCanonicalURL();
+          this.seoService.createLinkForCanonicalURL(this.roundParams);
         }
       }
     }
@@ -82,12 +82,12 @@ export class PresidentialSheetComponent implements OnInit {
         cityParams = this.route.snapshot.firstChild.firstChild.params['city'];
       } else {
         this.roundParams = this.route.snapshot.firstChild.firstChild.params['city'];
-        this.seoService.createLinkForCanonicalURL();
+        this.seoService.createLinkForCanonicalURL(this.roundParams);
       }
     }
     if (this.route.snapshot.firstChild && this.route.snapshot.firstChild.firstChild && this.route.snapshot.firstChild.firstChild.firstChild) {
       this.roundParams = this.route.snapshot.firstChild.firstChild.firstChild.params['round'];
-      this.seoService.createLinkForCanonicalURL();
+      this.seoService.createLinkForCanonicalURL(this.roundParams);
     }
     if (regionParams && departementParams && cityParams) {
       this.link = `${regionParams}/${departementParams}/${cityParams}`;
