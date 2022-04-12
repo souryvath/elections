@@ -5,6 +5,7 @@ import { SEO } from '../../config/seo.config';
 import { JsonLdService } from 'ngx-seo';
 import { JsonLd } from 'ngx-seo/lib/json-ld';
 import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class SeoService {
     private readonly title: Title,
     private readonly meta: Meta,
     private readonly jsonLdService: JsonLdService,
+    private readonly router: Router,
     @Inject(DOCUMENT) private doc: any
   ) {}
 
@@ -48,7 +50,7 @@ export class SeoService {
     let link: HTMLLinkElement = this.doc.createElement('link');
     link.setAttribute('rel', 'canonical');
     this.doc.head.appendChild(link);
-    link.setAttribute('href', `${URL_DOMAIN.main}${window.location.pathname}`);
+    link.setAttribute('href', `${URL_DOMAIN.main}${this.router.url}`);
  }
 
   private setTitle(title: string): void {
