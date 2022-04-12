@@ -236,8 +236,8 @@
           <a href="resultats-presidentielle-2022/candidats/{{result.candidates[0].slug}}"
             title="résultats présidentielle 2022 {{result.candidates[0].firstName}} {{result.candidates[0].lastName}} par département et par région">{{result.candidates[0].firstName}}
             {{result.candidates[0].lastName}}</a> ({{result.candidates[0].party}}) a
-          récolté le plus grand nombre de voix avec <ng-container *ngIf="!roundParams">...</ng-container>
-          <span [class.hidden]="!roundParams">{{result.candidates[0].pctVotesOnExprimated | number: "":"fr-FR"}}%
+          récolté le plus grand nombre de voix avec <ng-container *ngIf="!roundParams && type !== 'Home'">...</ng-container>
+          <span [class.hidden]="!roundParams && type !== 'Home'">{{result.candidates[0].pctVotesOnExprimated | number: "":"fr-FR"}}%
           des suffrages
           ({{result.candidates[0].nbrVotes | number: "":"fr-FR"}} votes) face à <a
             href="resultats-presidentielle-2022/candidats/{{result.candidates[1].slug}}"
@@ -348,8 +348,8 @@
           <a href="resultats-presidentielle-2022/candidats/{{result.candidates[0].slug}}"
             title="résultats présidentielle 2022 {{result.candidates[0].firstName}} {{result.candidates[0].lastName}} par département et par région">{{result.candidates[0].firstName}}
             {{result.candidates[0].lastName}}</a> ({{result.candidates[0].party}}), en tête
-          des résultats avec<ng-container *ngIf="!roundParams && type !== 'France'">...</ng-container>
-          <span [class.hidden]="!roundParams && type !== 'France'">
+          des résultats avec<ng-container *ngIf="!roundParams && type !== 'France' && type !== 'Home'">...</ng-container>
+          <span [class.hidden]="!roundParams && type !== 'France' && type !== 'Home'">
           {{result.candidates[0].pctVotesOnExprimated | number: "":"fr-FR"}}% des suffrages
           ({{result.candidates[0].nbrVotes | number:
           "":"fr-FR"}} voix),

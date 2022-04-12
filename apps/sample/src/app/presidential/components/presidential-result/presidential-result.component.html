@@ -16,10 +16,10 @@
     </div>
   </ng-container>
   <ng-container *ngIf="result.candidates && result.candidates.length > 5">
-    <p *ngIf="!roundParams && type !== 'France'">
+    <p *ngIf="!roundParams && type !== 'France' && type !== 'Home'">
       3 premiers résultats affichés
     </p>
-    <div class="bottom" *ngIf="result.round === '1'" [class.hidden]="!roundParams && type !== 'France'">
+    <div class="bottom" *ngIf="result.round === '1'" [class.hidden]="!roundParams && type !== 'France' && type !== 'Home'">
       <p *ngIf="numberResults === 5">
         5 premiers résultats affichés
       </p>

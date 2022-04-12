@@ -17,7 +17,7 @@ export class PresidentialResultComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if (this.roundParams || this.type === 'France') {
+    if (this.roundParams || this.type === 'France' || this.type === 'Home') {
       this.numberResults = 5;
     }
   }
