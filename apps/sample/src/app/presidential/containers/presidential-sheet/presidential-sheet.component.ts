@@ -37,17 +37,19 @@ export class PresidentialSheetComponent implements OnInit {
     '1er-tour': {
       'title': '1er tour',
       'ariane': '1er tour',
-      'desc': 'premier tour'
+      'desc': 'premier tour',
+      'titleSheet': '1er tour'
     },
     '2nd-tour': {
       'title': '2nd tour (ou 2ème tour)',
       'ariane': '2nd tour',
-      'desc': 'second tour'
+      'desc': 'second tour',
+      'titleSheet': '2ème tour'
     },
     '1er et 2ème tour': {
-
       'title': '1er et 2nd tour (ou 2ème tour)',
-      'desc': 'premier tour et second tour'
+      'desc': 'premier tour et second tour',
+      'titleSheet': '1er et 2nd tour'
     }
   }
 

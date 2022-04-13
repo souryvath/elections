@@ -8,17 +8,32 @@
 
         <div class="cs-title">
           <h1 *ngIf="region$ && result[0]">
-            Résultats de l'élection présidentielle 2022 en {{result[0].place.name}} : 1er et 2ème tour
+            Résultats de l'élection présidentielle 2022 en {{result[0].place.name}} :
+            <ng-container *ngIf="!roundParams">
+              1er et 2ème tour
+            </ng-container>
+            <ng-container *ngIf="roundParams">
+              {{roundParamsSeo[roundParams].titleSheet}}
+            </ng-container>
           </h1>
           <h1 *ngIf="departement$ && result[0]">
             Résultats de l'élection présidentielle 2022 en {{result[0].place.name}} ({{result[0].place.code | slice: 3}}) :
-            1er et 2ème tour
+            <ng-container *ngIf="!roundParams">
+              1er et 2ème tour
+            </ng-container>
+            <ng-container *ngIf="roundParams">
+              {{roundParamsSeo[roundParams].titleSheet}}
+            </ng-container>
           </h1>
           <h1 *ngIf="city$ && result[0]">
             Résultats de l'élection présidentielle 2022 à {{result[0].name}}     <ng-container *ngIf="result[0].place.postalCode">
               ({{result[0].place.postalCode}})
-            </ng-container> : 1er
-            et 2ème tour
+            </ng-container> :           <ng-container *ngIf="!roundParams">
+              1er et 2ème tour
+            </ng-container>
+            <ng-container *ngIf="roundParams">
+              {{roundParamsSeo[roundParams].titleSheet}}
+            </ng-container>
           </h1>
         </div>
         <div class="content">
