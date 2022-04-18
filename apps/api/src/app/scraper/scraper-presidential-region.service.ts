@@ -15,7 +15,7 @@ const converter = require('json-2-csv');
 @Injectable()
 export class ScraperPresidentialRegionService {
 
-  readonly URL_PRESIDENTIAL_REGION_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/2022%20-%201er%20tour%20-%20regions.csv';
+  readonly URL_PRESIDENTIAL_REGION_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/defs/2022%20-%201er%20tour%20-%20regions.csv';
   readonly URL_PRESIDENTIAL_REGION_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%202eme%20tour%20-%20r%C3%A9gions.csv';
   readonly URL_SEARCH_ADDRESS = 'http://195.154.90.2:7878/search/csv/';
   private readonly logger = new Logger(this.constructor.name);
