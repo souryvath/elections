@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JsonLdService } from 'ngx-seo';
 import { Observable } from 'rxjs';
 import { BreadcrumbService } from 'xng-breadcrumb';
+import { AVAILABLE_ROUND } from '../../../config/round.config';
 import { URL_DOMAIN } from '../../../config/url.config';
 import { SeoService } from '../../../core/services/seo.service';
 import { FRANCE_DEPS_LIST } from '../../../shared/constants/departments.constant';
@@ -22,6 +23,7 @@ export class PresidentialHomeComponent implements OnInit {
   listCity$: Observable<any>;
   table$: Observable<any>;
   selectedTab: any;
+  AVAILABLE_ROUND = AVAILABLE_ROUND;
   constructor(
     private readonly breadcrumbService: BreadcrumbService,
     private readonly presidentialService: PresidentialService,
@@ -32,11 +34,11 @@ export class PresidentialHomeComponent implements OnInit {
   ngOnInit(): void {
     this.result$ = this.presidentialService.getFranceResult();
     this.listCity$ = this.presidentialService.getMostVotedCities();
-    this.table$ = this.presidentialService.getDepartements('1');
+    this.table$ = this.presidentialService.getDepartements(AVAILABLE_ROUND);
     this.setSeo();
     this.setBreadCrumbJsonLd();
     this.selectedTab = {
-      '1': 'Département'
+      '2': 'Département'
     }
   }
 
@@ -66,9 +68,9 @@ export class PresidentialHomeComponent implements OnInit {
 
   selectTab($event): void {
     if ($event.type === 'Département') {
-      this.table$ = this.presidentialService.getDepartements('1');
+      this.table$ = this.presidentialService.getDepartements(AVAILABLE_ROUND);
     } else if ($event.type === 'Région') {
-      this.table$ = this.presidentialService.getRegions('1');
+      this.table$ = this.presidentialService.getRegions(AVAILABLE_ROUND);
     }
     this.selectedTab[$event.round] = $event.type;
   }

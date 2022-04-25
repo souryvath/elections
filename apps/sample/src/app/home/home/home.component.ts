@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     this.ranking$ = this.sponsorshipService.getRanking();
     this.result$ = this.presidentialService.getFranceResult();
     this.table$ = this.presidentialService.getDepartements(this.AVAILABLE_ROUND);
-    this.selectedTab[this.AVAILABLE_ROUND] = 'Département'
+    this.selectedTab[this.AVAILABLE_ROUND] = 'Département';
   }
 
   private setSeo(): void {
