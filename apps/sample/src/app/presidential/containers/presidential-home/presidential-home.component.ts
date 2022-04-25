@@ -22,7 +22,7 @@ export class PresidentialHomeComponent implements OnInit {
   listRegions: any[] = FRANCE_REGIONS;
   listCity$: Observable<any>;
   table$: Observable<any>;
-  selectedTab: any;
+  selectedTab: any = {};
   AVAILABLE_ROUND = AVAILABLE_ROUND;
   constructor(
     private readonly breadcrumbService: BreadcrumbService,
@@ -37,9 +37,7 @@ export class PresidentialHomeComponent implements OnInit {
     this.table$ = this.presidentialService.getDepartements(AVAILABLE_ROUND);
     this.setSeo();
     this.setBreadCrumbJsonLd();
-    this.selectedTab = {
-      '2': 'Département'
-    }
+    this.selectedTab[this.AVAILABLE_ROUND] = 'Département';
   }
 
   private setSeo(): void {
