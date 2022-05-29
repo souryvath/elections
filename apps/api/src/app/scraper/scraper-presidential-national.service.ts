@@ -13,8 +13,8 @@ export class ScraperPresidentialNationalService {
 
   readonly URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/defs/2022%20-%201er%20tour%20-%20national%20-%20candidat_1.csv';
   readonly URL_PRESIDENTIAL_NATIONAL_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/defs/2022%20-%201er%20tour%20-%20national%20-%20chiffres_1.csv';
-  readonly URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/2022%20-%202eme%20tour%20-%20national%20-%20candidat.csv';
-  readonly URL_PRESIDENTIAL_NATIONAL_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/2022%20-%202eme%20tour%20-%20national%20-%20chiffres.csv';
+  readonly URL_PRESIDENTIAL_NATIONAL_CANDIDATE_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/defs/2emetour/2022%20-%202eme%20tour%20-%20national%20-%20candidat.csv';
+  readonly URL_PRESIDENTIAL_NATIONAL_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/defs/2emetour/2022%20-%202eme%20tour%20-%20national%20-%20chiffres-1.csv';
   private readonly logger = new Logger(this.constructor.name);
 
   constructor(

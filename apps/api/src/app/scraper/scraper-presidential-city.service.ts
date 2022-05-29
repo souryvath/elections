@@ -13,10 +13,8 @@ import { MAYOTTE } from './tab_mayotte';
 @Injectable()
 export class ScraperPresidentialCityService {
 
-  // readonly URL_PRESIDENTIAL_CITY_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%202eme%20tour%20-%20communes-test-monthurel.csv';
   readonly URL_PRESIDENTIAL_CITY_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/defs/2022%20-%201er%20tour%20-%20communes.csv';
-  readonly URL_PRESIDENTIAL_CITY_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/2022%20-%202eme%20tour%20-%20communes.csv';
-  // readonly URL_PRESIDENTIAL_CITY_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles%202017%20csv/2017%20-%202eme%20tour%20-%20communes-test-monthurel.csv';
+  readonly URL_PRESIDENTIAL_CITY_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/defs/2emetour/communes.csv';
   private readonly logger = new Logger(this.constructor.name);
 
   constructor(

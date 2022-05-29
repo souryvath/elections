@@ -14,7 +14,7 @@ import { CANDIDATES_PRESIDENTIAL } from '../presidential/candidates.constants';
 export class ScraperPresidentialDepartementService {
 
   readonly URL_PRESIDENTIAL_DEPARTEMENT_ROUND_1 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/defs/2022%20-%201er%20tour%20-%20departements.csv';
-  readonly URL_PRESIDENTIAL_DEPARTEMENT_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/2022%20-%202eme%20tour%20-%20departements.csv';
+  readonly URL_PRESIDENTIAL_DEPARTEMENT_ROUND_2 = 'https://raw.githubusercontent.com/souryvath/deconfinement_data/master/presidentielles-2022/defs/2emetour/departements.csv';
   readonly URL_SEARCH_ADDRESS = 'http://195.154.90.2:7878/search/csv/';
   private readonly logger = new Logger(this.constructor.name);
 
