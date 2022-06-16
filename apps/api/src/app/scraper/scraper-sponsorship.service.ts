@@ -20,7 +20,7 @@ const converter = require('json-2-csv');
 export class ScraperSponsorshipService {
 
   readonly URL_SPONSORSHIP = 'https://presidentielle2022.conseil-constitutionnel.fr/telechargement/parrainagestotal.csv';
-  readonly URL_SEARCH_ADDRESS = 'http://195.154.90.2:7878/search/csv/';
+  readonly URL_SEARCH_ADDRESS = 'http://195.154.83.124:7878/search/csv/';
   private readonly logger = new Logger(this.constructor.name);
 
   constructor(

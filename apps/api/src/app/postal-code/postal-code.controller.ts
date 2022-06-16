@@ -42,7 +42,7 @@ export class PostalCodeController {
 
   @Get('postal-code/reverse')
   async getReverse(@Res() res, @Query() params): Promise<any> {
-    const result = await this.httpService.get(`http://195.154.90.2:7879/reverse/?lon=${params.lon}&lat=${params.lat}`).toPromise();
+    const result = await this.httpService.get(`http://195.154.83.124:7879/reverse/?lon=${params.lon}&lat=${params.lat}`).toPromise();
     return res.status(HttpStatus.OK).json(result.data);
   }
 
