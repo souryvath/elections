@@ -5,7 +5,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { environment } from '../environments/environment';
-import { SocialNetworkModule } from './social-network/social-network.module';
 import { SponsorshipModule } from './sponsorship/sponsorship.module';
 import { PresidentialModule } from './presidential/presidential.module';
 
