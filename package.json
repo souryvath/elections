@@ -98,7 +98,6 @@
     "popper.js": "^1.16.1",
     "primeicons": "^5.0.0",
     "primeng": "^13.1.0",
-    "puppeteer": "^13.1.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.2",
     "slugify": "^1.6.5",

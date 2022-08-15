@@ -18,7 +18,6 @@ const mongo = environment.production === true ?
     MongooseModule.forRoot(mongo),
     PostalCodeModule,
     ScraperModule,
-    SocialNetworkModule,
     SponsorshipModule,
     PresidentialModule
   ],
