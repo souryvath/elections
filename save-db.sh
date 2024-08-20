@@ -25,8 +25,8 @@ docker cp $CONTAINER_NAME:$BACKUP_DIR_IN_CONTAINER/. $BACKUP_DIR_ON_HOST
 # Optionnel: supprimer les fichiers de sauvegarde dans le conteneur
 docker exec $CONTAINER_NAME rm -rf $BACKUP_DIR_IN_CONTAINER
 
-# Optionnel: supprimer les sauvegardes plus anciennes (par exemple, garder seulement les 7 derniers jours)
-find /data/backup-mongodb/ -type d -mtime +7 -exec rm -rf {} \;
-
 rclone copy $BACKUP_DIR_ON_HOST $REMOTE_NAME:$REMOTE_DIR --transfers=4 --checkers=8 --progress
-~                                                                                                         
+
+# Optionnel: supprimer les sauvegardes plus anciennes (par exemple, garder seulement les 7 derniers jours)
+find /data/backup-mongodb/elections -type d -mtime +7 -exec rm -rf {} \;
+
