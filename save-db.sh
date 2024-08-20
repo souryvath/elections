@@ -9,7 +9,7 @@ MONGO_USER="app-username"
 MONGO_PASSWORD="fkDkfDZjMcugqvGfugLvgCBc9LHaIG7ngkeMfZD+7v0P"
 AUTH_DB="admin" # Généralement 'admin' pour les super utilisateurs
 REMOTE_NAME="gdrive"
-REMOTE_DIR="backups/mongodb/doqi/elections" # Dossier sur Google Drive
+REMOTE_DIR="backups/mongodb/elections" # Dossier sur Google Drive
 
 # Exécuter mongodump dans le conteneur
 docker exec $CONTAINER_NAME mkdir -p /data/db
