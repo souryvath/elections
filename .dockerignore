@@ -9,3 +9,4 @@ LICENSE
 .dockerignore
 .git
 .gitignore
+mongo-volume
